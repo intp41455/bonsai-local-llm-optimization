@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <rect width="400" height="200" fill="#dceeff"/>
+  <rect y="150" width="400" height="50" fill="#7d9c5e"/>
+  <line x1="0" y1="150" x2="400" y2="150" stroke="#5c7a42" stroke-width="3"/>
+  <g stroke="#2b2b2b" stroke-width="4" fill="none" stroke-linecap="round">
+    <line x1="130" y1="120" x2="155" y2="95"/>
+    <line x1="155" y2="95" x2="235" y2="95"/>
+    <line x1="235" y2="95" x2="250" y2="120"/>
+    <line x1="155" y2="95" x2="150" y2="85"/>
+    <line x1="140" y2="85" x2="160" y2="85"/>
+    <line x1="235" y2="95" x2="240" y2="80"/>
+  </g>
+  <ellipse cx="240" cy="80" rx="14" ry="6" fill="#2b2b2b"/>
+  <g transform="translate(130,120)">
+    <circle r="30" fill="none" stroke="#2b2b2b" stroke-width="4"/>
+    <g stroke="#2b2b2b" stroke-width="3">
+      <line x1="-30" y1="0" x2="30" y2="0"/>
+      <line x1="0" y1="-30" x2="0" y2="30"/>
+      <line x1="-21" y1="-21" x2="21" y2="21"/>
+      <line x1="-21" y1="21" x2="21" y2="-21"/>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="0.8s" repeatCount="indefinite"/>
+    </g>
+    <circle r="4" fill="#2b2b2b"/>
+  </g>
+  <g transform="translate(250,120)">
+    <circle r="30" fill="none" stroke="#2b2b2b" stroke-width="4"/>
+    <g stroke="#2b2b2b" stroke-width="3">
+      <line x1="-30" y1="0" x2="30" y2="0"/>
+      <line x1="0" y1="-30" x2="0" y2="30"/>
+      <line x1="-21" y1="-21" x2="21" y2="21"/>
+      <line x1="-21" y1="21" x2="21" y2="-21"/>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="0.8s" repeatCount="indefinite"/>
+    </g>
+    <circle r="4" fill="#2b2b2b"/>
+  </g>
+  <g id="pelican">
+    <animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="0.5s" repeatCount="indefinite"/>
+    <line x1="235" y1="112" x2="235" y2="135" stroke="#f4a261" stroke-width="7" stroke-linecap="round"/>
+    <line x1="235" y1="112" x2="215" y2="135" stroke="#f4a261" stroke-width="7" stroke-linecap="round"/>
+    <ellipse cx="235" cy="95" rx="34" ry="24" fill="#f4a261"/>
+    <path d="M262 88 Q292 78 296 96 Q288 104 262 100 Z" fill="#e76f51"/>
+    <circle cx="205" cy="72" r="14" fill="#f4a261"/>
+    <path d="M193 70 L152 78 L193 86 Z" fill="#e76f51"/>
+    <circle cx="200" cy="70" r="3" fill="#2b2b2b"/>
+    <line x1="250" y1="95" x2="155" y2="88" stroke="#f4a261" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>

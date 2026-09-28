@@ -1,0 +1,9 @@
+{
+  "model": "bonsai-2-27b",
+  "messages": [
+    {"role": "system", "content": "You are a helpful coding assistant."},
+    {"role": "user", "content": "用 Python 写一个快速排序"}
+  ],
+  "max_tokens": 200,
+  "stream": false
+}

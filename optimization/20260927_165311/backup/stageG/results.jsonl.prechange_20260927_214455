@@ -1,0 +1,1 @@
+{"cfg": "B", "task": 1, "pass": 4, "fail": 0, "ok": true, "wall_s": 82.9, "stop_reason": "model_finished", "rounds": 4, "tool_retries": 0, "prompt_n": [null, null, null, null], "cache_n": [null, null, null, null], "decode_tps": [8.46, 7.19, 8.08, 8.31], "finish_reasons": ["tool_calls", "tool_calls", "tool_calls", "stop"], "checks": [], "at": "2026-09-27 20:14:44"}

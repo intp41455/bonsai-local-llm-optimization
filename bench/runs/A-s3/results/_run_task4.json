@@ -1,0 +1,89 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 4,
+  "task_text": "编写convert.py，将sales.csv转为results/sales.jsonl，保留全部原始行和字段，运行脚本。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\A-s3",
+  "stop_reason": "model_finished",
+  "rounds": 6,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.12,
+      "ttft_s": 1.4,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 61,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 1.19,
+      "ttft_s": 0.46,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 63,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 4.67,
+      "ttft_s": 0.49,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 139,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 1.23,
+      "ttft_s": 0.82,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 23,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 1.13,
+      "ttft_s": 0.67,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 26,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 6.96,
+      "ttft_s": 0.64,
+      "finish": "stop",
+      "content_chars": 608,
+      "reasoning_chars": 50,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 17.4,
+  "tool_retries": 0,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 01:39:37"
+}

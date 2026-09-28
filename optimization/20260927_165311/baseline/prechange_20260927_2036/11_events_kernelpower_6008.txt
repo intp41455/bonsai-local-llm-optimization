@@ -1,0 +1,151 @@
+变更前证据保全（只读）
+采集时间：2026-09-27 20:37:35
+目的：陛下已安排另一 agent 卸载 Windows 11 26200 预览版并更换 NVIDIA 驱动；
+      本快照固化"变更前"的 OS/驱动/虚拟化/崩溃证据，供变更后做前后对照。
+说明：本目录全部为只读采集结果；转储文件副本见上一级目录。
+      C 盘原件（Minidump / WER / 事件日志）可能被系统回退或清理，故先行固化。
+
+
+
+TimeCreated  : 2026/9/20 21:58:15
+Id           : 109
+ProviderName : Microsoft-Windows-Kernel-Power
+Message      : 内核电源管理器已启动关闭转换。
+               
+               Action： Power Action Reboot 
+               事件代码： 0x0 
+               原因： Kernel API
+
+TimeCreated  : 2026/9/20 21:59:17
+Id           : 1074
+ProviderName : User32
+Message      : The process C:\Windows\servicing\TrustedInstaller.exe (THINKBOOK16P) has initiated the 重启 of computer TH
+               INKBOOK16P on behalf of user NT AUTHORITY\SYSTEM for the following reason: 操作系统: 升级(计划内)
+                Reason Code: 0x80020003
+                Shutdown Type: 重启
+                Comment: 
+
+TimeCreated  : 2026/9/20 21:59:21
+Id           : 109
+ProviderName : Microsoft-Windows-Kernel-Power
+Message      : 内核电源管理器已启动关闭转换。
+               
+               Action： Power Action Reboot 
+               事件代码： 0x0 
+               原因： Kernel API
+
+TimeCreated  : 2026/9/24 12:17:20
+Id           : 1074
+ProviderName : User32
+Message      : The process C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExper
+               ienceHost.exe (THINKBOOK16P) has initiated the 关闭电源 of computer THINKBOOK16P on behalf of user THINKBOOK
+               16P\intpj for the following reason: 其他(计划外)
+                Reason Code: 0x0
+                Shutdown Type: 关闭电源
+                Comment: 
+
+TimeCreated  : 2026/9/24 12:32:03
+Id           : 41
+ProviderName : Microsoft-Windows-Kernel-Power
+Message      : 系统已在未先正常关机的情况下重新启动。如果系统停止响应、发生崩溃或意外断电，则可能会导致此错误。
+
+TimeCreated  : 2026/9/24 12:32:18
+Id           : 6008
+ProviderName : EventLog
+Message      : 上一次系统的 12:03:32 在 ‎2026/‎9/‎24 上的关闭是意外的。
+
+TimeCreated  : 2026/9/24 12:49:05
+Id           : 1074
+ProviderName : User32
+Message      : The process C:\Windows\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExper
+               ienceHost.exe (THINKBOOK16P) has initiated the 重启 of computer THINKBOOK16P on behalf of user THINKBOOK16
+               P\intpj for the following reason: 其他(计划外)
+                Reason Code: 0x0
+                Shutdown Type: 重启
+                Comment: 
+
+TimeCreated  : 2026/9/24 12:50:35
+Id           : 109
+ProviderName : Microsoft-Windows-Kernel-Power
+Message      : 内核电源管理器已启动关闭转换。
+               
+               Action： Power Action Reboot 
+               事件代码： 0x0 
+               原因： Kernel API
+
+TimeCreated  : 2026/9/24 12:51:37
+Id           : 1074
+ProviderName : User32
+Message      : The process C:\Windows\servicing\TrustedInstaller.exe (THINKBOOK16P) has initiated the 重启 of computer TH
+               INKBOOK16P on behalf of user NT AUTHORITY\SYSTEM for the following reason: 操作系统: 升级(计划内)
+                Reason Code: 0x80020003
+                Shutdown Type: 重启
+                Comment: 
+
+TimeCreated  : 2026/9/24 12:51:41
+Id           : 109
+ProviderName : Microsoft-Windows-Kernel-Power
+Message      : 内核电源管理器已启动关闭转换。
+               
+               Action： Power Action Reboot 
+               事件代码： 0x0 
+               原因： Kernel API
+
+TimeCreated  : 2026/9/25 5:00:09
+Id           : 1074
+ProviderName : User32
+Message      : The process C:\Windows\uus\AMD64\MoUsoCoreWorker.exe (THINKBOOK16P) has initiated the 重启 of computer THI
+               NKBOOK16P on behalf of user NT AUTHORITY\SYSTEM for the following reason: 操作系统: Service Pack (计划内)
+                Reason Code: 0x80020010
+                Shutdown Type: 重启
+                Comment: 
+
+TimeCreated  : 2026/9/25 5:02:49
+Id           : 109
+ProviderName : Microsoft-Windows-Kernel-Power
+Message      : 内核电源管理器已启动关闭转换。
+               
+               Action： Power Action Reboot 
+               事件代码： 0x0 
+               原因： Kernel API
+
+TimeCreated  : 2026/9/25 5:03:52
+Id           : 1074
+ProviderName : User32
+Message      : The process C:\Windows\servicing\TrustedInstaller.exe (THINKBOOK16P) has initiated the 重启 of computer TH
+               INKBOOK16P on behalf of user NT AUTHORITY\SYSTEM for the following reason: 操作系统: 升级(计划内)
+                Reason Code: 0x80020003
+                Shutdown Type: 重启
+                Comment: 
+
+TimeCreated  : 2026/9/25 5:04:00
+Id           : 109
+ProviderName : Microsoft-Windows-Kernel-Power
+Message      : 内核电源管理器已启动关闭转换。
+               
+               Action： Power Action Reboot 
+               事件代码： 0x0 
+               原因： Kernel API
+
+TimeCreated  : 2026/9/27 4:52:21
+Id           : 41
+ProviderName : Microsoft-Windows-Kernel-Power
+Message      : 系统已在未先正常关机的情况下重新启动。如果系统停止响应、发生崩溃或意外断电，则可能会导致此错误。
+
+TimeCreated  : 2026/9/27 4:52:34
+Id           : 6008
+ProviderName : EventLog
+Message      : 上一次系统的 4:49:40 在 ‎2026/‎9/‎27 上的关闭是意外的。
+
+TimeCreated  : 2026/9/27 20:17:47
+Id           : 41
+ProviderName : Microsoft-Windows-Kernel-Power
+Message      : 系统已在未先正常关机的情况下重新启动。如果系统停止响应、发生崩溃或意外断电，则可能会导致此错误。
+
+TimeCreated  : 2026/9/27 20:17:59
+Id           : 6008
+ProviderName : EventLog
+Message      : 上一次系统的 20:16:55 在 ‎2026/‎9/‎27 上的关闭是意外的。
+
+
+

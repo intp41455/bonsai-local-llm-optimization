@@ -1,0 +1,122 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 6,
+  "task_text": "从logs/run.log找出全部ERROR，写results/errors.md，仅保留行号、错误码、原因。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\A1",
+  "stop_reason": "model_finished",
+  "rounds": 9,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.68,
+      "ttft_s": 1.22,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 180,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 9.58,
+      "ttft_s": 6.75,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 330,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 7.18,
+      "ttft_s": 0.52,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 119,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 2.43,
+      "ttft_s": 0.84,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 167,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 1.39,
+      "ttft_s": 0.5,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 63,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 1.75,
+      "ttft_s": 0.53,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 117,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 7,
+      "wall_s": 4.5,
+      "ttft_s": 0.49,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 312,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 8,
+      "wall_s": 2.07,
+      "ttft_s": 0.54,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 140,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 9,
+      "wall_s": 4.07,
+      "ttft_s": 0.58,
+      "finish": "stop",
+      "content_chars": 189,
+      "reasoning_chars": 171,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 35.7,
+  "tool_retries": 1,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-27 22:21:58"
+}

@@ -1,0 +1,31 @@
+# 阶段 G4 宿主管存压力 只读快照 baseline
+# 采集时间 2026-09-27 22:21:38
+TotalVisibleMemoryMB = 32189
+FreePhysicalMemoryMB = 10623
+TotalVirtualMemoryMB  = 105917
+FreeVirtualMemoryMB   = 63003
+
+# 页面文件
+  C:\pagefile.sys  InitialMB=8192  MaxMB=8192
+  D:\pagefile.sys  InitialMB=65536  MaxMB=131072
+  C:\pagefile.sys  AllocatedMB=8192  CurrentUsageMB=424  PeakUsageMB=592
+  D:\pagefile.sys  AllocatedMB=65536  CurrentUsageMB=389  PeakUsageMB=564
+
+# 进程内存 (PID / WorkingSetMB / PrivateMB / CommitMB)
+  llama-server pid=35040  WS=380MB  Private=16584MB
+  python pid=33800  WS=7MB  Private=13MB
+
+# 全机 WorkingSet Top10
+  Memory Compression pid=4320  WS=9019MB  Private=19MB
+  MsMpEng pid=6636  WS=510MB  Private=513MB
+  TRAE SOLO CN pid=27524  WS=488MB  Private=775MB
+  llama-server pid=35040  WS=380MB  Private=16584MB
+  pi Desktop pid=5348  WS=323MB  Private=670MB
+  pi Desktop pid=34388  WS=275MB  Private=444MB
+  dwm pid=2816  WS=222MB  Private=515MB
+  pi Desktop pid=32704  WS=155MB  Private=302MB
+  sandbox-cli-gc pid=30500  WS=147MB  Private=156MB
+  Secure System pid=332  WS=115MB  Private=0MB
+
+# 后端命令行
+  D:\Bonsai-demo\dist\bonsai2-8gb-combo\bin\llama-server.exe -m D:\Bonsai-demo\models\bonsai2-gguf\27B\Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf -ngl 99 -fa on -np 1 -c 65536 -b 2048 -ub 512 -ctk q4_0 -ctv q4_0 --backend-sampling --jinja --metrics --host 127.0.0.1 --port 8081 --alias bonsai-2-27b

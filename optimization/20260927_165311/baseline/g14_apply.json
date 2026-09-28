@@ -1,0 +1,62 @@
+{
+  "phase": "G14",
+  "step": "apply",
+  "started_at": "2026-09-28 15:01:18",
+  "old_config_sha": "f09a77be63c09dbe519341797f32b7d2903be9ae60f8cc4d6cb3d04f23e7febb",
+  "new_config_sha": "f09a77be63c09dbe519341797f32b7d2903be9ae60f8cc4d6cb3d04f23e7febb",
+  "old_proxy_pid": "40480",
+  "new_proxy_pid": "55872",
+  "prod_reqlog_off_before": 1371778,
+  "prod_timings_off_before": 167049,
+  "health_8080_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "netstat_before": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "new_proxy_launch": {
+    "pid": 55872,
+    "cmdline": "C:\\Users\\intpj\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -u D:\\Bonsai-demo\\proxy\\bonsai_proxy.py --port 8080 --upstream 8081 --config D:\\Bonsai-demo\\config\\bonsai-agent.json --effort medium"
+  },
+  "acceptance": {
+    "probe_dense": {
+      "tag": "probe-dense",
+      "status": 400,
+      "body": "{\"error\": {\"message\": \"input over budget: 输入超预算：输入 62249 + 计划生成 8192 + 余量 1024 = 71465 > 窗口 65536（超 5929 tok）。请先减少输入（历史整理 / 拆分任务）或降低计划生成预算后重试。\", \"type\": \"input_over_budget\", \"code\": \"input_over_budget\", \"budget\": {\"enabled\": true, \"mode\": \"reject\", \"window\": 65536, \"window_source\": \"server /props\", \"planned_gen\": 8192, \"reserve\": 1024, \"method\": \"exact(apply-template+tokenize)\", \"input_tokens\": 62249, \"required\": 71465, \"headroom\": -5929, \"verdict\": \"超预算\", \"elapsed_ms\": 62.0, \"est_upper_tokens\": 84181, \"input_pct_of_window\": 94.98}}}",
+      "wall_s": 0.08
+    },
+    "probe_small": {
+      "tag": "probe-small",
+      "status": 200,
+      "body": "data: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":null}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\"The\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" user\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" is\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" asking\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" me\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" to\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" simply\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" report\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" what\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" \"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\"1\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\"+\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\"1\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" equals\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\".\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" They\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" want\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" a\"}}],\"created\":1790578891,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" very\"}}],\"created\":1790578892,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" simple\"}}],\"created\":1790578892,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\" answer\"}}],\"created\":1790578892,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\".\"}}],\"created\":1790578892,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"reasoning_content\":\"\\n\"}}],\"created\":1790578892,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"content\":\"2\"}}],\"created\":1790578892,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\"}\n\ndata: {\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"delta\":{}}],\"created\":1790578892,\"id\":\"chatcmpl-wim1fYdPjp4eFT8Cva9sLDc50KCnjqr6\",\"model\":\"bonsai-2-27b\",\"system_fingerprint\":\"b181-9ef3205\",\"object\":\"chat.completion.chunk\",\"timings\":{\"cache_n\":0,\"prompt_n\":147,\"prompt_ms\":607.05,\"prompt_per_token_ms\":4.1295918367346935,\"prompt_per_second\":242.15468248085003,\"predicted_n\":27,\"predicted_ms\":570.931,\"predicted_per_token_ms\":21.958884615384616,\"predicted_per_second\":45.53965365341871}}\n\ndata: [DONE]\n\n",
+      "wall_s": 1.75
+    },
+    "dense_self_exact_tokens": 62165
+  },
+  "acceptance_ok": true,
+  "ended_at": "2026-09-28 15:01:32",
+  "health_8080_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "netstat_after": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       55872",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "config_sha256_after": "f09a77be63c09dbe519341797f32b7d2903be9ae60f8cc4d6cb3d04f23e7febb",
+  "prod_reqlog_lines_after": 819,
+  "prod_timings_lines_after": 908,
+  "prod_reqlog_delta": 5,
+  "prod_chat_in_delta": 2,
+  "prod_timings_delta": 1
+}

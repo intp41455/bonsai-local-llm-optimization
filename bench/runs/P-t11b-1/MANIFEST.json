@@ -1,0 +1,37 @@
+{
+  "dir": "D:\\Bonsai-demo\\bench\\fixtures",
+  "files": {
+    "sales.csv": {
+      "sha256": "a646dafbf5bef6cdcfda1674094da4df5cab0e644de29ccad4dae6e47bdd8770",
+      "bytes": 111
+    },
+    "notes.txt": {
+      "sha256": "27ecf50af701121dc37368eabae087afb1a10421d32004f9858f22390fa7dc5f",
+      "bytes": 131
+    },
+    "source.txt": {
+      "sha256": "da71a7911097c35ef6c72221a944caeeacb990c62699d1c2ed6bd46362bfcf2f",
+      "bytes": 18
+    },
+    "calc.py": {
+      "sha256": "2b1298bd3f7f0c5da497b0b2d97719728740858891b05f6a8a8d1de567739f37",
+      "bytes": 71
+    },
+    "checkpoint.md": {
+      "sha256": "88719dba49e3f4b431c24b0c575838573ff7834e42fee6178631d38f93a4a5e0",
+      "bytes": 163
+    },
+    "logs/run.log": {
+      "sha256": "65d8477240e2b9dad9b30baed19f622c832f15c16def58abe93266dc44886f1a",
+      "bytes": 12914
+    }
+  },
+  "task11_preset_sales_json": {
+    "content": {
+      "count": 3,
+      "amount": 350
+    },
+    "sha256_of_canonical": "ce3f1fca8433dd83919abf7b190b268a982eff2ea092b841c8f6e9ad09aa4083"
+  },
+  "_note": "固定夹具唯一版本（方案 §14.1）。原始夹具只读；各参测配置使用 runs/<CFG> 独立副本。第10项压缩边界切片由 bench_split.py 另建，其哈希单独记录。"
+}

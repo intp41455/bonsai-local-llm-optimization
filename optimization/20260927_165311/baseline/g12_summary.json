@@ -1,0 +1,385 @@
+{
+  "phase": "G12",
+  "threshold": 56320,
+  "window": 65536,
+  "max_tokens": 4096,
+  "probes": [
+    {
+      "probe": "P-dense",
+      "max_tokens": 64,
+      "content_chars": 116336,
+      "body_bytes": 127199,
+      "self_exact_tokens": 62750,
+      "self_chars_per_token": 1.854,
+      "self_body_bytes_per_token": 2.027,
+      "est_upper_floor3": 42399,
+      "wall_s": 118.88,
+      "ttft_s": 116.03,
+      "finish": "length",
+      "error": null,
+      "content_out_chars": 0,
+      "tool_calls": [],
+      "gate": {
+        "verdict": "在预算内(便宜路径)",
+        "method": "chars_upper_bound",
+        "input_tokens": null,
+        "est_upper": 42615,
+        "required": null,
+        "headroom": null,
+        "window": 65536,
+        "planned_gen": 8192,
+        "reserve": 1024,
+        "elapsed_ms": 0.0,
+        "mode": "warn"
+      },
+      "processed_tokens_backend": 62831,
+      "prompt_evaluated_tokens": 62722,
+      "cache_reused_tokens": 109,
+      "prefill_ms": 115607.9,
+      "finish_reason": "length",
+      "proxy_notes": [
+        "服务端未返回 usage（拿不到 token 总数）"
+      ],
+      "record_seen": true,
+      "calib_reps": 9,
+      "calib_tokens": 62165,
+      "content_kind": "日志切片重复（时间戳/数字/符号密集）"
+    },
+    {
+      "probe": "P-sparse",
+      "max_tokens": 64,
+      "content_chars": 55102,
+      "body_bytes": 57061,
+      "self_exact_tokens": 9991,
+      "self_chars_per_token": 5.515,
+      "self_body_bytes_per_token": 5.711,
+      "est_upper_floor3": 19020,
+      "wall_s": 15.02,
+      "ttft_s": 13.35,
+      "finish": "length",
+      "error": null,
+      "content_out_chars": 0,
+      "tool_calls": [],
+      "gate": {
+        "verdict": "在预算内(便宜路径)",
+        "method": "chars_upper_bound",
+        "input_tokens": null,
+        "est_upper": 19235,
+        "required": null,
+        "headroom": null,
+        "window": 65536,
+        "planned_gen": 8192,
+        "reserve": 1024,
+        "elapsed_ms": 0.0,
+        "mode": "warn"
+      },
+      "processed_tokens_backend": 10072,
+      "prompt_evaluated_tokens": 9364,
+      "cache_reused_tokens": 708,
+      "prefill_ms": 13306.4,
+      "finish_reason": "length",
+      "proxy_notes": [
+        "服务端未返回 usage（拿不到 token 总数）"
+      ],
+      "record_seen": true,
+      "calib_reps": 25,
+      "calib_tokens": 9032,
+      "content_kind": "英文自然语段重复"
+    }
+  ],
+  "at": "2026-09-28 07:48:45",
+  "c2": {
+    "arm": "C2",
+    "K": 8,
+    "K5": 8,
+    "run_dir": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g12\\runs\\C2",
+    "compressed": true,
+    "compress_events": [
+      {
+        "round": 5,
+        "projected_tokens_before": 57292,
+        "threshold": 56320,
+        "replaced": [
+          {
+            "slice": 1,
+            "before_chars": 20185,
+            "after_chars": 149,
+            "summary_chars": 0
+          },
+          {
+            "slice": 2,
+            "before_chars": 20933,
+            "after_chars": 536,
+            "summary_chars": 394
+          },
+          {
+            "slice": 3,
+            "before_chars": 20933,
+            "after_chars": 599,
+            "summary_chars": 457
+          },
+          {
+            "slice": 4,
+            "before_chars": 20933,
+            "after_chars": 682,
+            "summary_chars": 540
+          }
+        ],
+        "projected_tokens_after": 14405,
+        "explicit_reduction_tokens": 42887
+      }
+    ],
+    "threshold": 56320,
+    "stop_reason": "max_rounds",
+    "rounds": [
+      {
+        "arm": "C2",
+        "round": 1,
+        "reps": 8,
+        "payload_chars": 20185,
+        "messages_n": 3,
+        "just_compressed": false,
+        "self_exact_tokens_before_send": 11107,
+        "wall_s": 5.2,
+        "ttft_s": 1.28,
+        "finish": "tool_calls",
+        "error": null,
+        "content_chars": 0,
+        "reasoning_chars": 538,
+        "tool_calls": [
+          "read_file"
+        ],
+        "gate": {
+          "verdict": "在预算内(便宜路径)",
+          "method": "chars_upper_bound",
+          "input_tokens": null,
+          "est_upper": 8186,
+          "required": null,
+          "headroom": null,
+          "window": 65536,
+          "planned_gen": 8192,
+          "reserve": 1024,
+          "elapsed_ms": 0.0,
+          "mode": "warn"
+        },
+        "processed_tokens_backend": 11188,
+        "prompt_evaluated_tokens": 516,
+        "cache_reused_tokens": 10672,
+        "prefill_ms": 1209.0,
+        "decode_tps": 38.01,
+        "finish_reason": "tool_calls",
+        "truncated": false,
+        "status": 200,
+        "proxy_notes": [
+          "服务端未返回 usage（拿不到 token 总数）"
+        ],
+        "record_seen": true
+      },
+      {
+        "arm": "C2",
+        "round": 2,
+        "reps": 8,
+        "payload_chars": 20933,
+        "messages_n": 7,
+        "just_compressed": false,
+        "self_exact_tokens_before_send": 22462,
+        "wall_s": 42.46,
+        "ttft_s": 17.79,
+        "finish": "stop",
+        "error": null,
+        "content_chars": 394,
+        "reasoning_chars": 1425,
+        "tool_calls": [],
+        "gate": {
+          "verdict": "在预算内(便宜路径)",
+          "method": "chars_upper_bound",
+          "input_tokens": null,
+          "est_upper": 15899,
+          "required": null,
+          "headroom": null,
+          "window": 65536,
+          "planned_gen": 8192,
+          "reserve": 1024,
+          "elapsed_ms": 0.0,
+          "mode": "warn"
+        },
+        "processed_tokens_backend": 22543,
+        "prompt_evaluated_tokens": 11359,
+        "cache_reused_tokens": 11184,
+        "prefill_ms": 17767.5,
+        "decode_tps": 30.92,
+        "finish_reason": "stop",
+        "truncated": false,
+        "status": 200,
+        "proxy_notes": [
+          "服务端未返回 usage（拿不到 token 总数）"
+        ],
+        "record_seen": true
+      },
+      {
+        "arm": "C2",
+        "round": 3,
+        "reps": 8,
+        "payload_chars": 20933,
+        "messages_n": 10,
+        "just_compressed": false,
+        "self_exact_tokens_before_send": 34014,
+        "wall_s": 35.38,
+        "ttft_s": 20.61,
+        "finish": "stop",
+        "error": null,
+        "content_chars": 457,
+        "reasoning_chars": 338,
+        "tool_calls": [],
+        "gate": {
+          "verdict": "在预算内(便宜路径)",
+          "method": "chars_upper_bound",
+          "input_tokens": null,
+          "est_upper": 23750,
+          "required": null,
+          "headroom": null,
+          "window": 65536,
+          "planned_gen": 8192,
+          "reserve": 1024,
+          "elapsed_ms": 0.0,
+          "mode": "warn"
+        },
+        "processed_tokens_backend": 34095,
+        "prompt_evaluated_tokens": 11556,
+        "cache_reused_tokens": 22539,
+        "prefill_ms": 20545.9,
+        "decode_tps": 28.16,
+        "finish_reason": "stop",
+        "truncated": false,
+        "status": 200,
+        "proxy_notes": [
+          "服务端未返回 usage（拿不到 token 总数）"
+        ],
+        "record_seen": true
+      },
+      {
+        "arm": "C2",
+        "round": 4,
+        "reps": 8,
+        "payload_chars": 20933,
+        "messages_n": 13,
+        "just_compressed": false,
+        "self_exact_tokens_before_send": 45615,
+        "wall_s": 42.78,
+        "ttft_s": 23.25,
+        "finish": "stop",
+        "error": null,
+        "content_chars": 540,
+        "reasoning_chars": 477,
+        "tool_calls": [],
+        "gate": {
+          "verdict": "在预算内(便宜路径)",
+          "method": "chars_upper_bound",
+          "input_tokens": null,
+          "est_upper": 31630,
+          "required": null,
+          "headroom": null,
+          "window": 65536,
+          "planned_gen": 8192,
+          "reserve": 1024,
+          "elapsed_ms": 0.0,
+          "mode": "warn"
+        },
+        "processed_tokens_backend": 45696,
+        "prompt_evaluated_tokens": 11605,
+        "cache_reused_tokens": 34091,
+        "prefill_ms": 23138.8,
+        "decode_tps": 25.5,
+        "finish_reason": "stop",
+        "truncated": false,
+        "status": 200,
+        "proxy_notes": [
+          "服务端未返回 usage（拿不到 token 总数）"
+        ],
+        "record_seen": true
+      },
+      {
+        "arm": "C2",
+        "round": 5,
+        "reps": 8,
+        "payload_chars": 21052,
+        "messages_n": 16,
+        "just_compressed": true,
+        "self_exact_tokens_before_send": 14405,
+        "wall_s": 55.14,
+        "ttft_s": 20.96,
+        "finish": "tool_calls",
+        "error": null,
+        "content_chars": 0,
+        "reasoning_chars": 496,
+        "tool_calls": [
+          "write_file"
+        ],
+        "gate": {
+          "verdict": "在预算内(便宜路径)",
+          "method": "chars_upper_bound",
+          "input_tokens": null,
+          "est_upper": 10777,
+          "required": null,
+          "headroom": null,
+          "window": 65536,
+          "planned_gen": 8192,
+          "reserve": 1024,
+          "elapsed_ms": 0.0,
+          "mode": "warn"
+        },
+        "processed_tokens_backend": 14486,
+        "prompt_evaluated_tokens": 14377,
+        "cache_reused_tokens": 109,
+        "prefill_ms": 20910.4,
+        "decode_tps": 33.18,
+        "finish_reason": "tool_calls",
+        "truncated": false,
+        "status": 200,
+        "proxy_notes": [
+          "服务端未返回 usage（拿不到 token 总数）"
+        ],
+        "record_seen": true
+      }
+    ],
+    "tail_rounds": [
+      {
+        "round": 1,
+        "wall_s": 7.23,
+        "finish": "stop",
+        "error": null,
+        "tool_calls": [],
+        "processed_tokens_backend": 15452,
+        "gate": {
+          "verdict": "在预算内(便宜路径)",
+          "method": "chars_upper_bound",
+          "input_tokens": null,
+          "est_upper": 11732,
+          "required": null,
+          "headroom": null,
+          "window": 65536,
+          "planned_gen": 8192,
+          "reserve": 1024,
+          "elapsed_ms": 0.0,
+          "mode": "warn"
+        }
+      }
+    ],
+    "final_summary_exists": true,
+    "final_summary_chars": 1469,
+    "final_summary_sha256": "4cd98958573056ff00e6541cc4a2b9b93ad49e71937b9f28b17d0f1bfc0f1d24",
+    "constraint_hits": {
+      "松针": true,
+      "Markdown": true,
+      "source.txt": true,
+      "results": true,
+      "人民币元": true
+    },
+    "constraints_all": true,
+    "source_unchanged": true,
+    "tool_calls_n": 2,
+    "tool_results_n": 2,
+    "pairing_ok": true,
+    "at": "2026-09-28 07:46:28"
+  }
+}

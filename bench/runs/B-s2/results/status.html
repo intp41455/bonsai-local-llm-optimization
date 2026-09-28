@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目状态 · 松针</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+    background: #f4f6f8;
+    color: #2c3e50;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+  .card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    max-width: 640px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .header {
+    background: #1f6f43;
+    color: #ffffff;
+    padding: 28px 32px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .header p {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.85;
+  }
+  .section {
+    padding: 24px 32px;
+    border-bottom: 1px solid #e8ecf0;
+  }
+  .section h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f6f43;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    display: inline-block;
+    background: #e8f5ee;
+    color: #1f6f43;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 999px;
+  }
+  ol.constraints {
+    padding-left: 24px;
+  }
+  ol.constraints li {
+    padding: 10px 0;
+    border-bottom: 1px dashed #e8ecf0;
+    font-size: 15px;
+  }
+  ol.constraints li:last-child {
+    border-bottom: none;
+  }
+  .footer {
+    padding: 16px 32px;
+    font-size: 12px;
+    color: #9aa5b1;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <h1>项目状态</h1>
+      <p>单文件离线页面 · 无外部资源依赖</p>
+    </div>
+    <div class="section">
+      <h2>项目代号</h2>
+      <p><span class="badge">松针</span></p>
+    </div>
+    <div class="section">
+      <h2>五条约束</h2>
+      <ol class="constraints">
+        <li>交付格式必须为 纯文本。</li>
+        <li>禁止修改 source.txt。</li>
+        <li>输出目录必须为 results。</li>
+        <li>预算单位必须使用人民币元。</li>
+        <li>项目代号统一为「松针」。</li>
+      </ol>
+    </div>
+    <div class="footer">
+      本页面为自包含 HTML，可直接离线打开，未引用任何外部 CSS、JS 或字体。
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+阶段 D 判定（修正版）——请求级思考预算能力与思考参数优先级
+原始数据: results\stage_d_probe.json / stage_d_probe.txt（本文件只做判定，不改原始数据）
+探测时间: 2026-09-27 18:45:31 ~ 2026-09-27 18:57:56   后端 build_info=b181-9ef3205
+
+## 0. 对第一版判定的更正（自我更正，透明记录）
+  第一版把“budget=0 必须立即结束思考”当唯一判决项 -> budget_supported=False。该判据设计有误：
+  budget=0 只是“边界值”的一种，真正能证明采样器在跑的是“正数预算的精确截断”与“message 被强制注入”。
+  按下列证据，结论改为：请求级正数预算已生效。
+
+## 1. D1 能力结论：请求级正数思考预算 = 已生效（有硬证据）
+  字段：顶层 reasoning_budget_tokens（别名 thinking_budget_tokens 同样生效）
+  证据 A（精确截断）：无预算 reasoning=383 tok；budget=32 -> 31 tok；budget=128 -> 128 tok
+  证据 B（强制注入原文）：budget=32 且带 reasoning_budget_message 时，
+    该 message 原文出现在输出里（saw_budget_message=True），reasoning 尾部为：
+      'ese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,Now produce the complete answer.'
+    => reasoning-budget 采样器确实存在并执行了“强制结束思考 + 注入 message”。
+  证据 C（别名等价）：thinking_budget_tokens=32 -> reasoning=31 tok，与 reasoning_budget_tokens=32 完全一致。
+  证据 D（二进制内含字段）：llama-server-impl.dll 同时含 reasoning_budget_tokens / thinking_budget_tokens / reasoning_budget_message / reasoning_control / reasoning_budget_start_tag 字面量；
+     源码 src\combo\tools\server\server-common.cpp 第 1352–1367 行在 thinking_end_tags 非空时透传到采样层。
+
+  待解问题（记录，不阻塞）：reasoning_budget_tokens=0 实测与“不传字段”逐字节一致（True），
+     reasoning=383 tok，并未按 --help 的“0 for immediate end”立即结束思考。
+     口径结论：生产上不要用 0 表示“关闭思考”，关闭思考一律用 chat_template_kwargs.enable_thinking=false（已实测生效）。
+
+## 2. D1 副作用：预算太小会伤正确性（决定后续档位选择的关键证据）
+  同一道题（中国剩余定理，正确答案 128，seed=1234，cap=512）：
+    nat_nobudget 无预算        reasoning=383  content=3    最终输出尾部='128'
+    bud0         budget=0   reasoning=383  content=3    最终输出尾部='128'
+    bud32        budget=32  reasoning=31   content=252  最终输出尾部=' final only maybe include brief. Final number.\n</think>\n\n128'
+    bud128       budget=128 reasoning=128  content=10   最终输出尾部='满足条件的最大数量是 **167**。'
+  观察：budget=32 时思考被硬截断（尾部断在句中），模型把剩余推理写进了 content（content 252 tok）；
+        budget=128 时 reasoning 恰好 128 tok 后被强制结束，最终答案错误（167）；无预算/budget=0 答案正确（128）。
+  => 只要“强制结束思考”，答案正确性就出现退化；预算档位必须按“正确完成耗时”而不是 token/s 来选（方案 §D3 提醒）。
+
+## 3. D2 参数优先级：实测（/apply-template 文本判定，与 chat/completions 同一解析函数）
+  判别串：xhigh 档注入 'Reasoning effort is set to xhigh.'；low 档注入 'Reasoning effort is set to low.'；
+          medium 档不注入任何档位行；enable_thinking=false 时空 think 块收尾。
+
+  用例                                             状态     判定
+  base_no_param                                  200    xhigh行/无low行/尾部形态未识别
+  toplevel_xhigh                                 200    xhigh行/无low行/尾部形态未识别
+  toplevel_medium                                200    无xhigh行/无low行/尾部形态未识别
+  toplevel_low                                   200    无xhigh行/low行/尾部形态未识别
+  kwargs_medium                                  200    无xhigh行/无low行/尾部形态未识别
+  kwargs_low                                     200    无xhigh行/low行/尾部形态未识别
+  toplevel_none                                  200    无xhigh行/无low行/尾部形态未识别
+  kwargs_enable_thinking_false                   200    无xhigh行/无low行/尾部形态未识别
+  conflict_toplevel_xhigh__kwargs_low            200    xhigh行/无low行/尾部形态未识别
+  conflict_toplevel_none__kwargs_xhigh           200    无xhigh行/无low行/尾部形态未识别
+  conflict_toplevel_none__kwargs_thinking_true   200    xhigh行/无low行/尾部形态未识别
+  conflict_toplevel_medium__kwargs_thinking_false 200    无xhigh行/无low行/尾部形态未识别
+  invalid_kwargs_none                            500    无xhigh行/无low行/尾部形态未识别
+  invalid_toplevel_high                          500    无xhigh行/无low行/尾部形态未识别
+
+  实测结论（4 条，均可复现）：
+   1) 模板默认档 = xhigh（不传 reasoning_effort 时注入 xhigh 指令行）；medium 反而是“不注入任何档位行”。
+   2) 顶层 reasoning_effort 覆盖 chat_template_kwargs.reasoning_effort（冲突用例结果是 xhigh 行）。
+   3) 顶层 reasoning_effort="none" 可关闭思考（无档位行 + 空 think 块）。
+   4) 但 chat_template_kwargs.enable_thinking=true 会压过顶层 none（冲突用例仍注入 xhigh 行）——
+      即 kwargs 里的 enable_thinking 显式值优先级最高；客户端明确要求“想”时，顶层 none 关不掉。
+   5) 非法档位会被模板拒绝：chat_template_kwargs.reasoning_effort="none" 与顶层 reasoning_effort="high" 都返回 500。
+      => 代理绝不能把 "none" 当档位传进模板；关闭思考只能走 enable_thinking=false。
+
+## 4. 对代理的落地口径（写入 proxy\bonsai_proxy.py 的 apply_thinking_policy）
+  优先级：显式请求参数 > 代理配置档 > 服务默认；客户端已指定一律不覆盖。
+  识别来源：顶层 reasoning_effort / chat_template_kwargs.reasoning_effort / .enable_thinking；
+            另外登记请求级预算字段（带预算的请求不再被注入档位，避免打断预算语义）。
+  档位归一：off/none/false -> enable_thinking=false；xhigh|medium|low -> chat_template_kwargs.reasoning_effort；
+            其它值 -> 不注入并记 invalid（模板会 500）。
+  预算注入：默认关闭（config.budget.policy 两项 false），逐项打开后才注入，且绝不覆盖客户端已给的值。
+
+## 5. 性能观察（非阶段 D 引入，必须记录并影响阶段 G）
+  同一后端进程（pid 43384，12:47 启动，参数未变）的服务端自报生成速度：
+    13:04 -> 35.9 tok/s ；14:04 -> 18.3 tok/s ；本次探测 -> 1.9~2.4 tok/s。
+  本次标准非流式测量的服务端权威值：predicted_per_second=2.36（200 tok 用了 84.4s）；
+    同时 prompt_per_second=11.4（30 tok prefill 用了 2.6s），即 prefill 与 decode 一起变慢。
+  现场证据：llama-server 进程 WorkingSet 仅 582 MB 而 PrivateMemory 16.4 GB；宿主 32 GB 内存仅剩 6 GB，
+    commit 已用 55.5 GB/105.9 GB，两个 pagefile 在用；GPU 7772/8151 MiB、利用率 6%、功耗 18 W（GPU 不是瓶颈）。
+  结论：宿主内存压力把服务的内存页挤出常驻集（权重 mmap 被反复回读），表现为整体慢 15 倍。
+  阶段 G 的性能对照必须在此状态解除后重测基线，否则 tok/s 数字不可比。
+

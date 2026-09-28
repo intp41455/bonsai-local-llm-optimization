@@ -1,0 +1,89 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 6,
+  "task_text": "从logs/run.log找出全部ERROR，写results/errors.md，仅保留行号、错误码、原因。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\A-s3",
+  "stop_reason": "model_finished",
+  "rounds": 6,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.46,
+      "ttft_s": 1.06,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 180,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 8.63,
+      "ttft_s": 6.19,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 330,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 6.9,
+      "ttft_s": 0.46,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 119,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 2.36,
+      "ttft_s": 0.78,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 172,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 1.32,
+      "ttft_s": 0.45,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 63,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 2.8,
+      "ttft_s": 0.52,
+      "finish": "stop",
+      "content_chars": 160,
+      "reasoning_chars": 118,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 24.5,
+  "tool_retries": 0,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 01:40:41"
+}

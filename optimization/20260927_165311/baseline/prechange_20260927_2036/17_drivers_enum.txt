@@ -1,0 +1,2405 @@
+﻿Microsoft PnP 工具
+
+发布名称:     oem114.inf
+原始名称:      acpivpc.inf
+提供程序名称:      Lenovo
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     05/19/2026 15.11.30.14
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem39.inf
+原始名称:      acpivpc.inf
+提供程序名称:      Lenovo
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     08/14/2025 15.11.30.11
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem153.inf
+原始名称:      alderlakedmasecextension.inf
+提供程序名称:      INTEL
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {aaa2e5d0-bba2-4900-95b4-fee1e274e6fe}
+驱动程序版本:     07/18/1968 10.1.45.9
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem167.inf
+原始名称:      alderlakepch-ndmasecextension.inf
+提供程序名称:      INTEL
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {4984e14e-1a73-42f1-8b39-9cc95d76a750}
+驱动程序版本:     07/18/1968 10.1.50.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem166.inf
+原始名称:      alderlakepch-nsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.50.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem210.inf
+原始名称:      alderlakepch-nsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.50.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem258.inf
+原始名称:      alderlakepch-pdmasecextension.inf
+提供程序名称:      INTEL
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {2975c8dd-faa3-4885-a3b6-7de3d2e06b86}
+驱动程序版本:     07/18/1968 10.1.36.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem46.inf
+原始名称:      alderlakepch-psystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.36.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem92.inf
+原始名称:      alderlakepch-psystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.36.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem146.inf
+原始名称:      alderlakepch-psystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.36.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem247.inf
+原始名称:      alderlakepch-ssystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.37.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem213.inf
+原始名称:      alderlakepch-ssystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.37.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem196.inf
+原始名称:      alderlakepch-ssystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.37.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem110.inf
+原始名称:      alderlakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.45.9
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem22.inf
+原始名称:      alderlakesystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.45.9
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem19.inf
+原始名称:      apollolakesdhost.inf
+提供程序名称:      INTEL
+类名:         SDHost
+类 GUID:         {a0a588a4-c46f-4b37-b7ea-c82fe89870c6}
+驱动程序版本:     07/18/1968 10.1.17.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem137.inf
+原始名称:      apollolakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.17.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem208.inf
+原始名称:      applekis.inf
+提供程序名称:      Apple, Inc.
+类名:         USBDevice
+类 GUID:         {88bae032-5a81-49f0-bc3d-a4ff138216d6}
+驱动程序版本:     08/02/2023 1.1.5.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem113.inf
+原始名称:      applersm.inf
+提供程序名称:      Apple, Inc.
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     09/19/2023 1.1.7.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem52.inf
+原始名称:      appleusb.inf
+提供程序名称:      Apple, Inc.
+类名:         USBDevice
+类 GUID:         {88bae032-5a81-49f0-bc3d-a4ff138216d6}
+驱动程序版本:     06/14/2023 538.0.0.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem145.inf
+原始名称:      bhtsddr.inf
+提供程序名称:      BayHubTech
+类名:         SCSIAdapter
+类 GUID:         {4d36e97b-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     09/17/2025 2.1.101.10734
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem135.inf
+原始名称:      cannonlake-hsdhost.inf
+提供程序名称:      INTEL
+类名:         SDHost
+类 GUID:         {a0a588a4-c46f-4b37-b7ea-c82fe89870c6}
+驱动程序版本:     07/18/1968 10.1.16.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem187.inf
+原始名称:      cannonlake-hsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.16.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem206.inf
+原始名称:      cannonlake-hsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.16.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem182.inf
+原始名称:      cannonlake-hsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.16.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem127.inf
+原始名称:      cannonlake-hsystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.16.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem231.inf
+原始名称:      cannonlake-lpsdhost.inf
+提供程序名称:      INTEL
+类名:         SDHost
+类 GUID:         {a0a588a4-c46f-4b37-b7ea-c82fe89870c6}
+驱动程序版本:     07/18/1968 10.1.15.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem199.inf
+原始名称:      cannonlake-lpsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.15.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem140.inf
+原始名称:      cannonlake-lpsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.15.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem184.inf
+原始名称:      cannonlake-lpsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.15.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem72.inf
+原始名称:      cannonlake-lpsystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.15.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem86.inf
+原始名称:      coffeelakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.14.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem91.inf
+原始名称:      cometlakepch-hsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.31.2
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem78.inf
+原始名称:      cometlakepch-hsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.31.2
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem149.inf
+原始名称:      cometlakepch-hsystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.31.2
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem179.inf
+原始名称:      cometlakepch-lpdmasecextension.inf
+提供程序名称:      INTEL
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {3580683e-65d6-43a6-988f-ea85d0bf2860}
+驱动程序版本:     07/18/1968 10.1.27.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem112.inf
+原始名称:      cometlakepch-lpsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.27.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem82.inf
+原始名称:      cometlakepch-lpsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.27.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem97.inf
+原始名称:      cometlakepch-lpsystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.27.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem107.inf
+原始名称:      cometlakepch-vsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.33.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem143.inf
+原始名称:      cometlakepch-vsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.33.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem244.inf
+原始名称:      cometlakepch-vsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.33.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem115.inf
+原始名称:      cometlakepch-vsystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.33.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem211.inf
+原始名称:      cometlakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.30.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem130.inf
+原始名称:      csaudioext.inf
+提供程序名称:      Cirrus Logic, Inc.
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {fcd2347d-c3c7-4d4f-b9e7-3c6a1000d458}
+驱动程序版本:     12/01/2025 21.45.58.24
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem5.inf
+原始名称:      ctachilddriver.inf
+提供程序名称:      Intel Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     12/20/2023 1.0.0.18
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem125.inf
+原始名称:      dax3_ext_rtk.inf
+提供程序名称:      Dolby
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {2c0454a3-ab52-4f33-8fd1-21140301103b}
+驱动程序版本:     10/28/2025 10.1029.1430.37
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem121.inf
+原始名称:      detectionverificationdrv.inf
+提供程序名称:      Intel(R) Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     11/17/2025 1.0.4112.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem8.inf
+原始名称:      dtt_ext.inf
+提供程序名称:      Intel
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {bc7814a1-a80e-44b3-87c6-652eac676387}
+驱动程序版本:     08/05/2025 9.0.11911.64898
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem66.inf
+原始名称:      elanmoc_extension.inf
+提供程序名称:      ELAN
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {f9bb281a-6145-49d2-90b1-df157f6d852a}
+驱动程序版本:     01/15/2025 3.4.12404.13030
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem157.inf
+原始名称:      elevocapo64ext.inf
+提供程序名称:      Elevoc Technology Co.,Ltd
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {f8ad342d-16e2-42b7-a8e3-eded26aad9e9}
+驱动程序版本:     01/27/2026 3.0.2.410
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem141.inf
+原始名称:      elevocapo64ext.inf
+提供程序名称:      Elevoc Technology Co.,Ltd
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {a882d99b-2bb1-484c-b438-a24b8b506686}
+驱动程序版本:     03/07/2025 3.0.2.304
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem90.inf
+原始名称:      elkhartlakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.25.6
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem37.inf
+原始名称:      elkhartlakesystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.25.6
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem154.inf
+原始名称:      emmitsburgsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.40.6
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem181.inf
+原始名称:      emmitsburgsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.40.6
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem170.inf
+原始名称:      geminilakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.13.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem228.inf
+原始名称:      geminilakesystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.13.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem59.inf
+原始名称:      geminilakesystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.13.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem168.inf
+原始名称:      gna.inf
+提供程序名称:      Intel Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     08/12/2025 3.5.0.1611
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem234.inf
+原始名称:      graniterapidssystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.52.12
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem43.inf
+原始名称:      gscauxdriver.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     01/31/2024 2405.6.0.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem240.inf
+原始名称:      gscheci.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     02/18/2025 32.0.101.6629
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem24.inf
+原始名称:      hdbusext.inf
+提供程序名称:      Intel Corporation
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {69cb4edd-bafe-4f9a-9135-c1f284d6860d}
+驱动程序版本:     12/12/2025 32.0.101.8332
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem106.inf
+原始名称:      hdx_lenovoext_dolby_wrap36_elevoc_whisper3.0.inf
+提供程序名称:      Realtek Semiconductor Corp.
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {c3a63edd-2d27-4b66-b155-5e94b43d926a}
+驱动程序版本:     01/08/2026 6.0.9937.1
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem237.inf
+原始名称:      heci.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     12/23/2025 2552.8.10.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem95.inf
+原始名称:      heci.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     04/24/2025 2517.8.1.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem71.inf
+原始名称:      ialpss2_gpio2_mtl_s.inf
+提供程序名称:      Intel Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/13/2025 30.100.2529.2
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem33.inf
+原始名称:      ialpss2_i2c_mtl_s.inf
+提供程序名称:      Intel Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/13/2025 30.100.2529.2
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem218.inf
+原始名称:      ialpss2_i3c_mtl_s.inf
+提供程序名称:      Intel Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     05/07/2024 30.100.2419.23
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem118.inf
+原始名称:      ialpss2_spi_mtl_s.inf
+提供程序名称:      Intel Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     05/07/2024 30.100.2419.23
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem35.inf
+原始名称:      ialpss2_uart2_mtl_s.inf
+提供程序名称:      Intel Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     05/07/2024 30.100.2419.23
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem221.inf
+原始名称:      icelakepch-lpsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.12.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem49.inf
+原始名称:      icelakepch-lpsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.12.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem198.inf
+原始名称:      icelakepch-lpsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.12.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem48.inf
+原始名称:      icelakepch-nsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.22.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem148.inf
+原始名称:      icelakepch-nsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.22.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem108.inf
+原始名称:      icelakesystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.20.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem85.inf
+原始名称:      icelakeusbfunctioncontroller.inf
+提供程序名称:      INTEL
+类名:         USBFunctionController
+类 GUID:         {bbbe8734-08fa-4966-b6a6-4e5ad010cdd7}
+驱动程序版本:     07/18/1968 10.1.20.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem20.inf
+原始名称:      iigd_ext.inf
+提供程序名称:      Intel Corporation
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {a882d99b-2bb1-484c-b438-a24b8b506686}
+驱动程序版本:     03/26/2026 32.0.101.8332
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem162.inf
+原始名称:      intcaudiobus.inf
+提供程序名称:      Intel(R) Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     11/24/2025 20.40.12446.9
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem156.inf
+原始名称:      intcdmicext_e.inf
+提供程序名称:      Elevoc Technology Co.,Ltd
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {a882d99b-2bb1-484c-b438-a24b8b506686}
+驱动程序版本:     03/07/2025 2.0.0.133
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem42.inf
+原始名称:      intcdmicext_e.inf
+提供程序名称:      Elevoc Technology Co.,Ltd
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {e6180347-8aed-4c51-bc54-1f0841edfeaf}
+驱动程序版本:     01/22/2026 2.0.1.170
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem203.inf
+原始名称:      intcoed.inf
+提供程序名称:      Intel(R) Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     11/24/2025 20.40.12446.9
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem192.inf
+原始名称:      intcoed_oemlibpath.inf
+提供程序名称:      Realtek Semiconductor Corp.
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {228e3b46-b439-4af1-a52c-7fc330341268}
+驱动程序版本:     09/25/2025 20.40.220.50
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem23.inf
+原始名称:      intcpmt.inf
+提供程序名称:      Intel(R) Platform Monitoring Technology (PMT) Device
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     05/24/2024 3.1.2.6
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem217.inf
+原始名称:      intcsdwbus.inf
+提供程序名称:      Intel(R) Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     11/24/2025 20.40.12446.9
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem193.inf
+原始名称:      intel_nf_i2c_child.inf
+提供程序名称:      Intel Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     04/30/2024 31.100.2418.2
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem38.inf
+原始名称:      ipf_acpi.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     12/05/2025 2.3.20301.5054
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem160.inf
+原始名称:      ipf_cpu.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     12/05/2025 2.3.20301.5054
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem172.inf
+原始名称:      ipf_smbus.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     12/05/2025 2.3.20301.5054
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem99.inf
+原始名称:      ishheci.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     09/19/2025 5.8.54.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem164.inf
+原始名称:      ishheciextensiontemplate.inf
+提供程序名称:      Intel
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {83da184a-49a1-4dab-b840-b5dfe7a8697d}
+驱动程序版本:     07/24/2024 5.8.30.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem224.inf
+原始名称:      ishhidbus.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     09/02/2025 5.8.52.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem67.inf
+原始名称:      ishhidmini.inf
+提供程序名称:      Intel
+类名:         HIDClass
+类 GUID:         {745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+驱动程序版本:     08/25/2025 5.8.50.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem194.inf
+原始名称:      ishoed.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     09/02/2025 5.8.52.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem214.inf
+原始名称:      jasperlake+system.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.29.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem176.inf
+原始名称:      jasperlake+systemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.29.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem27.inf
+原始名称:      jasperlakepch-nsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.32.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem220.inf
+原始名称:      jasperlakepch-nsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.32.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem175.inf
+原始名称:      jasperlakepch-nsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.32.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem229.inf
+原始名称:      kabylakepch-hsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.11.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem70.inf
+原始名称:      kabylakepch-hsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.11.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem4.inf
+原始名称:      kabylakepch-hsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.11.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem241.inf
+原始名称:      kabylakepch-hsystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.11.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem41.inf
+原始名称:      kabylakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.10.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem117.inf
+原始名称:      kabylakesystemgmm.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.10.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem159.inf
+原始名称:      kpe_apo_ext.inf
+提供程序名称:      Intel
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {9de2e99c-1f83-4479-a78c-4c03439e52a8}
+驱动程序版本:     12/17/2025 9.1.10005.898
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem134.inf
+原始名称:      kpe_apo_win.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     12/17/2025 9.1.10005.898
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem89.inf
+原始名称:      lakefieldsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.28.2
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem219.inf
+原始名称:      lakefieldsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.28.2
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem74.inf
+原始名称:      lakefieldsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.28.2
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem9.inf
+原始名称:      lcfcintelligentrfivddriver.inf
+提供程序名称:      Lenovo
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     10/14/2025 1.0.2.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem122.inf
+原始名称:      lenovodriverbus.inf
+提供程序名称:      Lenovo Inc
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     05/12/2024 2.0.0.133
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem104.inf
+原始名称:      lenovodriverhid.inf
+提供程序名称:      Lenovo Inc
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     06/20/2024 1.5.0.86
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem76.inf
+原始名称:      lenovofnandfunctionkeys.inf
+提供程序名称:      Lenovo
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     03/05/2026 2.1.2602.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem126.inf
+原始名称:      lnvprocessmanagement.inf
+提供程序名称:      Lenovo
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     12/05/2025 3.2.0.17
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem250.inf
+原始名称:      memcntrl.inf
+提供程序名称:      Intel
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     02/18/2025 32.0.101.6629
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem129.inf
+原始名称:      meteorlakepch-hsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.55.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem80.inf
+原始名称:      meteorlakepch-ssystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.51.10
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem88.inf
+原始名称:      meteorlakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.47.12
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem186.inf
+原始名称:      meteorlakesystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.47.12
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem51.inf
+原始名称:      npu_extension.inf
+提供程序名称:      Intel Corporation
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {a882d99b-2bb1-484c-b438-a24b8b506686}
+驱动程序版本:     12/17/2025 32.0.100.4512
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem155.inf
+原始名称:      nvppc.inf
+提供程序名称:      NVIDIA
+类名:         USB
+类 GUID:         {36fc9e60-c465-11cf-8056-444553540000}
+驱动程序版本:     01/20/2026 1.52.831.832
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem158.inf
+原始名称:      pmtchilddriver.inf
+提供程序名称:      Intel Corporation
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     12/20/2023 1.0.0.15
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem190.inf
+原始名称:      raptorlakepch-ssystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.46.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem111.inf
+原始名称:      raptorlakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.49.10
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem3.inf
+原始名称:      rocketlakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.41.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem116.inf
+原始名称:      rtscrextpr.inf
+提供程序名称:      Realtek Semiconductor Corp.
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {a58bd39e-56d3-453f-a8b7-1e83725a8b54}
+驱动程序版本:     08/27/2025 10.0.26200.1
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem54.inf
+原始名称:      sapphirerapidssystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.39.10
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem222.inf
+原始名称:      server_commonsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.42.12
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem124.inf
+原始名称:      server_commonsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.42.12
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem0.inf
+原始名称:      skylakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.7.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem249.inf
+原始名称:      skylakesystemgmm.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.7.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem174.inf
+原始名称:      skylakesystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.7.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem7.inf
+原始名称:      spitexmep.inf
+提供程序名称:      SunplusIT
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {f4f1d3e0-e64f-4691-9ac8-7eee13352af7}
+驱动程序版本:     09/02/2025 2.0.18.14
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem58.inf
+原始名称:      sunrisepoint-hsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.6.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem17.inf
+原始名称:      sunrisepoint-hsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.6.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem152.inf
+原始名称:      sunrisepoint-hsystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.6.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem227.inf
+原始名称:      sunrisepoint-lpsdhost.inf
+提供程序名称:      INTEL
+类名:         SDHost
+类 GUID:         {a0a588a4-c46f-4b37-b7ea-c82fe89870c6}
+驱动程序版本:     07/18/1968 10.1.5.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem96.inf
+原始名称:      sunrisepoint-lpsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.5.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem151.inf
+原始名称:      sunrisepoint-lpsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.5.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem103.inf
+原始名称:      sunrisepoint-lpsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.5.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem239.inf
+原始名称:      sunrisepoint-lpsystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.5.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem29.inf
+原始名称:      tigerlakedmasecextension.inf
+提供程序名称:      INTEL
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {de302a51-9c06-4b47-b201-6bf070faa935}
+驱动程序版本:     07/18/1968 10.1.43.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem57.inf
+原始名称:      tigerlakepch-hdmasecextension.inf
+提供程序名称:      INTEL
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {3f215854-5046-4482-8288-e287b0d11e07}
+驱动程序版本:     07/18/1968 10.1.34.13
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem63.inf
+原始名称:      tigerlakepch-hsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.34.13
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem245.inf
+原始名称:      tigerlakepch-hsystemish.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.34.13
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem98.inf
+原始名称:      tigerlakepch-hsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.34.13
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem202.inf
+原始名称:      tigerlakepch-hsystemnorthpeak.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.34.13
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem197.inf
+原始名称:      tigerlakepch-hsystemthermal.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.34.13
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem69.inf
+原始名称:      tigerlakepch-lpdmasecextension.inf
+提供程序名称:      INTEL
+类名:         Extension
+类 GUID:         {e2f84ce7-8efa-411c-aa69-97454ca4cb57}
+扩展 ID:       {ec1f097b-60a1-4803-81ba-0625dfd4254d}
+驱动程序版本:     07/18/1968 10.1.24.6
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem188.inf
+原始名称:      tigerlakepch-lpsystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.24.6
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem26.inf
+原始名称:      tigerlakepch-lpsystemlpss.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.24.6
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem243.inf
+原始名称:      tigerlakepch-lpusbfunctioncontroller.inf
+提供程序名称:      INTEL
+类名:         USBFunctionController
+类 GUID:         {bbbe8734-08fa-4966-b6a6-4e5ad010cdd7}
+驱动程序版本:     07/18/1968 10.1.24.6
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem50.inf
+原始名称:      tigerlakesystem.inf
+提供程序名称:      INTEL
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/18/1968 10.1.43.5
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem119.inf
+原始名称:      udcdriver.inf
+提供程序名称:      Lenovo
+类名:         System
+类 GUID:         {4d36e97d-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     07/20/2026 26.7.0.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem6.inf
+原始名称:      android_winusb.inf
+提供程序名称:      Motorola, Inc.
+类名:         AndroidUsbDeviceClass
+类 GUID:         {3f966bd9-fa04-4ec5-991c-d326973b5128}
+驱动程序版本:     07/11/2024 14.7.0.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem123.inf
+原始名称:      csaudio.inf
+提供程序名称:      Cirrus Logic, Inc.
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     02/11/2025 17.54.59.438
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem200.inf
+原始名称:      cui_dch.inf
+提供程序名称:      Intel Corporation
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     02/18/2025 32.0.101.6629
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem83.inf
+原始名称:      dal.inf
+提供程序名称:      Intel
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     03/31/2024 1.46.2024.221
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem178.inf
+原始名称:      dax3_swc_aposvc.inf
+提供程序名称:      Dolby
+类名:         AudioProcessingObject
+类 GUID:         {5989fce8-9cd0-467d-8a6a-5419e31529d4}
+驱动程序版本:     09/29/2025 3.30811.890.1
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem11.inf
+原始名称:      dax3_swc_hsa.inf
+提供程序名称:      Dolby
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     12/17/2024 3.30803.830.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem255.inf
+原始名称:      dtt_sw.inf
+提供程序名称:      Intel
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     12/17/2025 9.1.10005.898
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem12.inf
+原始名称:      elevocapo64.inf
+提供程序名称:      Elevoc Technology Co.,Ltd
+类名:         AudioProcessingObject
+类 GUID:         {5989fce8-9cd0-467d-8a6a-5419e31529d4}
+驱动程序版本:     01/22/2026 5.0.5.295
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem109.inf
+原始名称:      hdxlvsst.inf
+提供程序名称:      Realtek Semiconductor Corp.
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     01/08/2026 6.0.9937.1
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem94.inf
+原始名称:      ibtpci.inf
+提供程序名称:      Intel Corporation
+类名:         Bluetooth
+类 GUID:         {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+驱动程序版本:     02/10/2025 23.120.0.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem248.inf
+原始名称:      ibtusb.inf
+提供程序名称:      Intel Corporation
+类名:         Bluetooth
+类 GUID:         {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+驱动程序版本:     02/10/2025 23.120.0.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem215.inf
+原始名称:      ibtusb.inf
+提供程序名称:      Intel Corporation
+类名:         Bluetooth
+类 GUID:         {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+驱动程序版本:     02/10/2025 23.120.0.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem44.inf
+原始名称:      ibtusb.inf
+提供程序名称:      Intel Corporation
+类名:         Bluetooth
+类 GUID:         {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+驱动程序版本:     03/23/2026 24.20.4.1
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem225.inf
+原始名称:      ibtusb.inf
+提供程序名称:      Intel Corporation
+类名:         Bluetooth
+类 GUID:         {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+驱动程序版本:     02/10/2025 23.120.0.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem87.inf
+原始名称:      ibtusb.inf
+提供程序名称:      Intel Corporation
+类名:         Bluetooth
+类 GUID:         {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+驱动程序版本:     02/10/2025 23.120.0.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem32.inf
+原始名称:      ibtusb.inf
+提供程序名称:      Intel Corporation
+类名:         Bluetooth
+类 GUID:         {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+驱动程序版本:     03/23/2026 24.20.4.1
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem84.inf
+原始名称:      ibtusb.inf
+提供程序名称:      Intel Corporation
+类名:         Bluetooth
+类 GUID:         {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+驱动程序版本:     02/10/2025 23.120.0.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem25.inf
+原始名称:      ibtusb.inf
+提供程序名称:      Intel Corporation
+类名:         Bluetooth
+类 GUID:         {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+驱动程序版本:     02/10/2025 23.120.0.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem207.inf
+原始名称:      ibtusb.inf
+提供程序名称:      Intel Corporation
+类名:         Bluetooth
+类 GUID:         {e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+驱动程序版本:     02/10/2025 23.120.0.4
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem64.inf
+原始名称:      iclsclient.inf
+提供程序名称:      Intel
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     08/01/2024 1.74.210.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem171.inf
+原始名称:      igcc_dch.inf
+提供程序名称:      Intel Corporation
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     02/18/2025 32.0.101.6629
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem47.inf
+原始名称:      iigd_dch.inf
+提供程序名称:      Intel Corporation
+类名:         Display
+类 GUID:         {4d36e968-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     03/26/2026 32.0.101.8332
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem81.inf
+原始名称:      intcbtau.inf
+提供程序名称:      Intel(R) Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     11/24/2025 20.40.12446.9
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem61.inf
+原始名称:      intcbtle.inf
+提供程序名称:      Intel(R) Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     03/21/2025 20.40.11988.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem161.inf
+原始名称:      intcdaud.inf
+提供程序名称:      Intel(R) Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     12/16/2024 11.2.0.14
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem252.inf
+原始名称:      intcdaud.inf
+提供程序名称:      Intel(R) Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     04/29/2024 12.1.0.12
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem15.inf
+原始名称:      intcdmic.inf
+提供程序名称:      Intel(R) Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     11/24/2025 20.40.12446.9
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem189.inf
+原始名称:      intcsdw.inf
+提供程序名称:      Intel(R) Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     03/21/2025 20.40.11988.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem55.inf
+原始名称:      intcsst.inf
+提供程序名称:      Intel(R) Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     04/10/2025 20.40.12061.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem136.inf
+原始名称:      intcsst.inf
+提供程序名称:      Intel(R) Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     11/24/2025 20.40.12446.9
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem102.inf
+原始名称:      intcusb.inf
+提供程序名称:      Intel(R) Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     11/24/2025 20.40.12446.9
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem195.inf
+原始名称:      intcusb.inf
+提供程序名称:      Intel(R) Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     04/10/2025 20.40.12061.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem212.inf
+原始名称:      ipfppm_sw.inf
+提供程序名称:      Intel
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     11/20/2025 1.0.0.200
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem30.inf
+原始名称:      lenovodisplay.inf
+提供程序名称:      Lenovo Inc
+类名:         Display
+类 GUID:         {4d36e968-e325-11ce-bfc1-08002be10318}
+类版本:      2.0
+驱动程序版本:     06/20/2024 1.5.0.134
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem205.inf
+原始名称:      lenovodriveraudio.inf
+提供程序名称:      Lenovo Inc
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     05/14/2024 2.0.0.133
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem73.inf
+原始名称:      lnblcd.inf
+提供程序名称:      Lenovo
+类名:         Monitor
+类 GUID:         {4d36e96e-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     09/13/2025 20.24.0.18
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem209.inf
+原始名称:      lnblcd.inf
+提供程序名称:      Lenovo
+类名:         Monitor
+类 GUID:         {4d36e96e-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     10/01/2024 20.24.0.8
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem77.inf
+原始名称:      mep_camera_component.inf
+提供程序名称:      Microsoft Corporation
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     06/21/2024 1.0.41.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem28.inf
+原始名称:      mep_camera_component.inf
+提供程序名称:      Microsoft Corporation
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     06/22/2026 1.0.50.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem204.inf
+原始名称:      mewmiprov.inf
+提供程序名称:      Intel
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     10/28/2025 2544.8.3.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem232.inf
+原始名称:      microsofteffectpack.inf
+提供程序名称:      Microsoft Corporation
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     06/21/2024 1.0.41.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem31.inf
+原始名称:      microsofteffectpack.inf
+提供程序名称:      Microsoft Corporation
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     06/22/2026 1.0.50.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem251.inf
+原始名称:      minictadriver.inf
+提供程序名称:      Intel Corporation
+类名:         CTA Driver Devices
+类 GUID:         {7bfd0817-dc85-41c5-8a55-bf38b1a1667e}
+驱动程序版本:     02/18/2025 32.0.101.6629
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem101.inf
+原始名称:      mshdadac.inf
+提供程序名称:      Intel Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     02/18/2025 32.0.101.6629
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem75.inf
+原始名称:      mshdadac.inf
+提供程序名称:      Intel Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     12/12/2025 32.0.101.8332
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem60.inf
+原始名称:      mumuidddriver.inf
+提供程序名称:      MuMu
+类名:         Display
+类 GUID:         {4d36e968-e325-11ce-bfc1-08002be10318}
+类版本:      2.0
+驱动程序版本:     03/12/2026 20.36.41.498
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+                    Attested
+WHCP 版本:      未知
+
+发布名称:     oem131.inf
+原始名称:      netwtw08.inf
+提供程序名称:      Intel
+类名:         Net
+类 GUID:         {4d36e972-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     02/12/2026 24.20.2.1
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem100.inf
+原始名称:      netwtw6e.inf
+提供程序名称:      Intel
+类名:         Net
+类 GUID:         {4d36e972-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     02/12/2026 24.20.2.1
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem246.inf
+原始名称:      npu.inf
+提供程序名称:      Intel Corporation
+类名:         ComputeAccelerator
+类 GUID:         {f01a9d53-3ff6-48d2-9f97-c8a7004be10c}
+驱动程序版本:     12/17/2025 32.0.100.4512
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem147.inf
+原始名称:      nvhda.inf
+提供程序名称:      NVIDIA Corporation
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     01/20/2026 1.4.5.7
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem120.inf
+原始名称:      nvlt.inf
+提供程序名称:      NVIDIA
+类名:         Display
+类 GUID:         {4d36e968-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     01/20/2026 32.0.15.9186
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem1.inf
+原始名称:      nvpcf.inf
+提供程序名称:      NVIDIA
+类名:         SoftwareDevice
+类 GUID:         {62f9c741-b25a-46ce-b54c-9bccce08b6f2}
+驱动程序版本:     01/20/2026 32.0.15.9071
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem45.inf
+原始名称:      nvvad.inf
+提供程序名称:      NVIDIA
+类名:         MEDIA
+类 GUID:         {4d36e96c-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     02/28/2024 4.65.0.3
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem65.inf
+原始名称:      oemvista.inf
+提供程序名称:      TAP-Windows Provider V9
+类名:         Net
+类 GUID:         {4d36e972-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     02/27/2024 9.27.0.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+                    Attested
+WHCP 版本:      未知
+
+发布名称:     oem62.inf
+原始名称:      ovpn-dco.inf
+提供程序名称:      OpenVPN, Inc
+类名:         Net
+类 GUID:         {4d36e972-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     05/22/2024 1.2.1.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+                    Attested
+WHCP 版本:      未知
+
+发布名称:     oem14.inf
+原始名称:      prnepcl2.inf
+提供程序名称:      EPSON
+类名:         Printer
+类 GUID:         {4d36e979-e325-11ce-bfc1-08002be10318}
+类版本:      4.0
+驱动程序版本:     04/22/2009 10.0.17119.1
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+                    Attested
+WHCP 版本:      未知
+
+发布名称:     oem21.inf
+原始名称:      prnms006.inf
+提供程序名称:      Microsoft
+类名:         Printer
+类 GUID:         {4d36e979-e325-11ce-bfc1-08002be10318}
+类版本:      4.0
+驱动程序版本:     11/29/2016 16.0.7629.4000
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem259.inf
+原始名称:      prnms009.inf
+提供程序名称:      Microsoft
+类名:         Printer
+类 GUID:         {4d36e979-e325-11ce-bfc1-08002be10318}
+类版本:      4.0
+驱动程序版本:     06/21/2006 10.0.26100.4484
+签名者姓名:        Microsoft Windows
+属性:        Legacy
+WHCP 版本:      未知
+
+发布名称:     oem185.inf
+原始名称:      realtekservice.inf
+提供程序名称:      Realtek
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     01/08/2026 1.0.946.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem256.inf
+原始名称:      realtekuapo2.inf
+提供程序名称:      Realtek
+类名:         AudioProcessingObject
+类 GUID:         {5989fce8-9cd0-467d-8a6a-5419e31529d4}
+驱动程序版本:     01/08/2026 13.4709.2329.744
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem150.inf
+原始名称:      rtsper.inf
+提供程序名称:      Realtek Semiconductor Corp.
+类名:         MTD
+类 GUID:         {4d36e970-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     08/28/2025 10.0.26200.21385
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem226.inf
+原始名称:      spuvcbvcn.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     03/03/2025 5.0.18.262
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem133.inf
+原始名称:      spuvcbvcn1.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     03/03/2025 5.0.18.262
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem68.inf
+原始名称:      spuvcbvcn2.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     03/03/2025 5.0.18.262
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem235.inf
+原始名称:      spuvcbvcn3.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     03/03/2025 5.0.18.262
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem253.inf
+原始名称:      spuvcbvjp.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     03/03/2025 5.0.18.262
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem93.inf
+原始名称:      spuvcbvjpir.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     03/03/2025 5.0.18.262
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem242.inf
+原始名称:      spuvcbvmerge.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     08/25/2025 5.0.18.284
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem40.inf
+原始名称:      spuvcbvmerge.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     12/12/2025 5.0.18.295
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem180.inf
+原始名称:      spuvcbvmerge2.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     03/03/2025 5.0.18.262
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem13.inf
+原始名称:      spuvcbvmergeir.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     12/12/2025 5.0.18.295
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem10.inf
+原始名称:      spuvcbvmergeir.inf
+提供程序名称:      SunplusIT
+类名:         Camera
+类 GUID:         {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+驱动程序版本:     08/25/2025 5.0.18.284
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem2.inf
+原始名称:      udccomponent.inf
+提供程序名称:      Lenovo
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     04/27/2026 26.4.0.12
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem105.inf
+原始名称:      udccomponent.inf
+提供程序名称:      Lenovo
+类名:         SoftwareComponent
+类 GUID:         {5c4c3332-344d-483c-8739-259e934c9cc8}
+驱动程序版本:     07/29/2026 26.9.0.20
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Declarative
+WHCP 版本:      未知
+
+发布名称:     oem56.inf
+原始名称:      voiceclarityep_audio_component.inf
+提供程序名称:      Microsoft Corporation
+类名:         AudioProcessingObject
+类 GUID:         {5989fce8-9cd0-467d-8a6a-5419e31529d4}
+驱动程序版本:     05/04/2026 1.0.3.56670
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem18.inf
+原始名称:      voiceclarityep_audio_component.inf
+提供程序名称:      Microsoft Corporation
+类名:         AudioProcessingObject
+类 GUID:         {5989fce8-9cd0-467d-8a6a-5419e31529d4}
+驱动程序版本:     06/16/2026 1.0.4.7057
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem173.inf
+原始名称:      wbfusbdriver.inf
+提供程序名称:      ELAN Finger Print
+类名:         Biometric
+类 GUID:         {53d29ef7-377c-4d14-864b-eb3a85769359}
+驱动程序版本:     09/05/2025 3.4.12404.14001
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem16.inf
+原始名称:      wbfusbdriver.inf
+提供程序名称:      ELAN Finger Print
+类名:         Biometric
+类 GUID:         {53d29ef7-377c-4d14-864b-eb3a85769359}
+驱动程序版本:     03/17/2026 3.4.12404.14006
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem53.inf
+原始名称:      wintun.inf
+提供程序名称:      WireGuard LLC
+类名:         Net
+类 GUID:         {4d36e972-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     10/13/2021 0.14.0.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+
+发布名称:     oem79.inf
+原始名称:      wireguard.inf
+提供程序名称:      WireGuard LLC
+类名:         Net
+类 GUID:         {4d36e972-e325-11ce-bfc1-08002be10318}
+驱动程序版本:     10/12/2021 0.10.0.0
+签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
+属性:        Universal
+WHCP 版本:      未知
+

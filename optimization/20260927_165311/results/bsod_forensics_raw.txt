@@ -1,0 +1,62 @@
+########## dump_forensics2.py (exit=0) ##########
+==============================================================================
+转储: D:\Bonsai-demo\optimization\20260927_165311\baseline\092726-17375-01.dmp
+  大小 12525826 字节  写入时间 2026-09-27 20:17:55
+  SHA256 adca00e1a729303aaa3916f4660a36b3cd1b8d0ce4ff11080612344a8fc55cd0
+  [内嵌头部 @0x0] PAGEDU64 v15.26100 nproc=24
+  [内嵌头部] BugCheckCode = 0x00020001
+  [内嵌头部] 参数 = 0x28, 0x1, 0x29B92701, 0xFC800000
+  !! 不是 MINIDUMP 格式（前 4 字节 b'PAGE'）
+==============================================================================
+转储: D:\Bonsai-demo\optimization\20260927_165311\baseline\092726-18406-01.dmp
+  大小 12380886 字节  写入时间 2026-09-27 04:52:30
+  SHA256 5a1fa7abbffe854cf3f87cd387c872f3f7a6f41bb1e13c7b2226e455110a7ebe
+  [内嵌头部 @0x0] PAGEDU64 v15.26100 nproc=24
+  [内嵌头部] BugCheckCode = 0x00020001
+  [内嵌头部] 参数 = 0x28, 0x1, 0x29B92701, 0xFC800000
+  !! 不是 MINIDUMP 格式（前 4 字节 b'PAGE'）
+==============================================================================
+映射：0x00020001 = HYPERVISOR_ERROR（虚拟化层报告的错误，非显卡 TDR 0x116/0x117）
+
+########## dump_forensics3.py (exit=0) ##########
+==============================================================================
+20:16:55 本次  092726-17375-01.dmp
+  内核版本 15.26100   机器类型 0x8664 (x64)
+  构建串 ''
+  [出现] ntoskrnl     UTF-16 x1     ASCII x0   
+  [出现] nvlddmkm     UTF-16 x1     ASCII x0   
+  [出现] dxgkrnl      UTF-16 x1     ASCII x0   
+  [出现] hvix64       UTF-16 x0     ASCII x3   
+  [出现] vmbus        UTF-16 x1     ASCII x1   
+  [出现] winhvr       UTF-16 x1     ASCII x0   
+  [出现] ksecdd       UTF-16 x1     ASCII x0   
+  [出现] storport     UTF-16 x2     ASCII x1   
+  [出现] nvme         UTF-16 x3     ASCII x1   
+  [出现] WdFilter     UTF-16 x1     ASCII x0   
+  [出现] WdNisDrv     UTF-16 x1     ASCII x0   
+  [出现] bam          UTF-16 x1     ASCII x0   
+  [出现] llama        UTF-16 x0     ASCII x2   
+  [魔数] MDMP      位置 无
+  [魔数] TRIAGE    位置 无
+  [魔数] PAGEDU64  位置 ['0x0']
+==============================================================================
+04:49:40 前例  092726-18406-01.dmp
+  内核版本 15.26100   机器类型 0x8664 (x64)
+  构建串 ''
+  [出现] ntoskrnl     UTF-16 x1     ASCII x0   
+  [出现] nvlddmkm     UTF-16 x2     ASCII x0   
+  [出现] dxgkrnl      UTF-16 x1     ASCII x0   
+  [出现] vmbus        UTF-16 x1     ASCII x0   
+  [出现] winhvr       UTF-16 x1     ASCII x0   
+  [出现] ksecdd       UTF-16 x1     ASCII x0   
+  [出现] storport     UTF-16 x2     ASCII x0   
+  [出现] nvme         UTF-16 x3     ASCII x0   
+  [出现] WdFilter     UTF-16 x1     ASCII x0   
+  [出现] WdNisDrv     UTF-16 x1     ASCII x0   
+  [出现] bam          UTF-16 x1     ASCII x2   
+  [出现] llama        UTF-16 x0     ASCII x9   
+  [出现] python       UTF-16 x1     ASCII x1   
+  [魔数] MDMP      位置 无
+  [魔数] TRIAGE    位置 无
+  [魔数] PAGEDU64  位置 ['0x0']
+==============================================================================

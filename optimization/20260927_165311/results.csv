@@ -1,0 +1,37 @@
+﻿cfg,task,ok,pass,fail,wall_s,rounds,tool_retries,truncation_rounds,decode_tps_median,decode_tps_min,prompt_n_total,cache_n_last,ttft_first_s,reasoning_chars_total,stop_reason,checks,at,source,memo
+B,1,true,4,0,10.0,3,0,0,45.61,41.44,null,null,2.26,444,model_finished,,2026-09-27 21:46:07,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B,3,true,5,0,57.5,14,3,0,42.53,39.3,null,null,1.02,2280,model_finished,,2026-09-27 21:47:04,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B,4,true,5,0,14.6,6,0,0,44.94,41.82,null,null,1.24,406,model_finished,,2026-09-27 21:47:19,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B,5,true,5,0,10.9,3,0,0,45.42,45.01,null,null,1.27,676,model_finished,,2026-09-27 21:47:30,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B,6,false,4,1,31.4,7,0,0,42.13,41.1,null,null,0.99,1134,model_finished,FAIL 任务6 没有遗漏（恰好两条）  <-,2026-09-27 21:48:01,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B,7,true,5,0,40.0,5,0,0,44.53,40.51,null,null,1.31,1941,model_finished,,2026-09-27 21:48:41,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B,8,true,6,0,103.5,5,0,0,43.82,40.86,null,null,1.2,7106,model_finished,,2026-09-27 21:50:25,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B,9,true,3,0,8.6,3,0,0,45.18,44.97,null,null,1.25,555,model_finished,,2026-09-27 21:50:33,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B,12,false,4,1,74.2,16,2,0,40.7,37.72,null,null,1.03,2649,model_finished,FAIL 任务12 含总额 350  <-,2026-09-27 21:51:48,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B-r2,6,true,5,0,31.8,7,0,0,42.49,40.59,null,null,1.71,1134,model_finished,,2026-09-27 21:54:34,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B-r2,12,false,3,2,55.2,16,2,0,41.15,39.04,null,null,1.27,2169,model_finished,FAIL 任务12 含去重已支付订单数 3（§14.2 第12项验收口径）  <- | FAIL 任务12 含总额 350  <-,2026-09-27 21:55:29,results.jsonl,早期批次；任务6 的 4/1 系 check_tasks.py 判据缺陷，修正后 B-r3 复跑 5/0
+B-t11,11,true,2,0,16.2,6,0,0,44.93,42.23,null,null,1.62,853,model_finished,,2026-09-27 21:57:37,results.jsonl,任务11 首次跑（含预置 checkpoint 夹具）
+B-r3,1,true,4,0,9.4,3,0,0,45.45,44.98,713,798,1.67,444,model_finished,,2026-09-27 22:02:28,results.jsonl,
+B-r3,3,true,5,0,71.3,14,3,0,42.16,38.78,7719,7730,1.06,3931,model_finished,,2026-09-27 22:03:39,results.jsonl,
+B-r3,4,true,5,0,14.9,6,0,0,45.17,41.86,1165,1164,1.53,406,model_finished,,2026-09-27 22:03:54,results.jsonl,
+B-r3,5,true,5,0,10.9,3,0,0,45.0,44.8,806,890,1.22,676,model_finished,,2026-09-27 22:04:05,results.jsonl,
+B-r3,6,true,5,0,31.2,7,0,0,42.31,40.98,5554,5530,1.0,1134,model_finished,,2026-09-27 22:04:36,results.jsonl,
+B-r3,7,true,5,0,39.4,5,0,0,44.8,41.29,2358,1762,1.26,1941,model_finished,,2026-09-27 22:05:16,results.jsonl,
+B-r3,8,true,6,0,101.8,5,0,0,44.45,42.46,2121,2247,1.23,7106,model_finished,,2026-09-27 22:06:57,results.jsonl,
+B-r3,9,true,3,0,8.7,3,0,0,44.53,44.3,705,791,1.26,555,model_finished,,2026-09-27 22:07:06,results.jsonl,
+B-r3,12,false,3,2,74.1,16,2,0,41.0,38.73,7852,7636,1.02,2649,model_finished,FAIL 任务12 含去重已支付订单数 3（§14.2 第12项验收口径）  <- | FAIL 任务12 含总额 350  <-,2026-09-27 22:08:20,results.jsonl,
+A1,1,true,4,0,8.8,3,0,0,null,null,null,null,1.41,367,model_finished,,2026-09-27 22:19:04,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+A1,3,true,5,0,105.4,14,6,0,null,null,null,null,1.05,6873,model_finished,,2026-09-27 22:20:49,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+A1,4,true,5,0,18.1,6,0,0,null,null,null,null,1.42,371,model_finished,,2026-09-27 22:21:07,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+A1,5,true,5,0,15.1,6,1,0,null,null,null,null,1.23,679,model_finished,,2026-09-27 22:21:22,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+A1,6,true,5,0,35.9,9,1,0,null,null,null,null,1.22,1599,model_finished,,2026-09-27 22:21:58,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+A1,7,true,5,0,44.4,5,0,0,null,null,null,null,1.38,1363,model_finished,,2026-09-27 22:22:43,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+A1,8,false,0,1,94.2,1,0,1,null,null,null,null,1.26,9607,model_finished,FAIL 任务8 results/pelican.svg 存在  <-,2026-09-27 22:24:17,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+A1,9,true,3,0,12.9,4,0,0,null,null,null,null,0.87,1302,model_finished,,2026-09-27 22:24:30,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+A1,12,false,3,2,57.1,15,0,0,null,null,null,null,1.07,1533,model_finished,FAIL 任务12 含去重已支付订单数 3（§14.2 第12项验收口径）  <- | FAIL 任务12 含总额 350  <-,2026-09-27 22:25:27,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+A-t11,11,true,2,0,15.7,6,0,0,null,null,null,null,1.4,876,model_finished,,2026-09-27 22:28:10,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+A-t2,2,true,4,0,16.4,4,0,0,null,null,null,null,1.57,831,model_finished,,2026-09-27 22:29:15,results.jsonl,A 侧代理不写 logs\requests.jsonl → prompt_n/cache_n/decode_tps 记 null（非 0）；ttft_first_s/finish_reasons/reasoning_chars_total 取自 _run_task<N>.json 的 detail_rounds（非代理日志）；A 侧量级另见 capture\timings.jsonl 增量
+B-t2,2,true,4,0,16.6,4,0,0,44.86,43.53,802,919,1.21,904,model_finished,,2026-09-27 22:30:14,results.jsonl,
+A-t10,10,true,3,0,78.16,5,null,null,null,null,null,null,3.36,1950,model_finished,,2026-09-27 22:27:54,bench\runs\A-t10\results\_run_task10.json,A（修复前代理）；5 轮小计 34.90s + 收尾 43.26s；压缩边界五轮未实现（本地 harness 无压缩器）；pass/fail 取自 check_tasks.py 10 实测 3/0；代理记录 0 条
+B-t10,10,null,null,null,48.87,5,null,0,42.31,38.79,null,null,2.89,2939,model_finished,,2026-09-27 21:58:26,bench\runs\B-t10\results\_run_task10.json,B（修复后代理）；**已作废**：旧驱动只有 4 轮切片且末轮直接截断模型工具链，被 B-t10b 取代，不作为测量数据（pass/fail 记 null）
+B-t10b,10,true,3,0,81.25,5,null,0,40.09,38.66,null,null,3.44,2939,model_finished,,2026-09-27 22:01:06,bench\runs\B-t10b\results\_run_task10.json,B（修复后代理）；5 轮小计 49.35s + 收尾 31.90s；压缩边界五轮未实现（本地 harness 无压缩器）；pass/fail 取自 check_tasks.py 10 实测 3/0；代理记录 8 条

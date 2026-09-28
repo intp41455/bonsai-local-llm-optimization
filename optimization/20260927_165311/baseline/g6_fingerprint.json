@@ -1,0 +1,50 @@
+{
+  "phase": "G6",
+  "started_at": "2026-09-28 02:59:58",
+  "harness_sha256": "f06852086dca5f5e2cf3e1cc624eee74af29888b6d42cdf4cc7431907ca97f6e",
+  "check_tasks_sha256": "ae549ca367fff01cb12ebaf657786d772251e918eea4d468cb6f1166c3fd234b",
+  "proxy_v2_sha256": "5daab527777684283bdfb1e3458ca9095e803168c1b2f751eb739a9f88fbc664",
+  "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "config_extra_args": [
+    "--cache-ram",
+    "1024"
+  ],
+  "task": 8,
+  "samples": [
+    1,
+    2,
+    3
+  ],
+  "max_tokens": 8192,
+  "max_rounds": 16,
+  "time_cap": 1500,
+  "port_A": 8082,
+  "port_B": 8080,
+  "timings_bytes_before": 152755,
+  "netstat_before": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "ended_at": "2026-09-28 03:21:57",
+  "netstat_after": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07"
+}

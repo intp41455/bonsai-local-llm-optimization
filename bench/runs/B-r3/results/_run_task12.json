@@ -1,0 +1,371 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 12,
+  "task_text": "创建results/summary.md，汇总sales.csv与logs/run.log统计，并列出实际生成文件路径。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B-r3",
+  "stop_reason": "model_finished",
+  "rounds": 16,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.61,
+      "ttft_s": 1.02,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 211,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 1.79,
+      "ttft_s": 0.32,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 50,
+      "tool_calls": [
+        "read_file",
+        "list_dir"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 1.9,
+      "ttft_s": 0.42,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 52,
+      "tool_calls": [
+        "read_file",
+        "list_dir"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 7.95,
+      "ttft_s": 6.55,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 115,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 9.56,
+      "ttft_s": 0.32,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 96,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 2.77,
+      "ttft_s": 0.82,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 221,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 7,
+      "wall_s": 3.25,
+      "ttft_s": 0.41,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 128,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 8,
+      "wall_s": 2.24,
+      "ttft_s": 0.36,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 173,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 9,
+      "wall_s": 4.84,
+      "ttft_s": 0.32,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 417,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 10,
+      "wall_s": 11.5,
+      "ttft_s": 0.51,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 474,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 11,
+      "wall_s": 1.9,
+      "ttft_s": 0.79,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 67,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 12,
+      "wall_s": 3.12,
+      "ttft_s": 0.78,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 74,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 13,
+      "wall_s": 1.81,
+      "ttft_s": 0.35,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 134,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 14,
+      "wall_s": 10.02,
+      "ttft_s": 0.31,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 284,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 15,
+      "wall_s": 1.84,
+      "ttft_s": 0.77,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 53,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 16,
+      "wall_s": 6.7,
+      "ttft_s": 0.79,
+      "finish": "stop",
+      "content_chars": 351,
+      "reasoning_chars": 100,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 73.9,
+  "tool_retries": 2,
+  "proxy_records": 16,
+  "prompt_n": [
+    524,
+    83,
+    148,
+    4443,
+    65,
+    397,
+    145,
+    111,
+    82,
+    198,
+    385,
+    360,
+    110,
+    69,
+    360,
+    372
+  ],
+  "cache_n": [
+    216,
+    736,
+    815,
+    959,
+    5398,
+    5459,
+    5852,
+    5993,
+    6100,
+    6178,
+    6372,
+    6753,
+    7109,
+    7215,
+    7280,
+    7636
+  ],
+  "prefill_ms": [
+    968.9,
+    265.2,
+    365.8,
+    6506.5,
+    255.0,
+    752.9,
+    373.0,
+    285.6,
+    258.0,
+    450.8,
+    725.6,
+    712.6,
+    299.8,
+    263.6,
+    698.8,
+    715.1
+  ],
+  "decode_tps": [
+    44.12,
+    44.28,
+    44.07,
+    39.85,
+    41.77,
+    40.71,
+    41.89,
+    41.31,
+    41.79,
+    41.3,
+    38.73,
+    39.88,
+    39.05,
+    39.86,
+    39.25,
+    38.77
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "reasoning_tokens": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "answer_tokens": [
+    71,
+    66,
+    66,
+    57,
+    387,
+    80,
+    120,
+    79,
+    190,
+    455,
+    44,
+    94,
+    58,
+    388,
+    43,
+    230
+  ],
+  "est_reasoning_chars": [
+    211,
+    50,
+    52,
+    115,
+    96,
+    221,
+    128,
+    173,
+    417,
+    474,
+    67,
+    74,
+    134,
+    284,
+    53,
+    100
+  ],
+  "wall_ms": [
+    2594.0,
+    1766.0,
+    1890.0,
+    7937.0,
+    9531.0,
+    2734.0,
+    3250.0,
+    2219.0,
+    4828.0,
+    11469.0,
+    1891.0,
+    3109.0,
+    1813.0,
+    10015.0,
+    1828.0,
+    6672.0
+  ],
+  "cache_reuse": [
+    "部分复用",
+    "部分复用",
+    "部分复用",
+    "部分复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用"
+  ],
+  "config_hash": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+  "at": "2026-09-27 22:08:20"
+}

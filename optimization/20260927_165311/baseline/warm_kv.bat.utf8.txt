@@ -1,0 +1,12 @@
+@echo off
+REM ---------------------------------------------------------------
+REM  Bonsai KV prewarm 鈥?replay the newest captured request once
+REM  so llama-server's prompt cache is hot before WorkBuddy sends.
+REM  (ASCII only on purpose: avoids GBK/UTF-8 codepage issues)
+REM ---------------------------------------------------------------
+set PY=C:\Users\intpj\AppData\Local\Programs\Python\Python310\python.exe
+echo.
+echo === Bonsai KV prewarm ===
+"%PY%" -u "D:\Bonsai-demo\warm_kv.py" %*
+echo.
+pause

@@ -1,0 +1,240 @@
+{"ts": "2026-09-27 05:38:26", "kind": "体检", "src": "req_006_053121.json", "prompt_n": 4, "wall_s": 0.25}
+{"ts": "2026-09-27 05:38:39", "kind": "启动预热", "src": "req_006_053121.json", "prompt_n": 4, "wall_s": 0.2}
+{"ts": "2026-09-27 05:38:49", "kind": "对话", "prompt_n": 16, "prefill_s": 0.19, "cache_n": 0, "decode_tps": 32.75, "hit": true}
+{"ts": "2026-09-27 05:42:06", "kind": "启动预热", "src": "req_001_053849.json", "prompt_n": 4, "prefill_s": 0.14, "hit": true, "wall_s": 0.15}
+{"ts": "2026-09-27 05:42:18", "kind": "对话", "prompt_n": 16, "prefill_s": 0.19, "cache_n": 0, "decode_tps": 33.6, "hit": true}
+{"ts": "2026-09-27 05:43:01", "kind": "启动预热", "src": "req_006_053121.json", "prompt_n": 4, "prefill_s": 0.17, "hit": true, "wall_s": 0.53}
+{"ts": "2026-09-27 05:43:13", "kind": "体检", "src": "req_006_053121.json", "prompt_n": 4, "prefill_s": 0.11, "hit": true, "wall_s": 0.22}
+{"ts": "2026-09-27 06:16:39", "kind": "体检", "src": "req_006_053121.json", "prompt_n": 4, "prefill_s": 0.17, "hit": true, "wall_s": 0.26}
+{"ts": "2026-09-27 06:22:00", "kind": "预热", "src": "req_006_053121.json", "prompt_n": 4, "prefill_s": 0.13, "hit": true, "wall_s": 0.24}
+{"ts": "2026-09-27 06:22:14", "kind": "预热", "src": "req_006_053121.json", "prompt_n": 4, "prefill_s": 0.12, "hit": true, "wall_s": 0.2}
+{"ts": "2026-09-27 06:55:15", "kind": "对话", "prompt_n": 48, "prefill_s": 0.21, "cache_n": 0, "decode_tps": 39.6, "hit": true}
+{"ts": "2026-09-27 06:55:26", "kind": "对话", "prompt_n": 90, "prefill_s": 0.33, "cache_n": 0, "decode_tps": 39.79, "hit": true}
+{"ts": "2026-09-27 06:55:33", "kind": "对话", "prompt_n": 78, "prefill_s": 0.33, "cache_n": 0, "decode_tps": 39.81, "hit": true}
+{"ts": "2026-09-27 06:57:45", "kind": "预热", "src": "req_006_053121.json", "prompt_n": 57847, "prefill_s": 122.53, "hit": false, "wall_s": 122.81}
+{"ts": "2026-09-27 06:57:46", "kind": "体检", "src": "req_006_053121.json", "prompt_n": 4, "prefill_s": 0.15, "hit": true, "wall_s": 0.24}
+{"ts": "2026-09-27 06:58:02", "kind": "体检", "src": "req_006_053121.json", "prompt_n": 4, "prefill_s": 0.13, "hit": true, "wall_s": 0.22}
+{"ts": "2026-09-27 06:58:04", "kind": "体检", "src": "req_006_053121.json", "prompt_n": 4, "prefill_s": 0.15, "hit": true, "wall_s": 1.28}
+{"ts": "2026-09-27 06:58:05", "kind": "预热", "src": "req_006_053121.json", "prompt_n": 4, "prefill_s": 0.14, "hit": true, "wall_s": 1.19}
+{"ts": "2026-09-27 07:01:16", "kind": "体检", "src": "req_006_053121.json", "prompt_n": 57873, "prefill_s": 124.23, "hit": false, "wall_s": 124.89}
+{"ts": "2026-09-27 07:01:17", "kind": "预热", "src": "req_006_053121.json", "prompt_n": 4, "prefill_s": 0.14, "hit": true, "wall_s": 1.22}
+{"ts": "2026-09-27 12:34:33", "kind": "预热", "src": "req_004_122147.json", "prompt_n": 52902, "prefill_s": 122.77, "hit": false, "wall_s": 122.91}
+{"ts": "2026-09-27 12:34:33", "kind": "启动预热", "src": "req_004_122147.json", "prompt_n": 4, "prefill_s": 0.15, "hit": true, "wall_s": 0.28}
+{"ts": "2026-09-27 12:34:56", "kind": "对话", "prompt_n": 4, "prefill_s": 0.12, "cache_n": 52898, "decode_tps": 0.0, "hit": true}
+{"ts": "2026-09-27 12:41:45", "kind": "预热", "src": "req_001_123456.json", "prompt_n": 52902, "prefill_s": 121.52, "hit": false, "wall_s": 121.61}
+{"ts": "2026-09-27 12:41:46", "kind": "启动预热", "src": "req_001_123456.json", "prompt_n": 4, "prefill_s": 0.14, "hit": true, "wall_s": 0.25}
+{"ts": "2026-09-27 12:51:07", "kind": "预热", "src": "req_001_123456.json", "prompt_n": 52902, "prefill_s": 165.65, "hit": false, "wall_s": 165.76}
+{"ts": "2026-09-27 12:57:25", "kind": "预热", "src": "req_001_123456.json", "prompt_n": 43075, "prefill_s": 99.85, "hit": false, "wall_s": 99.93}
+{"ts": "2026-09-27 12:57:40", "kind": "对话", "prompt_n": 4, "prefill_s": 0.14, "cache_n": 49215, "decode_tps": 0.0, "hit": true}
+{"ts": "2026-09-27 13:03:59", "kind": "对话", "prompt_n": 11, "prefill_s": 0.19, "cache_n": 0, "decode_tps": 35.92, "hit": true}
+{"ts": "2026-09-27 13:04:19", "kind": "对话", "prompt_n": 29, "prefill_s": 0.29, "cache_n": 0, "decode_tps": 36.49, "hit": true}
+{"ts": "2026-09-27 13:04:34", "kind": "对话", "prompt_n": 4, "prefill_s": 0.13, "cache_n": 25, "decode_tps": 35.91, "hit": true}
+{"ts": "2026-09-27 13:24:07", "kind": "对话", "prompt_n": 9081, "prefill_s": 24.79, "cache_n": 38491, "decode_tps": 18.21, "hit": false}
+{"ts": "2026-09-27 13:24:24", "kind": "对话", "prompt_n": 52, "prefill_s": 0.31, "cache_n": 47568, "decode_tps": 20.16, "hit": true}
+{"ts": "2026-09-27 13:38:09", "kind": "对话", "prompt_n": 3519, "prefill_s": 9.61, "cache_n": 47616, "decode_tps": 17.71, "hit": false}
+{"ts": "2026-09-27 13:41:22", "kind": "对话", "prompt_n": 52, "prefill_s": 0.31, "cache_n": 51131, "decode_tps": 18.5, "hit": true}
+{"ts": "2026-09-27 13:48:51", "kind": "对话", "prompt_n": 6848, "prefill_s": 19.86, "cache_n": 51179, "decode_tps": 17.61, "hit": false}
+{"ts": "2026-09-27 13:54:52", "kind": "对话", "prompt_n": 1185, "prefill_s": 3.55, "cache_n": 58023, "decode_tps": 17.86, "hit": true}
+{"ts": "2026-09-27 13:59:45", "kind": "对话", "prompt_n": 1209, "prefill_s": 3.71, "cache_n": 59204, "decode_tps": 17.85, "hit": true}
+{"ts": "2026-09-27 14:04:30", "kind": "对话", "prompt_n": 52, "prefill_s": 0.32, "cache_n": 60409, "decode_tps": 18.26, "hit": true}
+{"ts": "2026-09-27 18:24:50", "kind": "启动预热", "src": "req_012_135949.json", "prompt_n": 4, "cache_n": 60457, "reuse": "高比例复用", "reuse_ratio": 0.9999, "prefill_s": 1.52, "wall_s": 1.72}
+{"ts": "2026-09-27 18:24:50", "kind": "对话", "request_id": "7d7a24bb82004a02", "prompt_n": 20, "cache_n": 0, "prefill_s": 2.51, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 2.03, "wall_s": 3.83}
+{"ts": "2026-09-27 18:25:10", "kind": "对话", "request_id": "45b65671366a4431", "prompt_n": 11, "cache_n": 0, "prefill_s": 1.87, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 2.07, "wall_s": 3.88}
+{"ts": "2026-09-27 18:25:26", "kind": "对话", "request_id": "fe3f1f8594cf4e4d", "prompt_n": 4, "cache_n": 7, "prefill_s": 1.39, "reuse": "部分复用", "reuse_ratio": 0.6364, "decode_tps": 2.01, "wall_s": 3.41}
+{"ts": "2026-09-27 19:01:25", "kind": "对话", "request_id": "fdbd3df80d334a9a", "prompt_n": 30, "cache_n": 0, "prefill_s": 2.64, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 2.36, "wall_s": 87.11}
+{"ts": "2026-09-27 19:10:07", "kind": "对话", "request_id": "ecb1d96b493f4705", "prompt_n": 15, "cache_n": 0, "prefill_s": 0.26, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 39.57, "wall_s": 0.56}
+{"ts": "2026-09-27 19:18:28", "kind": "对话", "request_id": "bbbeb08b7339402f", "prompt_n": 4, "cache_n": 11, "prefill_s": 0.16, "reuse": "部分复用", "reuse_ratio": 0.7333, "decode_tps": 16.11, "wall_s": 0.38}
+{"ts": "2026-09-27 19:20:57", "kind": "对话", "request_id": "6399ba84687f48da", "prompt_n": 4, "cache_n": 11, "prefill_s": 0.15, "reuse": "部分复用", "reuse_ratio": 0.7333, "decode_tps": 16.96, "wall_s": 1.08}
+{"ts": "2026-09-27 19:21:45", "kind": "对话", "request_id": "3bbcac8b30d14b63", "prompt_n": 4, "cache_n": 11, "prefill_s": 0.13, "reuse": "部分复用", "reuse_ratio": 0.7333, "decode_tps": 17.38, "wall_s": 1.03}
+{"ts": "2026-09-27 19:22:21", "kind": "对话", "request_id": "414d4b8369024a59", "prompt_n": 6810, "cache_n": 0, "prefill_s": 106.36, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 0.0, "wall_s": 106.52}
+{"ts": "2026-09-27 19:39:18", "kind": "对话", "request_id": "1878217f7c284c87", "prompt_n": 16, "cache_n": 0, "prefill_s": 5.07, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 0.0, "wall_s": 5.31}
+{"ts": "2026-09-27 19:40:05", "kind": "对话", "request_id": "6b5447e59cb44992", "prompt_n": 897, "cache_n": 0, "prefill_s": 49.59, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 0.0, "wall_s": 49.72}
+{"ts": "2026-09-27 19:40:55", "kind": "对话", "request_id": "09557a0f94bf40b6", "prompt_n": 4, "cache_n": 12, "prefill_s": 1.23, "reuse": "部分复用", "reuse_ratio": 0.75, "decode_tps": 0.0, "wall_s": 1.47}
+{"ts": "2026-09-27 20:04:43", "kind": "对话", "request_id": "bff8bcc04f0e4ce0", "prompt_n": 751, "cache_n": 0, "prefill_s": 53.99, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 2.03, "wall_s": 74.36}
+{"ts": "2026-09-27 20:05:57", "kind": "对话", "request_id": "f791e4b326534ce1", "prompt_n": 64, "cache_n": 747, "prefill_s": 5.51, "reuse": "高比例复用", "reuse_ratio": 0.9211, "decode_tps": 2.01, "wall_s": 25.95}
+{"ts": "2026-09-27 20:06:23", "kind": "对话", "request_id": "3ee1fcc918c34364", "prompt_n": 116, "cache_n": 807, "prefill_s": 9.23, "reuse": "部分复用", "reuse_ratio": 0.8743, "decode_tps": 1.99, "wall_s": 156.36}
+{"ts": "2026-09-27 20:08:59", "kind": "对话", "request_id": "8eee164e27444d5e", "prompt_n": 87, "cache_n": 919, "prefill_s": 7.18, "reuse": "高比例复用", "reuse_ratio": 0.9135, "decode_tps": 3.67, "wall_s": 85.5}
+{"ts": "2026-09-27 20:11:04", "kind": "对话", "request_id": "c64836f432be4b7e", "prompt_n": 497, "cache_n": 235, "prefill_s": 23.77, "reuse": "部分复用", "reuse_ratio": 0.321, "decode_tps": 8.38, "wall_s": 30.5}
+{"ts": "2026-09-27 20:11:35", "kind": "对话", "request_id": "6b9da0952c864875", "prompt_n": 74, "cache_n": 728, "prefill_s": 3.18, "reuse": "高比例复用", "reuse_ratio": 0.9077, "decode_tps": 7.0, "wall_s": 26.62}
+{"ts": "2026-09-27 20:12:01", "kind": "对话", "request_id": "2891a5b04feb4584", "prompt_n": 136, "cache_n": 798, "prefill_s": 6.28, "reuse": "部分复用", "reuse_ratio": 0.8544, "decode_tps": 7.23, "wall_s": 11.84}
+{"ts": "2026-09-27 20:12:13", "kind": "对话", "request_id": "576a56d691bf4cea", "prompt_n": 111, "cache_n": 930, "prefill_s": 5.15, "reuse": "部分复用", "reuse_ratio": 0.8934, "decode_tps": 7.24, "wall_s": 17.23}
+{"ts": "2026-09-27 20:13:21", "kind": "对话", "request_id": "ae5465d68fab4ec6", "prompt_n": 497, "cache_n": 235, "prefill_s": 23.94, "reuse": "部分复用", "reuse_ratio": 0.321, "decode_tps": 8.46, "wall_s": 30.62}
+{"ts": "2026-09-27 20:13:52", "kind": "对话", "request_id": "aa2c9fa41258475e", "prompt_n": 74, "cache_n": 728, "prefill_s": 3.18, "reuse": "高比例复用", "reuse_ratio": 0.9077, "decode_tps": 7.19, "wall_s": 26.02}
+{"ts": "2026-09-27 20:14:18", "kind": "对话", "request_id": "330be6fb8576442d", "prompt_n": 136, "cache_n": 798, "prefill_s": 5.74, "reuse": "部分复用", "reuse_ratio": 0.8544, "decode_tps": 8.08, "wall_s": 10.7}
+{"ts": "2026-09-27 20:14:28", "kind": "对话", "request_id": "96f47bb440464279", "prompt_n": 111, "cache_n": 930, "prefill_s": 4.82, "reuse": "部分复用", "reuse_ratio": 0.8934, "decode_tps": 8.31, "wall_s": 15.34}
+{"ts": "2026-09-27 20:14:44", "kind": "对话", "request_id": "aa017244a5e1443b", "prompt_n": 507, "cache_n": 235, "prefill_s": 22.69, "reuse": "部分复用", "reuse_ratio": 0.3167, "decode_tps": 8.29, "wall_s": 27.67}
+{"ts": "2026-09-27 20:15:11", "kind": "对话", "request_id": "246e8f71ccf24eb3", "prompt_n": 64, "cache_n": 738, "prefill_s": 2.72, "reuse": "高比例复用", "reuse_ratio": 0.9202, "decode_tps": 8.4, "wall_s": 10.73}
+{"ts": "2026-09-27 20:15:22", "kind": "对话", "request_id": "de985bb5ec5d44f4", "prompt_n": 129, "cache_n": 798, "prefill_s": 5.54, "reuse": "部分复用", "reuse_ratio": 0.8608, "decode_tps": 8.42, "wall_s": 16.39}
+{"ts": "2026-09-27 20:15:39", "kind": "对话", "request_id": "b875524912ec4768", "prompt_n": 170, "cache_n": 923, "prefill_s": 7.34, "reuse": "部分复用", "reuse_ratio": 0.8445, "decode_tps": 8.44, "wall_s": 16.48}
+{"ts": "2026-09-27 20:15:55", "kind": "对话", "request_id": "d18753dc46f7474a", "prompt_n": 163, "cache_n": 1089, "prefill_s": 7.16, "reuse": "部分复用", "reuse_ratio": 0.8698, "decode_tps": 8.45, "wall_s": 26.72}
+{"ts": "2026-09-27 20:35:16", "kind": "启动预热", "src": "req_001_192027.json", "prompt_n": 60675, "cache_n": 0, "reuse": "无复用", "reuse_ratio": 0.0, "prefill_s": 123.01, "wall_s": 123.15}
+{"ts": "2026-09-27 20:35:16", "kind": "对话", "request_id": "5669e4cfcbff44e7", "prompt_n": 20, "cache_n": 0, "prefill_s": 0.26, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 29.5, "wall_s": 0.98}
+{"ts": "2026-09-27 21:39:42", "kind": "启动预热", "src": "req_001_192027.json", "prompt_n": 60675, "cache_n": 0, "reuse": "无复用", "reuse_ratio": 0.0, "prefill_s": 120.7, "wall_s": 120.82}
+{"ts": "2026-09-27 21:39:42", "kind": "对话", "request_id": "4063c4c07b814bd4", "prompt_n": 20, "cache_n": 0, "prefill_s": 0.23, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 28.43, "wall_s": 1.06}
+{"ts": "2026-09-27 21:44:55", "kind": "启动预热", "src": "req_001_192027.json", "prompt_n": 64358, "cache_n": 0, "reuse": "无复用", "reuse_ratio": 0.0, "prefill_s": 123.14, "wall_s": 123.96}
+{"ts": "2026-09-27 21:45:57", "kind": "对话", "request_id": "ef5d110bc7e94d3a", "prompt_n": 732, "cache_n": 0, "prefill_s": 1.2, "reuse": "无复用", "reuse_ratio": 0.0, "decode_tps": 41.44, "wall_s": 3.61}
+{"ts": "2026-09-27 21:46:01", "kind": "对话", "request_id": "17bd7919ba384668", "prompt_n": 74, "cache_n": 728, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9077, "decode_tps": 45.93, "wall_s": 4.33}
+{"ts": "2026-09-27 21:46:05", "kind": "对话", "request_id": "be40436b31e04d34", "prompt_n": 123, "cache_n": 798, "prefill_s": 0.31, "reuse": "部分复用", "reuse_ratio": 0.8664, "decode_tps": 45.61, "wall_s": 1.88}
+{"ts": "2026-09-27 21:46:07", "kind": "对话", "request_id": "8670fab7f2634acd", "prompt_n": 526, "cache_n": 216, "prefill_s": 0.97, "reuse": "部分复用", "reuse_ratio": 0.2911, "decode_tps": 44.03, "wall_s": 1.92}
+{"ts": "2026-09-27 21:46:09", "kind": "对话", "request_id": "095d4184ea174564", "prompt_n": 64, "cache_n": 738, "prefill_s": 0.24, "reuse": "高比例复用", "reuse_ratio": 0.9202, "decode_tps": 45.6, "wall_s": 1.74}
+{"ts": "2026-09-27 21:46:11", "kind": "对话", "request_id": "4eccb56f176047bc", "prompt_n": 129, "cache_n": 798, "prefill_s": 0.31, "reuse": "部分复用", "reuse_ratio": 0.8608, "decode_tps": 45.68, "wall_s": 2.34}
+{"ts": "2026-09-27 21:46:13", "kind": "对话", "request_id": "e97faea4882548b1", "prompt_n": 162, "cache_n": 923, "prefill_s": 0.38, "reuse": "部分复用", "reuse_ratio": 0.8507, "decode_tps": 44.05, "wall_s": 2.28}
+{"ts": "2026-09-27 21:46:15", "kind": "对话", "request_id": "f231826f4a254b47", "prompt_n": 488, "cache_n": 1081, "prefill_s": 0.83, "reuse": "部分复用", "reuse_ratio": 0.689, "decode_tps": 43.23, "wall_s": 2.69}
+{"ts": "2026-09-27 21:46:18", "kind": "对话", "request_id": "15da7ae9723542a0", "prompt_n": 643, "cache_n": 1565, "prefill_s": 0.99, "reuse": "部分复用", "reuse_ratio": 0.7088, "decode_tps": 43.21, "wall_s": 2.84}
+{"ts": "2026-09-27 21:46:21", "kind": "对话", "request_id": "6a5fb946d164456d", "prompt_n": 48, "cache_n": 2204, "prefill_s": 0.23, "reuse": "高比例复用", "reuse_ratio": 0.9787, "decode_tps": 44.48, "wall_s": 1.26}
+{"ts": "2026-09-27 21:46:22", "kind": "对话", "request_id": "6e1ee552088e4a95", "prompt_n": 4298, "cache_n": 2248, "prefill_s": 6.3, "reuse": "部分复用", "reuse_ratio": 0.3434, "decode_tps": 41.59, "wall_s": 11.75}
+{"ts": "2026-09-27 21:46:34", "kind": "对话", "request_id": "f31e4b4f14264d24", "prompt_n": 149, "cache_n": 6542, "prefill_s": 0.39, "reuse": "高比例复用", "reuse_ratio": 0.9777, "decode_tps": 40.53, "wall_s": 2.17}
+{"ts": "2026-09-27 21:46:36", "kind": "对话", "request_id": "27109ae9d02940e4", "prompt_n": 101, "cache_n": 6687, "prefill_s": 0.29, "reuse": "高比例复用", "reuse_ratio": 0.9851, "decode_tps": 41.86, "wall_s": 5.25}
+{"ts": "2026-09-27 21:46:41", "kind": "对话", "request_id": "922965989e2341be", "prompt_n": 102, "cache_n": 6784, "prefill_s": 0.3, "reuse": "高比例复用", "reuse_ratio": 0.9852, "decode_tps": 40.89, "wall_s": 12.34}
+{"ts": "2026-09-27 21:46:54", "kind": "对话", "request_id": "e344513af4d54a31", "prompt_n": 485, "cache_n": 6882, "prefill_s": 0.86, "reuse": "高比例复用", "reuse_ratio": 0.9342, "decode_tps": 39.3, "wall_s": 3.02}
+{"ts": "2026-09-27 21:46:57", "kind": "对话", "request_id": "c570669960e94998", "prompt_n": 63, "cache_n": 7363, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9915, "decode_tps": 39.73, "wall_s": 1.31}
+{"ts": "2026-09-27 21:46:58", "kind": "对话", "request_id": "ef01dce608b14d42", "prompt_n": 163, "cache_n": 7422, "prefill_s": 0.4, "reuse": "高比例复用", "reuse_ratio": 0.9785, "decode_tps": 39.51, "wall_s": 6.14}
+{"ts": "2026-09-27 21:47:04", "kind": "对话", "request_id": "80ab661108fd49e0", "prompt_n": 526, "cache_n": 216, "prefill_s": 0.97, "reuse": "部分复用", "reuse_ratio": 0.2911, "decode_tps": 44.38, "wall_s": 2.11}
+{"ts": "2026-09-27 21:47:07", "kind": "对话", "request_id": "90b6d9893f6e4249", "prompt_n": 73, "cache_n": 738, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.91, "decode_tps": 44.68, "wall_s": 1.22}
+{"ts": "2026-09-27 21:47:08", "kind": "对话", "request_id": "34583043fb574114", "prompt_n": 116, "cache_n": 807, "prefill_s": 0.3, "reuse": "部分复用", "reuse_ratio": 0.8743, "decode_tps": 45.23, "wall_s": 4.73}
+{"ts": "2026-09-27 21:47:13", "kind": "对话", "request_id": "643a92b14aad4db9", "prompt_n": 195, "cache_n": 919, "prefill_s": 0.43, "reuse": "部分复用", "reuse_ratio": 0.825, "decode_tps": 41.82, "wall_s": 1.31}
+{"ts": "2026-09-27 21:47:14", "kind": "对话", "request_id": "5d7277e57fab41fa", "prompt_n": 58, "cache_n": 1110, "prefill_s": 0.24, "reuse": "高比例复用", "reuse_ratio": 0.9503, "decode_tps": 45.2, "wall_s": 1.11}
+{"ts": "2026-09-27 21:47:15", "kind": "对话", "request_id": "e72952143f27429c", "prompt_n": 197, "cache_n": 1164, "prefill_s": 0.43, "reuse": "部分复用", "reuse_ratio": 0.8553, "decode_tps": 45.39, "wall_s": 3.84}
+{"ts": "2026-09-27 21:47:19", "kind": "对话", "request_id": "0935ad6738944b2b", "prompt_n": 525, "cache_n": 216, "prefill_s": 0.99, "reuse": "部分复用", "reuse_ratio": 0.2915, "decode_tps": 45.42, "wall_s": 3.44}
+{"ts": "2026-09-27 21:47:23", "kind": "对话", "request_id": "94895773d5d347f4", "prompt_n": 157, "cache_n": 737, "prefill_s": 0.38, "reuse": "部分复用", "reuse_ratio": 0.8244, "decode_tps": 45.5, "wall_s": 4.61}
+{"ts": "2026-09-27 21:47:27", "kind": "对话", "request_id": "9df8fe573fc64fb4", "prompt_n": 124, "cache_n": 890, "prefill_s": 0.32, "reuse": "部分复用", "reuse_ratio": 0.8777, "decode_tps": 45.01, "wall_s": 2.62}
+{"ts": "2026-09-27 21:47:30", "kind": "对话", "request_id": "26d98a9950cd4cd8", "prompt_n": 525, "cache_n": 216, "prefill_s": 0.98, "reuse": "部分复用", "reuse_ratio": 0.2915, "decode_tps": 44.32, "wall_s": 2.61}
+{"ts": "2026-09-27 21:47:33", "kind": "对话", "request_id": "81e57c19307b47de", "prompt_n": 4298, "cache_n": 737, "prefill_s": 6.23, "reuse": "部分复用", "reuse_ratio": 0.1464, "decode_tps": 41.1, "wall_s": 8.09}
+{"ts": "2026-09-27 21:47:41", "kind": "对话", "request_id": "af58d69802274464", "prompt_n": 69, "cache_n": 5031, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.9865, "decode_tps": 42.13, "wall_s": 6.91}
+{"ts": "2026-09-27 21:47:48", "kind": "对话", "request_id": "96572ce43eca4c08", "prompt_n": 282, "cache_n": 5096, "prefill_s": 0.59, "reuse": "高比例复用", "reuse_ratio": 0.9476, "decode_tps": 41.19, "wall_s": 1.92}
+{"ts": "2026-09-27 21:47:50", "kind": "对话", "request_id": "6dc53ad2531444e7", "prompt_n": 64, "cache_n": 5374, "prefill_s": 0.24, "reuse": "高比例复用", "reuse_ratio": 0.9882, "decode_tps": 42.23, "wall_s": 1.31}
+{"ts": "2026-09-27 21:47:51", "kind": "对话", "request_id": "3588ec87e3bd48a0", "prompt_n": 100, "cache_n": 5434, "prefill_s": 0.3, "reuse": "高比例复用", "reuse_ratio": 0.9819, "decode_tps": 42.2, "wall_s": 7.23}
+{"ts": "2026-09-27 21:47:58", "kind": "对话", "request_id": "de7831004ad74188", "prompt_n": 216, "cache_n": 5530, "prefill_s": 0.45, "reuse": "高比例复用", "reuse_ratio": 0.9624, "decode_tps": 41.49, "wall_s": 3.05}
+{"ts": "2026-09-27 21:48:01", "kind": "对话", "request_id": "5204ca6d64034b8b", "prompt_n": 523, "cache_n": 216, "prefill_s": 0.99, "reuse": "部分复用", "reuse_ratio": 0.2923, "decode_tps": 45.22, "wall_s": 3.17}
+{"ts": "2026-09-27 21:48:05", "kind": "对话", "request_id": "4f2885e7cf6d4c90", "prompt_n": 80, "cache_n": 735, "prefill_s": 0.28, "reuse": "高比例复用", "reuse_ratio": 0.9018, "decode_tps": 45.77, "wall_s": 2.94}
+{"ts": "2026-09-27 21:48:08", "kind": "对话", "request_id": "357ca3dcfdfe4e8c", "prompt_n": 137, "cache_n": 811, "prefill_s": 0.37, "reuse": "部分复用", "reuse_ratio": 0.8555, "decode_tps": 44.53, "wall_s": 21.03}
+{"ts": "2026-09-27 21:48:29", "kind": "对话", "request_id": "77971f4af1b74d87", "prompt_n": 822, "cache_n": 944, "prefill_s": 1.29, "reuse": "部分复用", "reuse_ratio": 0.5345, "decode_tps": 40.51, "wall_s": 2.33}
+{"ts": "2026-09-27 21:48:31", "kind": "对话", "request_id": "eec0e5575b1e4523", "prompt_n": 796, "cache_n": 1762, "prefill_s": 1.26, "reuse": "部分复用", "reuse_ratio": 0.6888, "decode_tps": 43.45, "wall_s": 10.28}
+{"ts": "2026-09-27 21:48:41", "kind": "对话", "request_id": "fc0062953b0c4d73", "prompt_n": 534, "cache_n": 216, "prefill_s": 0.99, "reuse": "部分复用", "reuse_ratio": 0.288, "decode_tps": 43.86, "wall_s": 85.72}
+{"ts": "2026-09-27 21:50:07", "kind": "对话", "request_id": "efc0bd2961284d61", "prompt_n": 1305, "cache_n": 746, "prefill_s": 1.95, "reuse": "部分复用", "reuse_ratio": 0.3637, "decode_tps": 41.77, "wall_s": 3.36}
+{"ts": "2026-09-27 21:50:10", "kind": "对话", "request_id": "ed66944caa454ff6", "prompt_n": 65, "cache_n": 2047, "prefill_s": 0.25, "reuse": "高比例复用", "reuse_ratio": 0.9692, "decode_tps": 43.82, "wall_s": 3.12}
+{"ts": "2026-09-27 21:50:14", "kind": "对话", "request_id": "820ce1fcad6b444d", "prompt_n": 143, "cache_n": 2108, "prefill_s": 0.38, "reuse": "高比例复用", "reuse_ratio": 0.9365, "decode_tps": 40.86, "wall_s": 1.27}
+{"ts": "2026-09-27 21:50:15", "kind": "对话", "request_id": "8f74872aae784a87", "prompt_n": 74, "cache_n": 2247, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.9681, "decode_tps": 44.07, "wall_s": 9.75}
+{"ts": "2026-09-27 21:50:25", "kind": "对话", "request_id": "6958fa39bd474be2", "prompt_n": 528, "cache_n": 216, "prefill_s": 0.99, "reuse": "部分复用", "reuse_ratio": 0.2903, "decode_tps": 45.18, "wall_s": 3.3}
+{"ts": "2026-09-27 21:50:28", "kind": "对话", "request_id": "b5e075ef9b2d43f1", "prompt_n": 55, "cache_n": 740, "prefill_s": 0.25, "reuse": "高比例复用", "reuse_ratio": 0.9308, "decode_tps": 45.26, "wall_s": 2.75}
+{"ts": "2026-09-27 21:50:31", "kind": "对话", "request_id": "ae809af784304b18", "prompt_n": 122, "cache_n": 791, "prefill_s": 0.31, "reuse": "部分复用", "reuse_ratio": 0.8664, "decode_tps": 44.97, "wall_s": 2.36}
+{"ts": "2026-09-27 21:50:33", "kind": "对话", "request_id": "f42215d1689d4a31", "prompt_n": 524, "cache_n": 216, "prefill_s": 0.99, "reuse": "部分复用", "reuse_ratio": 0.2919, "decode_tps": 44.65, "wall_s": 2.61}
+{"ts": "2026-09-27 21:50:36", "kind": "对话", "request_id": "cb4ee5fc85a047ef", "prompt_n": 83, "cache_n": 736, "prefill_s": 0.27, "reuse": "部分复用", "reuse_ratio": 0.8987, "decode_tps": 45.13, "wall_s": 1.75}
+{"ts": "2026-09-27 21:50:38", "kind": "对话", "request_id": "868de156c7c4497d", "prompt_n": 148, "cache_n": 815, "prefill_s": 0.39, "reuse": "部分复用", "reuse_ratio": 0.8463, "decode_tps": 42.76, "wall_s": 1.94}
+{"ts": "2026-09-27 21:50:40", "kind": "对话", "request_id": "eea90f2f4de74161", "prompt_n": 4443, "cache_n": 959, "prefill_s": 6.51, "reuse": "部分复用", "reuse_ratio": 0.1775, "decode_tps": 40.52, "wall_s": 7.94}
+{"ts": "2026-09-27 21:50:48", "kind": "对话", "request_id": "3ac01c3852f54ace", "prompt_n": 65, "cache_n": 5398, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9881, "decode_tps": 42.2, "wall_s": 9.44}
+{"ts": "2026-09-27 21:50:57", "kind": "对话", "request_id": "4d1aba8de3774b6a", "prompt_n": 397, "cache_n": 5459, "prefill_s": 0.76, "reuse": "高比例复用", "reuse_ratio": 0.9322, "decode_tps": 40.86, "wall_s": 2.73}
+{"ts": "2026-09-27 21:51:00", "kind": "对话", "request_id": "701c5b0708f84f7b", "prompt_n": 145, "cache_n": 5852, "prefill_s": 0.39, "reuse": "高比例复用", "reuse_ratio": 0.9758, "decode_tps": 42.15, "wall_s": 3.27}
+{"ts": "2026-09-27 21:51:03", "kind": "对话", "request_id": "79c4c29b74d84f95", "prompt_n": 111, "cache_n": 5993, "prefill_s": 0.31, "reuse": "高比例复用", "reuse_ratio": 0.9818, "decode_tps": 40.55, "wall_s": 2.28}
+{"ts": "2026-09-27 21:51:06", "kind": "对话", "request_id": "380a303864e640b6", "prompt_n": 82, "cache_n": 6100, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.9867, "decode_tps": 41.5, "wall_s": 4.86}
+{"ts": "2026-09-27 21:51:10", "kind": "对话", "request_id": "cd0c683baa7a49f9", "prompt_n": 198, "cache_n": 6178, "prefill_s": 0.45, "reuse": "高比例复用", "reuse_ratio": 0.9689, "decode_tps": 41.86, "wall_s": 11.36}
+{"ts": "2026-09-27 21:51:22", "kind": "对话", "request_id": "d34d1d6e812a4c9c", "prompt_n": 385, "cache_n": 6372, "prefill_s": 0.72, "reuse": "高比例复用", "reuse_ratio": 0.943, "decode_tps": 39.9, "wall_s": 1.86}
+{"ts": "2026-09-27 21:51:24", "kind": "对话", "request_id": "a447e609c657443e", "prompt_n": 360, "cache_n": 6753, "prefill_s": 0.7, "reuse": "高比例复用", "reuse_ratio": 0.9494, "decode_tps": 39.38, "wall_s": 3.08}
+{"ts": "2026-09-27 21:51:27", "kind": "对话", "request_id": "f64c640e4a61462e", "prompt_n": 110, "cache_n": 7109, "prefill_s": 0.3, "reuse": "高比例复用", "reuse_ratio": 0.9848, "decode_tps": 39.24, "wall_s": 1.8}
+{"ts": "2026-09-27 21:51:29", "kind": "对话", "request_id": "fbe3c9c0401c4375", "prompt_n": 69, "cache_n": 7215, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.9905, "decode_tps": 39.15, "wall_s": 10.22}
+{"ts": "2026-09-27 21:51:39", "kind": "对话", "request_id": "76e057f488844a6c", "prompt_n": 360, "cache_n": 7280, "prefill_s": 0.78, "reuse": "高比例复用", "reuse_ratio": 0.9529, "decode_tps": 37.72, "wall_s": 1.95}
+{"ts": "2026-09-27 21:51:41", "kind": "对话", "request_id": "bfc602e63cde44d9", "prompt_n": 372, "cache_n": 7636, "prefill_s": 0.73, "reuse": "高比例复用", "reuse_ratio": 0.9535, "decode_tps": 39.05, "wall_s": 6.64}
+{"ts": "2026-09-27 21:54:03", "kind": "对话", "request_id": "ad682de0cb354cf1", "prompt_n": 525, "cache_n": 216, "prefill_s": 1.06, "reuse": "部分复用", "reuse_ratio": 0.2915, "decode_tps": 45.1, "wall_s": 3.3}
+{"ts": "2026-09-27 21:54:06", "kind": "对话", "request_id": "fa83f50f4d1a4b7d", "prompt_n": 4298, "cache_n": 737, "prefill_s": 6.18, "reuse": "部分复用", "reuse_ratio": 0.1464, "decode_tps": 41.36, "wall_s": 8.03}
+{"ts": "2026-09-27 21:54:14", "kind": "对话", "request_id": "18ba2e1023a24d56", "prompt_n": 69, "cache_n": 5031, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9865, "decode_tps": 42.64, "wall_s": 6.81}
+{"ts": "2026-09-27 21:54:21", "kind": "对话", "request_id": "6d5998cf11f3447e", "prompt_n": 282, "cache_n": 5096, "prefill_s": 0.59, "reuse": "高比例复用", "reuse_ratio": 0.9476, "decode_tps": 40.59, "wall_s": 1.94}
+{"ts": "2026-09-27 21:54:23", "kind": "对话", "request_id": "bdbe5338aa2945a8", "prompt_n": 64, "cache_n": 5374, "prefill_s": 0.25, "reuse": "高比例复用", "reuse_ratio": 0.9882, "decode_tps": 41.97, "wall_s": 1.3}
+{"ts": "2026-09-27 21:54:24", "kind": "对话", "request_id": "5655379edb4d408a", "prompt_n": 100, "cache_n": 5434, "prefill_s": 0.29, "reuse": "高比例复用", "reuse_ratio": 0.9819, "decode_tps": 42.49, "wall_s": 7.19}
+{"ts": "2026-09-27 21:54:31", "kind": "对话", "request_id": "44484b2277af4be7", "prompt_n": 216, "cache_n": 5530, "prefill_s": 0.45, "reuse": "高比例复用", "reuse_ratio": 0.9624, "decode_tps": 42.49, "wall_s": 2.98}
+{"ts": "2026-09-27 21:54:34", "kind": "对话", "request_id": "37b624aea022409e", "prompt_n": 524, "cache_n": 216, "prefill_s": 1.07, "reuse": "部分复用", "reuse_ratio": 0.2919, "decode_tps": 45.31, "wall_s": 2.81}
+{"ts": "2026-09-27 21:54:37", "kind": "对话", "request_id": "0965300da4404830", "prompt_n": 68, "cache_n": 736, "prefill_s": 0.25, "reuse": "高比例复用", "reuse_ratio": 0.9154, "decode_tps": 45.76, "wall_s": 2.38}
+{"ts": "2026-09-27 21:54:40", "kind": "对话", "request_id": "24a4403c82f74a93", "prompt_n": 198, "cache_n": 800, "prefill_s": 0.43, "reuse": "部分复用", "reuse_ratio": 0.8016, "decode_tps": 43.3, "wall_s": 2.02}
+{"ts": "2026-09-27 21:54:42", "kind": "对话", "request_id": "ce78ef99040748a1", "prompt_n": 4382, "cache_n": 994, "prefill_s": 6.34, "reuse": "部分复用", "reuse_ratio": 0.1849, "decode_tps": 41.63, "wall_s": 8.45}
+{"ts": "2026-09-27 21:54:50", "kind": "对话", "request_id": "58b52bfbe70c49ad", "prompt_n": 65, "cache_n": 5372, "prefill_s": 0.24, "reuse": "高比例复用", "reuse_ratio": 0.988, "decode_tps": 42.52, "wall_s": 11.64}
+{"ts": "2026-09-27 21:55:02", "kind": "对话", "request_id": "3232900e898f4df0", "prompt_n": 394, "cache_n": 5433, "prefill_s": 0.77, "reuse": "高比例复用", "reuse_ratio": 0.9324, "decode_tps": 40.68, "wall_s": 2.55}
+{"ts": "2026-09-27 21:55:04", "kind": "对话", "request_id": "ecff39ed4fed4d8b", "prompt_n": 179, "cache_n": 5823, "prefill_s": 0.42, "reuse": "高比例复用", "reuse_ratio": 0.9702, "decode_tps": 41.79, "wall_s": 6.8}
+{"ts": "2026-09-27 21:55:11", "kind": "对话", "request_id": "9ad34a01ef40409b", "prompt_n": 203, "cache_n": 5998, "prefill_s": 0.46, "reuse": "高比例复用", "reuse_ratio": 0.9673, "decode_tps": 39.36, "wall_s": 1.59}
+{"ts": "2026-09-27 21:55:13", "kind": "对话", "request_id": "158f9a62a9be47bd", "prompt_n": 178, "cache_n": 6197, "prefill_s": 0.42, "reuse": "高比例复用", "reuse_ratio": 0.9721, "decode_tps": 39.77, "wall_s": 2.11}
+{"ts": "2026-09-27 21:55:15", "kind": "对话", "request_id": "5a75a6ca3cf143d1", "prompt_n": 88, "cache_n": 6371, "prefill_s": 0.29, "reuse": "高比例复用", "reuse_ratio": 0.9864, "decode_tps": 41.42, "wall_s": 2.52}
+{"ts": "2026-09-27 21:55:17", "kind": "对话", "request_id": "66c40e4b241e441a", "prompt_n": 80, "cache_n": 6455, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.9878, "decode_tps": 41.09, "wall_s": 1.3}
+{"ts": "2026-09-27 21:55:19", "kind": "对话", "request_id": "0e978da27e2b472d", "prompt_n": 58, "cache_n": 6531, "prefill_s": 0.23, "reuse": "高比例复用", "reuse_ratio": 0.9912, "decode_tps": 41.21, "wall_s": 1.44}
+{"ts": "2026-09-27 21:55:20", "kind": "对话", "request_id": "07d2aa43aa174b20", "prompt_n": 108, "cache_n": 6585, "prefill_s": 0.31, "reuse": "高比例复用", "reuse_ratio": 0.9839, "decode_tps": 40.0, "wall_s": 2.3}
+{"ts": "2026-09-27 21:55:23", "kind": "对话", "request_id": "e7bf1778f6914035", "prompt_n": 81, "cache_n": 6689, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.988, "decode_tps": 39.04, "wall_s": 1.36}
+{"ts": "2026-09-27 21:55:24", "kind": "对话", "request_id": "8a12a3826d0a462b", "prompt_n": 59, "cache_n": 6766, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.9914, "decode_tps": 40.64, "wall_s": 1.2}
+{"ts": "2026-09-27 21:55:25", "kind": "对话", "request_id": "0e3ecf76cbb6499c", "prompt_n": 106, "cache_n": 6821, "prefill_s": 0.31, "reuse": "高比例复用", "reuse_ratio": 0.9847, "decode_tps": 40.82, "wall_s": 4.22}
+{"ts": "2026-09-27 21:57:21", "kind": "对话", "request_id": "21bbc27262dc4a30", "prompt_n": 515, "cache_n": 216, "prefill_s": 1.16, "reuse": "部分复用", "reuse_ratio": 0.2955, "decode_tps": 44.21, "wall_s": 2.91}
+{"ts": "2026-09-27 21:57:24", "kind": "对话", "request_id": "5c09dd70543f4810", "prompt_n": 79, "cache_n": 727, "prefill_s": 0.28, "reuse": "高比例复用", "reuse_ratio": 0.902, "decode_tps": 44.95, "wall_s": 1.83}
+{"ts": "2026-09-27 21:57:26", "kind": "对话", "request_id": "afd7c2bfce6749ac", "prompt_n": 122, "cache_n": 802, "prefill_s": 0.31, "reuse": "部分复用", "reuse_ratio": 0.868, "decode_tps": 44.91, "wall_s": 1.83}
+{"ts": "2026-09-27 21:57:28", "kind": "对话", "request_id": "6a9152c85f8f4d53", "prompt_n": 94, "cache_n": 920, "prefill_s": 0.28, "reuse": "高比例复用", "reuse_ratio": 0.9073, "decode_tps": 45.01, "wall_s": 4.48}
+{"ts": "2026-09-27 21:57:32", "kind": "对话", "request_id": "7b8ef66dd4f445e7", "prompt_n": 118, "cache_n": 1010, "prefill_s": 0.31, "reuse": "部分复用", "reuse_ratio": 0.8954, "decode_tps": 42.23, "wall_s": 1.33}
+{"ts": "2026-09-27 21:57:33", "kind": "对话", "request_id": "aea0b2d0fa9c4f37", "prompt_n": 94, "cache_n": 1124, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.9228, "decode_tps": 45.07, "wall_s": 3.59}
+{"ts": "2026-09-27 21:57:37", "kind": "对话", "request_id": "fa0b026159834db6", "prompt_n": 1869, "cache_n": 216, "prefill_s": 2.84, "reuse": "部分复用", "reuse_ratio": 0.1036, "decode_tps": 44.26, "wall_s": 11.98}
+{"ts": "2026-09-27 21:57:49", "kind": "对话", "request_id": "ea8c35f6728e4563", "prompt_n": 1489, "cache_n": 2081, "prefill_s": 2.31, "reuse": "部分复用", "reuse_ratio": 0.5829, "decode_tps": 43.04, "wall_s": 7.84}
+{"ts": "2026-09-27 21:57:57", "kind": "对话", "request_id": "74519b5fa0394170", "prompt_n": 1627, "cache_n": 3566, "prefill_s": 2.52, "reuse": "部分复用", "reuse_ratio": 0.6867, "decode_tps": 42.31, "wall_s": 8.98}
+{"ts": "2026-09-27 21:58:06", "kind": "对话", "request_id": "7b602130490a4fff", "prompt_n": 1638, "cache_n": 5189, "prefill_s": 2.59, "reuse": "部分复用", "reuse_ratio": 0.7601, "decode_tps": 40.91, "wall_s": 8.8}
+{"ts": "2026-09-27 21:58:15", "kind": "对话", "request_id": "c0bc221f54834c57", "prompt_n": 1655, "cache_n": 6823, "prefill_s": 2.64, "reuse": "部分复用", "reuse_ratio": 0.8048, "decode_tps": 38.79, "wall_s": 11.19}
+{"ts": "2026-09-27 21:59:45", "kind": "对话", "request_id": "668dbdb4448e4300", "prompt_n": 1869, "cache_n": 216, "prefill_s": 2.9, "reuse": "部分复用", "reuse_ratio": 0.1036, "decode_tps": 44.49, "wall_s": 12.5}
+{"ts": "2026-09-27 21:59:58", "kind": "对话", "request_id": "15699cdf5f1f4cd1", "prompt_n": 1489, "cache_n": 2081, "prefill_s": 2.32, "reuse": "部分复用", "reuse_ratio": 0.5829, "decode_tps": 43.14, "wall_s": 7.88}
+{"ts": "2026-09-27 22:00:05", "kind": "对话", "request_id": "5292bcc2d3484999", "prompt_n": 1627, "cache_n": 3566, "prefill_s": 2.51, "reuse": "部分复用", "reuse_ratio": 0.6867, "decode_tps": 42.3, "wall_s": 8.98}
+{"ts": "2026-09-27 22:00:14", "kind": "对话", "request_id": "5b61bd89c6954169", "prompt_n": 1638, "cache_n": 5189, "prefill_s": 2.58, "reuse": "部分复用", "reuse_ratio": 0.7601, "decode_tps": 41.11, "wall_s": 8.75}
+{"ts": "2026-09-27 22:00:23", "kind": "对话", "request_id": "e54547a3aadd45f6", "prompt_n": 1655, "cache_n": 6823, "prefill_s": 2.63, "reuse": "部分复用", "reuse_ratio": 0.8048, "decode_tps": 38.74, "wall_s": 11.19}
+{"ts": "2026-09-27 22:00:34", "kind": "对话", "request_id": "8d4e1e661a75445d", "prompt_n": 21, "cache_n": 8474, "prefill_s": 0.22, "reuse": "高比例复用", "reuse_ratio": 0.9975, "decode_tps": 38.74, "wall_s": 21.44}
+{"ts": "2026-09-27 22:00:56", "kind": "对话", "request_id": "74bf1f028a864f4d", "prompt_n": 45, "cache_n": 8491, "prefill_s": 0.34, "reuse": "高比例复用", "reuse_ratio": 0.9947, "decode_tps": 39.08, "wall_s": 1.97}
+{"ts": "2026-09-27 22:00:58", "kind": "对话", "request_id": "84f9a5ac77d84653", "prompt_n": 506, "cache_n": 8532, "prefill_s": 1.02, "reuse": "高比例复用", "reuse_ratio": 0.944, "decode_tps": 38.66, "wall_s": 8.47}
+{"ts": "2026-09-27 22:02:18", "kind": "对话", "request_id": "f47af3b5471a4c05", "prompt_n": 516, "cache_n": 216, "prefill_s": 1.02, "reuse": "部分复用", "reuse_ratio": 0.2951, "decode_tps": 44.98, "wall_s": 2.94}
+{"ts": "2026-09-27 22:02:21", "kind": "对话", "request_id": "1855cc2be1484c8c", "prompt_n": 74, "cache_n": 728, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.9077, "decode_tps": 45.55, "wall_s": 4.38}
+{"ts": "2026-09-27 22:02:26", "kind": "对话", "request_id": "6e4521720f4443ae", "prompt_n": 123, "cache_n": 798, "prefill_s": 0.31, "reuse": "部分复用", "reuse_ratio": 0.8664, "decode_tps": 45.45, "wall_s": 1.89}
+{"ts": "2026-09-27 22:02:28", "kind": "对话", "request_id": "a2f79e7874d24787", "prompt_n": 526, "cache_n": 216, "prefill_s": 1.0, "reuse": "部分复用", "reuse_ratio": 0.2911, "decode_tps": 43.76, "wall_s": 1.97}
+{"ts": "2026-09-27 22:02:30", "kind": "对话", "request_id": "2027290c4bf9429a", "prompt_n": 64, "cache_n": 738, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9202, "decode_tps": 45.12, "wall_s": 1.78}
+{"ts": "2026-09-27 22:02:32", "kind": "对话", "request_id": "8d6b2e6ecc5840fb", "prompt_n": 129, "cache_n": 798, "prefill_s": 0.32, "reuse": "部分复用", "reuse_ratio": 0.8608, "decode_tps": 45.53, "wall_s": 2.34}
+{"ts": "2026-09-27 22:02:34", "kind": "对话", "request_id": "2cf7b05c2a2d4311", "prompt_n": 162, "cache_n": 923, "prefill_s": 0.38, "reuse": "部分复用", "reuse_ratio": 0.8507, "decode_tps": 45.36, "wall_s": 2.23}
+{"ts": "2026-09-27 22:02:36", "kind": "对话", "request_id": "84c45bb6b0234c93", "prompt_n": 494, "cache_n": 1081, "prefill_s": 0.85, "reuse": "部分复用", "reuse_ratio": 0.6863, "decode_tps": 43.86, "wall_s": 3.41}
+{"ts": "2026-09-27 22:02:40", "kind": "对话", "request_id": "fc3dbe8df36d4e2e", "prompt_n": 83, "cache_n": 1571, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9498, "decode_tps": 45.09, "wall_s": 1.94}
+{"ts": "2026-09-27 22:02:42", "kind": "对话", "request_id": "5750a307ea264d7d", "prompt_n": 4381, "cache_n": 1650, "prefill_s": 6.39, "reuse": "部分复用", "reuse_ratio": 0.2736, "decode_tps": 42.29, "wall_s": 14.83}
+{"ts": "2026-09-27 22:02:56", "kind": "对话", "request_id": "57b0d969565e45b1", "prompt_n": 102, "cache_n": 6027, "prefill_s": 0.29, "reuse": "高比例复用", "reuse_ratio": 0.9834, "decode_tps": 42.04, "wall_s": 2.69}
+{"ts": "2026-09-27 22:02:59", "kind": "对话", "request_id": "94adc5266d3546cd", "prompt_n": 840, "cache_n": 6125, "prefill_s": 1.36, "reuse": "部分复用", "reuse_ratio": 0.8794, "decode_tps": 40.36, "wall_s": 4.48}
+{"ts": "2026-09-27 22:03:04", "kind": "对话", "request_id": "8ce98e2f6c464e56", "prompt_n": 102, "cache_n": 6961, "prefill_s": 0.3, "reuse": "高比例复用", "reuse_ratio": 0.9856, "decode_tps": 39.7, "wall_s": 12.02}
+{"ts": "2026-09-27 22:03:16", "kind": "对话", "request_id": "e8c56c620f08415a", "prompt_n": 139, "cache_n": 7059, "prefill_s": 0.38, "reuse": "高比例复用", "reuse_ratio": 0.9807, "decode_tps": 39.66, "wall_s": 12.5}
+{"ts": "2026-09-27 22:03:28", "kind": "对话", "request_id": "85a1b859bce34ccc", "prompt_n": 467, "cache_n": 7194, "prefill_s": 0.86, "reuse": "高比例复用", "reuse_ratio": 0.939, "decode_tps": 39.61, "wall_s": 3.31}
+{"ts": "2026-09-27 22:03:32", "kind": "对话", "request_id": "c54c6037173840f7", "prompt_n": 77, "cache_n": 7657, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.99, "decode_tps": 38.78, "wall_s": 1.36}
+{"ts": "2026-09-27 22:03:33", "kind": "对话", "request_id": "ffa121764b7b457f", "prompt_n": 153, "cache_n": 7730, "prefill_s": 0.39, "reuse": "高比例复用", "reuse_ratio": 0.9806, "decode_tps": 39.95, "wall_s": 6.03}
+{"ts": "2026-09-27 22:03:39", "kind": "对话", "request_id": "5897c00a41fa4a3b", "prompt_n": 526, "cache_n": 216, "prefill_s": 1.06, "reuse": "部分复用", "reuse_ratio": 0.2911, "decode_tps": 42.0, "wall_s": 2.48}
+{"ts": "2026-09-27 22:03:42", "kind": "对话", "request_id": "3d748a73acb14d40", "prompt_n": 73, "cache_n": 738, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.91, "decode_tps": 45.3, "wall_s": 1.22}
+{"ts": "2026-09-27 22:03:43", "kind": "对话", "request_id": "714ada6270214905", "prompt_n": 116, "cache_n": 807, "prefill_s": 0.3, "reuse": "部分复用", "reuse_ratio": 0.8743, "decode_tps": 45.52, "wall_s": 4.7}
+{"ts": "2026-09-27 22:03:48", "kind": "对话", "request_id": "ebf96b1b3ce14d58", "prompt_n": 195, "cache_n": 919, "prefill_s": 0.42, "reuse": "部分复用", "reuse_ratio": 0.825, "decode_tps": 41.86, "wall_s": 1.3}
+{"ts": "2026-09-27 22:03:49", "kind": "对话", "request_id": "f6df3f6eeccc43c5", "prompt_n": 58, "cache_n": 1110, "prefill_s": 0.24, "reuse": "高比例复用", "reuse_ratio": 0.9503, "decode_tps": 45.05, "wall_s": 1.09}
+{"ts": "2026-09-27 22:03:50", "kind": "对话", "request_id": "1b17016c81d241ac", "prompt_n": 197, "cache_n": 1164, "prefill_s": 0.43, "reuse": "部分复用", "reuse_ratio": 0.8553, "decode_tps": 45.35, "wall_s": 3.84}
+{"ts": "2026-09-27 22:03:54", "kind": "对话", "request_id": "423a6d61566d4201", "prompt_n": 525, "cache_n": 216, "prefill_s": 0.98, "reuse": "部分复用", "reuse_ratio": 0.2915, "decode_tps": 45.0, "wall_s": 3.44}
+{"ts": "2026-09-27 22:03:57", "kind": "对话", "request_id": "cfe46b66887e47c0", "prompt_n": 157, "cache_n": 737, "prefill_s": 0.4, "reuse": "部分复用", "reuse_ratio": 0.8244, "decode_tps": 44.8, "wall_s": 4.69}
+{"ts": "2026-09-27 22:04:02", "kind": "对话", "request_id": "7ec95129642c465f", "prompt_n": 124, "cache_n": 890, "prefill_s": 0.31, "reuse": "部分复用", "reuse_ratio": 0.8777, "decode_tps": 45.03, "wall_s": 2.59}
+{"ts": "2026-09-27 22:04:05", "kind": "对话", "request_id": "2f76df69898b4a67", "prompt_n": 525, "cache_n": 216, "prefill_s": 0.97, "reuse": "部分复用", "reuse_ratio": 0.2915, "decode_tps": 44.61, "wall_s": 2.61}
+{"ts": "2026-09-27 22:04:08", "kind": "对话", "request_id": "107efee42cf04694", "prompt_n": 4298, "cache_n": 737, "prefill_s": 6.23, "reuse": "部分复用", "reuse_ratio": 0.1464, "decode_tps": 41.72, "wall_s": 8.08}
+{"ts": "2026-09-27 22:04:16", "kind": "对话", "request_id": "f9115066c4f3472e", "prompt_n": 69, "cache_n": 5031, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9865, "decode_tps": 42.69, "wall_s": 6.8}
+{"ts": "2026-09-27 22:04:22", "kind": "对话", "request_id": "f3447580a1a24f7c", "prompt_n": 282, "cache_n": 5096, "prefill_s": 0.58, "reuse": "高比例复用", "reuse_ratio": 0.9476, "decode_tps": 40.98, "wall_s": 1.92}
+{"ts": "2026-09-27 22:04:24", "kind": "对话", "request_id": "c07df6640c284d9f", "prompt_n": 64, "cache_n": 5374, "prefill_s": 0.25, "reuse": "高比例复用", "reuse_ratio": 0.9882, "decode_tps": 42.12, "wall_s": 1.31}
+{"ts": "2026-09-27 22:04:26", "kind": "对话", "request_id": "339ead08f39f4c95", "prompt_n": 100, "cache_n": 5434, "prefill_s": 0.29, "reuse": "高比例复用", "reuse_ratio": 0.9819, "decode_tps": 42.31, "wall_s": 7.2}
+{"ts": "2026-09-27 22:04:33", "kind": "对话", "request_id": "e4aa7fb26a964bcf", "prompt_n": 216, "cache_n": 5530, "prefill_s": 0.45, "reuse": "高比例复用", "reuse_ratio": 0.9624, "decode_tps": 42.39, "wall_s": 3.02}
+{"ts": "2026-09-27 22:04:36", "kind": "对话", "request_id": "59549812611147d4", "prompt_n": 523, "cache_n": 216, "prefill_s": 1.05, "reuse": "部分复用", "reuse_ratio": 0.2923, "decode_tps": 44.8, "wall_s": 3.16}
+{"ts": "2026-09-27 22:04:39", "kind": "对话", "request_id": "67d34fd9c54541b6", "prompt_n": 80, "cache_n": 735, "prefill_s": 0.27, "reuse": "高比例复用", "reuse_ratio": 0.9018, "decode_tps": 45.65, "wall_s": 2.94}
+{"ts": "2026-09-27 22:04:42", "kind": "对话", "request_id": "772626880e1143c9", "prompt_n": 137, "cache_n": 811, "prefill_s": 0.38, "reuse": "部分复用", "reuse_ratio": 0.8555, "decode_tps": 45.36, "wall_s": 20.66}
+{"ts": "2026-09-27 22:05:03", "kind": "对话", "request_id": "6d1880de9fbc4c37", "prompt_n": 822, "cache_n": 944, "prefill_s": 1.29, "reuse": "部分复用", "reuse_ratio": 0.5345, "decode_tps": 41.29, "wall_s": 2.33}
+{"ts": "2026-09-27 22:05:05", "kind": "对话", "request_id": "a4122d9730064031", "prompt_n": 796, "cache_n": 1762, "prefill_s": 1.24, "reuse": "部分复用", "reuse_ratio": 0.6888, "decode_tps": 44.13, "wall_s": 10.14}
+{"ts": "2026-09-27 22:05:16", "kind": "对话", "request_id": "c1c3f9418c6e4eaf", "prompt_n": 534, "cache_n": 216, "prefill_s": 0.99, "reuse": "部分复用", "reuse_ratio": 0.288, "decode_tps": 44.45, "wall_s": 84.61}
+{"ts": "2026-09-27 22:06:40", "kind": "对话", "request_id": "4b0ee2c775bf4329", "prompt_n": 1305, "cache_n": 746, "prefill_s": 1.94, "reuse": "部分复用", "reuse_ratio": 0.3637, "decode_tps": 42.46, "wall_s": 3.02}
+{"ts": "2026-09-27 22:06:43", "kind": "对话", "request_id": "935f32073ec3453e", "prompt_n": 65, "cache_n": 2047, "prefill_s": 0.24, "reuse": "高比例复用", "reuse_ratio": 0.9692, "decode_tps": 44.85, "wall_s": 3.06}
+{"ts": "2026-09-27 22:06:46", "kind": "对话", "request_id": "d48790519be74314", "prompt_n": 143, "cache_n": 2108, "prefill_s": 0.38, "reuse": "高比例复用", "reuse_ratio": 0.9365, "decode_tps": 44.26, "wall_s": 1.2}
+{"ts": "2026-09-27 22:06:48", "kind": "对话", "request_id": "16db3a45767f475c", "prompt_n": 74, "cache_n": 2247, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9681, "decode_tps": 44.55, "wall_s": 9.62}
+{"ts": "2026-09-27 22:06:57", "kind": "对话", "request_id": "b328cbb9146a4349", "prompt_n": 528, "cache_n": 216, "prefill_s": 0.97, "reuse": "部分复用", "reuse_ratio": 0.2903, "decode_tps": 44.3, "wall_s": 3.36}
+{"ts": "2026-09-27 22:07:01", "kind": "对话", "request_id": "499e46b192e44e45", "prompt_n": 55, "cache_n": 740, "prefill_s": 0.25, "reuse": "高比例复用", "reuse_ratio": 0.9308, "decode_tps": 44.56, "wall_s": 2.77}
+{"ts": "2026-09-27 22:07:04", "kind": "对话", "request_id": "d485cc536ae046eb", "prompt_n": 122, "cache_n": 791, "prefill_s": 0.32, "reuse": "部分复用", "reuse_ratio": 0.8664, "decode_tps": 44.53, "wall_s": 2.41}
+{"ts": "2026-09-27 22:07:06", "kind": "对话", "request_id": "faf0a35d40ff48cf", "prompt_n": 524, "cache_n": 216, "prefill_s": 0.97, "reuse": "部分复用", "reuse_ratio": 0.2919, "decode_tps": 44.12, "wall_s": 2.59}
+{"ts": "2026-09-27 22:07:09", "kind": "对话", "request_id": "1a599a568dd14676", "prompt_n": 83, "cache_n": 736, "prefill_s": 0.27, "reuse": "部分复用", "reuse_ratio": 0.8987, "decode_tps": 44.28, "wall_s": 1.77}
+{"ts": "2026-09-27 22:07:10", "kind": "对话", "request_id": "22660ca483e14d6e", "prompt_n": 148, "cache_n": 815, "prefill_s": 0.37, "reuse": "部分复用", "reuse_ratio": 0.8463, "decode_tps": 44.07, "wall_s": 1.89}
+{"ts": "2026-09-27 22:07:12", "kind": "对话", "request_id": "dc571da457f44659", "prompt_n": 4443, "cache_n": 959, "prefill_s": 6.51, "reuse": "部分复用", "reuse_ratio": 0.1775, "decode_tps": 39.85, "wall_s": 7.94}
+{"ts": "2026-09-27 22:07:20", "kind": "对话", "request_id": "511d83aff0084f54", "prompt_n": 65, "cache_n": 5398, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9881, "decode_tps": 41.77, "wall_s": 9.53}
+{"ts": "2026-09-27 22:07:30", "kind": "对话", "request_id": "d72d68b3ad514bd4", "prompt_n": 397, "cache_n": 5459, "prefill_s": 0.75, "reuse": "高比例复用", "reuse_ratio": 0.9322, "decode_tps": 40.71, "wall_s": 2.73}
+{"ts": "2026-09-27 22:07:33", "kind": "对话", "request_id": "f4822f02814f44fe", "prompt_n": 145, "cache_n": 5852, "prefill_s": 0.37, "reuse": "高比例复用", "reuse_ratio": 0.9758, "decode_tps": 41.89, "wall_s": 3.25}
+{"ts": "2026-09-27 22:07:36", "kind": "对话", "request_id": "de23d07a3bd7402f", "prompt_n": 111, "cache_n": 5993, "prefill_s": 0.29, "reuse": "高比例复用", "reuse_ratio": 0.9818, "decode_tps": 41.31, "wall_s": 2.22}
+{"ts": "2026-09-27 22:07:38", "kind": "对话", "request_id": "b1f93ba17941422f", "prompt_n": 82, "cache_n": 6100, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9867, "decode_tps": 41.79, "wall_s": 4.83}
+{"ts": "2026-09-27 22:07:43", "kind": "对话", "request_id": "4747e78e39f141b6", "prompt_n": 198, "cache_n": 6178, "prefill_s": 0.45, "reuse": "高比例复用", "reuse_ratio": 0.9689, "decode_tps": 41.3, "wall_s": 11.47}
+{"ts": "2026-09-27 22:07:55", "kind": "对话", "request_id": "174ac3faf16e462e", "prompt_n": 385, "cache_n": 6372, "prefill_s": 0.73, "reuse": "高比例复用", "reuse_ratio": 0.943, "decode_tps": 38.73, "wall_s": 1.89}
+{"ts": "2026-09-27 22:07:56", "kind": "对话", "request_id": "c958b2df61b34d4b", "prompt_n": 360, "cache_n": 6753, "prefill_s": 0.71, "reuse": "高比例复用", "reuse_ratio": 0.9494, "decode_tps": 39.88, "wall_s": 3.11}
+{"ts": "2026-09-27 22:08:00", "kind": "对话", "request_id": "95f9ea0604ea4043", "prompt_n": 110, "cache_n": 7109, "prefill_s": 0.3, "reuse": "高比例复用", "reuse_ratio": 0.9848, "decode_tps": 39.05, "wall_s": 1.81}
+{"ts": "2026-09-27 22:08:01", "kind": "对话", "request_id": "9201bca127834f27", "prompt_n": 69, "cache_n": 7215, "prefill_s": 0.26, "reuse": "高比例复用", "reuse_ratio": 0.9905, "decode_tps": 39.86, "wall_s": 10.02}
+{"ts": "2026-09-27 22:08:11", "kind": "对话", "request_id": "49321112094c4268", "prompt_n": 360, "cache_n": 7280, "prefill_s": 0.7, "reuse": "高比例复用", "reuse_ratio": 0.9529, "decode_tps": 39.25, "wall_s": 1.83}
+{"ts": "2026-09-27 22:08:13", "kind": "对话", "request_id": "f999c6dad92f41dc", "prompt_n": 372, "cache_n": 7636, "prefill_s": 0.72, "reuse": "高比例复用", "reuse_ratio": 0.9535, "decode_tps": 38.77, "wall_s": 6.67}

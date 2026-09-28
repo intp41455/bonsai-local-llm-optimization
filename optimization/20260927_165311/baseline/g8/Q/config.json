@@ -1,0 +1,112 @@
+{
+  "schema": "bonsai-agent-config/2",
+  "version": 2,
+  "updated_at": "2026-09-27T23:05:20+08:00",
+  "_authority": "唯一权威配置来源。所有启动入口（start_all_agent.bat / start_bonsai_8gb_agent.bat / start-bonsai.ps1 / warm_kv.bat / start_capture.bat）统一经 launcher\\bonsai_launcher.py 读取本文件构造参数；任何脚本不得再自行拼一份后端/代理参数。",
+  "python": "C:\\Users\\intpj\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+  "backend": {
+    "exe": "D:\\Bonsai-demo\\dist\\bonsai2-8gb-combo\\bin\\llama-server.exe",
+    "cwd": "D:\\Bonsai-demo\\dist\\bonsai2-8gb-combo\\bin",
+    "model": "D:\\Bonsai-demo\\models\\bonsai2-gguf\\27B\\Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf",
+    "n_gpu_layers": 99,
+    "flash_attention": "on",
+    "n_parallel": 1,
+    "n_ctx": 65536,
+    "n_batch": 2048,
+    "n_ubatch": 512,
+    "cache_type_k": "q4_0",
+    "cache_type_v": "q4_0",
+    "backend_sampling": true,
+    "jinja": true,
+    "metrics": true,
+    "host": "127.0.0.1",
+    "port": 8081,
+    "alias": "bonsai-2-27b",
+    "log": "D:\\Bonsai-demo\\logs\\llama-server.log",
+    "mtp": {
+      "enabled": false,
+      "_note": "长上下文档保持关闭。历史 depth2_result.json 显示较深上下文开启 MTP 为负收益；只有满足短输入+显存余量+正确性条件时才在阶段 G4 重测。"
+    },
+    "sampling": {
+      "mode": "server_default",
+      "_note": "保持在线基线：不传采样参数（llama.cpp 服务端默认）。start_bonsai_8gb_agent.bat 旧有的 --temp 1.0/--top-p 0.95/--top-k 20 属配置漂移，本阶段不引入；采样对照留到阶段 D/G 之后单独做，且一次只改一项。",
+      "params": {}
+    },
+    "extra_args": [
+      "--cache-ram",
+      "1024"
+    ]
+  },
+  "proxy": {
+    "script": "D:\\Bonsai-demo\\proxy\\bonsai_proxy.py",
+    "host": "127.0.0.1",
+    "port": 8080,
+    "upstream_host": "127.0.0.1",
+    "upstream_port": 8081,
+    "capture_dir": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g8\\Q\\capture",
+    "log": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g8\\Q\\logs\\proxy.log"
+  },
+  "thinking": {
+    "default_effort": "medium",
+    "allowed": [
+      "xhigh",
+      "medium",
+      "low",
+      "off"
+    ],
+    "_note": "模型模板原生三档 xhigh/medium/low，默认 xhigh（最重思考）；medium = 不注入任何思考指令（模型自然行为，推荐）。档位拼在 system 前缀里，一轮会话固定一档，中途切换会让 KV 前缀作废。"
+  },
+  "budget": {
+    "request_max_tokens": 8192,
+    "thinking_budget_tokens": 2048,
+    "context_reserve_tokens": 1024,
+    "context_window_tokens": 65536,
+    "gate": {
+      "enabled": true,
+      "mode": "warn",
+      "chars_per_token_floor": 3.0,
+      "_note": "阶段 E 输入预算闸门。enabled=true 生效；mode=warn 只告警并转发，mode=reject 在生成前返回 400（不占槽位、不消耗 GPU）。chars_per_token_floor 是“跳过精确计数”的保守上界阈值：实测本机请求体约 4.5 字节/token，纯中文最坏约 3 字节/token，取 3.0 偏保守（宁可多算）。context_window_tokens 仅在 /props 不可达时兜底。"
+    },
+    "policy": {
+      "apply_request_max_tokens": false,
+      "apply_thinking_budget": false
+    },
+    "_note": "候选值取自方案 D3 日常 A（medium / 思考 2048 / 总生成 8192）。policy.*=false 表示阶段 B 只登记不注入：总生成预算含思考+答案，且请求级 reasoning_budget_tokens 是否被当前二进制支持须先由阶段 D 行为验证；验证通过后逐项打开并记录证据。不使用旧手册的 20480/24576 作为新日常值。"
+  },
+  "slimming": {
+    "locations": true,
+    "deferred_tools": false,
+    "subagents": false,
+    "_note": "阶段 F 起代理按三项【各自独立】生效（不再是全开/全关）。locations=true 剥 (location: C:/.../SKILL.md) 纯磁盘路径（省约 4,931 tok，模型按名调用，零代价）-> 保留；deferred_tools=false 与 subagents=false = 【不压缩】ToolSearch 的 deferred 工具清单与 Agent 的子代理类型清单（原压缩省 2,512 / 约 1,200 tok，但会让模型看不到工具名与子代理类型，损伤发现能力，方案 P09 要求恢复）。取舍与实测差异见 changes.md 阶段 F。"
+  },
+  "tools": {
+    "schema_hardening": true,
+    "error_policy": false,
+    "_note": "阶段 F / P05。schema_hardening=true 时把 show_widget.loading_messages 的描述替换为精确契约（JSON 编码字符串 -> 数组，长度 1–4，元素为非空字符串；含最小正确示例、失败原文与自纠指令），代理另有 semantic validator + 历史审计观测量。error_policy=true 时对带 tools 的请求，在第一条 system 文本尾部并入常驻策略块（同一错误连续两次不得原样重试；有副作用的操作不得重复执行）。两项都是【确定性】改写，预热与实际请求走同一管线，不破坏 KV 前缀复用。注意：工具校验与重试决策在客户端（WorkBuddy），代理只能加固模型看到的契约，无法强制客户端行为。"
+  },
+  "prewarm": {
+    "enabled": false,
+    "min_chars": 20000,
+    "_note": "每次启动只预热一次（合并 warm_kv.py 与代理 --warm 两条路径）。忙时不预热，不抢占正在执行的用户任务。"
+  },
+  "timeouts": {
+    "connect_s": 8,
+    "first_response_s": 180,
+    "stream_idle_s": 300,
+    "overall_s": 1800,
+    "client_write_s": 120,
+    "release_wait_s": 30,
+    "smoke_s": 240,
+    "_note": "阶段 C 已落到代理实现并离线测试（36/36 通过）。connect=建连；first_response=首字节容忍（参照历史冷 prefill 约 100~165 秒）；stream_idle=流中无数据；overall=单请求整体上限；client_write=给客户端写超时（对端卡死时不把单槽一起卡住）；release_wait=取消/超时后等后端 /slots 释放的验证窗口。"
+  },
+  "logging": {
+    "dir": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g8\\Q\\logs",
+    "request_log": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g8\\Q\\logs\\requests.jsonl",
+    "_note": "阶段 C 建立每请求日志（request_id/config_hash/各段耗时/终止原因）。"
+  },
+  "state": {
+    "dir": "D:\\Bonsai-demo\\state",
+    "file": "D:\\Bonsai-demo\\state\\launcher_state.json",
+    "_note": "记录本管理器启动并核对过身份的 PID；停止只按这里的 PID 操作，禁止按端口盲杀。"
+  }
+}

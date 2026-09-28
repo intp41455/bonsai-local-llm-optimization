@@ -1,0 +1,103 @@
+阶段 E 在线验证证据（逐字转录本次会话实测输出；本机 2026-09-27 晚）
+
+环境：代理 D:\Bonsai-demo\proxy\bonsai_proxy.py（sha256 a375f4f3…，E 版）
+      后端 127.0.0.1:8081 pid 43384（全程未重启，身份未变）
+      代理 127.0.0.1:8080 随 gate.mode 切换重启（54088 -> 2588 -> 52236）
+      配置 config\bonsai-agent.json sha256 2df7ef56…（warn 态）
+
+--------------------------------------------------------------------------------
+[1] mode=reject，真实抓包（296,318 字节）-> 生成前拒绝
+    命令: python tests\stage_e_online.py big
+--------------------------------------------------------------------------------
+== 阶段 E 在线验证：big ==
+请求体: D:\Bonsai-demo\capture\req_012_135949.json  296318 字节
+HTTP 状态: 400   用时 187 ms
+响应(节选): {"error": {"message": "input over budget: 输入超预算：输入 60461 + 计划生成 8192 + 余量 1024 = 69677 > 窗口 65536（超 4141 tok）。请先减少输入（历史整理 / 拆分任务）或降低计划生成预算后重试。", "type": "input_over_budget", "code": "input_over_budget", "budget": {"enabled": true, "mode": "reject", "window": 65536, "window_source": "server /props", "planned_gen": 8192, "reserve": 1024, "method": "exact(apply-template+tokenize)", "input_tokens": 60461, "required": 69677, "headroom": -4141, "verdict": "超预算", "elapsed_ms": 172.0, "est_upper_tokens": 88965, "input_pct_of_window": 92.26}}}
+
+logs\requests.jsonl 对应记录（关键字段）：
+  request_id            feac004359ff496d
+  start_at/end_at       2026-09-27 19:20:27 / 2026-09-27 19:20:27
+  status                400
+  error_type            input_over_budget
+  sse_events            0
+  wall_ms               187.0
+  finish_reason         null
+  input_tokens_total    null
+  budget_applied        null
+  budget_check          {"enabled": true, "mode": "reject", "window": 65536,
+                         "window_source": "server /props", "planned_gen": 8192, "reserve": 1024,
+                         "method": "exact(apply-template+tokenize)", "input_tokens": 60461,
+                         "required": 69677, "headroom": -4141, "verdict": "超预算",
+                         "elapsed_ms": 172.0, "est_upper_tokens": 88965, "input_pct_of_window": 92.26}
+  notes                 ["输入超预算：输入 60461 + 计划生成 8192 + 余量 1024 = 69677 > 窗口 65536（超 4141 tok）；按配置 reject，未发起推理（不占槽位）"]
+
+判读：sse_events=0 且 wall_ms=187（≈一次精确核算 172 ms + 开销），无 prefill、无生成，
+      证明“超预算在生成前发现”，未占用单槽、未消耗 GPU。
+      闸门精确计数 60,461 与 E1 的 A2 完全一致 -> 闸门测的就是真正要转发的 body。
+
+--------------------------------------------------------------------------------
+[2] 仍 mode=reject，小请求 -> 确认不误伤
+    命令: python tests\stage_e_online.py small
+--------------------------------------------------------------------------------
+== 阶段 E 在线验证：small ==
+请求体: 小请求  134 字节
+HTTP 状态: 200   用时 1078 ms
+响应(节选): {"choices": [{"finish_reason": "length", ... "usage": {"completion_tokens": 16,
+             "prompt_tokens": 15, "total_tokens": 31, "prompt_tokens_details": {"cached_tokens": 11}},
+             "timings": {"cache_n": 11, "prompt_n": 4, ..., "predicted_per_second": 16.96}}]}
+
+logs\requests.jsonl 对应记录：
+  budget_check  {"enabled":true,"mode":"reject","window":65536,"window_source":"server /props",
+                 "planned_gen":8192,"reserve":1024,"method":"chars_upper_bound","input_tokens":null,
+                 "required":null,"headroom":null,"verdict":"在预算内(便宜路径)","elapsed_ms":0.0,
+                 "est_upper_tokens":63}
+  status=200  wall_ms=1078  sse_events=0  prompt_tokens=15  cache_reuse=部分复用
+
+判读：reject 模式下小请求照常 200；走便宜路径 0 ms，未触发精确计数。
+
+--------------------------------------------------------------------------------
+[3] 恢复 mode=warn（配置哈希回到 2df7ef56…），重启代理 -> 正常流量健康
+    命令: python tests\set_gate_mode.py warn
+          （按身份停 2588）python launcher\bonsai_launcher.py up --no-prewarm
+          python tests\stage_e_online.py small
+--------------------------------------------------------------------------------
+gate.mode: reject -> warn   sha256 cf4b15e83aacd1a5 -> 2df7ef565a53e559
+[代理] pid=52236   （后端 [已在运行 pid=43384]，身份核对一致，未重启）
+
+== 阶段 E 在线验证：small ==
+请求体: 小请求  134 字节
+HTTP 状态: 200   用时 1031 ms
+
+logs\requests.jsonl 对应记录：
+  request_id            3bbcac8b30d14b63
+  status                200   finish_reason=length   input_tokens_total=15   completion_tokens=16
+  wall_ms               1031.0
+  budget_check          {"enabled": true, "mode": "warn", ... "method": "chars_upper_bound",
+                         "verdict": "在预算内(便宜路径)", "elapsed_ms": 0.0, "est_upper_tokens": 63}
+
+判读：warn 态健康，闸门只登记不拦截。
+
+--------------------------------------------------------------------------------
+[4] 附带发现：冷 prefill 实测速率（判定 warn 在线复现是否可行）
+    命令: python tests\stage_e_online.py prefill      # 6,810 token 冷输入，max_tokens=1
+--------------------------------------------------------------------------------
+== 阶段 E 在线验证：prefill ==
+请求体: 预填充探针  36106 字节
+HTTP 状态: 200   用时 106531 ms
+  usage.prompt_tokens = 6810
+  timings: prompt_n=6810, prompt_ms=106355.892, prompt_per_second=64.0303, cache_n=0
+
+判读：冷 prefill 仅 64.03 tok/s。据此推算真实抓包 60,461 token 需 ≈945 s 预填充，
+      远超 first_response_s=180 s -> warn 模式“超预算仍转发”的在线复现必然首字节超时。
+      故该项不在线复现，改由离线测试 tests\stage_e_tests.py 覆盖（已在 changes.md 说明，不谎报）。
+      同时这是宿主内存压力的又一次量化证据。
+
+--------------------------------------------------------------------------------
+结论（对应方案 §7 的 E 验收四条）
+--------------------------------------------------------------------------------
+  1) 超预算在生成前发现：达成。reject 实测 400 @187 ms，sse_events=0，无 prefill/生成。
+  2) 不丢关键事实：达成。闸门只判定、不改写 body（离线断言 body 字节不变）；
+     超预算时拒绝或告警，绝不静默裁剪。
+  3) 工具配对完整：达成。闸门不拆分/不删减 messages 与 tool_calls；超预算直接拒绝。
+  4) 无静默裁剪：达成。reject 明确 400 + 原因 + 建议；warn 明确写 notes。
+  未达成项（不属验收四条，但需记录）：E3 的输入 8k–24k 目标未达成，取决于阶段 F 处理 tools/system。

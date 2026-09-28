@@ -1,0 +1,31 @@
+﻿**********************
+Windows PowerShell 脚本开始
+开始时间: 20260927203920
+用户名: THINKBOOK16P\intpj
+RunAs 用户: THINKBOOK16P\intpj
+配置名称: 
+计算机: THINKBOOK16P (Microsoft Windows NT 10.0.26200.0)
+主机应用程序: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File D:\Bonsai-demo\optimization\20260927_165311\_stage\snap_admin.ps1
+进程 ID: 35884
+PSVersion: 5.1.26100.9444
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9444
+BuildVersion: 10.0.26100.9444
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+脚本启动 2026-09-27 20:39:20  dest=D:\Bonsai-demo\optimization\20260927_165311\baseline\prechange_20260927_2036
+
+System.evtx 导出完成
+
+Application.evtx 导出完成
+WER 归档 -> D:\Bonsai-demo\optimization\20260927_165311\baseline\prechange_20260927_2036\wer_reportarchive
+驱动包清单已写入 17_drivers_enum.txt
+bcdedit 已写入 18_bcdedit_current.txt
+完成。
+**********************
+Windows PowerShell 脚本结束
+结束时间: 20260927203921
+**********************

@@ -1,0 +1,86 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 1,
+  "task_text": "将notes.txt整理为五条约束，保存results/constraints.md。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B",
+  "stop_reason": "model_finished",
+  "rounds": 4,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 30.63,
+      "ttft_s": 24.0,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 124,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 26.01,
+      "ttft_s": 3.21,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 272,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 10.72,
+      "ttft_s": 5.77,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 40,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 15.35,
+      "ttft_s": 4.88,
+      "finish": "stop",
+      "content_chars": 153,
+      "reasoning_chars": 46,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 82.7,
+  "tool_retries": 0,
+  "proxy_records": 4,
+  "prompt_n": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "cache_n": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "prefill_ms": [
+    23937.0,
+    3182.0,
+    5741.9,
+    4821.8
+  ],
+  "decode_tps": [
+    8.46,
+    7.19,
+    8.08,
+    8.31
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "at": "2026-09-27 20:14:44"
+}

@@ -1,0 +1,66 @@
+{
+  "phase": "G12b",
+  "started_at": "2026-09-28 08:48:52",
+  "harness_sha256": "f06852086dca5f5e2cf3e1cc624eee74af29888b6d42cdf4cc7431907ca97f6e",
+  "proxy_v3_sha256": "6acfb9c5914595ec567f5b9d4db2da188e99c1bf635b36c017bc0532026340f5",
+  "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "threshold_tokens": 56320,
+  "hard_limit_tokens": 65536,
+  "need_gen": 9216,
+  "floor": 3.0,
+  "skip_exact_if_body_bytes_le": 168960,
+  "probe_target": 57000,
+  "probe_max_tokens": 64,
+  "prod_reqlog_lines_before": 730,
+  "prod_timings_lines_before": 907,
+  "prod_reqlog_off_before": 1257463,
+  "netstat_before": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "note": "G12b：修正 G12 的 P-sparse 标定未达标；两探针精确同 token 数（~57000），仅字符/token 密度不同；每探针 n=1；生产不动",
+  "arm_config": {
+    "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g12b\\config.json",
+    "config_sha256": "6e7383c4719b262a15d4d88d7740afd81e7fbfc88537dfaebc13b6912e587798",
+    "changed_top_keys": [
+      "logging",
+      "prewarm",
+      "proxy"
+    ],
+    "tools_diff_keys": [],
+    "behavior_unchanged": true,
+    "backend_extra_args": [
+      "--cache-ram",
+      "1024"
+    ],
+    "prewarm_enabled": false
+  },
+  "ended_at": "2026-09-28 08:52:41",
+  "netstat_after": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "prod_reqlog_lines_after": 732,
+  "prod_timings_lines_after": 907,
+  "prod_reqlog_delta": 2,
+  "prod_timings_delta": 0,
+  "prod_chat_completions_in_delta": 0,
+  "prod_chat_completions_detail": []
+}

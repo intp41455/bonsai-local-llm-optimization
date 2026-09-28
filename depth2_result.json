@@ -1,0 +1,140 @@
+{
+  "on": {
+    "tag": "on-dm0",
+    "depth_max": 0,
+    "rows": [
+      {
+        "copies": 1,
+        "new": 4978,
+        "depth": 5228,
+        "decode": 18.969675412093345,
+        "acc": 0.7222222222222222,
+        "chars": 762
+      },
+      {
+        "copies": 2,
+        "new": 5467,
+        "depth": 10945,
+        "decode": 21.388502039509632,
+        "acc": 0.6870748299319728,
+        "chars": 834
+      },
+      {
+        "copies": 3,
+        "new": 5467,
+        "depth": 16662,
+        "decode": 19.772899121527413,
+        "acc": 0.7412587412587412,
+        "chars": 782
+      },
+      {
+        "copies": 4,
+        "new": 5467,
+        "depth": 22379,
+        "decode": 17.082773998261676,
+        "acc": 0.6644295302013423,
+        "chars": 772
+      },
+      {
+        "copies": 5,
+        "new": 5467,
+        "depth": 28096,
+        "decode": 16.599644767601973,
+        "acc": 0.7971014492753623,
+        "chars": 578
+      }
+    ]
+  },
+  "off": {
+    "tag": "off",
+    "depth_max": 0,
+    "rows": [
+      {
+        "copies": 1,
+        "new": 4978,
+        "depth": 5228,
+        "decode": 34.59579262364904,
+        "acc": NaN,
+        "chars": 762
+      },
+      {
+        "copies": 2,
+        "new": 5467,
+        "depth": 10945,
+        "decode": 33.3020552584079,
+        "acc": NaN,
+        "chars": 834
+      },
+      {
+        "copies": 3,
+        "new": 5467,
+        "depth": 16662,
+        "decode": 29.616396303064946,
+        "acc": NaN,
+        "chars": 782
+      },
+      {
+        "copies": 4,
+        "new": 5467,
+        "depth": 22379,
+        "decode": 29.512405284735454,
+        "acc": NaN,
+        "chars": 772
+      },
+      {
+        "copies": 5,
+        "new": 5467,
+        "depth": 28096,
+        "decode": 27.912057067041395,
+        "acc": NaN,
+        "chars": 578
+      }
+    ]
+  },
+  "on_dm4096": {
+    "tag": "on-dm4096",
+    "depth_max": 4096,
+    "rows": [
+      {
+        "copies": 1,
+        "new": 4978,
+        "depth": 5228,
+        "decode": 26.275138263681885,
+        "acc": NaN,
+        "chars": 762
+      },
+      {
+        "copies": 2,
+        "new": 5467,
+        "depth": 10945,
+        "decode": 24.893482886180397,
+        "acc": NaN,
+        "chars": 834
+      },
+      {
+        "copies": 3,
+        "new": 5467,
+        "depth": 16662,
+        "decode": 27.681934791589494,
+        "acc": NaN,
+        "chars": 782
+      },
+      {
+        "copies": 4,
+        "new": 5467,
+        "depth": 22379,
+        "decode": 26.306208920319232,
+        "acc": NaN,
+        "chars": 772
+      },
+      {
+        "copies": 5,
+        "new": 5467,
+        "depth": 28096,
+        "decode": 25.013594235501685,
+        "acc": NaN,
+        "chars": 578
+      }
+    ]
+  }
+}

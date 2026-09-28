@@ -1,0 +1,129 @@
+{
+  "phase_c": {
+    "low-bat-ball": {
+      "content": "$0.05",
+      "think_tok": 0,
+      "out_tok": 93,
+      "think_chars": 205,
+      "finish": "stop",
+      "decode": 59.011581664331864,
+      "wall": 1.8596343994140625,
+      "hit": 1,
+      "total": 3
+    },
+    "low-split-bill": {
+      "content": "ANSWER: Alice=78 Bob=39 Carol=26",
+      "think_tok": 0,
+      "out_tok": 134,
+      "think_chars": 241,
+      "finish": "stop",
+      "decode": 55.445082271330726,
+      "wall": 2.9315645694732666,
+      "hit": 3,
+      "total": 3
+    },
+    "low-chick-rabbit": {
+      "content": "ANSWER: chickens=23 rabbits=12",
+      "think_tok": 0,
+      "out_tok": 72,
+      "think_chars": 133,
+      "finish": "stop",
+      "decode": 54.24663269757808,
+      "wall": 1.8685131072998047,
+      "hit": 2,
+      "total": 2
+    },
+    "medium-bat-ball": {
+      "content": "$0.05",
+      "think_tok": 0,
+      "out_tok": 97,
+      "think_chars": 174,
+      "finish": "stop",
+      "decode": 64.70829701917185,
+      "wall": 1.9479691982269287,
+      "hit": 1,
+      "total": 3
+    },
+    "medium-split-bill": {
+      "content": "ANSWER: Alice=78 Bob=39 Carol=26",
+      "think_tok": 0,
+      "out_tok": 189,
+      "think_chars": 310,
+      "finish": "stop",
+      "decode": 62.92236217241463,
+      "wall": 3.341280460357666,
+      "hit": 3,
+      "total": 3
+    },
+    "medium-chick-rabbit": {
+      "content": "ANSWER: chickens=23 rabbits=12",
+      "think_tok": 0,
+      "out_tok": 192,
+      "think_chars": 338,
+      "finish": "stop",
+      "decode": 61.85054899648294,
+      "wall": 3.4221441745758057,
+      "hit": 2,
+      "total": 2
+    },
+    "xhigh-bat-ball": {
+      "content": "$0.05",
+      "think_tok": 0,
+      "out_tok": 116,
+      "think_chars": 284,
+      "finish": "stop",
+      "decode": 58.03616713003078,
+      "wall": 2.505237579345703,
+      "hit": 1,
+      "total": 3
+    },
+    "xhigh-split-bill": {
+      "content": "ANSWER: Alice=78 Bob=39 Carol=26",
+      "think_tok": 0,
+      "out_tok": 163,
+      "think_chars": 373,
+      "finish": "stop",
+      "decode": 55.540698989982104,
+      "wall": 3.4692864418029785,
+      "hit": 3,
+      "total": 3
+    },
+    "xhigh-chick-rabbit": {
+      "content": "ANSWER: chickens=23 rabbits=12",
+      "think_tok": 0,
+      "out_tok": 101,
+      "think_chars": 213,
+      "finish": "stop",
+      "decode": 55.028232234547936,
+      "wall": 2.347945213317871,
+      "hit": 2,
+      "total": 2
+    }
+  },
+  "phase_d": {
+    "low": {
+      "content": "def balanced(s: str) -> bool:\n    matching = {\n        \")\": \"(\",\n        \"]\": \"[\",\n        \"}\": \"{\",\n    }\n    stack = []\n\n    for ch in s:\n        if ch in \"([{\":\n            stack.append(ch)\n        elif ch in \")]}\":\n            if not stack or stack[-1] != matching[ch]:\n                return False\n            stack.pop()\n\n    return not stack\n\n\nimport pytest\n\n\n@pytest.mark.parametrize(\n    \"s, expected\",\n    [\n        (\"\", True),\n        (\"()\", True),\n        (\"[]\", True),\n        (\"{}\", True),\n        (\"([]{})\", True),\n        (\"([{}])\", True),\n        (\"(]\", False),\n        (\"([)]\", False),\n        (\"((\", False),\n        (\")(\", False),\n        (\"a(b[c]d)e\", True),\n        (\"abc\", True),\n    ],\n)\ndef test_balanced(s, expected):\n    assert balanced(s) == expected",
+      "think_tok": 0,
+      "out_tok": 713,
+      "think_chars": 1816,
+      "finish": "stop",
+      "decode": 56.35230575114853,
+      "wall": 12.942984580993652,
+      "compiles": true,
+      "n_balanced": 1,
+      "n_tests": 1
+    },
+    "medium": {
+      "content": "```python\ndef balanced(s: str) -> bool:\n    stack = []\n    pairs = {')': '(', ']': '[', '}': '{'}\n    for ch in s:\n        if ch in '([{':\n            stack.append(ch)\n        elif ch in ')]}':\n            if not stack or stack[-1] != pairs[ch]:\n                return False\n            stack.pop()\n    return not stack\n\n\nimport pytest\n\n\ndef test_empty_string():\n    assert balanced(\"\") is True\n\n\ndef test_single_open_paren():\n    assert balanced(\"(\") is False\n\n\ndef test_single_close_brace():\n    assert balanced(\"}\") is False\n\n\ndef test_simple_balanced():\n    assert balanced(\"()\") is True\n\n\ndef test_mismatched_types():\n    assert balanced(\"{[}]}\") is False\n\n\ndef test_extra_closing():\n    assert balanced(\"())\") is False\n\n\ndef test_extra_opening():\n    assert balanced(\"(((\") is False\n\n\ndef test_nested_all_types():\n    assert balanced(\"(([]{}))\") is True\n\n\ndef test_no_brackets():\n    assert balanced(\"hello world\") is True\n\n\ndef test_crossed_brackets():\n    assert balanced(\"([)]\") is False\n\n\ndef test_multiple_groups():\n    assert balanced(\"{[()]}{}\") is True\n\n\ndef test_deeply_nested():\n    assert balanced(\"((({[[{}}]]}))\") is True\n```",
+      "think_tok": 0,
+      "out_tok": 582,
+      "think_chars": 892,
+      "finish": "stop",
+      "decode": 55.999271334782634,
+      "wall": 10.793649196624756,
+      "compiles": true,
+      "n_balanced": 1,
+      "n_tests": 12
+    }
+  }
+}

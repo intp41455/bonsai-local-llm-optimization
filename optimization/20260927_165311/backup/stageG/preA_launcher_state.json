@@ -1,0 +1,18 @@
+{
+  "config_fingerprint": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+  "updated_at": "2026-09-27 21:37:41",
+  "backend": {
+    "pid": 35040,
+    "exe": "D:\\Bonsai-demo\\dist\\bonsai2-8gb-combo\\bin\\llama-server.exe",
+    "model": "D:\\Bonsai-demo\\models\\bonsai2-gguf\\27B\\Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf",
+    "port": 8081,
+    "config_fingerprint": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+    "started_by": "bonsai_launcher"
+  },
+  "proxy": {
+    "pid": 31136,
+    "script": "D:\\Bonsai-demo\\proxy\\bonsai_proxy.py",
+    "port": 8080,
+    "config_fingerprint": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07"
+  }
+}

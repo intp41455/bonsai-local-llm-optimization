@@ -1,0 +1,193 @@
+{
+  "phase": "G11",
+  "design": "任务10 压缩边界补测 3 档：S=短上下文(普通五轮) / N=边界穿越不压缩 / C=边界穿越+驱动侧§E2压缩；同后端:8081、同实验代理:8084、同 system/tools",
+  "started_at": "2026-09-28 07:22:08",
+  "harness_sha256": "f06852086dca5f5e2cf3e1cc624eee74af29888b6d42cdf4cc7431907ca97f6e",
+  "proxy_v3_sha256": "6acfb9c5914595ec567f5b9d4db2da188e99c1bf635b36c017bc0532026340f5",
+  "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "config_extra_args": [
+    "--cache-ram",
+    "1024"
+  ],
+  "budget": {
+    "request_max_tokens": 8192,
+    "context_reserve_tokens": 1024,
+    "context_window_tokens": 65536,
+    "gate": {
+      "enabled": true,
+      "mode": "warn",
+      "chars_per_token_floor": 3.0,
+      "_note": "阶段 E 输入预算闸门。enabled=true 生效；mode=warn 只告警并转发，mode=reject 在生成前返回 400（不占槽位、不消耗 GPU）。chars_per_token_floor 是“跳过精确计数”的保守上界阈值：实测本机请求体约 4.5 字节/token，纯中文最坏约 3 字节/token，取 3.0 偏保守（宁可多算）。context_window_tokens 仅在 /props 不可达时兜底。"
+    }
+  },
+  "threshold_tokens": 56320,
+  "hard_limit_tokens": 65536,
+  "band": [
+    56320,
+    61440
+  ],
+  "target_tokens": 57520,
+  "max_tokens": 4096,
+  "reps_round5_extra": 3,
+  "n_tail": 4,
+  "slice_source_run": "D:\\Bonsai-demo\\bench\\runs\\B-t10b",
+  "prod_reqlog_lines_before": 704,
+  "prod_timings_lines_before": 905,
+  "netstat_before": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "props_8081_before": [
+    200,
+    "{\"default_generation_settings\":{\"params\":{\"seed\":4294967295,\"temperature\":1.0,\"dynatemp_range\":0.0,\"dynatemp_exponent\":1.0,\"top_k\":20,\"top_p\":0.949999988079071,\"min_p\":0.05000000074505806,\"top_n_sigma\":-1.0,\"xtc_probability\":0.0,\"xtc_threshold\":0.10000000149011612,\"typical_p\":1.0,\"repeat_last_n\":64,\"repeat_penalty\":1.0,\"presence_penalty\":0.0,\"frequency_penalty\":0.0,\"dry_multiplier\":0.0,\"dry_base\":"
+  ],
+  "note": "专用驱动；每档 n=1；「压缩」为驱动侧自建模拟，非 WorkBuddy 实测；口径不可与 G5/G9 成功率相加",
+  "slices": [
+    {
+      "name": "slice1.log",
+      "lines": [
+        1,
+        200
+      ],
+      "chars": 2506,
+      "sha256": "69c67f7b26b50d1fe156ceb4a787b5745b488a8876f932e5a6329080920e4001"
+    },
+    {
+      "name": "slice2.log",
+      "lines": [
+        201,
+        400
+      ],
+      "chars": 2600,
+      "sha256": "ae5898e9138fea108b3115bf4347cf9a64166c82c450a747e4cf15023a1aeccc"
+    },
+    {
+      "name": "slice3.log",
+      "lines": [
+        401,
+        600
+      ],
+      "chars": 2600,
+      "sha256": "e2490f6a058a0cc06c9ad12d23cc2a87154ddac3ef7dc4bc598a1e35f18cd553"
+    },
+    {
+      "name": "slice4.log",
+      "lines": [
+        601,
+        800
+      ],
+      "chars": 2600,
+      "sha256": "2100d53371cecce5d30cf9a3e404d27919b9deb958fe7b101f0aadcfaec3d988"
+    },
+    {
+      "name": "slice5.log",
+      "lines": [
+        801,
+        1000
+      ],
+      "chars": 2608,
+      "sha256": "0bc08defa2d332ff90eb53d49e1e7a25b68a600ac8f04c2c8ce3c6556925176c"
+    }
+  ],
+  "arm_config": {
+    "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g11\\config.json",
+    "config_sha256": "c2a53e794a759c5570812e8e79b07d9987f837bf20d28e5bfeaf8e33ad47df2e",
+    "changed_top_keys": [
+      "logging",
+      "prewarm",
+      "proxy"
+    ],
+    "tools_diff_keys": [],
+    "behavior_unchanged": true,
+    "backend_extra_args": [
+      "--cache-ram",
+      "1024"
+    ],
+    "prewarm_enabled": false
+  },
+  "calibration": {
+    "table": [
+      {
+        "K": 6,
+        "tokens": 43756
+      },
+      {
+        "K": 7,
+        "tokens": 50677
+      },
+      {
+        "K": 8,
+        "tokens": 57598
+      },
+      {
+        "K": 8,
+        "K5": 5,
+        "tokens": 53377
+      },
+      {
+        "K": 8,
+        "K5": 6,
+        "tokens": 54784
+      },
+      {
+        "K": 8,
+        "K5": 7,
+        "tokens": 56191
+      },
+      {
+        "K": 8,
+        "K5": 8,
+        "tokens": 57598
+      },
+      {
+        "K": 8,
+        "K5": 9,
+        "tokens": 59005
+      },
+      {
+        "K": 8,
+        "K5": 10,
+        "tokens": 60413
+      },
+      {
+        "K": 8,
+        "K5": 11,
+        "tokens": 61820
+      }
+    ],
+    "chosen_K": 8,
+    "chosen_K5": 8,
+    "chosen_tokens_est": 57598,
+    "target": 57520,
+    "band": [
+      56320,
+      61440
+    ]
+  },
+  "ended_at": "2026-09-28 07:30:14",
+  "netstat_after": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "prod_reqlog_lines_after": 708,
+  "prod_timings_lines_after": 905,
+  "prod_reqlog_delta": 4,
+  "prod_timings_delta": 0
+}

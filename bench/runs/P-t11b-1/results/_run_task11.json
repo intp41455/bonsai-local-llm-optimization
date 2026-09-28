@@ -1,0 +1,110 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 11,
+  "task_text": "读取checkpoint.md继续未完成事项，不重做已完成步骤。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\P-t11b-1",
+  "max_tokens": 8192,
+  "stop_reason": "model_finished",
+  "rounds": 7,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.65,
+      "ttft_s": 1.36,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 157,
+      "tool_calls": [
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "wall_s": 1.78,
+      "ttft_s": 0.3,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 72,
+      "tool_calls": [
+        "list_dir",
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "wall_s": 1.81,
+      "ttft_s": 0.34,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 77,
+      "tool_calls": [
+        "list_dir",
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 4,
+      "wall_s": 4.83,
+      "ttft_s": 0.3,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 403,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 5,
+      "wall_s": 1.24,
+      "ttft_s": 0.34,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 52,
+      "tool_calls": [
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 6,
+      "wall_s": 2.17,
+      "ttft_s": 0.31,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 74,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 7,
+      "wall_s": 2.45,
+      "ttft_s": 0.3,
+      "finish": "stop",
+      "content_chars": 213,
+      "reasoning_chars": 24,
+      "tool_calls": [],
+      "error": null
+    }
+  ],
+  "wall_s": 16.9,
+  "tool_retries": 0,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 04:57:15"
+}

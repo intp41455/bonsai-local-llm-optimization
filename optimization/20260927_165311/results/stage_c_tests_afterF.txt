@@ -1,0 +1,80 @@
+== 阶段 C 验收测试 ==
+   被测代理: D:\Bonsai-demo\proxy\bonsai_proxy.py
+
+[#1] system=0 tools=2 msgs=1
+[468c86b95b4143f2 2026-09-27 19:38:22] 200 /v1/chat/completions queue=0.0ms ttfb=0.0ms first_ev=0.0ms wall=609.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=stop
+  [PASS] C1 首块立即转发（TTFB<0.35s，不等攒满）
+  [PASS] C1 整段耗时 >=0.55s（说明确实是边收边转，不是缓冲到结束）
+  [PASS] C1 字节不丢不重复（客户端收到的 == 上游发出的）
+
+[#2] system=0 tools=2 msgs=1
+     与上一请求公共前缀 94.0%
+[40628ac46ef34f98 2026-09-27 19:38:22] 200 /v1/chat/completions queue=0.0ms ttfb=0.0ms first_ev=0.0ms wall=0.0ms reuse=高比例复用 pn=52 cn=60409 decode=19.5t/s finish=stop
+  [PASS] C1 脏 SSE 流字节完全一致（拆块/CRLF/心跳/多事件同块/UTF-8 跨块）
+  [PASS] C1 解析出 reasoning 字数=7
+  [PASS] C1 解析出 content 字数=4（含 emoji，UTF-8 跨块未破）
+  [PASS] C1 解析出 tool 参数增量字数=7
+  [PASS] C1 解析出 tool_calls 增量条数=2
+  [PASS] C1 注释心跳被识别
+  [PASS] C1 finish_reason / stop_type 正确
+  [PASS] C1 服务端 timings 采用（pn=52 高比例复用）
+  [PASS] C1 usage 采用（input=1234 completion=56）
+  [PASS] C1 reasoning_tokens=0 时记 null 并加说明（不判“没思考”）
+  [PASS] C1 truncated=False（finish=stop）
+
+[#3] system=0 tools=2 msgs=1
+     与上一请求公共前缀 70.8%
+[64437beae7f74ec5 2026-09-27 19:38:22] 500 /v1/chat/completions queue=0.0ms ttfb=0.0ms first_ev=0.0ms wall=0.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None
+  [PASS] C1 上游 500 原样转发（状态码+响应体完整）
+
+[#4] system=0 tools=2 msgs=1
+     与上一请求公共前缀 72.6%
+[5d0c87bf31b741cb 2026-09-27 19:38:22] 200 /v1/chat/completions queue=0.0ms ttfb=32.0ms first_ev=32.0ms wall=344.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None
+  [PASS] C1 中途断流：已生成的片段被保留转发
+  [PASS] C1 断流被明确记录（未见 [DONE] 提示，不谎报成功）
+
+[#5] system=0 tools=2 msgs=1
+     与上一请求公共前缀 90.8%
+
+[#6] system=0 tools=2 msgs=1
+     与上一请求公共前缀 100.0%
+     [排队] 等待 625 ms 后获得槽位
+[a4734e06818a4090 2026-09-27 19:38:23] 200 /v1/chat/completions queue=0.0ms ttfb=16.0ms first_ev=16.0ms wall=625.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=stop
+[7082b025d5b74553 2026-09-27 19:38:23] 200 /v1/chat/completions queue=625.0ms ttfb=625.0ms first_ev=625.0ms wall=1219.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=stop
+  [PASS] C3 上游同时只被一个请求占用（代理串行化 -np 1 单槽）
+  [PASS] C3 两个并发请求都被完整转发
+  [PASS] C3 排队时间可观测（有一个请求 queue_ms>=300）
+  [PASS] C3 串行化确实拉长了总时长（>=1.1s 两个 0.6s 串行）
+
+[#7] system=0 tools=2 msgs=1
+     与上一请求公共前缀 93.2%
+[9174fd40578f4974 2026-09-27 19:38:24] 200 /v1/chat/completions queue=15.0ms ttfb=15.0ms first_ev=15.0ms wall=343.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None [客户端断开] [错误]
+  [PASS] C2 客户端取消被记录（client_disconnected）
+  [PASS] C2 取消后验证后端 /slots 释放（不假设 close 即取消）
+  [PASS] C4 requests.jsonl 字段齐全（方案 §C4 清单）
+  [PASS] C4 每请求有独立 request_id
+  [PASS] C4 reuse_class 无复用
+  [PASS] C4 reuse_class 部分复用
+  [PASS] C4 reuse_class 高比例复用
+  [PASS] C4 reuse_class 未知（无计数）
+  [PASS] C4 reuse_class 全复用（prompt_n=0）
+  [PASS] C4 verdict.txt 已删除“prompt_n < 1500”绝对判据
+  [PASS] C4 timings.jsonl 不再写 hit 绝对字段
+
+[#8] system=0 tools=2 msgs=1
+     与上一请求公共前缀 90.1%
+  [PASS] C2 首字超时 -> 504（timeout_kind=first_response）
+[5f411caeb15246a1 2026-09-27 19:38:24] None /v1/chat/completions queue=16.0ms ttfb=Nonems first_ev=Nonems wall=1063.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None [超时:first_response]
+  [PASS] C2 首字超时被记录并带 release 验证结果
+
+[#9] system=0 tools=2 msgs=1
+     与上一请求公共前缀 94.8%
+[3a2be4fee32c4f28 2026-09-27 19:38:25] 200 /v1/chat/completions queue=16.0ms ttfb=16.0ms first_ev=16.0ms wall=1547.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None [超时:no_data]
+  [PASS] C2 无数据超时 -> no_data 且已转发部分保留
+
+[#10] system=0 tools=2 msgs=1
+     与上一请求公共前缀 92.4%
+[382e6fabe1e54428 2026-09-27 19:38:27] 200 /v1/chat/completions queue=0.0ms ttfb=31.0ms first_ev=31.0ms wall=1172.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None [超时:overall]
+  [PASS] C2 整体超时 -> overall（心跳/小块数据不断时也不能无限拖）
+
+== 结果: 36 通过 / 0 失败 ==

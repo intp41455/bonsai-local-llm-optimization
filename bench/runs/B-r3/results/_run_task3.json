@@ -1,0 +1,333 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 3,
+  "task_text": "修复calc.py的total_paid：仅汇总paid、按order_id去重；保留函数名并运行测试。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B-r3",
+  "stop_reason": "model_finished",
+  "rounds": 14,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.0,
+      "ttft_s": 1.06,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 84,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 1.8,
+      "ttft_s": 0.31,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 52,
+      "tool_calls": [
+        "read_file",
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 2.36,
+      "ttft_s": 0.36,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 58,
+      "tool_calls": [
+        "read_file",
+        "read_file",
+        "list_dir"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 2.25,
+      "ttft_s": 0.44,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 114,
+      "tool_calls": [
+        "read_file",
+        "read_file"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 3.42,
+      "ttft_s": 0.91,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 200,
+      "tool_calls": [
+        "list_dir",
+        "read_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 1.95,
+      "ttft_s": 0.33,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 82,
+      "tool_calls": [
+        "read_file",
+        "read_file"
+      ]
+    },
+    {
+      "round": 7,
+      "wall_s": 14.85,
+      "ttft_s": 6.46,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 960,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 8,
+      "wall_s": 2.68,
+      "ttft_s": 0.33,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 265,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 9,
+      "wall_s": 4.5,
+      "ttft_s": 1.43,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 393,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 10,
+      "wall_s": 12.04,
+      "ttft_s": 0.38,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 1214,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 11,
+      "wall_s": 12.52,
+      "ttft_s": 0.44,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 167,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 12,
+      "wall_s": 3.34,
+      "ttft_s": 0.94,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 267,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 13,
+      "wall_s": 1.37,
+      "ttft_s": 0.34,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 51,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 14,
+      "wall_s": 6.04,
+      "ttft_s": 0.43,
+      "finish": "stop",
+      "content_chars": 383,
+      "reasoning_chars": 24,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 71.2,
+  "tool_retries": 3,
+  "proxy_records": 14,
+  "prompt_n": [
+    526,
+    64,
+    129,
+    162,
+    494,
+    83,
+    4381,
+    102,
+    840,
+    102,
+    139,
+    467,
+    77,
+    153
+  ],
+  "cache_n": [
+    216,
+    738,
+    798,
+    923,
+    1081,
+    1571,
+    1650,
+    6027,
+    6125,
+    6961,
+    7059,
+    7194,
+    7657,
+    7730
+  ],
+  "prefill_ms": [
+    995.8,
+    262.3,
+    320.2,
+    376.2,
+    854.6,
+    263.7,
+    6393.7,
+    293.3,
+    1363.0,
+    302.0,
+    383.3,
+    857.4,
+    274.3,
+    391.3
+  ],
+  "decode_tps": [
+    43.76,
+    45.12,
+    45.53,
+    45.36,
+    43.86,
+    45.09,
+    42.29,
+    42.04,
+    40.36,
+    39.7,
+    39.66,
+    39.61,
+    38.78,
+    39.95
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "reasoning_tokens": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "answer_tokens": [
+    42,
+    68,
+    92,
+    83,
+    111,
+    74,
+    356,
+    100,
+    125,
+    464,
+    480,
+    96,
+    41,
+    225
+  ],
+  "est_reasoning_chars": [
+    84,
+    52,
+    58,
+    114,
+    200,
+    82,
+    960,
+    265,
+    393,
+    1214,
+    167,
+    267,
+    51,
+    24
+  ],
+  "wall_ms": [
+    1969.0,
+    1781.0,
+    2344.0,
+    2234.0,
+    3406.0,
+    1937.0,
+    14828.0,
+    2687.0,
+    4484.0,
+    12015.0,
+    12500.0,
+    3313.0,
+    1359.0,
+    6031.0
+  ],
+  "cache_reuse": [
+    "部分复用",
+    "高比例复用",
+    "部分复用",
+    "部分复用",
+    "部分复用",
+    "高比例复用",
+    "部分复用",
+    "高比例复用",
+    "部分复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用"
+  ],
+  "config_hash": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+  "at": "2026-09-27 22:03:39"
+}

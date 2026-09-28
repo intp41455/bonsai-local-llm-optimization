@@ -1,0 +1,96 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 8,
+  "task_text": "创建results/pelican.svg：鹈鹕骑自行车，车轮旋转、身体轻微起伏，单SVG不超过120行，无外部资源。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B-s2",
+  "stop_reason": "model_finished",
+  "rounds": 3,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 80.28,
+      "ttft_s": 1.22,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 5359,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 3.18,
+      "ttft_s": 2.18,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 49,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 97.99,
+      "ttft_s": 1.95,
+      "finish": "length",
+      "content_chars": 0,
+      "reasoning_chars": 9864,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 181.4,
+  "tool_retries": 0,
+  "proxy_records": 3,
+  "prompt_n": [
+    641,
+    1326,
+    1299
+  ],
+  "cache_n": [
+    109,
+    746,
+    2068
+  ],
+  "prefill_ms": [
+    1021.1,
+    1904.5,
+    1890.1
+  ],
+  "decode_tps": [
+    44.55,
+    42.13,
+    42.65
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "length"
+  ],
+  "reasoning_tokens": [
+    null,
+    null,
+    null
+  ],
+  "answer_tokens": [
+    3522,
+    43,
+    4096
+  ],
+  "est_reasoning_chars": [
+    5359,
+    49,
+    9864
+  ],
+  "wall_ms": [
+    80250.0,
+    3156.0,
+    97954.0
+  ],
+  "cache_reuse": [
+    "部分复用",
+    "部分复用",
+    "部分复用"
+  ],
+  "config_hash": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+  "at": "2026-09-28 01:30:30"
+}

@@ -1,0 +1,38 @@
+变更前证据保全（只读）
+采集时间：2026-09-27 20:37:35
+目的：陛下已安排另一 agent 卸载 Windows 11 26200 预览版并更换 NVIDIA 驱动；
+      本快照固化"变更前"的 OS/驱动/虚拟化/崩溃证据，供变更后做前后对照。
+说明：本目录全部为只读采集结果；转储文件副本见上一级目录。
+      C 盘原件（Minidump / WER / 事件日志）可能被系统回退或清理，故先行固化。
+
+
+
+Name                      : Intel(R) Core(TM) Ultra 9 275HX
+NumberOfCores             : 24
+NumberOfLogicalProcessors : 24
+MaxClockSpeed             : 2700
+
+
+
+
+Manufacturer    Capacity Speed PartNumber          
+------------    -------- ----- ----------          
+Samsung      17179869184  5600 M425R2GA3EB0-CWMOL  
+Samsung      17179869184  5600 M425R2GA3EB0-CWMOL  
+
+
+
+
+Manufacturer      : LENOVO
+SMBIOSBIOSVersion : R2CN57WW
+ReleaseDate       : 2026/2/24 8:00:00
+
+
+
+
+
+Manufacturer : LENOVO
+Product      : LNVNB161216
+
+
+

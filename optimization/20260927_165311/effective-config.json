@@ -1,0 +1,213 @@
+{
+  "schema": "bonsai-effective-config/1",
+  "generated_at": "2026-09-27 22:42:27",
+  "generated_by": "TRAE Agent（阶段 H3 交付清单）",
+  "authority": {
+    "config_path": "D:\\Bonsai-demo\\config\\bonsai-agent.json",
+    "config_bytes": 6276,
+    "config_sha256": "d678a79a1283496573e980db1ab5397a08a63037cf2356774728f3f68ca815b7",
+    "config_fingerprint": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+    "fingerprint_algo": "sha256(json.dumps(cfg, ensure_ascii=False, sort_keys=True, separators=(',',':'))) —— 与 launcher.config_fingerprint 同算法",
+    "_note": "唯一权威配置源；launcher 由本文件构造全部后端与代理参数，脚本不得自行拼参数"
+  },
+  "identity": {
+    "backend_exe": {
+      "path": "D:\\Bonsai-demo\\dist\\bonsai2-8gb-combo\\bin\\llama-server.exe",
+      "bytes": 10752,
+      "sha256": "2A9D89EFFF1174B51386DF985EABA00F0D0D69E68BE8E6C3660057B359D29299",
+      "_note": "exe 是 shim（10752 B），真正代码在下列 DLL"
+    },
+    "key_dlls": {
+      "llama-server-impl.dll": "0EC121E761684EF438BB98D959A6C6806970F0A87832D2CC67CB563353096D72",
+      "llama-common.dll": "A568BE5AA35FB161A969883EEBC07BF94A2938D36E98AD69EC7B1794F168ABFB",
+      "llama.dll": "CC5349487C55145FE1F5FE86C6BDE06B45522F9A09512EB5289633DBC65D43E6",
+      "ggml-cuda.dll": "786D64C7D02A446AB56D8A3A3D3079435B59BABFCAF1415B556F77625AD132F6",
+      "ggml.dll": "88D629BDBD4CB66E54CC7AF3D3B106AD79998678F58D90E651816F069A8850E1",
+      "ggml-base.dll": "8C268DC3C2A5FEEA51C55C73EDC31B3717F164114070F52102F81929FF108AF1",
+      "_source": "baseline\\binary_info.txt（阶段 A 只读快照）"
+    },
+    "model": {
+      "path": "D:\\Bonsai-demo\\models\\bonsai2-gguf\\27B\\Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf",
+      "bytes": 6297658848,
+      "GiB": "5.865",
+      "last_write": "2026-09-26 23:39:10",
+      "sha256": null,
+      "sha256_reason": "未计算：6.3 GB 全量哈希在本阶段无判别需求；模型标识以 字节数 + last_write + 路径 为准"
+    },
+    "runtime_build_info": "b181-9ef3205",
+    "python": "C:\\Users\\intpj\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "git": {
+      "head": "9ef32054fe44797376792c869891163083d64bd0",
+      "date": "2026-09-25T13:10:09-07:00",
+      "subject": "Refresh Bonsai 2 upstream progress and Q2_0 support scope (#244)",
+      "dirty": "175 entries",
+      "_source": "baseline\\git_info.txt"
+    }
+  },
+  "runtime_verified": {
+    "checked_at": "2026-09-27 22:42:27",
+    "backend_pid": 35040,
+    "proxy_pid": 18008,
+    "state_fingerprint": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+    "fingerprint_matches_config": true,
+    "health_backend_8081": {
+      "status": "ok"
+    },
+    "health_proxy_8080": {
+      "status": "ok"
+    },
+    "n_slots": 1,
+    "slot_busy": null,
+    "backend_cmdline_observed": "D:\\Bonsai-demo\\dist\\bonsai2-8gb-combo\\bin\\llama-server.exe -m D:\\Bonsai-demo\\models\\bonsai2-gguf\\27B\\Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf -ngl 99 -fa on -np 1 -c 65536 -b 2048 -ub 512 -ctk q4_0 -ctv q4_0 --backend-sampling --jinja --metrics --host 127.0.0.1 --port 8081 --alias bonsai-2-27b",
+    "backend_args_expected": [
+      "D:\\Bonsai-demo\\dist\\bonsai2-8gb-combo\\bin\\llama-server.exe",
+      "-m",
+      "D:\\Bonsai-demo\\models\\bonsai2-gguf\\27B\\Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf",
+      "-ngl",
+      "99",
+      "-fa",
+      "on",
+      "-np",
+      "1",
+      "-c",
+      "65536",
+      "-b",
+      "2048",
+      "-ub",
+      "512",
+      "-ctk",
+      "q4_0",
+      "-ctv",
+      "q4_0",
+      "--backend-sampling",
+      "--jinja",
+      "--metrics",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8081",
+      "--alias",
+      "bonsai-2-27b"
+    ],
+    "backend_cmdline_missing_tokens": [],
+    "backend_params_match_config": true
+  },
+  "context_and_mtp": {
+    "n_ctx": 65536,
+    "n_parallel": 1,
+    "n_batch": 2048,
+    "n_ubatch": 512,
+    "cache_type_k": "q4_0",
+    "cache_type_v": "q4_0",
+    "flash_attention": "on",
+    "n_gpu_layers": 99,
+    "props_reported_n_ctx": 65536,
+    "mtp_enabled": false,
+    "mtp_note": "长上下文档保持关闭。历史 depth2_result.json 显示较深上下文开启 MTP 为负收益；只有满足短输入+显存余量+正确性条件时才在阶段 G4 重测。",
+    "mmproj": null,
+    "modalities": {
+      "vision": false,
+      "video": false,
+      "audio": false
+    }
+  },
+  "sampling": {
+    "mode": "server_default",
+    "params_passed_by_launcher": {},
+    "observed_server_defaults": {
+      "temperature": 1.0,
+      "top_k": 20,
+      "top_p": 0.949999988079071,
+      "min_p": 0.05000000074505806,
+      "repeat_last_n": 64,
+      "repeat_penalty": 1.0,
+      "seed": 4294967295,
+      "n_predict": -1,
+      "backend_sampling": true
+    },
+    "_note": "config 的 sampling.mode=server_default 表示不传采样参数；observed_server_defaults 取自 /props 的 default_generation_settings，属服务端默认，不是本方案引入",
+    "chat_template_caps": {
+      "supports_object_arguments": true,
+      "supports_parallel_tool_calls": true,
+      "supports_preserve_reasoning": true,
+      "supports_reasoning_effort": true,
+      "supports_string_content": true,
+      "supports_system_role": true,
+      "supports_tool_calls": true,
+      "supports_tools": true,
+      "supports_typed_content": false
+    }
+  },
+  "budget": {
+    "request_max_tokens": 8192,
+    "thinking_budget_tokens": 2048,
+    "context_reserve_tokens": 1024,
+    "context_window_tokens": 65536,
+    "gate": {
+      "enabled": true,
+      "mode": "warn",
+      "chars_per_token_floor": 3.0,
+      "_note": "阶段 E 输入预算闸门。enabled=true 生效；mode=warn 只告警并转发，mode=reject 在生成前返回 400（不占槽位、不消耗 GPU）。chars_per_token_floor 是“跳过精确计数”的保守上界阈值：实测本机请求体约 4.5 字节/token，纯中文最坏约 3 字节/token，取 3.0 偏保守（宁可多算）。context_window_tokens 仅在 /props 不可达时兜底。"
+    },
+    "policy": {
+      "apply_request_max_tokens": false,
+      "apply_thinking_budget": false
+    },
+    "_status": "本阶段只登记不注入：policy.apply_request_max_tokens=false、policy.apply_thinking_budget=false；输入闸门 enabled=true / mode=warn"
+  },
+  "thinking": {
+    "default_effort": "medium",
+    "allowed": [
+      "xhigh",
+      "medium",
+      "low",
+      "off"
+    ],
+    "_note": "模型模板原生三档 xhigh/medium/low，默认 xhigh（最重思考）；medium = 不注入任何思考指令（模型自然行为，推荐）。档位拼在 system 前缀里，一轮会话固定一档，中途切换会让 KV 前缀作废。"
+  },
+  "slimming": {
+    "locations": true,
+    "deferred_tools": false,
+    "subagents": false,
+    "_note": "阶段 F 起代理按三项【各自独立】生效（不再是全开/全关）。locations=true 剥 (location: C:/.../SKILL.md) 纯磁盘路径（省约 4,931 tok，模型按名调用，零代价）-> 保留；deferred_tools=false 与 subagents=false = 【不压缩】ToolSearch 的 deferred 工具清单与 Agent 的子代理类型清单（原压缩省 2,512 / 约 1,200 tok，但会让模型看不到工具名与子代理类型，损伤发现能力，方案 P09 要求恢复）。取舍与实测差异见 changes.md 阶段 F。"
+  },
+  "tools": {
+    "schema_hardening": true,
+    "error_policy": true,
+    "_note": "阶段 F / P05。schema_hardening=true 时把 show_widget.loading_messages 的描述替换为精确契约（JSON 编码字符串 -> 数组，长度 1–4，元素为非空字符串；含最小正确示例、失败原文与自纠指令），代理另有 semantic validator + 历史审计观测量。error_policy=true 时对带 tools 的请求，在第一条 system 文本尾部并入常驻策略块（同一错误连续两次不得原样重试；有副作用的操作不得重复执行）。两项都是【确定性】改写，预热与实际请求走同一管线，不破坏 KV 前缀复用。注意：工具校验与重试决策在客户端（WorkBuddy），代理只能加固模型看到的契约，无法强制客户端行为。"
+  },
+  "prewarm": {
+    "enabled": true,
+    "min_chars": 20000,
+    "_note": "每次启动只预热一次（合并 warm_kv.py 与代理 --warm 两条路径）。忙时不预热，不抢占正在执行的用户任务。"
+  },
+  "timeouts": {
+    "connect_s": 8,
+    "first_response_s": 180,
+    "stream_idle_s": 300,
+    "overall_s": 1800,
+    "client_write_s": 120,
+    "release_wait_s": 30,
+    "smoke_s": 240,
+    "_note": "阶段 C 已落到代理实现并离线测试（36/36 通过）。connect=建连；first_response=首字节容忍（参照历史冷 prefill 约 100~165 秒）；stream_idle=流中无数据；overall=单请求整体上限；client_write=给客户端写超时（对端卡死时不把单槽一起卡住）；release_wait=取消/超时后等后端 /slots 释放的验证窗口。"
+  },
+  "proxy": {
+    "script": "D:\\Bonsai-demo\\proxy\\bonsai_proxy.py",
+    "port": 8080,
+    "upstream_port": 8081,
+    "proxy_sha256": "6acfb9c5914595ec567f5b9d4db2da188e99c1bf635b36c017bc0532026340f5",
+    "_note": "代理是三子项瘦身 + 工具契约加固 + 错误策略的执行点"
+  },
+  "logging_and_state": {
+    "requests_jsonl": "D:\\Bonsai-demo\\logs\\requests.jsonl",
+    "launcher_state": "D:\\Bonsai-demo\\state\\launcher_state.json",
+    "capture_dir": "D:\\Bonsai-demo\\capture"
+  },
+  "unsupported_or_disabled": [
+    "MTP 投机解码（backend.mtp.enabled=false）",
+    "budget.policy.apply_request_max_tokens / apply_thinking_budget（登记未启用）",
+    "slimming.deferred_tools / slimming.subagents（按 P09 恢复名册，不压缩）",
+    "自动历史压缩（受客户端能力限制，未实现）",
+    "多模态 / mmproj（modalities.vision=false）"
+  ]
+}

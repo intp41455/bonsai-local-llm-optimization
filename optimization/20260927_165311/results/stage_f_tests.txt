@@ -1,0 +1,83 @@
+======================================================================
+阶段 F 离线验收测试   代理=D:\Bonsai-demo\proxy\bonsai_proxy.py
+夹具抓包=D:\Bonsai-demo\capture\req_012_135949.json
+======================================================================
+
+F2 瘦身逐项开关（config.slimming 三项各自独立）
+  [PASS] locations-only 确实剥掉 (location: ...) 且省字符 > 0
+  [PASS] locations-only 不改动 deferred 名册
+  [PASS] locations-only 不改动 subagent 名册
+  [PASS] deferred-only：只有 deferred 被压（省字符>0、location 未被剥）
+  [PASS] subagent-only：只有 subagent 被压
+  [PASS] 三项全 false：字节原样、saved=0、明细记 total=0
+  [PASS] 逐项省字符可加和：all == locations + deferred + subagent
+  [PASS] 默认配置（locations 开 / 另两项关）时瘦身总收益 < 三项全开（P09 代价已量化）
+  [PASS] 确定性：同一输入两次调用逐字节相同（前缀稳定、KV 可复用）
+  [PASS] 非 JSON / 非 dict 输入：原样返回、saved=0、不抛异常
+  [PASS] ARGS.keep_location=True 时 keep_location() 为真（A/B 对照开关仍有效）
+  [PASS] 默认配置下 keep_location() 为假（locations 开 -> 仍然瘦身）
+  [PASS] 三项全 false 时 keep_location() 为真（等价于整体关闭）
+
+F1 工具体契约加固（show_widget.loading_messages）
+  [PASS] show_widget 工具体在夹具中存在（P05 的对象确实来自客户端 schema）
+  [PASS] 重写记录：rewritten 含 show_widget.loading_messages、chars_delta>0
+  [PASS] 字段名精确出现（field name exactly "loading_messages"）
+  [PASS] 类型语义写明 JSON-ENCODED STRING + 数组 + 1 to 4 个非空字符串
+  [PASS] 最小正确示例存在（含转义后的单个元素数组）
+  [PASS] 失败原文与自纠指令存在（不得原样重试）
+  [PASS] 类型仍是 string（客户端 schema 语义不变，只改描述）
+  [PASS] required 仍含 loading_messages
+  [PASS] 幂等：第二次调用不再改写（rewritten 为空）
+  [PASS] 确定性：同一输入两次调用逐字节相同
+  [PASS] 只有 loading_messages 一处被改（widget_code 描述逐字节不变）
+  [PASS] 无 tools / 非 JSON 请求体：原样返回、不抛异常
+  [PASS] 其他工具（非 show_widget）未被改写（抽查 3 个工具逐字节相同）
+
+F1 semantic validator（可解析为数组 / 长度 1–4 / 元素为字符串）
+  [PASS] 13 个语义用例（有效/空串/空数组/裸数组/非字符串元素/超长/非数组/缺失）全部判定正确
+  [PASS] 失败原因给出精确原因（用于自纠），成功时给出解析方式
+
+F1 历史审计观测量（真实抓包：P05 的现场证据）
+  [PASS] 真实抓包里 show_widget 调用被计数（calls>0）
+  [PASS] 真实抓包里存在工具失败记录（tool_failures>0）
+  [PASS] 真实抓包能识别同一错误重复：repeated_identical_error 非空且指向 loading_messages
+  [PASS] 合法 + 不合法 == 调用总数（计数自洽）
+  [PASS] 合成夹具：不合法 1 / 合法 1，且重复错误被识别
+  [PASS] 只出现一次的错误不算重复
+  [PASS] arguments 不是合法 JSON 时计为不合法且不抛异常
+  [PASS] tool_arg_audit：无工具调用历史的请求返回 None（日志不膨胀）
+  [PASS] tool_arg_audit：真实抓包（含历史）返回审计结构
+
+F4 工具错误恢复策略块
+  [PASS] 带 tools 的请求被并入策略块（说明非空、字符数>0）
+  [PASS] 策略块含同一错误连续两次不得原样重试与有副作用操作不得重复
+  [PASS] 策略块是尾部追加：原 system 文本是改写后的前缀（不破坏已缓存前缀）
+  [PASS] 幂等：第二次调用不再改写（不会叠加多个策略块）
+  [PASS] 不带 tools 的请求不改写（原样字节返回）
+  [PASS] config.tools.error_policy=false 时整体关闭
+  [PASS] system content 是多模态数组时跳过（不猜、不抛异常）
+  [PASS] 策略块文本本身是常量（长度>200，不含任何请求内容）
+
+整条管线（瘦身 -> 契约加固 -> 策略块 -> 思考档位）
+  [PASS] 管线输出仍是合法 JSON 且 tools/messages 结构完好
+  [PASS] 管线后工具体契约仍在（加固未被后续步骤回退）
+  [PASS] 管线确定性：同输入两次跑完整管线逐字节相同
+
+配置与启动器（唯一权威来源一致性）
+  [PASS] config.slimming：locations=true（保留零代价项）
+  [PASS] config.slimming：deferred_tools=false（恢复 deferred 工具名册，P09）
+  [PASS] config.slimming：subagents=false（恢复子代理类型名册，P09）
+  [PASS] config.tools：schema_hardening / error_policy 均为 true 且有 _note
+  [PASS] 代理 load_runtime 读入三项瘦身与两项 tools 开关
+  [PASS] 真实配置下 keep_location() 为假（瘦身仍生效，只是逐项）
+  [PASS] 启动器横幅不再有过期文案（阶段 D 验证前只登记）
+  [PASS] 启动器不再声称代理只支持全开/全关
+  [PASS] 启动器横幅含逐项瘦身说明与工具体两行（与代理实际行为一致）
+  [PASS] 代理启动横幅含逐项瘦身与工具体说明（在线可见，可核验）
+  [PASS] proxy_args：逐项配置（开/关/关）不传 --keep-location（代理自己按 config 逐项生效）
+  [PASS] proxy_args：三项全 false 才传 --keep-location（A/B 对照）
+  [PASS] proxy_args：三项全开也不传 --keep-location
+
+======================================================================
+阶段 F 离线验收：PASS 61 / FAIL 0
+======================================================================

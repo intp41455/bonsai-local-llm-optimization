@@ -1,0 +1,7 @@
+order_id,amount,status
+A001,120,paid
+A002,80,refunded
+A003,200,paid
+A003,200,paid
+A004,50,pending
+A005,30,paid

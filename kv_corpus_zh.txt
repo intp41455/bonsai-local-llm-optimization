@@ -1,0 +1,69 @@
+康源集团养老信息管理系统数据管理规定（修订稿）
+
+第一章 总则
+第一条 为规范集团养老信息管理系统的数据采集、存储、使用与安全保护工作，保障老年人个人信息合法权益，依据《中华人民共和国个人信息保护法》《中华人民共和国数据安全法》及相关行业规范，制定本规定。
+第二条 本规定适用于集团总部及各分支机构、子公司、养老服务机构在系统运行过程中产生的全部数据活动。
+第三条 数据管理遵循"谁采集谁负责、谁使用谁担责"的原则，实行分级分类管理。
+
+第二章 数据分类分级
+第四条 系统数据按敏感程度划分为四级：一级为公开数据，二级为内部数据，三级为敏感数据，四级为核心数据。
+第五条 涉及老年人身份证号码、生物识别信息、健康档案、家庭住址、银行账户等信息的，一律归入三级及以上，禁止在非受控环境中传输与存储。
+
+第三章 数据采集与录入
+第六条 数据采集应遵循最小必要原则，采集范围不得超出业务办理必需的范围。
+第七条 各岗位人员应在业务发生后二十四小时内完成数据录入，确保准确、完整、及时。
+第八条 打卡考勤数据以系统记录为准，上班打卡时间应早于八点三十分，下班打卡时间应晚于十七点三十分；周末及法定节假日加班的，须由部门负责人事前审批。
+
+第四章 数据使用与共享
+第九条 内部调阅三级及以上数据须经数据owner审批，并留存操作日志。
+第十条 对外提供数据须签署数据处理协议，明确用途、期限、销毁方式与违约责任。
+
+第五章 安全与责任
+第十一条 任何人不得利用职务便利查询、下载、传播与本职工作无关的敏感数据。
+第十二条 违反本规定的，视情节给予通报批评、经济处罚、解除劳动合同等处理；造成严重后果的，移交司法机关处理。
+
+数据质量检查报告
+本次抽查覆盖三个区域共一千二百四十条记录，其中字段缺失十七条，占比百分之一点三七；数值越界三条；重复记录两条。整体合格率为百分之九十八点二三，较上季度提升零点四一个百分点。主要问题集中在入住日期与合同签订日期不一致。建议在录入环节增加日期联动校验，并对历史数据执行一次性清洗。
+
+import pandas as pd
+import sqlite3
+
+conn = sqlite3.connect("kangyuan.db")
+df = pd.read_sql_query(
+    """
+    SELECT region,
+           COUNT(*) AS total,
+           SUM(CASE WHEN status = 'active' THEN 1 ELSE 0 END) AS active
+      FROM elderly_records
+     WHERE create_time >= '2026-01-01'
+     GROUP BY region
+     ORDER BY total DESC
+    """,
+    conn,
+)
+df["active_rate"] = (df["active"] / df["total"] * 100).round(2)
+print(df.to_string(index=False))
+
+Quarterly revenue grew 12.4 percent to 48.3 million yuan, while operating margin
+compressed from 21.7 percent to 19.2 percent on higher logistics costs. The board
+approved a 250 million yuan buyback and guided full-year EPS to 3.10-3.25.
+
+def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+
+To integrate x squared times sin(x), apply integration by parts twice:
+let u = x^2 and dv = sin(x) dx, giving -x^2 cos(x) + 2x sin(x) + 2 cos(x) + C.
+
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+Traceback (most recent call last):
+  File "server.py", line 88, in <module>
+    app.run(host="0.0.0.0", port=8000)
+Address already in use
+
+合同编号 KY-2026-0417，甲方康源养老服务有限公司，乙方某某科技有限公司。
+服务期限自二〇二六年十月一日起至二〇二七年九月三十日止，合同金额人民币
+壹佰贰拾万元整，分四期支付，每期百分之二十五。任何一方违约的，应按合同
+总金额的百分之十支付违约金。争议解决方式：提交合同签订地人民法院管辖。

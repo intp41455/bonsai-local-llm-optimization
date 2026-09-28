@@ -1,0 +1,125 @@
+{
+  "phase": "G10",
+  "design": "dedicated driver 2x2: driver policy {N=no local error policy, L=harness-equivalent local policy + runtime hint} x proxy tools.error_policy {P=true :8084, Q=false :8085}; 3 failing probes x 2 rounds",
+  "started_at": "2026-09-28 06:52:18",
+  "harness_sha256": "f06852086dca5f5e2cf3e1cc624eee74af29888b6d42cdf4cc7431907ca97f6e",
+  "proxy_v3_sha256": "6acfb9c5914595ec567f5b9d4db2da188e99c1bf635b36c017bc0532026340f5",
+  "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "config_extra_args": [
+    "--cache-ram",
+    "1024"
+  ],
+  "sys_prompt_full_chars": 628,
+  "sys_prompt_N_chars": 283,
+  "sys_prompt_policy_delta_chars": 345,
+  "max_tokens": 8192,
+  "max_rounds": 12,
+  "time_cap": 600,
+  "rounds": [
+    1,
+    2
+  ],
+  "cells": [
+    "N+P",
+    "N+Q",
+    "L+P",
+    "L+Q"
+  ],
+  "probes": [
+    {
+      "name": "locked",
+      "task": "运行 probe/locked.py；把它是否成功、以及失败时的错误原文，写入 results/probe_locked.md。",
+      "call": "run_python probe/locked.py",
+      "files": [
+        "probe/locked.py"
+      ]
+    },
+    {
+      "name": "boom",
+      "task": "运行 probe/boom.py；把它是否成功、以及失败时的错误原文，写入 results/probe_boom.md。",
+      "call": "run_python probe/boom.py",
+      "files": [
+        "probe/boom.py"
+      ]
+    },
+    {
+      "name": "absent",
+      "task": "读取 probe/absent.txt，把文件内容原样写入 results/probe_absent.md。",
+      "call": "read_file probe/absent.txt",
+      "files": []
+    }
+  ],
+  "port_P": 8084,
+  "port_Q": 8085,
+  "upstream": 8081,
+  "note": "专用驱动；口径与标准 harness 不同，结论仅适用于『客户端不自带错误策略』的情形",
+  "prod_reqlog_lines_before": 695,
+  "prod_timings_lines_before": 905,
+  "netstat_before": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "arms": {
+    "P": {
+      "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\P\\config.json",
+      "config_sha256": "ca12c25dac4fa067d0bc8ec801d159da75ff78c7eda17a157a9e3b1c181f48dc",
+      "changed_top_keys": [
+        "logging",
+        "prewarm",
+        "proxy"
+      ],
+      "tools_diff_keys": [],
+      "behavior_unchanged_except_tools": true,
+      "error_policy": true,
+      "backend_extra_args": [
+        "--cache-ram",
+        "1024"
+      ],
+      "prewarm_enabled": false
+    },
+    "Q": {
+      "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\Q\\config.json",
+      "config_sha256": "72f510433d0038afd2b74f99ace1fb684214a48acdda6964b2a1d5b13d7b9e81",
+      "changed_top_keys": [
+        "logging",
+        "prewarm",
+        "proxy",
+        "tools"
+      ],
+      "tools_diff_keys": [
+        "error_policy"
+      ],
+      "behavior_unchanged_except_tools": true,
+      "error_policy": false,
+      "backend_extra_args": [
+        "--cache-ram",
+        "1024"
+      ],
+      "prewarm_enabled": false
+    }
+  },
+  "ended_at": "2026-09-28 06:58:27",
+  "netstat_after": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "prod_reqlog_lines_after": 699,
+  "prod_timings_lines_after": 905
+}

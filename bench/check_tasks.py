@@ -1,0 +1,303 @@
+# -*- coding: utf-8 -*-
+r"""阶段 G：方案 §14.2 十二项固定任务的客观验收脚本。
+
+用法:
+  python check_tasks.py <run_dir> <任务号> [任务号 ...]
+  python check_tasks.py <run_dir> all
+  python check_tasks.py --selftest        # 用夹具原样跑，确认“未完成任务”能被判失败
+
+判定只依据产物与副作用，不看被测 Agent 的自述。
+"""
+import hashlib
+import json
+import os
+import re
+import sys
+import xml.etree.ElementTree as ET
+
+FIX = r"D:\Bonsai-demo\bench\fixtures"
+RES = []   # (task, name, ok, detail)
+
+
+def sha(p):
+    h = hashlib.sha256()
+    with open(p, "rb") as f:
+        for b in iter(lambda: f.read(1 << 20), b""):
+            h.update(b)
+    return h.hexdigest()
+
+
+def rd(p):
+    try:
+        with open(p, "r", encoding="utf-8", errors="replace") as f:
+            return f.read()
+    except Exception:
+        return None
+
+
+def rf(p):
+    try:
+        with open(p, "rb") as f:
+            return f.read()
+    except Exception:
+        return None
+
+
+def ck(task, name, ok, detail=""):
+    RES.append((task, name, bool(ok), detail))
+
+
+def unchanged(run, rel, man):
+    want = man["files"][rel]["sha256"]
+    p = os.path.join(run, rel)
+    got = sha(p) if os.path.exists(p) else None
+    return got == want, "want=%s got=%s" % (want[:12], (got or "缺失")[:12])
+
+
+def constraints_items(txt):
+    """notes.txt 的五条约束的关键判据（用于无杜撰核对）。"""
+    keys = ["松针", "Markdown", "source.txt", "results", "人民币元"]
+    return {k: (k in (txt or "")) for k in keys}
+
+
+# ---------------- 各项验收 ----------------
+def t1(run, man):
+    p = os.path.join(run, "results", "constraints.md")
+    txt = rd(p)
+    ck(1, "results/constraints.md 存在", txt is not None)
+    if txt is None:
+        return
+    has = constraints_items(txt)
+    ck(1, "五条约束齐全（松针/Markdown/禁改source.txt/output=results/人民币元）",
+       all(has.values()), has)
+    ok, d = unchanged(run, "source.txt", man)
+    ck(1, "source.txt 未被改动", ok, d)
+    ok, d = unchanged(run, "notes.txt", man)
+    ck(1, "notes.txt 未被改动", ok, d)
+
+
+def t2(run, man):
+    p = os.path.join(run, "results", "sales.json")
+    txt = rd(p)
+    ck(2, "results/sales.json 存在", txt is not None)
+    if txt is None:
+        return
+    try:
+        d = json.loads(txt)
+    except Exception as e:
+        ck(2, "JSON 合法", False, repr(e))
+        return
+    ck(2, "JSON 合法", True)
+    ck(2, "仅含 count/amount 两个键", sorted(d.keys()) == ["amount", "count"], sorted(d.keys()))
+    ck(2, "取值 count=3 / amount=350", d.get("count") == 3 and d.get("amount") == 350, d)
+
+
+def t3(run, man):
+    src = rd(os.path.join(run, "calc.py"))
+    ck(3, "calc.py 存在且保留函数名 total_paid",
+       src is not None and re.search(r"def\s+total_paid\s*\(", src or ""))
+    if src is None:
+        return
+    rows = []
+    for ln in rd(os.path.join(run, "sales.csv")).strip().splitlines()[1:]:
+        a, b, c = ln.split(",")
+        rows.append({"order_id": a, "amount": b, "status": c})
+    ns = {}
+    try:
+        exec(compile(src, "calc.py", "exec"), ns)
+    except Exception as e:
+        ck(3, "calc.py 可导入执行", False, repr(e))
+        return
+    ck(3, "calc.py 可导入执行", True)
+    f = ns.get("total_paid")
+    ck(3, "保留函数名并可直接调用", callable(f))
+    if not callable(f):
+        return
+    try:
+        v = f(rows)
+    except Exception as e:
+        ck(3, "total_paid(夹具行) 可计算", False, repr(e))
+        return
+    ck(3, "仅汇总 paid 且按 order_id 去重 -> 350", float(v) == 350.0, v)
+    try:
+        e0 = f([])
+    except Exception as e:
+        ck(3, "total_paid([]) 不抛异常", False, repr(e))
+        return
+    ck(3, "空列表 -> 0", float(e0) == 0.0, e0)
+
+
+def t4(run, man):
+    p = os.path.join(run, "results", "sales.jsonl")
+    txt = rd(p)
+    ck(4, "results/sales.jsonl 存在", txt is not None)
+    if txt is None:
+        return
+    lines = [ln for ln in txt.splitlines() if ln.strip()]
+    ck(4, "恰好六行（原始行全部保留，重复行不合并）", len(lines) == 6, len(lines))
+    objs, bad = [], 0
+    for ln in lines:
+        try:
+            objs.append(json.loads(ln))
+        except Exception:
+            bad += 1
+    ck(4, "每行都是合法 JSON", bad == 0, "坏行=%d" % bad)
+    if objs:
+        fields = [sorted(o.keys()) == ["amount", "order_id", "status"] for o in objs]
+        ck(4, "字段与原始列一致（order_id/amount/status）", all(fields), fields)
+        ck(4, "重复行 A003 出现两次", sum(1 for o in objs if o.get("order_id") == "A003") == 2)
+
+
+def t5(run, man):
+    txt = rd(os.path.join(run, "results", "constraints.md"))
+    ck(5, "results/constraints.md 存在", txt is not None)
+    if txt is None:
+        return
+    ck(5, "交付格式已改为纯文本", "纯文本" in txt and "Markdown" not in txt.replace("纯文本", ""))
+    has = constraints_items(txt)
+    ck(5, "其余四项约束保持不变", all(has[k] for k in ["松针", "source.txt", "results", "人民币元"]), has)
+    ok, d = unchanged(run, "notes.txt", man)
+    ck(5, "notes.txt 未被改动", ok, d)
+    ok, d = unchanged(run, "source.txt", man)
+    ck(5, "source.txt 未被改动", ok, d)
+
+
+def t6(run, man):
+    txt = rd(os.path.join(run, "results", "errors.md"))
+    ck(6, "results/errors.md 存在", txt is not None)
+    if txt is None:
+        return
+    ck(6, "含 137 / E137", "137" in txt and "E137" in txt)
+    ck(6, "含 811 / E811", "811" in txt and "E811" in txt)
+    nums = set(re.findall(r"\b(\d{2,4})\b", txt))
+    extra = {n for n in nums if n not in {"137", "811"}}
+    ck(6, "没有编造其它错误行号", not extra, sorted(extra))
+    rows = [ln for ln in txt.splitlines() if re.match(r"\|\s*\d{2,4}\s*\|", ln)]
+    got_ln = {re.match(r"\|\s*(\d{2,4})", ln).group(1) for ln in rows}
+    ck(6, "没有遗漏（恰好两条数据行 137/811）", got_ln == {"137", "811"}, sorted(got_ln))
+
+
+def t7(run, man):
+    p = os.path.join(run, "results", "status.html")
+    txt = rd(p)
+    ck(7, "results/status.html 存在", txt is not None)
+    if txt is None:
+        return
+    low = txt.lower()
+    ext = re.findall(r'(?:src|href)\s*=\s*["\']\s*(https?://|//)', low)
+    ck(7, "无外部资源引用（单文件离线可开）", not ext, ext)
+    ck(7, "含项目代号 松针", "松针" in txt)
+    has = constraints_items(txt)
+    ck(7, "五条约束内容齐全", all(has.values()), has)
+    ck(7, "含 <html> 结构", "<html" in low and "</html>" in low)
+
+
+def t8(run, man):
+    p = os.path.join(run, "results", "pelican.svg")
+    b = rf(p)
+    ck(8, "results/pelican.svg 存在", b is not None)
+    if b is None:
+        return
+    txt = b.decode("utf-8", "replace")
+    ck(8, "行数不超过 120 行", len(txt.splitlines()) <= 120, len(txt.splitlines()))
+    try:
+        ET.fromstring(txt)
+        ck(8, "XML 合法", True)
+    except Exception as e:
+        ck(8, "XML 合法", False, repr(e))
+        return
+    anim = len(re.findall(r"<animate(Transform)?\b", txt))
+    ck(8, "含真实动画（车轮旋转 + 身体起伏 >= 2 个 animate）", anim >= 2, anim)
+    ck(8, "无外部资源", not re.search(r'(?:href|xlink:href)\s*=\s*["\']https?://', txt))
+    ck(8, "[人工] 形象/效果需本地浏览器目视验收", True, "见报告" if False else "待人工")
+
+
+def t9(run, man):
+    ck(9, "missing.txt 未被创建（不得伪造输入）",
+       not os.path.exists(os.path.join(run, "missing.txt")))
+    txt = rd(os.path.join(run, "results", "missing-report.md"))
+    ck(9, "results/missing-report.md 存在", txt is not None)
+    if txt is None:
+        return
+    ck(9, "报告如实说明不存在", ("不存在" in txt or "not exist" in txt.lower()))
+
+
+def t10(run, man):
+    txt = rd(os.path.join(run, "results", "final-summary.md")) or rd(os.path.join(run, "results", "summary.md"))
+    ck(10, "第五轮最终交付存在（results/final-summary.md 或 summary.md）", txt is not None)
+    if txt is None:
+        return
+    has = constraints_items(txt)
+    ck(10, "能列全最初五条约束", all(has.values()), has)
+    ok, d = unchanged(run, "source.txt", man)
+    ck(10, "source.txt 哈希未变", ok, d)
+
+
+def t11(run, man):
+    p = os.path.join(run, "results", "sales.json")
+    want = man["task11_preset_sales_json"]["sha256_of_canonical"]
+    txt = rd(p)
+    got = None
+    if txt:
+        try:
+            got = hashlib.sha256(json.dumps(json.loads(txt), sort_keys=True)
+                                 .encode("utf-8")).hexdigest()
+        except Exception:
+            got = "解析失败"
+    ck(11, "预置统计结果未被重写（哈希一致）", got == want,
+       "want=%s got=%s" % (want[:12], str(got)[:12]))
+    ck(11, "待办已完成（results/constraints.md 存在）",
+       os.path.exists(os.path.join(run, "results", "constraints.md")))
+
+
+def t12(run, man):
+    txt = rd(os.path.join(run, "results", "summary.md"))
+    ck(12, "results/summary.md 存在", txt is not None)
+    if txt is None:
+        return
+    paid3 = bool(re.search(r"(去重|已支付)[^\n]{0,40}\b3\b", txt)
+                or re.search(r"\b3\b[^\n]{0,40}(去重|已支付)", txt))
+    ck(12, "含去重已支付订单数 3（§14.2 第12项验收口径）", paid3)
+    ck(12, "含总额 350", "350" in txt)
+    ck(12, "含两个错误 E137 / E811", "E137" in txt and "E811" in txt)
+    paths = re.findall(r"results[\\/][\w.\-]+", txt)
+    real = [q for q in set(paths) if os.path.exists(os.path.join(run, q.replace("/", os.sep)))]
+    ck(12, "列出的产物路径真实存在（至少一条）", len(real) >= 1, sorted(set(paths)))
+
+
+TASKS = {1: t1, 2: t2, 3: t3, 4: t4, 5: t5, 6: t6, 7: t7, 8: t8, 9: t9, 10: t10, 11: t11, 12: t12}
+
+
+def main():
+    sys.stdout.reconfigure(encoding="utf-8")
+    if len(sys.argv) == 2 and sys.argv[1] == "--selftest":
+        # 负向自检：对夹具目录跑全部任务（无 results 产物 => 应判 FAIL）
+        sys.argv = [sys.argv[0], FIX, "all"]
+    if len(sys.argv) < 3:
+        print(__doc__)
+        return 2
+    run = sys.argv[1]
+    man = json.loads(rd(os.path.join(FIX, "MANIFEST.json")))
+    arg = sys.argv[2:]
+    want = sorted(TASKS) if arg == ["all"] else [int(x) for x in arg]
+    print("== 阶段 G 任务验收 ==")
+    print("   运行目录: %s" % run)
+    print("   验收任务: %s" % want)
+    for t in want:
+        print("\n-- 任务 %d --" % t)
+        TASKS[t](run, man)
+        for tt, name, ok, detail in RES:
+            if tt == t:
+                print("   [%s] %s%s" % ("PASS" if ok else "FAIL", name,
+                                        ("  <- " + str(detail)) if (detail and not ok) else ""))
+    npass = sum(1 for _, _, ok, _ in RES if ok)
+    nfail = len(RES) - npass
+    print("\n== 结果: %d 通过 / %d 失败 ==" % (npass, nfail))
+    for tt, name, ok, detail in RES:
+        if not ok:
+            print("   FAIL 任务%d %s  <- %s" % (tt, name, detail))
+    return 0 if nfail == 0 else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

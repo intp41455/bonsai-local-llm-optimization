@@ -1,0 +1,25 @@
+== 阶段 D 离线测试：D:\Bonsai-demo\proxy\bonsai_proxy.py ==
+  [PASS] D2 无客户端意图 + effort=medium -> 注入 reasoning_effort=medium
+  [PASS] D2 effort=xhigh -> 注入 reasoning_effort=xhigh
+  [PASS] D2 effort=off -> 注入 enable_thinking=false
+  [PASS] D2 effort=none -> 归一成 enable_thinking=false（绝不把 none 当档位传模板）
+  [PASS] D2 effort=high（模板不支持的档位）-> 不注入且标记 invalid
+  [PASS] D2 顶层 reasoning_effort=low -> 不覆盖（src=client，body 原样）
+  [PASS] D2 模板参数 reasoning_effort=low -> 不覆盖
+  [PASS] D2 模板参数 enable_thinking=false -> 不覆盖（用户要关思考）
+  [PASS] D2 客户端自带 reasoning_budget_tokens -> 不注入档位（src=client_budget）
+  [PASS] D2 客户端用别名 thinking_budget_tokens -> 同样不注入档位
+  [PASS] D2 代理未配置档位（effort=None）-> 不动 body
+  [PASS] D2 非 JSON body -> 原样返回（src=unparsed）
+  [PASS] D2 非对话请求（无 messages）-> 原样返回（src=not_chat）
+  [PASS] D3 policy 两项=false -> 不注入 max_tokens / reasoning_budget_tokens
+  [PASS] D3 只开 max_tokens -> 注入 8192，仍不注入思考预算
+  [PASS] D3 只开思考预算 -> 注入 reasoning_budget_tokens=2048
+  [PASS] D3 两项全开 -> 两个字段都注入
+  [PASS] D3 客户端已给 max_tokens=100 -> 不覆盖
+  [PASS] D3 客户端已关思考 -> 不注入思考预算（仍可注入总生成预算）
+  [PASS] D3 代理档位=off（关闭思考）-> 不注入思考预算
+  [PASS] C4' requests.jsonl 新增 effort_source/effort_effective/budget_applied
+  [PASS] D2 旧的 apply_effort 已不存在（避免两套逻辑并存）
+
+通过 22 / 失败 0

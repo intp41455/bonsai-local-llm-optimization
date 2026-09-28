@@ -1,0 +1,4 @@
+﻿path=D:\Bonsai-demo\models\bonsai2-gguf\27B\Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf
+bytes=6297658848
+GiB=5.865
+last_write=2026-09-26 23:39:10

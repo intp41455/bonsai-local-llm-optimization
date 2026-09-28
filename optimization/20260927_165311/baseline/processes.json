@@ -1,0 +1,38 @@
+﻿[
+    {
+        "ProcessId":  35788,
+        "Name":  "python.exe",
+        "ExecutablePath":  "C:\\Users\\intpj\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+        "CommandLine":  "\"C:\\Users\\intpj\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe\" -m hermes_cli.main gateway run"
+    },
+    {
+        "ProcessId":  19532,
+        "Name":  "python.exe",
+        "ExecutablePath":  "C:\\Users\\intpj\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe",
+        "CommandLine":  "\"C:\\Users\\intpj\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe\"  -m hermes_cli.main gateway run"
+    },
+    {
+        "ProcessId":  43384,
+        "Name":  "llama-server.exe",
+        "ExecutablePath":  "D:\\Bonsai-demo\\dist\\bonsai2-8gb-combo\\bin\\llama-server.exe",
+        "CommandLine":  "D:\\Bonsai-demo\\dist\\bonsai2-8gb-combo\\bin\\llama-server.exe -m D:/Bonsai-demo/models/bonsai2-gguf/27B/Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf -ngl 99 -fa on -np 1 -c 65536 -b 2048 -ub 512 -ctk q4_0 -ctv q4_0 --backend-sampling --jinja --metrics --host 127.0.0.1 --port 8081 --alias bonsai-2-27b"
+    },
+    {
+        "ProcessId":  40108,
+        "Name":  "python.exe",
+        "ExecutablePath":  "C:\\Users\\intpj\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "CommandLine":  "C:\\Users\\intpj\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -u proxy/bonsai_proxy.py --port 8080 --upstream 8081 --effort medium"
+    },
+    {
+        "ProcessId":  4672,
+        "Name":  "python.exe",
+        "ExecutablePath":  "C:\\Users\\intpj\\AppData\\Local\\uv\\cache\\archive-v0\\QXtiztJ8A1i8OKzT\\Scripts\\python.exe",
+        "CommandLine":  "\"C:\\Users\\intpj\\AppData\\Local\\uv\\cache\\archive-v0\\QXtiztJ8A1i8OKzT\\Scripts\\python.exe\" \"C:\\Users\\intpj\\AppData\\Local\\uv\\cache\\archive-v0\\QXtiztJ8A1i8OKzT\\Scripts\\chroma-mcp.exe\" --client-type persistent --data-dir C:/Users/intpj/.claude-mem/chroma"
+    },
+    {
+        "ProcessId":  24456,
+        "Name":  "python.exe",
+        "ExecutablePath":  "C:\\Users\\intpj\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe",
+        "CommandLine":  "\"C:\\Users\\intpj\\AppData\\Local\\uv\\cache\\archive-v0\\QXtiztJ8A1i8OKzT\\Scripts\\python.exe\" \"C:\\Users\\intpj\\AppData\\Local\\uv\\cache\\archive-v0\\QXtiztJ8A1i8OKzT\\Scripts\\chroma-mcp.exe\" --client-type persistent --data-dir C:/Users/intpj/.claude-mem/chroma"
+    }
+]

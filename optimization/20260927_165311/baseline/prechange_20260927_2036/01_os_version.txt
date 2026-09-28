@@ -1,0 +1,29 @@
+变更前证据保全（只读）
+采集时间：2026-09-27 20:37:35
+目的：陛下已安排另一 agent 卸载 Windows 11 26200 预览版并更换 NVIDIA 驱动；
+      本快照固化"变更前"的 OS/驱动/虚拟化/崩溃证据，供变更后做前后对照。
+说明：本目录全部为只读采集结果；转储文件副本见上一级目录。
+      C 盘原件（Minidump / WER / 事件日志）可能被系统回退或清理，故先行固化。
+
+
+
+Caption        : Microsoft Windows 11 家庭版 中文版
+Version        : 10.0.26200
+BuildNumber    : 26200
+OSArchitecture : 64 位
+InstallDate    : 2026/7/8 20:58:27
+LastBootUpTime : 2026/9/27 20:17:42
+
+
+
+
+
+ProductName    : Windows 10 Home China
+DisplayVersion : 25H2
+CurrentBuild   : 26200
+UBR            : 9457
+EditionID      : CoreCountrySpecific
+InstallTime    : 134279891071883318
+
+
+

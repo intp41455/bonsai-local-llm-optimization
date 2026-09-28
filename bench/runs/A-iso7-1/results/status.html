@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目状态</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans", sans-serif;
+    background: #f4f6f8;
+    color: #2c3e50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    max-width: 560px;
+    width: 100%;
+    padding: 40px 36px;
+  }
+  .badge {
+    display: inline-block;
+    background: #2e7d32;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .code {
+    font-size: 34px;
+    font-weight: 700;
+    color: #1b5e20;
+    margin: 10px 0 24px;
+  }
+  h2 {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 8px;
+  }
+  ol {
+    list-style: none;
+    counter-reset: item;
+  }
+  ol li {
+    counter-increment: item;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  ol li:last-child { border-bottom: none; }
+  .num {
+    flex: 0 0 28px;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .constraint { font-size: 15px; line-height: 1.6; }
+  footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <span class="badge">项目状态</span>
+    <h1>项目代号</h1>
+    <div class="code">松针</div>
+
+    <h2>五条约束</h2>
+    <ol>
+      <li><span class="num">1</span><span class="constraint">交付格式：Markdown</span></li>
+      <li><span class="num">2</span><span class="constraint">禁止修改 source.txt</span></li>
+      <li><span class="num">3</span><span class="constraint">输出目录：results</span></li>
+      <li><span class="num">4</span><span class="constraint">预算单位：人民币元</span></li>
+      <li><span class="num">5</span><span class="constraint">原始夹具只读，各参测配置使用 runs/&lt;CFG&gt; 独立副本</span></li>
+    </ol>
+
+    <footer>单文件离线 · 无外部资源</footer>
+  </div>
+</body>
+</html>

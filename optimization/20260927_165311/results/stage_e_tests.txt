@@ -1,0 +1,25 @@
+== 阶段 E 验收测试 ==
+   被测代理: D:\Bonsai-demo\proxy\bonsai_proxy.py
+  [PASS] E1 小请求走上界估算跳过精确计数（action=skip，且未调用上游模板/分词）
+  [PASS] E1 大请求走精确计数（/apply-template + /tokenize 各一次）
+  [PASS] E1 预算算式正确：required=input+计划生成+余量，headroom=窗口-required
+  [PASS] E3 /apply-template 失败 -> unknown（不当作安全放行）
+  [PASS] E3 /props 不可达 -> 窗口取配置兜底且来源如实标注
+  [PASS] E4 预算检查不改写请求体（不静默裁剪/不替用户删消息）
+
+[#1] system=0 tools=2 msgs=1
+     [预算] 输入超预算：输入 60000 + 计划生成 8192 + 余量 1024 = 69216 > 窗口 65536（超 3680 tok） -> warn，仍转发
+[11b7220475ce4950 2026-09-27 19:17:36] 200 /v1/chat/completions queue=0.0ms ttfb=31.0ms first_ev=31.0ms wall=31.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None
+  [PASS] E2 warn：超预算仍转发（客户端 200，上游确实收到推理请求）
+  [PASS] E2 warn：日志记录超预算判定与 warn 说明
+
+[#2] system=0 tools=2 msgs=1
+     与上一请求公共前缀 100.0%
+[ecf156e083344445 2026-09-27 19:17:36] 400 /v1/chat/completions queue=Nonems ttfb=Nonems first_ev=Nonems wall=47.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None [错误]
+     [预算] 输入超预算：输入 60000 + 计划生成 8192 + 余量 1024 = 69216 > 窗口 65536（超 3680 tok） -> 生成前拒绝（400，不消耗槽位）
+  [PASS] E2 reject：生成前返回 400 且错误可操作（含 input_over_budget 与预算明细）
+  [PASS] E2 reject：未向上游发起推理（不占单槽、不消耗 GPU）
+  [PASS] E5 gate.enabled=false -> 不判定、不调上游（记录为已关闭）
+  [PASS] E5 requests.jsonl 新增 budget_check 字段
+
+通过 12 / 失败 0

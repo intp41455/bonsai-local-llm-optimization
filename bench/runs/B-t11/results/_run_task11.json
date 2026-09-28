@@ -1,0 +1,120 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 11,
+  "task_text": "读取checkpoint.md继续未完成事项，不重做已完成步骤。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B-t11",
+  "stop_reason": "model_finished",
+  "rounds": 6,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.93,
+      "ttft_s": 1.62,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 157,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 1.85,
+      "ttft_s": 0.34,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 72,
+      "tool_calls": [
+        "list_dir",
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 1.85,
+      "ttft_s": 0.36,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 77,
+      "tool_calls": [
+        "list_dir",
+        "read_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 4.49,
+      "ttft_s": 0.31,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 351,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 1.33,
+      "ttft_s": 0.36,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 52,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 3.59,
+      "ttft_s": 0.28,
+      "finish": "stop",
+      "content_chars": 242,
+      "reasoning_chars": 144,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 16.1,
+  "tool_retries": 0,
+  "proxy_records": 6,
+  "prompt_n": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "cache_n": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "prefill_ms": [
+    1159.8,
+    277.8,
+    312.9,
+    277.5,
+    312.7,
+    265.9
+  ],
+  "decode_tps": [
+    44.21,
+    44.95,
+    44.91,
+    45.01,
+    42.23,
+    45.07
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "at": "2026-09-27 21:57:37"
+}

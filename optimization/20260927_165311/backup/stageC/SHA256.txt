@@ -1,0 +1,3 @@
+5750751F9A7CC85A759BB1ABCFF2A257B90B532D6D4462B60E7528DE25376729  bonsai-agent.json.v2  <- D:\Bonsai-demo\config\bonsai-agent.json
+3F531008C4F95462AF5CCB35EEBBEA12C5B6CE87A5EE9E9E158E05020F799101  stage_b_tests.py.v2  <- D:\Bonsai-demo\optimization\20260927_165311\tests\stage_b_tests.py
+B31A2555C705E921602251AB227A05AFE96EDC049AE2E6DA6D665EB27498E288  bonsai_launcher.py.v2  <- D:\Bonsai-demo\launcher\bonsai_launcher.py

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目状态</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background: #f4f6f8;
+    color: #2c3e50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    max-width: 560px;
+    width: 100%;
+    padding: 40px 36px;
+  }
+  .badge {
+    display: inline-block;
+    background: #2e8b57;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 6px 18px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e8ecf0;
+  }
+  ol.constraints {
+    list-style: none;
+    counter-reset: c;
+  }
+  ol.constraints li {
+    counter-increment: c;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f2f4;
+  }
+  ol.constraints li:last-child { border-bottom: none; }
+  ol.constraints li::before {
+    content: counter(c);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #e8f5e9;
+    color: #2e8b57;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  ol.constraints li p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  ol.constraints li strong {
+    color: #2c3e50;
+  }
+  .footer {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px solid #e8ecf0;
+    font-size: 12px;
+    color: #95a5a6;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <span class="badge">项目状态</span>
+    <h1>项目代号：松针</h1>
+    <p class="subtitle">单文件离线页面 · 无外部资源依赖</p>
+
+    <div class="section-title">五条约束</div>
+    <ol class="constraints">
+      <li><p><strong>项目代号</strong>：松针</p></li>
+      <li><p><strong>交付格式</strong>：Markdown</p></li>
+      <li><p><strong>禁止修改</strong>：source.txt</p></li>
+      <li><p><strong>输出目录</strong>：results</p></li>
+      <li><p><strong>预算单位</strong>：人民币元</p></li>
+    </ol>
+
+    <div class="footer">
+      本页面为自包含 HTML，可直接离线打开，未引用任何外部 CSS / JS / 字体 / 图片。
+    </div>
+  </div>
+</body>
+</html>

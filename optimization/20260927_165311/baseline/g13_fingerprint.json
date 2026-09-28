@@ -1,0 +1,53 @@
+{
+  "phase": "G13",
+  "started_at": "2026-09-28 14:46:12",
+  "harness_sha256": "f06852086dca5f5e2cf3e1cc624eee74af29888b6d42cdf4cc7431907ca97f6e",
+  "proxy_v3_sha256": "6acfb9c5914595ec567f5b9d4db2da188e99c1bf635b36c017bc0532026340f5",
+  "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "config_extra_args": [
+    "--cache-ram",
+    "1024"
+  ],
+  "prod_gate_mode": "warn",
+  "gate_chars_per_token_floor": 3.0,
+  "threshold_tokens": 56320,
+  "hard_limit_tokens": 65536,
+  "probe_max_tokens": 64,
+  "probe_target_over": 57200,
+  "prod_reqlog_off_before": 1363615,
+  "prod_timings_off_before": 167049,
+  "prod_reqlog_lines_before": 808,
+  "prod_timings_lines_before": 907,
+  "netstat_before": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "note": "G13：预算闸门 mode=warn(生产现状) vs mode=reject 行为对照；同后端/同代理/同素材，仅 gate.mode 不同；in/over 两探针",
+  "ended_at": "2026-09-28 14:48:21",
+  "netstat_after": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "prod_reqlog_lines_after": 811,
+  "prod_timings_lines_after": 907,
+  "prod_reqlog_delta": 3,
+  "prod_timings_delta": 0,
+  "prod_chat_completions_in_delta": 0
+}

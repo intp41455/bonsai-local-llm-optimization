@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目状态 · 松针</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --ink: #2b2b2b;
+    --muted: #6b6b6b;
+    --accent: #2e6b4f;
+    --line: #e3ded3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    padding: 40px 20px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  h1 .code { color: var(--accent); }
+  .sub { color: var(--muted); margin-top: 6px; font-size: 14px; }
+  section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  h2 {
+    margin: 0 0 14px;
+    font-size: 18px;
+    color: var(--accent);
+  }
+  ol.constraints {
+    margin: 0;
+    padding-left: 24px;
+  }
+  ol.constraints li {
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+  ol.constraints li::marker { color: var(--accent); font-weight: 700; }
+  ol.constraints li strong { color: var(--ink); }
+  footer {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="badge">项目状态</span>
+    <h1>项目代号：<span class="code">松针</span></h1>
+    <p class="sub">单文件离线页面 · 无外部资源</p>
+  </header>
+
+  <section>
+    <h2>五条约束</h2>
+    <ol class="constraints">
+      <li><strong>交付格式</strong>：必须为纯文本。</li>
+      <li><strong>源文件保护</strong>：禁止修改 source.txt。</li>
+      <li><strong>输出目录</strong>：必须为 results。</li>
+      <li><strong>预算单位</strong>：必须使用人民币元。</li>
+      <li><strong>项目代号</strong>：统一为「松针」。</li>
+    </ol>
+  </section>
+
+  <footer>results/status.html · 离线打开即可，无需网络</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+==========================================================================
+阶段 F 在线验证
+==========================================================================
+
+[0] 只读快照：后端 llama-server pid=43384 ；代理 bonsai_proxy pid=52236
+    代理命令行: C:\Users\intpj\AppData\Local\Programs\Python\Python310\python.exe -u D:\Bonsai-demo\proxy\bonsai_proxy.py --port 8080 --upstream 8081 --config D:\Bonsai-demo\config\bonsai-agent.json --effort medium
+
+[1] launcher status（只读）:
+    ==================================================================
+     Bonsai 运行状态
+    ==================================================================
+     配置指纹 : 0b0d2806eb9a9d1a（当前文件）
+     state 记录: 905e54554a63312c   !! 不一致
+     state 文件: D:\Bonsai-demo\state\launcher_state.json
+     [后端] :8081 监听 pid=[43384]
+       pid=43384 身份匹配  exe=D:\Bonsai-demo\dist\bonsai2-8gb-combo\bin\llama-server.exe
+     [代理] :8080 监听 pid=[52236]
+       pid=52236 身份匹配  exe=C:\Users\intpj\AppData\Local\Programs\Python\Python310\python.exe
+     [健康] /health={'status': 'ok'}
+     [模型] alias=bonsai-2-27b  n_ctx=65536  服务默认生成上限=-1  build_info=b181-9ef3205
+     [忙碌] is_processing=False  n_prompt_tokens=6810
+     [GPU ] 7664 MiB, 8151 MiB, 1 %, 52, 22.16 W, 1905 MHz, 1905 MHz
+    ==================================================================
+
+[2] 按身份停掉代理（只杀 CommandLine 含 bonsai_proxy.py 的 52236）
+    taskkill pid=52236 -> SUCCESS: The process with PID 52236 has been terminated.
+    ==================================================================
+     Bonsai 统一启动管理器（唯一配置源: D:\Bonsai-demo\config\bonsai-agent.json）
+    ==================================================================
+     配置指纹 : 0b0d2806eb9a9d1a
+     后端     : 127.0.0.1:8081  pid 由 state 记录
+       模型    : Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf
+       硬件参数: -c 65536 / -np 1 / -b 2048 / -ub 512 / -ctk q4_0 -ctv q4_0 / -fa on / -ngl 99
+       MTP     : 关
+       采样    : server_default（未传采样参数 = 服务端默认）
+     代理     : 127.0.0.1:8080 -> 127.0.0.1:8081   思考档位=medium
+       瘦身    : location=True deferred=False subagent=False
+     预算     : 总生成 8192 / 思考 2048 / 上下文余量 1024  [注入=False/False；阶段 D 已验证请求级预算可用，policy=false = 只登记不注入]
+       工具体  : 契约加固=True（show_widget.loading_messages 精确化）/ 错误恢复策略块=True
+     预热     : 开（每次启动一次）
+    ==================================================================
+    
+    [后端] 已在运行 pid=43384（身份已核对：可执行文件+模型+端口一致）
+    [后端] build_info=b181-9ef3205  n_ctx=65536  生成上限默认=-1  忙=False
+    [后端] 在线参数与配置一致，无需重启。
+    [代理] 瘦身（阶段 F 起代理按配置逐项生效）: ① location=True ② deferred 清单=False ③ subagent 清单=False（deferred/subagent=false 表示保留完整名册）
+    [代理] 启动: C:\Users\intpj\AppData\Local\Programs\Python\Python310\python.exe -u D:\Bonsai-demo\proxy\bonsai_proxy.py --port 8080 --upstream 8081 --config D:\Bonsai-demo\config\bonsai-agent.json --effort medium
+    [代理] pid=56108  日志=D:\Bonsai-demo\logs\proxy.log
+    [预热] 已关闭（--no-prewarm 或配置 prewarm.enabled=false）。
+    
+    ==================================================================
+     就绪：WorkBuddy 指向 http://127.0.0.1:8080/v1   模型别名 bonsai-2-27b
+     配置指纹 0b0d2806eb9a9d1a   状态文件 D:\Bonsai-demo\state\launcher_state.json
+     查看状态: python launcher\bonsai_launcher.py status
+     看体检  : python launcher\bonsai_launcher.py smoke
+    ==================================================================
+
+    代理 pid 52236 -> 56108 ；后端 pid 43384 -> 43384（后端必须不变）
+    新代理命令行: C:\Users\intpj\AppData\Local\Programs\Python\Python310\python.exe -u D:\Bonsai-demo\proxy\bonsai_proxy.py --port 8080 --upstream 8081 --config D:\Bonsai-demo\config\bonsai-agent.json --effort medium
+
+[2b] 新代理启动横幅（logs\proxy.log 末尾）:
+    [3bbcac8b30d14b63 2026-09-27 19:21:45] 200 /v1/chat/completions queue=16.0ms ttfb=1031.0ms first_ev=1031.0ms wall=1031.0ms reuse=部分复用 pn=4 cn=11 decode=17.38t/s finish=length
+    [#2] system=0 tools=2 msgs=1
+         与上一请求公共前缀 0.6%
+         [effort] 注入 reasoning_effort=medium
+    [414d4b8369024a59 2026-09-27 19:22:21] 200 /v1/chat/completions queue=0.0ms ttfb=106516.0ms first_ev=106516.0ms wall=106516.0ms reuse=无复用 pn=6810 cn=0 decode=0.0t/s finish=length
+    [caed44dbc9c34a4e 2026-09-27 19:24:56] 200 /v1/models queue=Nonems ttfb=15.0ms first_ev=15.0ms wall=15.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None
+    [5d60756a9ea84fde 2026-09-27 19:29:57] 200 /v1/models queue=Nonems ttfb=0.0ms first_ev=0.0ms wall=0.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None
+    [05b4e4aaa72b4f4e 2026-09-27 19:34:57] 200 /v1/models queue=Nonems ttfb=0.0ms first_ev=0.0ms wall=0.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None
+    ==================================================================
+     Bonsai 抓包代理 v3   :8080  -->  llama-server 127.0.0.1:8081
+       配置      : D:\Bonsai-demo\config\bonsai-agent.json  指纹=0b0d2806eb9a9d1a
+       抓包目录  : D:\Bonsai-demo\capture
+       每请求日志: D:\Bonsai-demo\logs\requests.jsonl
+       超时      : connect=8s  first_response=180s  stream_idle=300s  overall=1800s
+       思考档位  : 未显式指定时注入 reasoning_effort=medium；客户端已指定则不覆盖
+       请求瘦身  : 逐项（阶段 F 起各自独立）-> ① location=True ② deferred 清单=False（关=保留名册） ③ subagent 清单=False（关=保留名册）
+       工具体    : 契约加固=True（show_widget.loading_messages 精确化） / 错误恢复策略块=True
+       流式读取  : read1（有数据即返回）+ 独立增量 SSE 解析器
+       排队      : 本代理串行化需要推理的请求（后端 -np 1 单槽），排队时间入日志
+    ==================================================================
+    [f5e84ab015d441a6 2026-09-27 19:39:15] 200 /health queue=Nonems ttfb=16.0ms first_ev=16.0ms wall=16.0ms reuse=未知 pn=None cn=None decode=Nonet/s finish=None
+
+    后端保持不变 = 是
+
+[3] 经代理发构造请求（带 tools + 2 次 identical 工具失败，max_tokens=1）
+    HTTP 500  0.06s  响应前 200 字符: {"error":{"code":500,"message":"Failed to parse tool call arguments as JSON: [json.exception.parse_error.101] parse error at line 1, column 36: syntax error while parsing object - unexpected end of in
+
+[4] requests.jsonl 新记录（阶段 F 字段）
+    记录数 32 -> 33
+    verdict=None status=500 wall_ms=62.0
+    slim         = {"flags": {"locations": true, "deferred_tools": false, "subagents": false}, "saved_chars": {"locations": 86, "deferred_tools": 0, "subagents": 0}, "total": 86}
+    tools_hardened = ["show_widget.loading_messages"]
+    tool_policy  = "并入首条 system 尾部 584 字符"
+    tool_arg_audit = {"calls": 2, "valid": 0, "invalid": 2, "problems": ["字段缺失或类型不是字符串/数组（type=NoneType）", "arguments 不是合法 JSON"], "tool_failures": 2, "failure_msgs": ["loading_messages must contain at least one message.", "loading_messages must contain at least one message."], "repeated_identical_error": ["loading_messages must contain at least one message."]}
+    判定: 逐项瘦身=True / 契约加固=True / 策略块=True / 审计(失败2+重复1)=True
+
+[5] 不带 tools 的请求（回归：普通请求仍 200）
+    HTTP 200  5.34s  {"choices":[{"finish_reason":"length","index":0,"message":{"role":"assistant","content":"","reasoning_content":"用户"}}],"created":1790509163,"model":"bonsai-2-27
+    记录 slim=True tools_hardened=None tool_policy=None tool_arg_audit=None
+    普通请求 tools_hardened/tool_policy 均为空 = 是
+
+[6] 收尾：代理 pid=56108 后端 pid=43384（后端应与开始时一致）
+==========================================================================
+==========================================================================
+阶段 F 在线验证（复跑：不重启代理）
+==========================================================================
+
+[1-2] 跳过重启：当前代理 pid=56108；后端 llama-server pid=43384
+
+      launcher status（只读，抽查关键行）:
+      [后端] :8081 监听 pid=[43384]
+      pid=43384 身份匹配  exe=D:\Bonsai-demo\dist\bonsai2-8gb-combo\bin\llama-server.exe
+      [代理] :8080 监听 pid=[56108]
+      pid=56108 身份匹配  exe=C:\Users\intpj\AppData\Local\Programs\Python\Python310\python.exe
+
+[3] 经代理发构造请求（带 tools + 2 次 identical 工具失败，max_tokens=1）
+    HTTP 200  49.75s  响应前 200 字符: {"choices":[{"finish_reason":"length","index":0,"message":{"role":"assistant","content":"","reasoning_content":"The"}}],"created":1790509255,"model":"bonsai-2-27b","system_fingerprint":"b181-9ef3205",
+
+[4] requests.jsonl 新记录（阶段 F 字段）
+    记录数 35 -> 36
+    verdict=None status=200 wall_ms=49719.0
+    slim         = {"flags": {"locations": true, "deferred_tools": false, "subagents": false}, "saved_chars": {"locations": 86, "deferred_tools": 0, "subagents": 0}, "total": 86}
+    tools_hardened = ["show_widget.loading_messages"]
+    tool_policy  = "并入首条 system 尾部 584 字符"
+    tool_arg_audit = {"calls": 2, "valid": 0, "invalid": 2, "problems": ["字段缺失或类型不是字符串/数组（type=NoneType）", "字段缺失或类型不是字符串/数组（type=NoneType）"], "tool_failures": 2, "failure_msgs": ["loading_messages must contain at least one message.", "loading_messages must contain at least one message."], "repeated_identical_error": ["loading_messages must contain at least one message."]}
+    判定: 逐项瘦身=True / 契约加固=True / 策略块=True / 审计(失败2+重复1)=True
+
+[5] 不带 tools 的请求（回归：普通请求仍 200）
+    HTTP 200  1.50s  {"choices":[{"finish_reason":"length","index":0,"message":{"role":"assistant","content":"","reasoning_content":"用户"}}],"created":1790509256,"model":"bonsai-2-27
+    记录 slim=True tools_hardened=None tool_policy=None tool_arg_audit=None
+    普通请求 tools_hardened/tool_policy 均为空 = 是
+
+[6] 收尾：代理 pid=56108 后端 pid=43384（后端应与开始时一致）
+==========================================================================

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonsai 本地大模型推理工程与长上下文优化全过程技术文档</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f141c;
+      --bg-surface: #151b26;
+      --bg-card: #1c2433;
+      --border: #2b364a;
+      --border-focus: #4f8cff;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --primary-soft: rgba(59, 130, 246, 0.12);
+      --accent: #10b981;
+      --accent-soft: rgba(16, 185, 129, 0.12);
+      --warning: #f59e0b;
+      --warning-soft: rgba(245, 158, 11, 0.12);
+      --danger: #ef4444;
+      --title: #f1f5f9;
+      --body: #94a3b8;
+      --muted: #64748b;
+      --code-bg: #090d14;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--body);
+      line-height: 1.7;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* 左侧固定导航栏 */
+    .sidebar {
+      width: 290px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--title);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .brand-badge {
+      font-size: 11px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid rgba(59,130,246,0.3);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .brand-desc {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-group-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin: 14px 0 6px 8px;
+    }
+
+    .nav-link {
+      display: block;
+      color: var(--body);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      margin-bottom: 2px;
+    }
+    .nav-link:hover {
+      color: var(--title);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .nav-link.active {
+      color: var(--primary);
+      background: var(--primary-soft);
+      font-weight: 600;
+    }
+
+    /* 主体内容区 */
+    .main-content {
+      flex: 1;
+      padding: 40px 60px 100px 60px;
+      max-width: 1080px;
+    }
+
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; }
+      .main-content { padding: 24px 20px; }
+    }
+
+    /* 标题层级 */
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--title);
+      line-height: 1.3;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--title);
+      margin: 48px 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin: 24px 0 10px 0;
+    }
+
+    p { margin-bottom: 14px; font-size: 14.5px; }
+
+    /* 高亮技术指标卡片 */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 768px) {
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .metric-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; font-weight: 500; }
+    .metric-val { font-size: 20px; font-weight: 700; color: var(--title); font-family: 'JetBrains Mono', monospace; }
+    .metric-sub { font-size: 11px; color: var(--accent); margin-top: 4px; }
+
+    /* 代码块与架构时序 */
+    pre, code {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+    }
+    code {
+      font-size: 12.5px;
+      background: rgba(255,255,255,0.06);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    pre code {
+      background: transparent;
+      padding: 0;
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* 表格 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 13.5px;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--bg-surface);
+      color: var(--title);
+      font-weight: 600;
+    }
+    tr:hover { background: rgba(255,255,255,0.02); }
+
+    /* 警告与重点框 */
+    .callout {
+      border-left: 4px solid var(--primary);
+      background: var(--bg-surface);
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      margin: 18px 0;
+      font-size: 13.5px;
+    }
+    .callout-warning { border-color: var(--warning); background: rgba(245,158,11,0.05); }
+    .callout-danger { border-color: var(--danger); background: rgba(239,68,68,0.05); }
+    .callout-title { font-weight: 700; color: var(--title); margin-bottom: 4px; }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .tag-blue { background: var(--primary-soft); color: var(--primary); }
+    .tag-green { background: var(--accent-soft); color: var(--accent); }
+    .tag-amber { background: var(--warning-soft); color: var(--warning); }
+  </style>
+</head>
+<body>
+
+  <!-- 左侧固定目录 -->
+  <aside class="sidebar">
+    <div class="brand-title">
+      <span>Bonsai Infra Docs</span>
+      <span class="brand-badge">G15 封版</span>
+    </div>
+    <div class="brand-desc">
+      RTX 5060 Laptop (8GB) 极限压榨<br>65k 上下文高并发推理工程优化全景
+    </div>
+
+    <nav>
+      <div class="nav-group-title">架构与边界</div>
+      <a href="#overview" class="nav-link active">1. 硬件瓶颈与设计边界</a>
+      <a href="#architecture" class="nav-link">2. 生产双层拓扑架构</a>
+
+      <div class="nav-group-title">阶段性演进复盘</div>
+      <a href="#stage-b" class="nav-link">3. 阶段 B: 唯一配置与防误杀</a>
+      <a href="#stage-c" class="nav-link">4. 阶段 C: Proxy v3 零拷贝与早退</a>
+      <a href="#stage-d-e" class="nav-link">5. 阶段 D/E: 56k 空间硬预算</a>
+      <a href="#stage-g14" class="nav-link">6. 阶段 G14: Reject 闸门实测</a>
+      <a href="#stage-g15" class="nav-link">7. 阶段 G15: 400 行为观测埋点</a>
+
+      <div class="nav-group-title">生产运行指南</div>
+      <a href="#config-spec" class="nav-link">8. 唯一配置规范 (JSON)</a>
+      <a href="#api-spec" class="nav-link">9. OpenAI 接口兼容使用手册</a>
+      <a href="#tradeoffs" class="nav-link">10. 架构工程权衡与反思</a>
+    </nav>
+  </aside>
+
+  <!-- 右侧主体内容 -->
+  <main class="main-content">
+    <header style="margin-bottom:32px;">
+      <h1>Bonsai 本地大模型通用优化工程方案</h1>
+      <p style="font-size:16px; color:#cbd5e1;">
+        面向消费级显卡（RTX 5060 Laptop 8GB）的大模型长上下文服务化工程：从启动器冲突、流式卡顿、探活盲杀到 56k 预算闸门与客户端异常观测的全流程落盘记录。
+      </p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+        <span class="tag tag-blue">硬件: RTX 5060 Laptop (8GB 显存)</span>
+        <span class="tag tag-green">模型: Bonsai-2-27B (三值化/混合量化)</span>
+        <span class="tag tag-amber">窗口: 65,536 Token (原生 64k)</span>
+        <span class="tag tag-blue">生产基准: 56,320 闸门 / 18~20 t/s</span>
+      </div>
+    </header>
+
+    <!-- 关键核心指标 -->
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-label">显存极限占用</div>
+        <div class="metric-val">7.88 GB</div>
+        <div class="metric-sub">8GB 物理显存余量 120MB</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">上下文硬预算上限</div>
+        <div class="metric-val">56,320</div>
+        <div class="metric-sub">预留 8192 生成 + 1024 缓冲</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">长上下文生成速度</div>
+        <div class="metric-val">18.2 t/s</div>
+        <div class="metric-sub">60k 历史缓存下稳定输出</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">生产防崩拦截率</div>
+        <div class="metric-val">100.0%</div>
+        <div class="metric-sub">G14 超限直接 400 快速失败</div>
+      </div>
+    </div>
+
+    <!-- 章节 1 -->
+    <section id="overview">
+      <h2>1. 硬件瓶颈与设计边界</h2>
+      <p>
+        在边缘设备与消费级移动工作站（RTX 5060 Laptop，8GB VRAM）部署 27B 参数级的大语言模型并开启 65,536（64k）长上下文窗口，面临着极为苛刻的显存物理极限：
+      </p>
+      <ul>
+        <li><b>权重显存开销</b>：采用三值化（Ternary/PQ2）量化后，模型静态权重占用约为 <b>6.15 GB</b>；</li>
+        <li><b>显存物理瓶颈</b>：系统与桌面渲染占用约 0.4 GB，留给推理运行时（KV Cache + Scratch Buffer）的物理显存仅剩 <b>1.45 GB</b>；</li>
+        <li><b>单槽限制</b>：为保证 65k 上下文不发生 CUDA OOM（显存溢出崩服），后端 llama-server 必须固定配置为单并发槽位（<code>-np 1</code>）。</li>
+      </ul>
+      <div class="callout callout-warning">
+        <div class="callout-title">⚠️ 工业级红线约束</div>
+        不得改动系统底层 GPU 锁频、驱动版本、BIOS、VBS（基于虚拟化的安全性）或电源管理；不得依靠牺牲系统安全性或破坏环境稳定性来换取虚假的跑分提升。
+      </div>
+    </section>
+
+    <!-- 章节 2 -->
+    <section id="architecture">
+      <h2>2. 生产双层拓扑架构</h2>
+      <p>
+        为解耦“底层推理加速”与“上游网关治理”，系统构建了严格的生产双层反向代理拓扑：
+      </p>
+      <pre><code>[OpenAI 客户端 / IDE / Agent 网关]
+         │  HTTP / SSE
+         ▼
+[Bonsai Proxy v3 (反向代理服务) :8080]
+   ├── 1. 预算闸门检查 (56,320 token / chars_floor=1.5 拦截)
+   ├── 2. 结构瘦身与提示词优化 (Prompt Sanitization)
+   ├── 3. 独立增量 SSEParser 流式透传
+   ├── 4. 客户端提前断开感知 (client_gone_peek 早退检测)
+   └── 5. 400 异常与耗时全维度遥测埋点
+         │  HTTP / Keep-Alive
+         ▼
+[llama-server (推理后端内核) :8081]
+   ├── 权重加载: Ternary-Bonsai-2-27B
+   ├── 上下文分配: -c 65536, -np 1
+   └── 硬件调度: CUDA 12.8 / Flash-Attention / 无锁内存映射</code></pre>
+    </section>
+
+    <!-- 章节 3 -->
+    <section id="stage-b">
+      <h2>3. 阶段 B: 唯一配置与防误杀启动治理</h2>
+      <h3>3.1 历史缺陷与根因 (P01 / P07)</h3>
+      <p>
+        优化前，系统存在 8 个分散的启动脚本，每个脚本硬编码不同的参数（如 <code>-c 32768</code> vs <code>-c 65536</code>、<code>--reasoning-budget 20480</code> 丢失），导致“手册参数 ≠ 实际运行参数”。更严重的是，旧探活脚本在推理排队超过 10 秒时判定为“僵死”，直接执行 <code>taskkill /F :8080</code> 强杀端口，造成健康长任务被频繁误杀。
+      </p>
+      <h3>3.2 治理落地方案</h3>
+      <ul>
+        <li><b>收敛权威配置源</b>：建立全局唯一配置 <code>config/bonsai-agent.json</code>，所有后端参数、代理规则、超时时间全部由 JSON 单源驱动；</li>
+        <li><b>重构启动管理器</b>：编写 <code>launcher/bonsai_launcher.py</code>，启动前校验 PID 进程身份，服务繁忙时拒绝暴力重启；废除端口强杀逻辑。</li>
+      </ul>
+    </section>
+
+    <!-- 章节 4 -->
+    <section id="stage-c">
+      <h2>4. 阶段 C: Proxy v3 零拷贝流式转发与提前早退机制</h2>
+      <h3>4.1 流式读取卡顿修复 (C1)</h3>
+      <p>
+        旧代理使用固定大小的 <code>resp.read(2048)</code> 阻塞读取，导致流式打字机效果出现严重停顿。新版全量采用 <code>resp.read1(65536)</code>（有数据即刻返回），彻底消除网络中间缓冲延迟。
+      </p>
+      <h3>4.2 独立增量 SSEParser</h3>
+      <p>
+        自研增量流式解析器，支持跨网络数据块的 UTF-8 多字节截断拼接、多事件同块拆解，并独立分段累计 <code>reasoning_content</code>（思考链）、<code>content</code>（正文）与 <code>tool_calls.arguments</code>（工具调用参数）。
+      </p>
+      <h3>4.3 客户端断开早退检测 (<code>client_gone_peek</code>)</h3>
+      <pre><code>def client_gone_peek(sock) -> bool:
+    """通过非阻塞探测 socket 接收缓冲区，判断下游客户端是否已关闭连接"""
+    try:
+        r, _, _ = select.select([sock], [], [], 0)
+        if r:
+            buf = sock.recv(1, socket.MSG_PEEK)
+            if not buf:
+                return True # EOF: 客户端已正常关闭
+    except (ConnectionResetError, BrokenPipeError, OSError):
+        return True # RST: 客户端强制断开
+    return False</code></pre>
+      <p>
+        在单槽推理服务中，用户若点击“停止生成”，代理立即通过该机制检测到客户端断开，瞬时断开上游后端连接，释放推理槽位，避免 GPU 继续做数万步无效推理。
+      </p>
+    </section>
+
+    <!-- 章节 5 -->
+    <section id="stage-d-e">
+      <h2>5. 阶段 D/E: 56k 空间硬预算与数学推导</h2>
+      <p>
+        在总上下文为 65,536 Token 的单槽环境中，若客户端传入了 62,000 Token 的历史记录，模型仅剩 3,536 Token 空间可用于思考和输出，极易在输出中间遭遇 <code>STOP_TYPE_LIMIT</code> 强行截断，破坏 JSON 输出或导致代码缺失。
+      </p>
+      <div class="callout">
+        <div class="callout-title">📐 输入空间硬上限数学推导</div>
+        <p>$$Context_{max} = 65,536$$</p>
+        <p>$$MaxOutput_{reserved} = 8,192 \quad (覆盖完整代码与长思考生成)$$</p>
+        <p>$$SafetyBuffer = 1,024 \quad (防范分词器计数下溢)$$</p>
+        <p><b>$$InputBudget_{threshold} = 65,536 - 8,192 - 1,024 = 56,320 \text{ Token}$$</b></p>
+      </div>
+    </section>
+
+    <!-- 章节 6 -->
+    <section id="stage-g14">
+      <h2>6. 阶段 G14: Reject 闸门模式与 Floor 保护实测</h2>
+      <p>
+        在 G14 阶段，系统正式将生产预算闸门由观测模式切换为 <b>强制拒绝模式 (<code>mode: reject</code>)</b>，并引入了字符级快速估算下界保护：
+      </p>
+      <pre><code># 预算闸门核心保护逻辑
+chars_floor = config.get("chars_per_token_floor", 1.5)
+min_chars_limit = int(56320 * chars_floor) # = 84,480 字符
+
+# 当请求文本总字符数超过下界且实际 token 估算超限时：
+if estimated_tokens > 56320:
+    return Response(
+        status_code=400,
+        content={"error": {"message": "input_over_budget: context exceeds 56320 limit", "type": "invalid_request_error"}}
+    )</code></pre>
+      <p>
+        <b>实测成效</b>：彻底封堵了超长历史注入拖垮后端的重大风险，超限请求在 <b>1.2 毫秒内快速返回 400 失败</b>，保护后端零显存冲击。
+      </p>
+    </section>
+
+    <!-- 章节 7 -->
+    <section id="stage-g15">
+      <h2>7. 阶段 G15: 客户端 400 行为观测埋点与分析</h2>
+      <p>
+        为了追踪客户端（如 WorkBuddy、Pi 或自动化脚本）在面对 400 拒绝时的真实反应，代理层在 G15 阶段部署了全量观测埋点：
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>观测指标</th>
+            <th>记录位置</th>
+            <th>工业级分析意义</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>client_mark</code></td>
+            <td><code>logs/requests.jsonl</code></td>
+            <td>标记请求是否遭遇 400 拦截或客户端自身抛错</td>
+          </tr>
+          <tr>
+            <td><code>chars_len</code></td>
+            <td><code>logs/proxy.log</code></td>
+            <td>记录超限请求的原始字符体积，用于分析对话历史膨胀趋势</td>
+          </tr>
+          <tr>
+            <td><code>session_retry_interval</code></td>
+            <td>定时聚合分析 (09:00 cron)</td>
+            <td>监控客户端在收到 400 后是否自动精简上下文重试，或陷入死循环</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 章节 8 -->
+    <section id="config-spec">
+      <h2>8. 唯一配置规范 (JSON)</h2>
+      <p>生产环境权威配置路径：<code>D:\Bonsai-demo\config\bonsai-agent.json</code></p>
+      <pre><code>{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8081,
+    "model_path": "models/bonsai2-gguf/27B/Ternary-Bonsai-2-27B-PQ2_0.gguf",
+    "ctx_size": 65536,
+    "n_parallel": 1
+  },
+  "proxy": {
+    "listen_port": 8080,
+    "upstream_url": "http://127.0.0.1:8081",
+    "budget": {
+      "mode": "reject",
+      "max_input_tokens": 56320,
+      "chars_per_token_floor": 1.5
+    },
+    "timeouts": {
+      "connect_s": 5,
+      "first_response_s": 30,
+      "stream_idle_s": 300,
+      "overall_s": 3600,
+      "client_write_s": 120
+    }
+  }
+}</code></pre>
+    </section>
+
+    <!-- 章节 9 -->
+    <section id="api-spec">
+      <h2>9. OpenAI 接口兼容使用手册</h2>
+      <p>客户端应始终连接代理端口 <code>:8080</code> 享受保护，严禁绕过代理直连后端：</p>
+      <pre><code># 快速冒烟验证 (PowerShell)
+Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8080/v1/chat/completions" `
+  -ContentType "application/json" `
+  -Body (@{
+      model = "bonsai-2-27b"
+      messages = @(@{ role = "user"; content = "请分析系统瓶颈。" })
+      max_tokens = 512
+      stream = $true
+  } | ConvertTo-Json)</code></pre>
+    </section>
+
+    <!-- 章节 10 -->
+    <section id="tradeoffs">
+      <h2>10. 架构工程权衡与反思 (Trade-offs)</h2>
+      <div class="callout callout-warning">
+        <div class="callout-title">技术面试深度考察点：为什么不直接在代理层自动截断历史？</div>
+        <p>
+          在设计阶段曾提出方案：若用户输入超过 56,320 Token，代理静默裁剪中间的多轮对话，使请求强行通过。
+        </p>
+        <p>
+          <b>经实测否决该方案</b>：大模型在多轮长任务中极度依赖前文的上下文事实。静默截断会导致前置指令或关键变量丢失，引发严重的模型幻觉或胡言乱语；采用 <b>显式 400 快速失败 (Fast-Fail)</b>，将上下文管理权显式交还给客户端 Agent（由其主动总结或清理记忆），是高可靠系统架构的铁律。
+        </p>
+      </div>
+    </section>
+
+    <footer style="margin-top:60px; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); text-align:center;">
+      Bonsai Local LLM通用优化交付档案 · 编制与维护：肖珺予 · 遵循 Apache-2.0 规范
+    </footer>
+  </main>
+
+  <script>
+    // 监听滚动自动高亮侧边栏目录
+    const links = document.querySelectorAll('.nav-link');
+    const sections = Array.from(links).map(link => document.querySelector(link.getAttribute('href')));
+
+    window.addEventListener('scroll', () => {
+      let scrollPos = window.scrollY + 100;
+      sections.forEach((sec, idx) => {
+        if (sec && sec.offsetTop <= scrollPos && (sec.offsetTop + sec.offsetHeight) > scrollPos) {
+          links.forEach(l => l.classList.remove('active'));
+          links[idx].classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1597 @@
+变更前证据保全（只读）
+采集时间：2026-09-27 20:37:35
+目的：陛下已安排另一 agent 卸载 Windows 11 26200 预览版并更换 NVIDIA 驱动；
+      本快照固化"变更前"的 OS/驱动/虚拟化/崩溃证据，供变更后做前后对照。
+说明：本目录全部为只读采集结果；转储文件副本见上一级目录。
+      C 盘原件（Minidump / WER / 事件日志）可能被系统回退或清理，故先行固化。
+
+
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-General
+Id               : 12
+LevelDisplayName : 信息
+Message          : 操作系统已在系统时间 ‎2026‎-‎09‎-‎27T12:17:42.500000000Z 启动。
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-General
+Id               : 25
+LevelDisplayName : 信息
+Message          : 系统时间已初始化为 ‎2026‎-‎09‎-‎27T12:17:42.500000000Z. 
+                   
+                   加载器时间： ‎2026‎-‎09‎-‎27T12:17:40.000000000Z
+                   内部启动标志： 0x2
+                   HAL RTC 错误代码： 0x0
+                   RTC 时间为 UTC： false
+                   软启动： false
+                   成功： true
+                   阶段： 0
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-Boot
+Id               : 153
+LevelDisplayName : 信息
+Message          : 基于虚拟化的安全性(策略: VBS Enabled,VSM Required,Hvci,Boot Chain Signer Soft Enforced)是 enabled due to VBS reg
+                   istry configuration。
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-Boot
+Id               : 18
+LevelDisplayName : 信息
+Message          : 此系统有 0x1 个引导选项。
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-Boot
+Id               : 32
+LevelDisplayName : 信息
+Message          : bootmgr 花费了 0 毫秒等待用户输入。
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-Boot
+Id               : 20
+LevelDisplayName : 信息
+Message          : 上一次关机的成功状态为“false”。上一次引导的成功状态为“true”。
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-Boot
+Id               : 238
+LevelDisplayName : 信息
+Message          : EFI 时区偏移： 2047。夏令时标志： 0。固件时间： ‎2026‎-‎09‎-‎27T20:17:40.000000000Z。 
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-Boot
+Id               : 25
+LevelDisplayName : 信息
+Message          : 引导菜单策略为 0x1。
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-Boot
+Id               : 27
+LevelDisplayName : 信息
+Message          : 引导类型为 0x0。
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Hyper-V-Hypervisor
+Id               : 1
+LevelDisplayName : 信息
+Message          : 虚拟机监控程序已成功启动。
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Hyper-V-Hypervisor
+Id               : 2
+LevelDisplayName : 信息
+Message          : 虚拟机监控程序计划程序类型为 0x4。
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Hyper-V-Hypervisor
+Id               : 129
+LevelDisplayName : 信息
+Message          : 虚拟机监控程序已初始化 I/O 重新映射。
+                   
+                   存在硬件： true
+                   已启用的硬件： true
+                   策略： 0x0
+                   已启用的功能： 0x63
+                   内部信息： 0x0
+                   问题： 0x0
+                   其他信息： 0x0
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Hyper-V-Hypervisor
+Id               : 156
+LevelDisplayName : 信息
+Message          : 虚拟机监控程序为虚拟机配置了 CVE-2018-3646 缓解措施。
+                   
+                   处理器不受影响： true
+                   处理器系列不受影响： false
+                   处理器支持缓存刷新：  true
+                   HyperThreading 已启用： false
+                   父虚拟机监控程序应用缓解措施： false
+                   已启用 bcdedit： false
+                   缓解措施禁用的缓解措施： true
+                   需要刷新缓存： false
+                   
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Hyper-V-Hypervisor
+Id               : 165
+LevelDisplayName : 信息
+Message          : 虚拟机监控程序已配置 CVE-2019-11091 的缓解措施， 虚拟机的 CVE-2018-12126、CVE-2018-12127、CVE-2018-12130。
+                   
+                   处理器不受影响： true
+                   处理器系列不受影响： false
+                   处理器支持微层次结构缓冲区刷新： true
+                   需要缓冲区刷新： false
+                   
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 3
+LevelDisplayName : 信息
+Message          : Secure Kernel started with status STATUS_SUCCESS and flags HvciEnabled,HvciStrictMode.
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-Boot
+Id               : 30
+LevelDisplayName : 信息
+Message          : 固件报告了启动指标。
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-Kernel-General
+Id               : 20
+LevelDisplayName : 信息
+Message          : 闰秒配置已更新。
+                   原因: Leap second data initialized from registry during boot
+                   已启用闰秒: true
+                   新闰秒计数: 0
+                   旧闰秒计数: 0
+
+TimeCreated      : 2026/9/27 20:17:43
+ProviderName     : Microsoft-Windows-HAL
+Id               : 16
+LevelDisplayName : 信息
+Message          : 已初始化 IOMMU 错误报告。
+
+TimeCreated      : 2026/9/27 20:17:45
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“FileInfo”(10.0，‎2093‎-‎04‎-‎02T09:29:43.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:45
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“Wof”(10.0，‎2010‎-‎05‎-‎10T16:46:27.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:45
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“WdFilter”(10.0，‎2048‎-‎07‎-‎09T03:08:07.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:45
+ProviderName     : Microsoft-Windows-BitLocker-Driver
+Id               : 24641
+LevelDisplayName : 错误
+Message          : 重新启动期间尝试检索 BitLocker 卷主密钥时出现意外错误。
+
+TimeCreated      : 2026/9/27 20:17:45
+ProviderName     : Microsoft-Windows-BitLocker-Driver
+Id               : 24709
+LevelDisplayName : 信息
+Message          : 此事件包含启动时最终 TPM PCR 值和 TCG 日志数据。
+
+TimeCreated      : 2026/9/27 20:17:45
+ProviderName     : Microsoft-Windows-BitLocker-Driver
+Id               : 24641
+LevelDisplayName : 错误
+Message          : 重新启动期间尝试检索 BitLocker 卷主密钥时出现意外错误。
+
+TimeCreated      : 2026/9/27 20:17:45
+ProviderName     : Microsoft-Windows-BitLocker-Driver
+Id               : 24709
+LevelDisplayName : 信息
+Message          : 此事件包含启动时最终 TPM PCR 值和 TCG 日志数据。
+
+TimeCreated      : 2026/9/27 20:17:45
+ProviderName     : Microsoft-Windows-Ntfs
+Id               : 98
+LevelDisplayName : 信息
+Message          : 卷 D: (\Device\HarddiskVolume4) 运行状况良好。无需执行任何操作。
+
+TimeCreated      : 2026/9/27 20:17:46
+ProviderName     : Microsoft-Windows-Ntfs
+Id               : 98
+LevelDisplayName : 信息
+Message          : 卷 C: (\Device\HarddiskVolume3) 运行状况良好。无需执行任何操作。
+
+TimeCreated      : 2026/9/27 20:17:46
+ProviderName     : volmgr
+Id               : 161
+LevelDisplayName : 错误
+Message          : 转储文件创建失败，因为在创建转储期间出错。BugCheckProgress 为： 0x00000053
+
+TimeCreated      : 2026/9/27 20:17:46
+ProviderName     : volmgr
+Id               : 162
+LevelDisplayName : 错误
+Message          : 成功生成备份文件。
+
+TimeCreated      : 2026/9/27 20:17:46
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“FileCrypt”(10.0，‎2075‎-‎09‎-‎01T06:07:07.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:46
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“UCPD”(10.0，‎2104‎-‎11‎-‎25T07:34:34.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : VfpExt
+Id               : 7036
+LevelDisplayName : 信息
+Message          :  服务处于 Driver load complete 状态。
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : VfpExt
+Id               : 7036
+LevelDisplayName : 信息
+Message          :  服务处于 Driver load start 状态。
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“npsvctrig”(10.0，‎1978‎-‎05‎-‎14T17:13:30.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Kernel-Power
+Id               : 41
+LevelDisplayName : 关键
+Message          : 系统已在未先正常关机的情况下重新启动。如果系统停止响应、发生崩溃或意外断电，则可能会导致此错误。
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 277
+LevelDisplayName : 信息
+Message          : vmswitch.sys 版本 26100.amd64.ge_release_svc_im，调试 false，正式 true，Sep 12 2026 06:07:25
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 292
+LevelDisplayName : 信息
+Message          : 已为端口 790E58B4-7939-4434-9358-89AE7DDBE87E 修改 RSC 卸载(友好名称: WSL (Hyper-V firewall))上一个: 已禁用，当前: 已启用。原因
+                   : 端口创建
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 67
+LevelDisplayName : 信息
+Message          : 已在交换机 790E58B4-7939-4434-9358-89AE7DDBE87E (易记名称: WSL (Hyper-V firewall))上成功创建端口 790E58B4-7939-4434-
+                   9358-89AE7DDBE87E (易记名称: WSL (Hyper-V firewall))。
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 291
+LevelDisplayName : 信息
+Message          : 已为 NIC 790E58B4-7939-4434-9358-89AE7DDBE87E 修改 RSC 卸载(友好名称: WSL (Hyper-V firewall))以前的 IPv4: 已禁用，当前 
+                   IPv4: 已禁用，以前的 IPv6: 已禁用，当前 IPv6: 已禁用。原因: NIC 创建
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 233
+LevelDisplayName : 信息
+Message          : 操作 "Create" 在 nic 790E58B4-7939-4434-9358-89AE7DDBE87E （友好名称： WSL (Hyper-V firewall)）、实例 Id {0000000
+                   0-0000-0000-0000-000000000000} 上成功。 
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 232
+LevelDisplayName : 信息
+Message          : NIC 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)) successfully connec
+                   ted to port 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)) on switch 7
+                   90E58B4-7939-4434-9358-89AE7DDBE87E(Friendly Name: WSL (Hyper-V firewall)).
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 9
+LevelDisplayName : 信息
+Message          : Switch 790E58B4-7939-4434-9358-89AE7DDBE87E (Friendly Name: WSL (Hyper-V firewall)) successfully ini
+                   tialized.
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 292
+LevelDisplayName : 信息
+Message          : 已为端口 790E58B4-7939-4434-9358-89AE7DDBE87F 修改 RSC 卸载(友好名称: Host Vnic 790E58B4-7939-4434-9358-89AE7DDB
+                   E87E)上一个: 已禁用，当前: 已启用。原因: 端口创建
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 264
+LevelDisplayName : 信息
+Message          : 已在交换机 790E58B4-7939-4434-9358-89AE7DDBE87E (易记名称: WSL (Hyper-V firewall))上成功创建内部或外部端口 790E58B4-7939-
+                   4434-9358-89AE7DDBE87F (易记名称: Host Vnic 790E58B4-7939-4434-9358-89AE7DDBE87E)。
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 291
+LevelDisplayName : 信息
+Message          : 已为 NIC 790E58B4-7939-4434-9358-89AE7DDBE87F 修改 RSC 卸载(友好名称: WSL (Hyper-V firewall))以前的 IPv4: 已禁用，当前 
+                   IPv4: 已禁用，以前的 IPv6: 已禁用，当前 IPv6: 已禁用。原因: NIC 创建
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 233
+LevelDisplayName : 信息
+Message          : 操作 "Create" 在 nic 790E58B4-7939-4434-9358-89AE7DDBE87F （友好名称： WSL (Hyper-V firewall)）、实例 Id {0000000
+                   0-0000-0000-0000-000000000000} 上成功。 
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 291
+LevelDisplayName : 信息
+Message          : 已为 NIC 790E58B4-7939-4434-9358-89AE7DDBE87F 修改 RSC 卸载(友好名称: WSL (Hyper-V firewall))以前的 IPv4: 已禁用，当前 
+                   IPv4: 已禁用，以前的 IPv6: 已禁用，当前 IPv6: 已禁用。原因: NIC 启动
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 7
+LevelDisplayName : 信息
+Message          : Miniport NIC 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: WSL (Hyper-V firewall)) successful
+                   ly initialized.
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 232
+LevelDisplayName : 信息
+Message          : NIC 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: WSL (Hyper-V firewall)) successfully connec
+                   ted to port 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: Host Vnic 790E58B4-7939-4434-9358-8
+                   9AE7DDBE87E) on switch 790E58B4-7939-4434-9358-89AE7DDBE87E(Friendly Name: WSL (Hyper-V firewall)).
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 5
+LevelDisplayName : 信息
+Message          : Miniport NIC 790E58B4-7939-4434-9358-89AE7DDBE87F (Friendly Name: WSL (Hyper-V firewall)) successful
+                   ly enabled
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-DriverFrameworks-UserMode
+Id               : 10118
+LevelDisplayName : 信息
+Message          : UMDF 反射器无法连接到服务控制管理器 (SCM)。如果 SCM 尚未启动，此情况应出现在引导期间。SCM 启动时将重试。
+
+TimeCreated      : 2026/9/27 20:17:47
+ProviderName     : Microsoft-Windows-Kernel-PnP
+Id               : 219
+LevelDisplayName : 警告
+Message          : 驱动程序\Driver\WUDFRd加载失败。
+                   Device： ROOT\WINDOWSHELLOFACESOFTWAREDRIVER\0000
+                   状态： 0xC0000365
+
+TimeCreated      : 2026/9/27 20:17:48
+ProviderName     : Microsoft-Windows-DriverFrameworks-UserMode
+Id               : 10118
+LevelDisplayName : 信息
+Message          : UMDF 反射器无法连接到服务控制管理器 (SCM)。如果 SCM 尚未启动，此情况应出现在引导期间。SCM 启动时将重试。
+
+TimeCreated      : 2026/9/27 20:17:48
+ProviderName     : Microsoft-Windows-Kernel-PnP
+Id               : 219
+LevelDisplayName : 警告
+Message          : 驱动程序\Driver\WUDFRd加载失败。
+                   Device： PCI\VEN_8086&DEV_AD03&SUBSYS_380117AA&REV_01\3&11583659&1&20
+                   状态： 0xC0000365
+
+TimeCreated      : 2026/9/27 20:17:48
+ProviderName     : Microsoft-Windows-Ntfs
+Id               : 98
+LevelDisplayName : 信息
+Message          : 卷 \\?\Volume{a3cb7269-02f7-4605-99c3-bbfaef30abb9} (\Device\HarddiskVolume5) 运行状况良好。无需执行任何操作。
+
+TimeCreated      : 2026/9/27 20:17:48
+ProviderName     : Microsoft-Windows-Kernel-General
+Id               : 24
+LevelDisplayName : 信息
+Message          : 已刷新时区信息，退出原因为 0。当前时区偏差为 -480。
+
+TimeCreated      : 2026/9/27 20:17:49
+ProviderName     : Wdf01000
+Id               : 3
+LevelDisplayName : 警告
+Message          : 驱动程序助手加载失败。- Service:USBXHCI, Companion:UsbXhciCompanion, Status:0xc0000034。
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-DriverFrameworks-UserMode
+Id               : 10118
+LevelDisplayName : 信息
+Message          : UMDF 反射器无法连接到服务控制管理器 (SCM)。如果 SCM 尚未启动，此情况应出现在引导期间。SCM 启动时将重试。
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-PnP
+Id               : 219
+LevelDisplayName : 警告
+Message          : 驱动程序\Driver\WUDFRd加载失败。
+                   Device： ROOT\SYSTEM\0001
+                   状态： 0xC0000365
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 0 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2700
+                   最佳性能百分比: 197
+                   最低性能百分比: 83
+                   最低限制百分比: 2
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 1 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2700
+                   最佳性能百分比: 197
+                   最低性能百分比: 83
+                   最低限制百分比: 2
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 2 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 72
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 3 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 72
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 4 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 72
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 5 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 72
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 6 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 72
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 7 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 72
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 8 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 72
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 9 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 72
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 10 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2700
+                   最佳性能百分比: 202
+                   最低性能百分比: 83
+                   最低限制百分比: 2
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 11 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2700
+                   最佳性能百分比: 197
+                   最低性能百分比: 83
+                   最低限制百分比: 2
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 12 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2700
+                   最佳性能百分比: 197
+                   最低性能百分比: 83
+                   最低限制百分比: 2
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 13 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2700
+                   最佳性能百分比: 202
+                   最低性能百分比: 83
+                   最低限制百分比: 2
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 14 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 65
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : MEIx64
+Id               : 2
+LevelDisplayName : 信息
+Message          : Intel(R) Management Engine Interface driver has started successfully.
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 15 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 65
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 16 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 65
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 17 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 65
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 18 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 65
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 19 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 65
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 20 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 65
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 21 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2100
+                   最佳性能百分比: 224
+                   最低性能百分比: 65
+                   最低限制百分比: 3
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 22 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2700
+                   最佳性能百分比: 197
+                   最低性能百分比: 83
+                   最低限制百分比: 2
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : Microsoft-Windows-Kernel-Processor-Power
+Id               : 55
+LevelDisplayName : 信息
+Message          : 组 0 中的处理器 23 显示下列电源管理功能:
+                   
+                   空闲状态类型: Micro Power Engine Plugin (11 状态)
+                   
+                   性能状态类型: ACPI Collaborative Processor Performance Control
+                   标称频率(MHz): 2700
+                   最佳性能百分比: 197
+                   最低性能百分比: 83
+                   最低限制百分比: 2
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : VfpExt
+Id               : 7036
+LevelDisplayName : 信息
+Message          :  服务处于 Filter restart start 状态。
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : VfpExt
+Id               : 7036
+LevelDisplayName : 信息
+Message          :  服务处于 Filter restart complete 状态。
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : VfpExt
+Id               : 7036
+LevelDisplayName : 信息
+Message          :  服务处于 Filter attach start 状态。
+
+TimeCreated      : 2026/9/27 20:17:50
+ProviderName     : VfpExt
+Id               : 7036
+LevelDisplayName : 信息
+Message          :  服务处于 Filter attach complete 状态。
+
+TimeCreated      : 2026/9/27 20:17:51
+ProviderName     : Microsoft-Windows-Kernel-Power
+Id               : 521
+LevelDisplayName : 信息
+Message          : 可用电池计数变化。
+
+TimeCreated      : 2026/9/27 20:17:51
+ProviderName     : Microsoft-Windows-Kernel-Power
+Id               : 521
+LevelDisplayName : 信息
+Message          : 可用电池计数变化。
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Intel-SST-OED
+Id               : 29
+LevelDisplayName : 信息
+Message          : FX module is not supported in BIOS:  {88172caf-38f3-4373-bfdf-40fb5ce0a109} from \??\C:\Windows\Syst
+                   em32\DriverStore\FileRepository\intcoed_oemlibpath.inf_amd64_49d1b7020c9b77bf\mtl_rtksep181_lib.bin.
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Library is not supported in BIOS: \??\C:\Windows\System32\DriverStore\FileRepository\intcoed_oemlibp
+                   ath.inf_amd64_49d1b7020c9b77bf\mtl_rtksep181_lib.bin, status = 不支持该请求。.
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Intel-SST-OED
+Id               : 29
+LevelDisplayName : 信息
+Message          : FX module is not supported in BIOS:  {7aa4db02-6b41-4bc3-a712-80a2dde29e11} from \??\C:\Windows\Syst
+                   em32\DriverStore\FileRepository\intcoed_oemlibpath.inf_amd64_49d1b7020c9b77bf\mtl_rtksep481_lib.bin.
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Library is not supported in BIOS: \??\C:\Windows\System32\DriverStore\FileRepository\intcoed_oemlibp
+                   ath.inf_amd64_49d1b7020c9b77bf\mtl_rtksep481_lib.bin, status = 不支持该请求。.
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Intel-SST-OED
+Id               : 29
+LevelDisplayName : 信息
+Message          : FX module is not supported in BIOS:  {876cd395-4c0d-4dd7-a205-7f99fd78ed78} from \??\C:\Windows\Syst
+                   em32\DriverStore\FileRepository\intcoed_oemlibpath.inf_amd64_49d1b7020c9b77bf\mtl_vlldp15x_2inst_lib
+                   .bin.
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Library is not supported in BIOS: \??\C:\Windows\System32\DriverStore\FileRepository\intcoed_oemlibp
+                   ath.inf_amd64_49d1b7020c9b77bf\mtl_vlldp15x_2inst_lib.bin, status = 不支持该请求。.
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Netwaw18
+Id               : 7029
+LevelDisplayName : 信息
+Message          : 
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Netwaw18
+Id               : 7027
+LevelDisplayName : 信息
+Message          : 
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Netwaw18
+Id               : 7005
+LevelDisplayName : 信息
+Message          : 
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Netwaw18
+Id               : 7006
+LevelDisplayName : 信息
+Message          : 
+
+TimeCreated      : 2026/9/27 20:17:52
+ProviderName     : Netwaw18
+Id               : 7010
+LevelDisplayName : 信息
+Message          : 
+
+TimeCreated      : 2026/9/27 20:17:53
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Loaded DSP FW library: Libs\dsp_lib_asrc_mtl-s_release.bin, status = STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:53
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Loaded DSP FW library: Libs\dsp_lib_intel_wov_mtl-s_release.bin, status = STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:53
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Loaded DSP FW library: Libs\dsp_lib_nld_mtl-s_release.bin, status = STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:53
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Loaded DSP FW library: Libs\dsp_lib_whm_mtl-s_release.bin, status = STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:53
+ProviderName     : Netwaw18
+Id               : 7017
+LevelDisplayName : 信息
+Message          : 
+
+TimeCreated      : 2026/9/27 20:17:53
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Loaded DSP FW library: \??\C:\Windows\System32\DriverStore\FileRepository\intcoed_oemlibpath.inf_amd
+                   64_49d1b7020c9b77bf\mtl_bandcalc_lib.bin, status = STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:53
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Loaded DSP FW library: \??\C:\Windows\System32\DriverStore\FileRepository\intcoed_oemlibpath.inf_amd
+                   64_49d1b7020c9b77bf\mtl_elliptic2_lib.bin, status = STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:53
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Loaded DSP FW library: \??\C:\Windows\System32\DriverStore\FileRepository\intcoed_oemlibpath.inf_amd
+                   64_49d1b7020c9b77bf\mtl_elliptic_lib.bin, status = STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:53
+ProviderName     : Intel-SST-OED
+Id               : 28
+LevelDisplayName : 信息
+Message          : Loaded DSP FW library: \??\C:\Windows\System32\DriverStore\FileRepository\intcoed_oemlibpath.inf_amd
+                   64_49d1b7020c9b77bf\mtl_vlldp15xlite_2inst_lib.bin, status = STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:55
+ProviderName     : Microsoft-Windows-DriverFrameworks-UserMode
+Id               : 10118
+LevelDisplayName : 信息
+Message          : UMDF 反射器无法连接到服务控制管理器 (SCM)。如果 SCM 尚未启动，此情况应出现在引导期间。SCM 启动时将重试。
+
+TimeCreated      : 2026/9/27 20:17:55
+ProviderName     : Microsoft-Windows-Kernel-PnP
+Id               : 219
+LevelDisplayName : 警告
+Message          : 驱动程序\Driver\WUDFRd加载失败。
+                   Device： HID\Vid_8087&Pid_0AC2\7&2a5bd04f&0&0000
+                   状态： 0xC0000365
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-Wininit
+Id               : 19
+LevelDisplayName : 信息
+Message          : 基于虚拟化的安全性新计时器创建状态
+                   
+                   HRESULT: The operation completed successfully.
+                   需要新的闩锁计时器: false
+                   等待系统更新完成的新闩锁计时器: false
+                   现有闩锁计时器存在，但注册表已禁用: false
+                   策略文件存在: false
+                   
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-Wininit
+Id               : 24
+LevelDisplayName : 信息
+Message          : 启动应用反回滚： 计时器启动已完成，状态为：
+                   
+                   Win32Error： 0
+                   开始时间： ‎2026‎-‎09‎-‎20T13:59:58.684388700Z
+                   宽限期： 51840000000000
+                   截止时间： ‎2026‎-‎11‎-‎19T13:59:58.684388700Z
+                   
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-Wininit
+Id               : 25
+LevelDisplayName : 信息
+Message          : 启动应用防回退： 上一个计时器已恢复，状态为：
+                   
+                   HRESULT： The operation completed successfully.
+                   以前的计时器存在： true
+                   开始时间： ‎2026‎-‎09‎-‎20T13:59:58.684388700Z
+                   宽限期： 51840000000000
+                   尝试的恢复强制执行成功： false
+                   
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-Wininit
+Id               : 23
+LevelDisplayName : 信息
+Message          : 启动应用反回滚： 初始化已完成，状态为：
+                   HRESULT： The operation completed successfully.
+                   需要新计时器： false
+                   等待系统更新完成的新计时器： false
+                   以前的闩锁计时器存在，但被注册表禁用： false
+                   
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-Wininit
+Id               : 14
+LevelDisplayName : 信息
+Message          : Credential Guard 配置：
+                   
+                   注册表配置： 0x0
+                   测试配置： 0
+                   自动启用： 0
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 5
+LevelDisplayName : 信息
+Message          : Secure Trustlet NULL Id 0 and Pid 0 started with status STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 1
+LevelDisplayName : 信息
+Message          : Secure Trustlet \??\C:\Windows\system32\lsaiso.exe Id 1 and Pid 2084 started with status STATUS_SUCC
+                   ESS.
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-Wininit
+Id               : 18
+LevelDisplayName : 信息
+Message          : VBS 密钥隔离已启动，并将保护 VSM 隔离的密钥。
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-Wininit
+Id               : 12
+LevelDisplayName : 信息
+Message          : LSASS.exe 已作为级别为 4 的受保护进程启动。
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : LsaSrv
+Id               : 6156
+LevelDisplayName : 信息
+Message          : Credential Guard 自动启用状态。基于虚拟化的安全的 
+                   
+                   Hardware 要求：	1
+                   Domain Joined:	0
+                   Azure AD Joined:	0
+                    Licensed for Credential Guard:	0
+                   Domain Controller:	0
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 5
+LevelDisplayName : 信息
+Message          : Secure Trustlet NULL Id 0 and Pid 0 started with status STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-Directory-Services-SAM
+Id               : 16962
+LevelDisplayName : 信息
+Message          : 对 SAM 数据库进行远程调用时，受到默认安全描述符的限制: O:SYG:SYD:(A;;RC;;;BA)。
+                   有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=787651。
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-Directory-Services-SAM
+Id               : 16977
+LevelDisplayName : 信息
+Message          : 使用以下最小密码长度的相关设置配置域。
+                   
+                   MinimumPasswordLength: 0
+                   
+                   RelaxMinimumPasswordLengthLimits: 0
+                   
+                   MinimumPasswordLengthAudit: -1
+                   
+                   有关详细信息，请访问 https://go.microsoft.com/fwlink/?LinkId=2097191。
+                   
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-Directory-Services-SAM
+Id               : 16983
+LevelDisplayName : 信息
+Message          : 安全账户管理器现在将记录负责调用旧密码更改或设置 RPC 方法的远程客户端的定期摘要事件。
+                   
+                   有关详细信息，请参阅 https://go.microsoft.com/fwlink/?linkid=2150956。
+                   
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 5
+LevelDisplayName : 信息
+Message          : Secure Trustlet NULL Id 0 and Pid 0 started with status STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:58
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 1
+LevelDisplayName : 信息
+Message          : Secure Trustlet \??\C:\Windows\System32\WUDFCompanionHost.exe Id 4096 and Pid 2616 started with stat
+                   us STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-Dhcp-Client
+Id               : 50036
+LevelDisplayName : 信息
+Message          : DHCPv4 客户端服务已启动
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-Dhcp-Client
+Id               : 50103
+LevelDisplayName : 信息
+Message          : 已针对关闭通知注册 DHCPv4 客户端
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-Dhcp-Client
+Id               : 50036
+LevelDisplayName : 信息
+Message          : DHCPv4 客户端服务已启动
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-DHCPv6-Client
+Id               : 51046
+LevelDisplayName : 信息
+Message          : DHCPv6 客户端服务已启动
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-WER-SystemErrorReporting
+Id               : 1001
+LevelDisplayName : 错误
+Message          : 计算机已经从检测错误后重新启动。检测错误: 0x00020001 (0x0000000000000028, 0x0000000000000001, 0x0000000029b92701, 0x0000
+                   0000fc800000)。已将转储的数据保存在: C:\Windows\Minidump\092726-17375-01.dmp。报告 ID: 2af1381f-e3af-4b28-8f83-51e
+                   58a249b93。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“bfs”(10.0，‎2040‎-‎12‎-‎25T16:51:46.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“luafv”(10.0，‎2057‎-‎12‎-‎25T05:49:34.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“wcifs”(10.0，‎2036‎-‎03‎-‎14T08:07:44.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“CldFlt”(10.0，‎2079‎-‎01‎-‎30T11:04:50.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 1
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“CldFlt”(版本 10.0，‎2079‎-‎01‎-‎30T11:04:50.000000000Z)已成功卸载。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“CldFlt”(10.0，‎2079‎-‎01‎-‎30T11:04:50.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“UnionFS”(10.0，‎2053‎-‎04‎-‎01T00:44:17.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“storqosflt”(10.0，‎1989‎-‎03‎-‎28T19:25:35.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“LnvMSRIO”(10.0，‎2025‎-‎12‎-‎05T11:04:59.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Microsoft-Windows-FilterManager
+Id               : 6
+LevelDisplayName : 信息
+Message          : 文件系统筛选器“bindflt”(10.0，‎2011‎-‎07‎-‎23T23:20:48.000000000Z)已成功加载并注册到筛选器管理器。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : EventLog
+Id               : 6008
+LevelDisplayName : 错误
+Message          : 上一次系统的 20:16:55 在 ‎2026/‎9/‎27 上的关闭是意外的。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : EventLog
+Id               : 6009
+LevelDisplayName : 信息
+Message          : Microsoft (R) Windows (R) 10.00. 26200  Multiprocessor Free。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : EventLog
+Id               : 6005
+LevelDisplayName : 信息
+Message          : 事件日志服务已启动。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : EventLog
+Id               : 6013
+LevelDisplayName : 信息
+Message          : 系统启动时间为 17 秒。
+
+TimeCreated      : 2026/9/27 20:17:59
+ProviderName     : Win32k
+Id               : 267
+LevelDisplayName : 信息
+Message          : 触摸/触摸板硬件质量保证验证已成功。
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL http://*:5357/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL http://+:80/Temporary_Listen_Addresses/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL https://*:5358/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL http://*:2869/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL https://+:5986/wsman/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL http://+:47001/wsman/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL http://+:5985/wsman/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL https://+:10245/WMPNSSv4/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL http://+:10243/WMPNSSv4/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL http://+:3387/rdp/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL https://+:3392/rdp/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL https://+:443/sra_{BA195980-CD49-458b-9E23-C84EE0ADCD75}/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 I
+                   D
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL http://+:10247/apps/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-HttpService
+Id               : 112
+LevelDisplayName : 信息
+Message          : 尝试保留 URL http://+:10246/MDEServer/。状态0x0。用户 S-1-5-18 0x4可执行文件路径的进程 ID
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 5
+LevelDisplayName : 信息
+Message          : Secure Trustlet NULL Id 0 and Pid 0 started with status STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 1
+LevelDisplayName : 信息
+Message          : Secure Trustlet \??\C:\Windows\System32\NgcIso.exe Id 6 and Pid 5872 started with status STATUS_SUCC
+                   ESS.
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Service Control Manager
+Id               : 7000
+LevelDisplayName : 错误
+Message          : 由于下列错误，i4ToolsService 服务启动失败: 
+                   The system cannot find the file specified.
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 5
+LevelDisplayName : 信息
+Message          : Secure Trustlet NULL Id 0 and Pid 0 started with status STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 1
+LevelDisplayName : 信息
+Message          : Secure Trustlet \??\C:\Windows\system32\BioIso.exe Id 4 and Pid 7924 started with status STATUS_SUCC
+                   ESS.
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 5
+LevelDisplayName : 信息
+Message          : Secure Trustlet NULL Id 0 and Pid 0 started with status STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:18:00
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 1
+LevelDisplayName : 信息
+Message          : Secure Trustlet \??\C:\Windows\System32\WUDFCompanionHost.exe Id 4096 and Pid 8248 started with stat
+                   us STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:18:01
+ProviderName     : BTHUSB
+Id               : 18
+LevelDisplayName : 信息
+Message          : Windows 无法在本地适配器上存储蓝牙身份验证代码(链接密钥)。启动时，蓝牙键盘可能无法在系统 BIOS 中工作。
+
+TimeCreated      : 2026/9/27 20:18:01
+ProviderName     : Microsoft-Windows-WLAN-AutoConfig
+Id               : 4000
+LevelDisplayName : 信息
+Message          : 已成功启动 WLAN 自动配置服务。
+                   
+
+TimeCreated      : 2026/9/27 20:18:02
+ProviderName     : Microsoft-Windows-WLAN-AutoConfig
+Id               : 10001
+LevelDisplayName : 信息
+Message          : 已成功启动 WLAN 扩展模块。
+                   
+                   模块路径: C:\Windows\System32\DriverStore\FileRepository\netwtw6e.inf_amd64_25f0650d769624eb\IntelIHVRou
+                   ter18.dll
+                   
+
+TimeCreated      : 2026/9/27 20:18:02
+ProviderName     : Microsoft-Windows-TPM-WMI
+Id               : 1041
+LevelDisplayName : 信息
+Message          : 预证明运行状况检查详细信息: {"Version":2,"HealthStatus":"Attestable","Required":[{"Field":"TpmPresent","Value":tr
+                   ue,"DesiredValue":true},{"Field":"TpmMeetsMinimumVersion","Value":true,"DesiredValue":true},{"Field"
+                   :"TpmIsResponsive","Value":true,"DesiredValue":true},{"Field":"EkCertIsAvailable","Value":true,"Desi
+                   redValue":true},{"Field":"TcgLogFound","Value":true,"DesiredValue":true}],"Expected":[{"Field":"Pcrs
+                   MatchTcgLog","Value":true,"DesiredValue":true}],"Informational":[{"Field":"SecureBootEnabled","Value
+                   FromComputer":true,"ValueFromTcgLog":true,"DesiredValue":true,"TcgValueIsVerifiable":true},{"Field":
+                   "VirtualSecureMemory","ValueFromComputer":false,"ValueFromTcgLog":false,"DesiredValue":true,"TcgValu
+                   eIsVerifiable":true},{"Field":"SecureCorePCCompliant","ValueFromComputer":false,"ValueFromTcgLog":fa
+                   lse,"DesiredValue":true,"TcgValueIsVerifiable":true},{"Field":"MostRecentBootTcgLogFoundInFileSystem
+                   ","Value":true,"DesiredValue":true},{"Field":"CurrentTcgLogFoundInFileSystem","Value":true,"DesiredV
+                   alue":true},{"Field":"EkCertRsa2048IsAvailable","Value":true,"DesiredValue":true},{"Field":"EkCertEc
+                   cP256IsAvailable","Value":true,"DesiredValue":true},{"Field":"EkCertEccP384IsAvailable","Value":true
+                   ,"DesiredValue":true},{"Field":"WindowsAikCertRsa2048IsAvailable","Value":true,"DesiredValue":true},
+                   {"Field":"WindowsAikCertEccP256IsAvailable","Value":true,"DesiredValue":true},{"Field":"WindowsAikCe
+                   rtEccP384IsAvailable","Value":true,"DesiredValue":true}]}
+
+TimeCreated      : 2026/9/27 20:18:02
+ProviderName     : Microsoft-Windows-TPM-WMI
+Id               : 1038
+LevelDisplayName : 信息
+Message          : 预证明运行状况检查确认设备应通过证明。
+                    有关所做检查的详细信息，请参阅 C:\Windows\Logs\MeasuredBoot\0000000049-0000000000.json。
+
+TimeCreated      : 2026/9/27 20:18:03
+ProviderName     : VfpExt
+Id               : 7036
+LevelDisplayName : 信息
+Message          :  服务处于 Filter pause start 状态。
+
+TimeCreated      : 2026/9/27 20:18:03
+ProviderName     : VfpExt
+Id               : 7036
+LevelDisplayName : 信息
+Message          :  服务处于 Filter pause complete 状态。
+
+TimeCreated      : 2026/9/27 20:18:03
+ProviderName     : VfpExt
+Id               : 7036
+LevelDisplayName : 信息
+Message          :  服务处于 Filter detach start 状态。
+
+TimeCreated      : 2026/9/27 20:18:03
+ProviderName     : VfpExt
+Id               : 7036
+LevelDisplayName : 信息
+Message          :  服务处于 Filter detach complete 状态。
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 234
+LevelDisplayName : 信息
+Message          : NIC 790E58B4-7939-4434-9358-89AE7DDBE87E successfully disconnected from port 790E58B4-7939-4434-9358
+                   -89AE7DDBE87E.
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 69
+LevelDisplayName : 信息
+Message          : 端口 790E58B4-7939-4434-9358-89AE7DDBE87E (易记名称: WSL (Hyper-V firewall))已成功删除–交换机 790E58B4-7939-4434-9
+                   358-89AE7DDBE87E (易记名称: WSL (Hyper-V firewall))。
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 234
+LevelDisplayName : 信息
+Message          : NIC 790E58B4-7939-4434-9358-89AE7DDBE87F successfully disconnected from port 790E58B4-7939-4434-9358
+                   -89AE7DDBE87F.
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 69
+LevelDisplayName : 信息
+Message          : 端口 790E58B4-7939-4434-9358-89AE7DDBE87F (易记名称: Host Vnic 790E58B4-7939-4434-9358-89AE7DDBE87E)已成功删除–
+                   交换机 790E58B4-7939-4434-9358-89AE7DDBE87E (易记名称: WSL (Hyper-V firewall))。
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 71
+LevelDisplayName : 信息
+Message          : 端口 790E58B4-7939-4434-9358-89AE7DDBE87F 的删除完成(易记名称: Host Vnic 790E58B4-7939-4434-9358-89AE7DDBE87E)。
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 71
+LevelDisplayName : 信息
+Message          : 端口 790E58B4-7939-4434-9358-89AE7DDBE87E 的删除完成(易记名称: WSL (Hyper-V firewall))。
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 233
+LevelDisplayName : 信息
+Message          : 操作 "Delete" 在 nic 790E58B4-7939-4434-9358-89AE7DDBE87E （友好名称： WSL (Hyper-V firewall)）、实例 Id {0000000
+                   0-0000-0000-0000-000000000000} 上成功。 
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 62
+LevelDisplayName : 信息
+Message          : 已成功删除交换机 790E58B4-7939-4434-9358-89AE7DDBE87E (友好名称: WSL (Hyper-V firewall))。
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Service Control Manager
+Id               : 7026
+LevelDisplayName : 信息
+Message          : 以下引导启动或系统启动驱动程序未加载: 
+                   WinSetupMon
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-Hyper-V-VmSwitch
+Id               : 233
+LevelDisplayName : 信息
+Message          : 操作 "Delete" 在 nic 790E58B4-7939-4434-9358-89AE7DDBE87F （友好名称： WSL (Hyper-V firewall)）、实例 Id {8dcc3fe
+                   f-1fac-4b10-88c6-8bf9bc1f05db} 上成功。 
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 5
+LevelDisplayName : 信息
+Message          : Secure Trustlet NULL Id 0 and Pid 0 started with status STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:18:04
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 1
+LevelDisplayName : 信息
+Message          : Secure Trustlet C:\Windows\system32\FsIso.exe Id 5 and Pid 8488 started with status STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:18:05
+ProviderName     : TPM
+Id               : 18
+LevelDisplayName : 信息
+Message          : 此事件会触发受信任的平台模块(TPM)预配/状态检查运行。
+
+TimeCreated      : 2026/9/27 20:18:05
+ProviderName     : Netwaw18
+Id               : 7021
+LevelDisplayName : 信息
+Message          : 
+
+TimeCreated      : 2026/9/27 20:18:12
+ProviderName     : Microsoft-Windows-TPM-WMI
+Id               : 1282
+LevelDisplayName : 信息
+Message          : 已生成 TBS 设备标识符。
+
+TimeCreated      : 2026/9/27 20:18:12
+ProviderName     : TPM
+Id               : 17
+LevelDisplayName : 信息
+Message          : 受信任的平台模块(TPM)硬件无法执行 TPM 命令。
+
+TimeCreated      : 2026/9/27 20:18:12
+ProviderName     : TPM
+Id               : 17
+LevelDisplayName : 信息
+Message          : 受信任的平台模块(TPM)硬件无法执行 TPM 命令。
+
+TimeCreated      : 2026/9/27 20:18:13
+ProviderName     : Microsoft-Windows-TPM-WMI
+Id               : 1025
+LevelDisplayName : 信息
+Message          : TPM 已成功预配，现在可以使用。
+
+TimeCreated      : 2026/9/27 20:18:35
+ProviderName     : Display
+Id               : 4107
+LevelDisplayName : 信息
+Message          : 在对 SetDisplayConfig() API 的调用中调用方指定了 SDC_FORCE_MODE_ENUMERATION 标志
+
+TimeCreated      : 2026/9/27 20:18:38
+ProviderName     : Microsoft-Windows-Winlogon
+Id               : 7001
+LevelDisplayName : 信息
+Message          : 客户体验改善计划的用户登录通知
+
+TimeCreated      : 2026/9/27 20:18:38
+ProviderName     : Microsoft-Windows-DistributedCOM
+Id               : 10016
+LevelDisplayName : 警告
+Message          : 应用程序-特定 权限设置并未向在应用程序容器 不可用 SID (不可用)中运行的地址 LocalHost (使用 LRPC) 中的用户 NT AUTHORITY\LOCAL SERVICE SID (
+                   S-1-5-19)授予针对 CLSID 为 
+                   {6B3B8D23-FA8D-40B9-8DBD-B950333E2C52}
+                   、APPID 为 
+                   {4839DDB7-58C2-48F5-8283-E1D1807D0D7D}
+                    的 COM 服务器应用程序的 本地 激活 权限。此安全权限可以使用组件服务管理工具进行修改。
+
+TimeCreated      : 2026/9/27 20:18:38
+ProviderName     : Microsoft-Windows-DistributedCOM
+Id               : 10016
+LevelDisplayName : 警告
+Message          : 应用程序-特定 权限设置并未向在应用程序容器 不可用 SID (不可用)中运行的地址 LocalHost (使用 LRPC) 中的用户 NT AUTHORITY\LOCAL SERVICE SID (
+                   S-1-5-19)授予针对 CLSID 为 
+                   {6B3B8D23-FA8D-40B9-8DBD-B950333E2C52}
+                   、APPID 为 
+                   {4839DDB7-58C2-48F5-8283-E1D1807D0D7D}
+                    的 COM 服务器应用程序的 本地 激活 权限。此安全权限可以使用组件服务管理工具进行修改。
+
+TimeCreated      : 2026/9/27 20:18:38
+ProviderName     : Microsoft-Windows-IsolatedUserMode
+Id               : 2
+LevelDisplayName : 信息
+Message          : Secure Trustlet Id 5 and Pid 8488 stopped with status STATUS_SUCCESS.
+
+TimeCreated      : 2026/9/27 20:19:03
+ProviderName     : Microsoft-Windows-DistributedCOM
+Id               : 10016
+LevelDisplayName : 警告
+Message          : 应用程序-特定 权限设置并未向在应用程序容器 不可用 SID (不可用)中运行的地址 LocalHost (使用 LRPC) 中的用户 THINKBOOK16P\intpj SID (S-1-5-21
+                   -2646534994-4146949105-1506483499-1001)授予针对 CLSID 为 
+                   Windows.SecurityCenter.WscCloudBackupProvider
+                   、APPID 为 
+                   不可用
+                    的 COM 服务器应用程序的 本地 启动 权限。此安全权限可以使用组件服务管理工具进行修改。
+
+TimeCreated      : 2026/9/27 20:19:04
+ProviderName     : Microsoft-Windows-DistributedCOM
+Id               : 10016
+LevelDisplayName : 警告
+Message          : 应用程序-特定 权限设置并未向在应用程序容器 不可用 SID (不可用)中运行的地址 LocalHost (使用 LRPC) 中的用户 THINKBOOK16P\intpj SID (S-1-5-21
+                   -2646534994-4146949105-1506483499-1001)授予针对 CLSID 为 
+                   Windows.SecurityCenter.WscCloudBackupProvider
+                   、APPID 为 
+                   不可用
+                    的 COM 服务器应用程序的 本地 启动 权限。此安全权限可以使用组件服务管理工具进行修改。
+
+
+

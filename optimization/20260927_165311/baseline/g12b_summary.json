@@ -1,0 +1,167 @@
+{
+  "phase": "G12b",
+  "threshold": 56320,
+  "window": 65536,
+  "need_gen": 9216,
+  "floor": 3.0,
+  "skip_exact_if_body_bytes_le": 168960,
+  "target": 57000,
+  "probes": [
+    {
+      "probe": "P-dense",
+      "max_tokens": 64,
+      "reps": 9,
+      "port": 8084,
+      "content_chars": 116336,
+      "body_bytes": 127199,
+      "self_exact_tokens": 62750,
+      "self_chars_per_token": 1.854,
+      "self_body_bytes_per_token": 2.027,
+      "est_upper_floor3": 42399,
+      "wall_s": 118.32,
+      "ttft_s": 115.47,
+      "finish": "length",
+      "error": null,
+      "content_out_chars": 0,
+      "tool_calls": [],
+      "gate": {
+        "verdict": "在预算内(便宜路径)",
+        "method": "chars_upper_bound",
+        "input_tokens": null,
+        "est_upper": 42615,
+        "required": null,
+        "headroom": null,
+        "window": 65536,
+        "planned_gen": 8192,
+        "reserve": 1024,
+        "elapsed_ms": 0.0,
+        "mode": "warn"
+      },
+      "processed_tokens_backend": 62831,
+      "prompt_evaluated_tokens": 62722,
+      "cache_reused_tokens": 109,
+      "prefill_ms": 115378.2,
+      "finish_reason": "length",
+      "truncated": true,
+      "status": 200,
+      "proxy_notes": [
+        "服务端未返回 usage（拿不到 token 总数）"
+      ],
+      "record_seen": true,
+      "content_kind": "日志切片重复（时间戳/数字/符号密集）",
+      "calib_trace": [
+        {
+          "reps": 1,
+          "tokens": 7542
+        },
+        {
+          "reps": 2,
+          "tokens": 14443
+        },
+        {
+          "reps": 4,
+          "tokens": 28245
+        },
+        {
+          "reps": 8,
+          "tokens": 55849
+        },
+        {
+          "reps": 16,
+          "tokens": 111057
+        },
+        {
+          "reps": 9,
+          "tokens": 62750
+        }
+      ]
+    },
+    {
+      "probe": "P-sparse",
+      "max_tokens": 64,
+      "reps": 151,
+      "port": 8084,
+      "content_chars": 332806,
+      "body_bytes": 335521,
+      "self_exact_tokens": 57115,
+      "self_chars_per_token": 5.827,
+      "self_body_bytes_per_token": 5.874,
+      "est_upper_floor3": 111840,
+      "wall_s": 105.53,
+      "ttft_s": 102.8,
+      "finish": "length",
+      "error": null,
+      "content_out_chars": 0,
+      "tool_calls": [],
+      "gate": {
+        "verdict": "超预算",
+        "method": "exact(apply-template+tokenize)",
+        "input_tokens": 57196,
+        "est_upper": 112055,
+        "required": 66412,
+        "headroom": -876,
+        "window": 65536,
+        "planned_gen": 8192,
+        "reserve": 1024,
+        "elapsed_ms": 125.0,
+        "mode": "warn"
+      },
+      "processed_tokens_backend": 57196,
+      "prompt_evaluated_tokens": 56488,
+      "cache_reused_tokens": 708,
+      "prefill_ms": 102513.8,
+      "finish_reason": "length",
+      "truncated": true,
+      "status": 200,
+      "proxy_notes": [
+        "输入超预算：输入 57196 + 计划生成 8192 + 余量 1024 = 66412 > 窗口 65536（超 876 tok）；按配置 warn，仍转发",
+        "服务端未返回 usage（拿不到 token 总数）"
+      ],
+      "record_seen": true,
+      "content_kind": "英文自然语段重复",
+      "calib_trace": [
+        {
+          "reps": 1,
+          "tokens": 1015
+        },
+        {
+          "reps": 2,
+          "tokens": 1389
+        },
+        {
+          "reps": 4,
+          "tokens": 2137
+        },
+        {
+          "reps": 8,
+          "tokens": 3633
+        },
+        {
+          "reps": 16,
+          "tokens": 6625
+        },
+        {
+          "reps": 32,
+          "tokens": 12609
+        },
+        {
+          "reps": 64,
+          "tokens": 24577
+        },
+        {
+          "reps": 128,
+          "tokens": 48513
+        },
+        {
+          "reps": 256,
+          "tokens": 96385
+        },
+        {
+          "reps": 151,
+          "tokens": 57115
+        }
+      ]
+    }
+  ],
+  "at": "2026-09-28 08:52:41"
+}

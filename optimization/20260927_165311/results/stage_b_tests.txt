@@ -1,0 +1,26 @@
+== 阶段 B 验收测试 ==
+
+  [PASS] launcher 默认配置 = config\bonsai-agent.json
+  [PASS] slots_busy: list[{is_processing:False}] -> False
+  [PASS] slots_busy: list[{is_processing:True}] -> True
+  [PASS] slots_busy: dict{is_processing:True} -> True
+  [PASS] slots_busy: None -> False
+[停止] 后端正在处理任务 → 拒绝停止（方案铁律：不杀掉用户的任务）。
+       确需强制停止请加 --force（会中断当前任务）。
+  [PASS] 忙时 cmd_stop 返回 4（拒绝停止）
+  [PASS] is_our_backend: 真实在线命令行 -> True
+  [PASS] is_our_backend: 未知进程 -> False
+  [PASS] is_our_backend: 端口不符 -> False
+  [PASS] is_our_proxy: 真实在线命令行 -> True
+  [PASS] 后端 在线 vs 配置 无差异
+  [PASS] 代理 在线 vs 配置 无差异
+  [PASS] 漂移检测: -c 32768 能被检出
+  [PASS] 8 个入口脚本(注释除外)无残留硬编码参数/盲杀
+  [PASS] start_all_agent.bat 以 GBK 解码成功且含中文标题
+  [PASS] budget.policy 两项均为 false（阶段 B 不注入预算）
+  [PASS] 代理参数含 --effort medium（与在线一致）
+  [PASS] 代理参数不含 --warm（预热只由 launcher 做一次）
+  [PASS] 预热候选请求体可选取（存在且为大请求）
+  [PASS] 预热档位与在线生效档位一致（medium）
+
+== 结果: 20 通过 / 0 失败 ==

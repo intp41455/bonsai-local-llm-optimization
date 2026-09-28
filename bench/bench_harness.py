@@ -1,0 +1,305 @@
+# -*- coding: utf-8 -*-
+r"""阶段 G：12 项固定任务的本地执行 harness（方案 §14.2 / §G3）。
+
+定位（诚实标注）：这是**本地脚本 harness**，不是 §14.3 里的 WorkBuddy(A/B) 或 Pi(C)。
+它只把同一份任务原文交给同一个本地模型（经 :8080 代理、单一后端进程），用于
+  a) 验证修复后的代理+后端能否真实完成这 12 项；
+  b) 采集 §G3 要求的测量字段。
+不得把它当作 A/B/C 对照结论。
+
+用法:
+  python bench_harness.py --run-dir D:\Bonsai-demo\bench\runs\B --task 2
+  python bench_harness.py --run-dir ... --task 2 --max-rounds 12 --time-cap 900
+"""
+import argparse
+import json
+import os
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.request
+
+PORT = 8080
+MODEL = "bonsai-2-27b"
+MAX_TOKENS = 4096
+PROXY_LOG = r"D:\Bonsai-demo\logs\requests.jsonl"
+
+TASKS = {
+    1: "将notes.txt整理为五条约束，保存results/constraints.md。",
+    2: ("统计sales.csv去重后已支付订单数量与总额，按order_id去重，"
+        "写results/sales.json，仅用count和amount两个键。"),
+    3: "修复calc.py的total_paid：仅汇总paid、按order_id去重；保留函数名并运行测试。",
+    4: "编写convert.py，将sales.csv转为results/sales.jsonl，保留全部原始行和字段，运行脚本。",
+    5: "把results/constraints.md中的交付格式改为纯文本，其他保持不变；不存在则从notes.txt先创建。",
+    6: "从logs/run.log找出全部ERROR，写results/errors.md，仅保留行号、错误码、原因。",
+    7: "创建results/status.html，展示项目代号和五条约束，单文件离线打开，无外部资源。",
+    8: ("创建results/pelican.svg：鹈鹕骑自行车，车轮旋转、身体轻微起伏，"
+        "单SVG不超过120行，无外部资源。"),
+    9: ("读取missing.txt；不存在则创建results/missing-report.md记录不存在，"
+        "不创建missing.txt、不重复读取相同路径。"),
+    11: "读取checkpoint.md继续未完成事项，不重做已完成步骤。",
+    12: "创建results/summary.md，汇总sales.csv与logs/run.log统计，并列出实际生成文件路径。",
+}
+
+SYS_PROMPT = (
+    "You are a local coding agent working inside the current working directory. "
+    "Use the provided tools to inspect and modify files. Never claim you did something "
+    "unless a tool call actually did it. Prefer one concrete tool call per step. "
+    "File paths are relative to the working directory.\n"
+    "[tool-error recovery policy -- local runtime] If a tool call returns the SAME error "
+    "twice, stop resending the identical call: change the arguments or switch to a clearly "
+    "different path, then report the blocking reason. Some tools have side effects "
+    "(writing files, running scripts); never blindly repeat a call that may already have taken effect."
+)
+
+TOOLS = [
+    {"type": "function", "function": {
+        "name": "list_dir", "description": "List entries of a directory (relative path).",
+        "parameters": {"type": "object", "properties": {
+            "path": {"type": "string"}}, "required": ["path"]}}},
+    {"type": "function", "function": {
+        "name": "read_file", "description": "Read a UTF-8 text file (relative path).",
+        "parameters": {"type": "object", "properties": {
+            "path": {"type": "string"}}, "required": ["path"]}}},
+    {"type": "function", "function": {
+        "name": "write_file",
+        "description": "Write a UTF-8 text file (relative path); creates results/ if needed.",
+        "parameters": {"type": "object", "properties": {
+            "path": {"type": "string"}, "content": {"type": "string"}},
+            "required": ["path", "content"]}}},
+    {"type": "function", "function": {
+        "name": "run_python", "description": "Run a python script file (relative path) and return stdout/stderr.",
+        "parameters": {"type": "object", "properties": {
+            "path": {"type": "string"}}, "required": ["path"]}}},
+]
+
+cfg = {}
+
+
+def inside(path):
+    p = os.path.realpath(os.path.join(cfg["run_dir"], path))
+    root = os.path.realpath(cfg["run_dir"])
+    if p != root and not p.startswith(root + os.sep):
+        raise ValueError("路径越界，拒绝访问: %s" % path)
+    return p
+
+
+def do_tool(name, args):
+    if name == "list_dir":
+        p = inside(args.get("path", "."))
+        return "\n".join(sorted(os.listdir(p)))
+    if name == "read_file":
+        p = inside(args.get("path", ""))
+        if not os.path.exists(p):
+            return "ERROR: file not found: %s" % os.path.relpath(p, cfg["run_dir"])
+        with open(p, "r", encoding="utf-8", errors="replace") as f:
+            return f.read()[:20000]
+    if name == "write_file":
+        p = inside(args.get("path", ""))
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with open(p, "w", encoding="utf-8", newline="") as f:
+            f.write(args.get("content", ""))
+        return "OK: wrote %d chars to %s" % (len(args.get("content", "")),
+                                             os.path.relpath(p, cfg["run_dir"]))
+    if name == "run_python":
+        p = inside(args.get("path", ""))
+        if not os.path.exists(p):
+            return "ERROR: script not found: %s" % os.path.relpath(p, cfg["run_dir"])
+        r = subprocess.run([sys.executable, p], cwd=cfg["run_dir"],
+                           capture_output=True, text=True, timeout=60)
+        return ("exit=%d\nSTDOUT:\n%s\nSTDERR:\n%s"
+                % (r.returncode, r.stdout[-4000:], r.stderr[-2000:]))
+    return "ERROR: unknown tool %s" % name
+
+
+def call_model(messages, timeout):
+    body = json.dumps({"model": MODEL, "messages": messages, "tools": TOOLS,
+                       "tool_choice": "auto", "stream": True, "max_tokens": MAX_TOKENS,
+                       "temperature": 0.0}, ensure_ascii=False).encode("utf-8")
+    req = urllib.request.Request("http://127.0.0.1:%d/v1/chat/completions" % PORT,
+                                 data=body, method="POST",
+                                 headers={"Content-Type": "application/json"})
+    t0 = time.time()
+    ttft = None
+    content, reasoning = [], []
+    tcalls = {}          # index -> {"id","name","args"}
+    finish = None
+    err = None
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            for raw in r:
+                line = raw.decode("utf-8", "replace").strip()
+                if not line.startswith("data:"):
+                    continue
+                data = line[5:].strip()
+                if data == "[DONE]":
+                    break
+                try:
+                    ev = json.loads(data)
+                except Exception:
+                    continue
+                ch = (ev.get("choices") or [{}])[0]
+                if ch.get("finish_reason"):
+                    finish = ch["finish_reason"]
+                d = ch.get("delta") or {}
+                piece = d.get("content") or d.get("reasoning_content") or ""
+                if piece and ttft is None:
+                    ttft = time.time() - t0
+                if d.get("reasoning_content"):
+                    reasoning.append(d["reasoning_content"])
+                if d.get("content"):
+                    content.append(d["content"])
+                for tc in d.get("tool_calls") or []:
+                    i = tc.get("index", 0)
+                    slot = tcalls.setdefault(i, {"id": None, "name": "", "args": ""})
+                    if tc.get("id"):
+                        slot["id"] = tc["id"]
+                    fn = tc.get("function") or {}
+                    if fn.get("name"):
+                        slot["name"] = fn["name"]
+                    if fn.get("arguments"):
+                        slot["args"] += fn["arguments"]
+    except urllib.error.HTTPError as e:
+        err = "HTTPError %s: %s" % (e.code, e.reason)
+        try:
+            err += " | body: " + e.read().decode("utf-8", "replace")[:300]
+        except Exception:
+            pass
+    except Exception as e:                    # URLError / timeout / 其它网络异常
+        err = "%s: %s" % (type(e).__name__, e)
+    return {"content": "".join(content), "reasoning": "".join(reasoning),
+            "tool_calls": [tcalls[k] for k in sorted(tcalls)],
+            "finish": finish, "ttft_s": ttft, "wall_s": time.time() - t0,
+            "error": err}
+
+
+def log_offset():
+    return os.path.getsize(PROXY_LOG) if os.path.exists(PROXY_LOG) else 0
+
+
+def log_delta(off):
+    if not os.path.exists(PROXY_LOG):
+        return []
+    out = []
+    with open(PROXY_LOG, "r", encoding="utf-8") as f:
+        f.seek(off)
+        for ln in f:
+            try:
+                out.append(json.loads(ln))
+            except Exception:
+                pass
+    return out
+
+
+def main():
+    sys.stdout.reconfigure(encoding="utf-8")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--run-dir", required=True)
+    ap.add_argument("--task", type=int, required=True)
+    ap.add_argument("--max-rounds", type=int, default=14)
+    ap.add_argument("--time-cap", type=float, default=1200.0)
+    ap.add_argument("--out", default=None)
+    ap.add_argument("--port", type=int, default=8080)
+    ap.add_argument("--max-tokens", type=int, default=4096)
+    a = ap.parse_args()
+    cfg["run_dir"] = a.run_dir
+    global PORT, MAX_TOKENS
+    PORT = a.port
+    MAX_TOKENS = a.max_tokens
+    assert a.task in TASKS, "任务 %s 需要专用驱动（10 多轮 / 11 断点），见 bench_multiturn.py" % a.task
+
+    os.makedirs(os.path.join(a.run_dir, "results"), exist_ok=True)
+    off = log_offset()
+    t_start = time.time()
+    messages = [{"role": "system", "content": SYS_PROMPT},
+                {"role": "user", "content": TASKS[a.task]}]
+    rounds, retries, seen = [], 0, {}
+    stop_reason = "max_rounds"
+
+    print("== 任务 %d : %s" % (a.task, TASKS[a.task]))
+    print("   运行目录 %s  上限 %d 轮 / %.0fs" % (a.run_dir, a.max_rounds, a.time_cap))
+    for rd_i in range(a.max_rounds):
+        if time.time() - t_start > a.time_cap:
+            stop_reason = "time_cap"
+            break
+        r = call_model(messages, timeout=max(60.0, a.time_cap))
+        print("   [轮 %2d] wall=%.1fs ttft=%s finish=%s 工具调用=%d content=%d 字"
+              % (rd_i + 1, r["wall_s"],
+                 ("%.1fs" % r["ttft_s"]) if r["ttft_s"] else "-",
+                 r["finish"], len(r["tool_calls"]), len(r["content"])))
+        rounds.append({"round": rd_i + 1, "wall_s": round(r["wall_s"], 2),
+                       "ttft_s": (round(r["ttft_s"], 2) if r["ttft_s"] else None),
+                       "finish": r["finish"], "content_chars": len(r["content"]),
+                       "reasoning_chars": len(r["reasoning"]),
+                       "tool_calls": [t["name"] for t in r["tool_calls"]],
+                       "error": r.get("error")})
+        if r.get("error"):
+            print("        !! 上游异常: %s" % r["error"])
+            stop_reason = "upstream_error"
+            break
+        if not r["tool_calls"]:
+            stop_reason = "model_finished"
+            break
+        messages.append({"role": "assistant", "content": r["content"] or None,
+                         "tool_calls": [
+                             {"id": t["id"] or ("call_%d" % i), "type": "function",
+                              "function": {"name": t["name"], "arguments": t["args"]}}
+                             for i, t in enumerate(r["tool_calls"])]})
+        for i, t in enumerate(r["tool_calls"]):
+            key = t["name"] + "|" + t["args"].strip()
+            seen[key] = seen.get(key, 0) + 1
+            if seen[key] >= 2:
+                retries += 1
+            try:
+                parsed = json.loads(t["args"]) if t["args"].strip() else {}
+                res = do_tool(t["name"], parsed)
+            except Exception as e:
+                res = "ERROR: %s: %s" % (type(e).__name__, e)
+            if seen[key] >= 2:
+                res += ("\n[local runtime] This is the SAME call with the SAME arguments as "
+                        "before (count=%d). Do not repeat it unchanged: change the arguments "
+                        "or switch to a different path." % seen[key])
+            print("        -> %s %s => %s" % (t["name"],
+                                              (t["args"][:70] + "…") if len(t["args"]) > 70 else t["args"],
+                                              res.replace("\n", " | ")[:110]))
+            messages.append({"role": "tool", "tool_call_id": t["id"] or ("call_%d" % i),
+                             "content": res[:8000]})
+
+    wall = time.time() - t_start
+    recs = [x for x in log_delta(off) if (x.get("path") or "").endswith("/chat/completions")]
+    out = {
+        "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+        "task": a.task, "task_text": TASKS[a.task], "run_dir": a.run_dir,
+        "max_tokens": MAX_TOKENS,
+        "stop_reason": stop_reason, "rounds": len(rounds), "detail_rounds": rounds,
+        "wall_s": round(wall, 1), "tool_retries": retries,
+        "proxy_records": len(recs),
+        # 键名以代理 logs\requests.jsonl 的实际字段为准（prompt_evaluated_tokens/
+        # cache_reused_tokens）；旧键名作为兜底。拿不到就保持 null，不写 0（§14.3 第4条）。
+        "prompt_n": [x.get("prompt_evaluated_tokens", x.get("prompt_n")) for x in recs],
+        "cache_n": [x.get("cache_reused_tokens", x.get("cache_n")) for x in recs],
+        "prefill_ms": [x.get("prefill_ms") for x in recs],
+        "decode_tps": [x.get("decode_tps") for x in recs],
+        "finish_reasons": [x.get("finish_reason") for x in recs],
+        "reasoning_tokens": [x.get("reasoning_tokens") for x in recs],
+        "answer_tokens": [x.get("answer_tokens") for x in recs],
+        "est_reasoning_chars": [x.get("est_reasoning_chars") for x in recs],
+        "wall_ms": [x.get("wall_ms") for x in recs],
+        "cache_reuse": [x.get("cache_reuse") for x in recs],
+        "config_hash": (recs[0].get("config_hash") if recs else None),
+        "at": time.strftime("%Y-%m-%d %H:%M:%S"),
+    }
+    outp = a.out or os.path.join(a.run_dir, "results", "_run_task%d.json" % a.task)
+    os.makedirs(os.path.dirname(outp), exist_ok=True)
+    with open(outp, "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, indent=2)
+    print("\n== 结束: stop=%s 轮数=%d 墙钟=%.1fs 工具重复=%d 代理记录=%d"
+          % (stop_reason, len(rounds), wall, retries, len(recs)))
+    print("   记录: %s" % outp)
+    print("   验收: python D:\\Bonsai-demo\\bench\\check_tasks.py \"%s\" %d" % (a.run_dir, a.task))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

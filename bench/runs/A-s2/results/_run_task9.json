@@ -1,0 +1,56 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 9,
+  "task_text": "读取missing.txt；不存在则创建results/missing-report.md记录不存在，不创建missing.txt、不重复读取相同路径。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\A-s2",
+  "stop_reason": "model_finished",
+  "rounds": 3,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 4.85,
+      "ttft_s": 1.08,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 661,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 3.02,
+      "ttft_s": 0.44,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 166,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 2.71,
+      "ttft_s": 0.5,
+      "finish": "stop",
+      "content_chars": 93,
+      "reasoning_chars": 284,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 10.6,
+  "tool_retries": 0,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 01:32:23"
+}

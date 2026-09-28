@@ -1,0 +1,57 @@
+{
+  "started_at": "2026-09-28 01:04:33",
+  "harness_sha256": "41fbfb0a455d392d3dfce2270621263c46f5083ff7d08a98a40c7eddb6c8ab99",
+  "harness_preG5_sha256": "c1693ceec4ce1788dec878ce19ff5103f76869ec1993f834ab0fed3462b0b0fc",
+  "check_tasks_sha256": "ae549ca367fff01cb12ebaf657786d772251e918eea4d468cb6f1166c3fd234b",
+  "proxy_v2_sha256": "5daab527777684283bdfb1e3458ca9095e803168c1b2f751eb739a9f88fbc664",
+  "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "config_extra_args": [
+    "--cache-ram",
+    "1024"
+  ],
+  "results_jsonl_bytes_before": 15965,
+  "results_jsonl_lines_before": 37,
+  "timings_bytes_before": 72500,
+  "netstat_before": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "tasks": [
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    12,
+    11,
+    2
+  ],
+  "rounds": 3,
+  "port_A": 8082,
+  "port_B": 8080,
+  "ended_at": "2026-09-28 01:50:18",
+  "netstat_after": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07"
+}

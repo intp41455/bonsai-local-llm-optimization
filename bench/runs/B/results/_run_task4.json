@@ -1,0 +1,118 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 4,
+  "task_text": "编写convert.py，将sales.csv转为results/sales.jsonl，保留全部原始行和字段，运行脚本。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B",
+  "stop_reason": "model_finished",
+  "rounds": 6,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.14,
+      "ttft_s": 1.24,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 61,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 1.24,
+      "ttft_s": 0.32,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 60,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 4.76,
+      "ttft_s": 0.36,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 139,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 1.32,
+      "ttft_s": 0.49,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 22,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 1.12,
+      "ttft_s": 0.3,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 26,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 3.86,
+      "ttft_s": 0.48,
+      "finish": "stop",
+      "content_chars": 249,
+      "reasoning_chars": 98,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 14.5,
+  "tool_retries": 0,
+  "proxy_records": 6,
+  "prompt_n": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "cache_n": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "prefill_ms": [
+    967.6,
+    267.1,
+    296.5,
+    434.1,
+    236.8,
+    433.1
+  ],
+  "decode_tps": [
+    44.38,
+    44.68,
+    45.23,
+    41.82,
+    45.2,
+    45.39
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "at": "2026-09-27 21:47:19"
+}

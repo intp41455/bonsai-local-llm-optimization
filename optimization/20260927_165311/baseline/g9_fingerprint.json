@@ -1,0 +1,107 @@
+{
+  "phase": "G9",
+  "design": "same v3 script across full 11-task set; only tools.error_policy differs (P=true / Q=false)",
+  "started_at": "2026-09-28 05:37:27",
+  "harness_sha256": "f06852086dca5f5e2cf3e1cc624eee74af29888b6d42cdf4cc7431907ca97f6e",
+  "check_tasks_sha256": "ae549ca367fff01cb12ebaf657786d772251e918eea4d468cb6f1166c3fd234b",
+  "proxy_v3_sha256": "6acfb9c5914595ec567f5b9d4db2da188e99c1bf635b36c017bc0532026340f5",
+  "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "config_extra_args": [
+    "--cache-ram",
+    "1024"
+  ],
+  "tasks": [
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    12,
+    11,
+    2
+  ],
+  "rounds": [
+    1,
+    2
+  ],
+  "max_tokens": 8192,
+  "max_rounds": 16,
+  "time_cap": 1500,
+  "port_P": 8084,
+  "port_Q": 8085,
+  "upstream": 8081,
+  "task11_preset_canon_sha": "ce3f1fca8433dd83919abf7b190b268a982eff2ea092b841c8f6e9ad09aa4083",
+  "task10_note": "任务 10 需 bench_multiturn.py 专用驱动（harness 无该任务定义），不在本批；普通五轮见 changes.md §10.2，压缩边界五轮见 §10.3（未实现）",
+  "prod_reqlog_lines_before": 676,
+  "prod_timings_lines_before": 905,
+  "netstat_before": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "arms": {
+    "P": {
+      "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g9\\P\\config.json",
+      "config_sha256": "11d15451f434625b1eef33fca4567e27ed68c1f742396caee038a81432457e35",
+      "changed_top_keys": [
+        "logging",
+        "prewarm",
+        "proxy"
+      ],
+      "tools_diff_keys": [],
+      "behavior_unchanged_except_tools": true,
+      "error_policy": true,
+      "backend_extra_args": [
+        "--cache-ram",
+        "1024"
+      ],
+      "prewarm_enabled": false
+    },
+    "Q": {
+      "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g9\\Q\\config.json",
+      "config_sha256": "002bbb4da67eb4feeef518a63bc5dcb10440155880cb321c893cc1cbe75adf55",
+      "changed_top_keys": [
+        "logging",
+        "prewarm",
+        "proxy",
+        "tools"
+      ],
+      "tools_diff_keys": [
+        "error_policy"
+      ],
+      "behavior_unchanged_except_tools": true,
+      "error_policy": false,
+      "backend_extra_args": [
+        "--cache-ram",
+        "1024"
+      ],
+      "prewarm_enabled": false
+    }
+  },
+  "ended_at": "2026-09-28 06:13:55",
+  "netstat_after": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "prod_reqlog_lines_after": 686,
+  "prod_timings_lines_after": 905
+}

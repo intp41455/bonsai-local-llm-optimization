@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#cfe8ff"/>
+  <circle cx="330" cy="55" r="24" fill="#ffffff"/>
+  <rect y="240" width="400" height="60" fill="#7d7d7d"/>
+  <line x1="0" y1="240" x2="400" y2="240" stroke="#555555" stroke-width="2"/>
+  <line x1="0" y1="270" x2="400" y2="270" stroke="#ffffff" stroke-width="4" stroke-dasharray="22 22">
+    <animate attributeName="stroke-dashoffset" from="0" to="-44" dur="0.5s" repeatCount="indefinite"/>
+  </line>
+  <g id="bike">
+    <g id="wheelF">
+      <circle cx="120" cy="210" r="30" fill="none" stroke="#222222" stroke-width="5"/>
+      <circle cx="120" cy="210" r="3" fill="#222222"/>
+      <g stroke="#222222" stroke-width="2">
+        <line x1="120" y1="180" x2="120" y2="240"/>
+        <line x1="90" y1="210" x2="150" y2="210"/>
+        <line x1="98.8" y1="188.8" x2="141.2" y2="231.2"/>
+        <line x1="98.8" y1="231.2" x2="141.2" y2="188.8"/>
+      </g>
+      <animateTransform attributeName="transform" type="rotate" from="0 120 210" to="360 120 210" dur="0.5s" repeatCount="indefinite"/>
+    </g>
+    <g id="wheelR">
+      <circle cx="260" cy="210" r="30" fill="none" stroke="#222222" stroke-width="5"/>
+      <circle cx="260" cy="210" r="3" fill="#222222"/>
+      <g stroke="#222222" stroke-width="2">
+        <line x1="260" y1="180" x2="260" y2="240"/>
+        <line x1="230" y1="210" x2="290" y2="210"/>
+        <line x1="238.8" y1="188.8" x2="281.2" y2="231.2"/>
+        <line x1="238.8" y1="231.2" x2="281.2" y2="188.8"/>
+      </g>
+      <animateTransform attributeName="transform" type="rotate" from="0 260 210" to="360 260 210" dur="0.5s" repeatCount="indefinite"/>
+    </g>
+    <g stroke="#333333" stroke-width="5" fill="none" stroke-linecap="round">
+      <path d="M120 210 L170 150"/>
+      <path d="M170 150 L240 150"/>
+      <path d="M240 150 L260 210"/>
+      <path d="M170 150 L200 190"/>
+      <path d="M200 190 L260 210"/>
+      <path d="M160 150 L170 140 M180 150 L170 140"/>
+    </g>
+    <ellipse cx="240" cy="140" rx="15" ry="6" fill="#333333"/>
+    <circle cx="200" cy="190" r="4" fill="#333333"/>
+  </g>
+  <g id="pelican">
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -6; 0 0" dur="0.5s" repeatCount="indefinite"/>
+    <g stroke="#333333" stroke-width="5" fill="none" stroke-linecap="round">
+      <path d="M240 145 L205 190"/>
+      <path d="M262 145 L215 190"/>
+      <path d="M225 115 L170 150"/>
+    </g>
+    <ellipse cx="250" cy="120" rx="38" ry="26" fill="#f5f0e6"/>
+    <ellipse cx="235" cy="128" rx="20" ry="12" fill="#e8d9b8" transform="rotate(-15 235 128)"/>
+    <path d="M282 108 Q292 82 268 78" stroke="#f5f0e6" stroke-width="14" fill="none" stroke-linecap="round"/>
+    <circle cx="264" cy="76" r="15" fill="#f5f0e6"/>
+    <circle cx="258" cy="72" r="3" fill="#222222"/>
+    <path d="M249 70 L180 78 L249 86" fill="#ff9d00"/>
+    <path d="M249 78 L195 78" stroke="#ff9d00" stroke-width="2"/>
+  </g>
+</svg>

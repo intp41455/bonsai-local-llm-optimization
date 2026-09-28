@@ -1,0 +1,1905 @@
+# -*- coding: utf-8 -*-
+r"""
+bonsai_proxy.py —— 透明反向代理 + 请求抓包 + KV 预热（v3，方案阶段 C）
+
+本文件对应《Bonsai 本地模型通用优化-交接执行方案》v1.1 §5，阶段 C 的改动：
+
+  C1 流式读取
+     resp.read(2048)（攒满式，首块要等填满 2KB 或流结束）-> HTTPResponse.read1()
+     （有数据即返回）。SSE 监控不再用正则扒尾部字符串，改为独立增量解析器
+     SSEParser：处理“一条事件被拆到多个网络块 / UTF-8 字符跨块 / CRLF 与 LF 混用 /
+     注释心跳 / 多条事件在同一块 / data: [DONE] / reasoning_content 与 content /
+     tool_calls arguments 增量 / 4xx-5xx 与中途断流”。
+     注意：本修复只改善转发延迟，不代表 GPU token/s 提升。
+
+  C2 分档超时（不再是 urlopen(timeout=3600) 一个数）
+     connect_s          建连（http.client.HTTPConnection(timeout=connect_s)）
+     first_response_s   发出请求到上游首个响应字节
+     stream_idle_s      流式期间“完全没有数据”的容忍时间（收到任何字节都会重置，
+                        心跳也算数据；用于区分“心跳在动”与“真的卡死”）
+     overall_s          单请求整体上限（整任务计时器，不是 socket 阻塞超时）
+     client_write_s     写回客户端时的超时（客户端卡死不能把单槽代理一起卡死；
+                        流式期间用 MSG_PEEK 非阻塞探测对端是否已关闭）
+     超时与客户端取消都会关闭上游连接，并轮询 /slots 验证后端释放
+     （不假设 close 就等于取消推理；方案 §C2 明确要求验证）。
+
+  C3 排队
+     后端 -np 1 单槽。本代理用 INFER_LOCK 串行化“需要推理”的请求，记录 queue_ms
+     与执行时间；预热（prewarm）也先等 /slots 空闲，避免后台预热抢槽。
+     不采用 429/503 拒绝排队（WorkBuddy 对这两种状态的重试行为未经验证，
+     贸然返回可能形成重试风暴，方案 §C3 要求先验证再启用）。
+
+  C4 每请求日志
+     logs\requests.jsonl 每请求一行，字段见方案 §C4（request_id/config_hash/各段耗时/
+     终止原因/复用分类）。计数优先取服务端 timings/usage；本地只能数“字符”的，
+     一律标成 est_*，不冒充 token 数。服务端 reasoning_tokens 恒为 0 时记 null 并加说明，
+     不据此判断“模型没思考”。
+     删除 prompt_n < 1500 作为“缓存命中”的绝对判据，改为
+     reuse_class()：无复用 / 部分复用 / 高比例复用 / 未知。
+
+  C5 离线测试
+     optimization\<timestamp>\tests\stage_c_tests.py 用“模拟 SSE 上游”覆盖上述路径，
+     不加载第二个模型进程。
+
+保留不变：抓包 capture\req_*.json、请求瘦身（--keep-location 关闭）、思考档位注入
+          （--effort）、KV 预热（prewarm，按 B3 由 launcher 在启动后调用一次）。
+
+  E1/E2/E3 输入预算闸门（阶段 E，见 results\stage_e_probe.txt）
+      判定按方案 §7 规则：输入 token + 计划总生成 + 上下文余量 <= 有效上下文窗口。
+      token 数用后端 /apply-template + /tokenize 精确核算（与 /v1/chat/completions 共用同一
+      模板解析路径），不凭字符数估算；只有"字符上界估算已能安全放行"时才跳过精确计数，
+      上界取 bytes / chars_per_token_floor（保守，宁可多算）。
+      超预算不静默裁剪：config.budget.gate.mode=warn 只告警转发，=reject 在生成前返回 400
+      （不占用单槽、不消耗 GPU）。计数失败记 unknown，绝不当作"安全放行"。
+
+  D2 思考参数优先级（阶段 D 实测结论，见 results\stage_d_probe.txt）
+     优先级：显式请求参数 > 代理配置档 > 服务默认；客户端已指定一律不覆盖。
+     只认服务端真正会读的字段：顶层 reasoning_effort、chat_template_kwargs 下的
+     reasoning_effort / enable_thinking；另登记请求级预算 reasoning_budget_tokens。
+     模板只接受 xhigh/medium/low，传 "none" 会让模板 raise_exception，故 none 一律
+     转成 enable_thinking=false 而不是当档位传下去。
+
+ARCHITECTURE
+    WorkBuddy  -->  :8080 (本代理)  -->  :8081 (llama-server)
+    客户端不用改配置；唯一权威配置 D:\Bonsai-demo\config\bonsai-agent.json
+    （由 launcher 用 --config 传入；直接手工运行本文件时用默认路径）。
+
+USAGE
+    python bonsai_proxy.py --config D:\Bonsai-demo\config\bonsai-agent.json
+    python bonsai_proxy.py --effort medium        # 注入思考档位（治“雷霆大思考”）
+    python bonsai_proxy.py --keep-location        # 关闭请求瘦身（A/B 对照）
+    python bonsai_proxy.py --verdict              # 只看缓存复用/前缀稳定性判定
+"""
+import argparse
+import codecs
+import hashlib
+import http.client
+import json
+import os
+import re
+import select
+import socket
+import sys
+import threading
+import time
+import uuid
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+# ================================================================ 路径与默认值
+DEMO = r"D:\Bonsai-demo"
+DEFAULT_CONFIG = os.path.join(DEMO, "config", "bonsai-agent.json")
+CAP = os.path.join(DEMO, "capture")          # 兼容旧路径；实际取值见 cap_dir()
+TIMINGS = os.path.join(CAP, "timings.jsonl")
+EFFORT_FILE = os.path.join(CAP, "effort.txt")
+os.makedirs(CAP, exist_ok=True)
+
+ARGS = None
+RAW_CFG = None
+CONFIG_HASH = None
+
+# 运行期配置：内置默认值，启动时被 config\bonsai-agent.json 覆盖
+CFG = {
+    "capture_dir": CAP,
+    "request_log": os.path.join(DEMO, "logs", "requests.jsonl"),
+    "upstream_host": "127.0.0.1",
+    "slimming": {"locations": True, "deferred_tools": True, "subagents": True},
+    "tools": {"schema_hardening": True, "error_policy": True},
+    "timeouts": {
+        "connect_s": 8,
+        "first_response_s": 180,
+        "stream_idle_s": 300,
+        "overall_s": 1800,
+        "client_write_s": 120,
+        "release_wait_s": 30,
+    },
+}
+
+STATE = {"n": 0, "last": None, "lock": threading.Lock()}
+INFER_LOCK = threading.Lock()        # 串行化占用 GPU 槽位的请求（后端 -np 1）
+INFLIGHT = {"rid": None, "started": None}
+LOG_LOCK = threading.Lock()
+
+HOP = {"host", "connection", "keep-alive", "proxy-authenticate",
+       "proxy-authorization", "te", "trailers", "transfer-encoding",
+       "upgrade", "content-length", "accept-encoding",
+       "content-encoding"}
+
+
+def cap_dir():
+    return CFG["capture_dir"]
+
+
+def timings_path():
+    return os.path.join(cap_dir(), "timings.jsonl")
+
+
+def effort_file():
+    return os.path.join(cap_dir(), "effort.txt")
+
+
+def now_iso():
+    return time.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def ms_since(t0):
+    return round((time.monotonic() - t0) * 1000.0, 1)
+
+
+class ClientGone(Exception):
+    """客户端断开（写回失败）。"""
+
+
+class UpstreamTimeout(Exception):
+    def __init__(self, kind):
+        super().__init__(kind)
+        self.kind = kind
+
+
+# ================================================================ 配置
+def load_runtime(path):
+    """把权威配置里与本代理相关的部分并进 CFG，并算配置指纹。
+
+    只取需要的段：proxy / logging / timeouts / thinking。
+    文件不存在时保留内置默认值（便于离线测试与手工调试）。
+    """
+    global RAW_CFG, CONFIG_HASH
+    if not path or not os.path.exists(path):
+        print("[配置] 未找到 %s，使用内置默认值。" % path, flush=True)
+        return False
+    try:
+        with open(path, "r", encoding="utf-8-sig") as f:
+            cfg = json.load(f)
+    except Exception as e:
+        print("[配置] 读取失败 %r，使用内置默认值。" % (e,), flush=True)
+        return False
+    RAW_CFG = cfg
+    blob = json.dumps(cfg, ensure_ascii=False, sort_keys=True,
+                      separators=(",", ":")).encode("utf-8")
+    CONFIG_HASH = hashlib.sha256(blob).hexdigest()
+    p = cfg.get("proxy") or {}
+    if p.get("upstream_host"):
+        CFG["upstream_host"] = p["upstream_host"]
+    if p.get("capture_dir"):
+        CFG["capture_dir"] = p["capture_dir"]
+    lg = cfg.get("logging") or {}
+    if lg.get("request_log"):
+        CFG["request_log"] = lg["request_log"]
+    tm = cfg.get("timeouts") or {}
+    for k in list(CFG["timeouts"].keys()):
+        if tm.get(k) is not None:
+            CFG["timeouts"][k] = tm[k]
+    sl = cfg.get("slimming") or {}
+    for k in ("locations", "deferred_tools", "subagents"):
+        if sl.get(k) is not None:
+            CFG["slimming"][k] = bool(sl[k])
+    tl = cfg.get("tools") or {}
+    for k in ("schema_hardening", "error_policy"):
+        if tl.get(k) is not None:
+            CFG["tools"][k] = bool(tl[k])
+    try:
+        os.makedirs(cap_dir(), exist_ok=True)
+    except Exception:
+        pass
+    return True
+
+
+def eff_profile():
+    """本代理实际生效的思考档位。
+
+    ARGS.effort 为空 = 不注入任何思考指令 = 模型模板默认档 xhigh（两者注入的
+    指令逐字节相同）。所以这里按“实际行为”报 xhigh，而不是按配置文件里
+    那个只给 launcher 用的 default_effort 报，避免日志与事实不一致。
+    """
+    return getattr(ARGS, "effort", None) or "xhigh"
+
+
+# ================================================================ 小工具
+def common_prefix_len(a, b):
+    n = min(len(a), len(b))
+    i = 0
+    while i < n and a[i] == b[i]:
+        i += 1
+    return i
+
+
+def http_get_json(port, path, timeout=3.0, host=None):
+    """向本机后端要一个 JSON（/health、/slots）。失败返回 None。"""
+    host = host or CFG["upstream_host"]
+    conn = http.client.HTTPConnection(host, int(port), timeout=float(timeout))
+    try:
+        conn.request("GET", path)
+        r = conn.getresponse()
+        raw = r.read()
+        return json.loads(raw.decode("utf-8", "ignore")) if raw.strip() else {}
+    except Exception:
+        return None
+    finally:
+        try:
+            conn.close()
+        except Exception:
+            pass
+
+
+def backend_busy(port, timeout=2.0):
+    """后端是否正在处理任务（-np 1 单槽）。取不到 -> None（未知，不臆断）。"""
+    slots = http_get_json(port, "/slots", timeout)
+    if slots is None:
+        return None
+    if isinstance(slots, dict):
+        return bool(slots.get("is_processing"))
+    for s in slots or []:
+        if isinstance(s, dict) and s.get("is_processing"):
+            return True
+    return False
+
+
+def wait_backend_idle(port, timeout_s=60.0, poll_s=0.5):
+    """等后端空闲（预热前用，避免抢正在执行的用户任务）。"""
+    t0 = time.monotonic()
+    while time.monotonic() - t0 < timeout_s:
+        if backend_busy(port, 2.0) is False:
+            return True
+        time.sleep(poll_s)
+    return backend_busy(port, 2.0) is False
+
+
+def verify_backend_release(port, wait_s=30.0):
+    """取消/超时后验证后端真的释放了槽位（方案 C2：不假设 close 即取消）。
+
+    返回 (释放成功?, 毫秒)。/slots 不可达时返回 (None, None) —— 未知，不谎报。
+    """
+    t0 = time.monotonic()
+    deadline = t0 + float(wait_s)
+    last = None
+    while time.monotonic() < deadline:
+        last = backend_busy(port, 2.0)
+        if last is None:
+            return None, None
+        if last is False:
+            return True, round((time.monotonic() - t0) * 1000.0, 1)
+        time.sleep(0.5)
+    return False, round((time.monotonic() - t0) * 1000.0, 1)
+
+
+def reuse_class(prompt_n, cache_n):
+    """缓存复用分档（替代旧的 prompt_n < 1500 绝对判据，方案 §C4）。
+
+    llama-server 语义（P03 实证：cache_n=60409 / prompt_n=52 / 窗口 65536）：
+        prompt_n = 本次真正进 prefill 的 token 数
+        cache_n  = 命中并复用 KV 的前缀 token 数
+    两个数都拿不到 -> 未知；拿得到就按复用占比分档，不做“绝对阈值即命中”的判断。
+    """
+    if prompt_n is None and cache_n is None:
+        return "未知"
+    pn = int(prompt_n or 0)
+    cn = int(cache_n or 0)
+    total = pn + cn
+    if total <= 0:
+        return "未知"
+    ratio = cn / float(total)
+    if ratio <= 0.0:
+        return "无复用"
+    if ratio >= 0.9:
+        return "高比例复用"
+    return "部分复用"
+
+
+def reuse_ratio(prompt_n, cache_n):
+    pn = int(prompt_n or 0)
+    cn = int(cache_n or 0)
+    total = pn + cn
+    return round(cn / float(total), 4) if total > 0 else None
+
+
+# ================================================================ 请求瘦身
+LOC_RE = re.compile(r"\s*\(location: [^)]*\)")
+DEFERRED_RE = re.compile(
+    r"<available_deferred_tools>.*?</available_deferred_tools>", re.S)
+SUBAGENT_RE = re.compile(
+    r"<avaliable_subagents>.*?</avaliable_subagents>", re.S)
+
+
+def keep_location():
+    """是否整体关闭瘦身：--keep-location，或 config.slimming 三项全 false。"""
+    if getattr(ARGS, "keep_location", False):
+        return True
+    s = CFG.get("slimming") or {}
+    return not any(bool(s.get(k)) for k in
+                   ("locations", "deferred_tools", "subagents"))
+
+
+_DEFPLACE = ("<available_deferred_tools>(names omitted; "
+             "call ToolSearch to discover)</available_deferred_tools>")
+_SUBPLACE = ("<avaliable_subagents>(types omitted; "
+             "specify subagent_type when needed)</avaliable_subagents>")
+
+SLIM_ITEMS = ("locations", "deferred_tools", "subagents")
+
+
+def slim_tools(raw, flags=None):
+    """按 config.slimming 三项【各自独立】决定是否剥离（阶段 F 改造）。
+
+    ┌─────────────────────────────────────┬────────┬──────┬───────────────┐
+    │ 优化项                               │ 净省tok│ 占比 │ 代价 / 默认    │
+    ├─────────────────────────────────────┼────────┼──────┼───────────────┤
+    │ ① 剥 (location: C:/.../SKILL.md)    │  4,931 │ 8.4% │ 零     -> 开   │
+    │ ② 压 ToolSearch deferred 工具清单    │  2,512 │ 4.3% │ 伤发现 -> 关   │
+    │ ③ 压 Agent 子代理类型清单            │ ~1,200 │ 2.1% │ 伤发现 -> 关   │
+    └─────────────────────────────────────┴────────┴──────┴───────────────┘
+
+    背景（P09）：②③ 省词，但会让模型看不到 deferred 工具名与子代理类型，损伤
+    “发现能力”（不知道该 ToolSearch 什么 / 该用哪个 subagent_type）。阶段 F 起
+    三项各自独立，默认只保留 ①（纯磁盘路径噪音，模型按名调用，零代价），
+    ②③ 只有 config.slimming 显式打开才压缩。
+
+    三项都是【确定性正则替换】 -> 同一请求每次得到逐字节相同结果 ->
+    前缀稳定 -> 不破坏 KV 复用；预热与实际请求走同一管线，前缀天然对齐。
+    返回 (bytes, 省下的字符数, 明细 dict)。
+    """
+    want = {k: bool((flags if flags is not None else CFG.get("slimming") or {}).get(k))
+            for k in SLIM_ITEMS}
+    detail = {"flags": want, "saved_chars": {k: 0 for k in SLIM_ITEMS}, "total": 0}
+    if not any(want.values()):
+        return raw, 0, detail
+    try:
+        d = json.loads(raw.decode("utf-8", "ignore"))
+    except Exception:
+        return raw, 0, detail
+    if not isinstance(d, dict):
+        return raw, 0, detail
+    for t in d.get("tools") or []:
+        fn = t.get("function") if isinstance(t, dict) else None
+        if not isinstance(fn, dict):
+            continue
+        desc = fn.get("description")
+        if not isinstance(desc, str):
+            continue
+        orig = desc
+        cur = desc
+        # ① 剥磁盘路径（默认开：零代价）
+        if want["locations"] and "(location:" in cur:
+            nxt = LOC_RE.sub("", cur)
+            detail["saved_chars"]["locations"] += len(cur) - len(nxt)
+            cur = nxt
+        # ② 压 ToolSearch 的 deferred 工具清单（默认关：保留名册）
+        if want["deferred_tools"] and "<available_deferred_tools>" in cur:
+            nxt = DEFERRED_RE.sub(_DEFPLACE, cur)
+            detail["saved_chars"]["deferred_tools"] += len(cur) - len(nxt)
+            cur = nxt
+        # ③ 压 Agent 的子代理类型清单（默认关：保留名册）
+        if want["subagents"] and "<avaliable_subagents>" in cur:
+            nxt = SUBAGENT_RE.sub(_SUBPLACE, cur)
+            detail["saved_chars"]["subagents"] += len(cur) - len(nxt)
+            cur = nxt
+        if cur != orig:
+            fn["description"] = cur
+    total = sum(detail["saved_chars"].values())
+    detail["total"] = total
+    if not total:
+        return raw, 0, detail
+    return json.dumps(d, ensure_ascii=False).encode("utf-8"), total, detail
+
+
+# ---------------------------------------------------------------- F1 工具体契约
+LOADING_MSG_DESC = (
+    'loading_messages (REQUIRED, field name exactly "loading_messages"): a JSON-ENCODED '
+    'STRING whose value is a JSON array of 1 to 4 non-empty short strings (each about 5 '
+    'words, same language as the response). Never omit the field, never send "", never '
+    '"[]", and never a bare array. Minimal correct example: '
+    '"loading_messages": "[\\"Rendering visualization\\"]". If it is missing or the array is '
+    'empty, this tool returns {"success":false,"loading_messages":[],"message":'
+    '"loading_messages must contain at least one message."} -- that is an ARGUMENT error: '
+    'fix exactly this field using the example above and resend; do NOT repeat the same call '
+    'unchanged.'
+)
+
+
+def harden_tool_schemas(raw):
+    """把工具体里已知易错字段的契约改成【精确、可自纠】的描述（阶段 F1 / P05）。
+
+    背景（P05，真实抓包 capture\\req_012_135949.json）：show_widget 的
+    loading_messages 被【连续两次】拒绝，工具返回
+        {"success":false,"loading_messages":[],"message":"loading_messages must contain
+         at least one message."}
+    客户端校验语义是：把该字段当 JSON 字符串解析成数组 —— 可解析为数组、长度 1–4、
+    元素均为非空字符串。原描述只给了一个示例（'["Preparing chart data",…]'），既没说
+    明“省略 / 空串 / 空数组 / 裸数组”都会被拒，也没说明失败后怎么修 —— 于是模型第二次
+    原样重试，又失败一次（该轮 6,328 生成 tok 全废）。
+
+    本函数只做【确定性文本改写】，把该字段描述替换为包含：
+      - 精确字段名与类型语义（JSON 编码字符串 -> 数组，1–4 个非空字符串）
+      - 最小正确示例
+      - 失败原文 + 自纠指令（不得原样重试）
+    同一输入每次逐字节相同 -> 前缀稳定、不破坏 KV 复用。
+    校验方是客户端（WorkBuddy），代理改不了它的代码；这里改的是【模型看到的契约】。
+    返回 (bytes, 明细 dict)。
+    """
+    detail = {"rewritten": [], "chars_delta": 0, "tools_seen": 0}
+    try:
+        d = json.loads(raw.decode("utf-8", "ignore"))
+    except Exception:
+        return raw, detail
+    if not isinstance(d, dict):
+        return raw, detail
+    tools = d.get("tools")
+    if not isinstance(tools, list):
+        return raw, detail
+    delta = 0
+    for t in tools:
+        fn = t.get("function") if isinstance(t, dict) else None
+        if not isinstance(fn, dict) or fn.get("name") != "show_widget":
+            continue
+        detail["tools_seen"] += 1
+        params = fn.get("parameters")
+        if not isinstance(params, dict):
+            continue
+        props = params.get("properties")
+        if not isinstance(props, dict):
+            continue
+        lm = props.get("loading_messages")
+        if not isinstance(lm, dict):
+            continue
+        old = lm.get("description") if isinstance(lm.get("description"), str) else ""
+        if old.strip() == LOADING_MSG_DESC.strip():
+            continue
+        lm["description"] = LOADING_MSG_DESC
+        delta += len(LOADING_MSG_DESC) - len(old)
+        detail["rewritten"].append("show_widget.loading_messages")
+        req = params.get("required")
+        if isinstance(req, list) and "loading_messages" not in req:
+            req.append("loading_messages")
+            detail["rewritten"].append("show_widget.required")
+    if not detail["rewritten"]:
+        return raw, detail
+    detail["chars_delta"] = delta
+    return json.dumps(d, ensure_ascii=False).encode("utf-8"), detail
+
+
+def validate_loading_messages(value):
+    """按客户端语义校验 loading_messages：可解析为数组、长度 1–4、元素为非空字符串。
+
+    返回 (ok: bool, reason: str, parsed_list)。reason 在 ok=True 时是解析方式
+    （json_string / bare_array），在 ok=False 时就是【精确的失败原因】。
+    """
+    arr = None
+    how = ""
+    if isinstance(value, str):
+        s = value.strip()
+        if not s:
+            return False, "空字符串", []
+        try:
+            arr = json.loads(s)
+        except Exception:
+            return False, "字符串不是合法 JSON（无法解析成数组）", []
+        how = "json_string"
+        if not isinstance(arr, list):
+            return False, "JSON 解析结果不是数组（type=%s）" % type(arr).__name__, []
+    elif isinstance(value, list):
+        arr, how = value, "bare_array"
+    else:
+        return False, "字段缺失或类型不是字符串/数组（type=%s）" % type(value).__name__, []
+    if not arr:
+        return False, "数组为空（length=0）", []
+    if len(arr) > 4:
+        return False, "数组过长（length=%d > 4）" % len(arr), arr
+    for i, x in enumerate(arr):
+        if not isinstance(x, str) or not x.strip():
+            return False, "第 %d 项不是非空字符串（%r）" % (i, x), arr
+    return True, how, arr
+
+
+def inspect_tool_arg_history(messages):
+    """扫历史里的 show_widget 调用与工具失败，做参数审计（阶段 F1 观测量，不改请求）。
+
+    用途：P05 的“修好了没有”只能靠现场数据回答 —— 该审计会落进 requests.jsonl，
+    后续抓包里 invalid 计数下降、repeated_identical_error 为空即为改善证据。
+    """
+    out = {"calls": 0, "valid": 0, "invalid": 0, "problems": [],
+           "tool_failures": 0, "failure_msgs": [], "repeated_identical_error": []}
+    if not isinstance(messages, list):
+        return out
+    for m in messages:
+        if not isinstance(m, dict):
+            continue
+        if m.get("role") == "assistant":
+            for tc in m.get("tool_calls") or []:
+                fn = (tc or {}).get("function") or {}
+                if fn.get("name") != "show_widget":
+                    continue
+                out["calls"] += 1
+                try:
+                    args = json.loads(fn.get("arguments") or "{}")
+                except Exception:
+                    out["invalid"] += 1
+                    if len(out["problems"]) < 6:
+                        out["problems"].append("arguments 不是合法 JSON")
+                    continue
+                ok, reason, _ = validate_loading_messages(
+                    (args or {}).get("loading_messages"))
+                if ok:
+                    out["valid"] += 1
+                else:
+                    out["invalid"] += 1
+                    if len(out["problems"]) < 6:
+                        out["problems"].append(reason)
+        elif m.get("role") == "tool":
+            c = m.get("content")
+            if isinstance(c, str) and '"success":false' in c.replace(" ", ""):
+                out["tool_failures"] += 1
+                msg = ""
+                try:
+                    msg = str((json.loads(c) or {}).get("message") or "")
+                except Exception:
+                    msg = ""
+                if msg:
+                    out["failure_msgs"].append(msg)
+    msgs = out["failure_msgs"]
+    for i in range(1, len(msgs)):
+        if msgs[i] == msgs[i - 1]:
+            out["repeated_identical_error"].append(msgs[i])
+    out["repeated_identical_error"] = out["repeated_identical_error"][:3]
+    return out
+
+
+def tool_arg_audit(body_bytes):
+    """对一份 chat 请求体做工具参数审计；没有任何工具调用/失败时返回 None。"""
+    try:
+        d = json.loads(body_bytes.decode("utf-8", "ignore"))
+    except Exception:
+        return None
+    if not isinstance(d, dict):
+        return None
+    a = inspect_tool_arg_history(d.get("messages"))
+    return a if (a["calls"] or a["tool_failures"]) else None
+
+
+# ---------------------------------------------------------------- F4 错误恢复策略
+TOOL_POLICY_BLOCK = (
+    "\n\n[tool-error recovery policy -- local runtime]\n"
+    "1) If the same tool returns the SAME error twice, never resend the identical call: "
+    "fix the exact field the error names (the error message states the field and the "
+    "required shape/example), or switch to a different tool or approach.\n"
+    "2) Never blindly repeat an action with side effects (writing files, sending "
+    "messages, submitting forms, state-changing commands); re-check the current state first.\n"
+    "3) Tool arguments must match the declared schema exactly; a field declared as a "
+    "string stays a string even when its content looks like JSON.\n"
+)
+
+
+def apply_tool_error_policy(body_bytes):
+    """把常驻的“工具错误恢复”策略块并入第一条 system 文本尾部（阶段 F4）。
+
+    为什么并入 system 文本，而不是在消息末尾插一条新消息：
+      - 真正的重试决策方是客户端（WorkBuddy），代理改不了它的代码；
+      - 在末尾插新 role 会伪造对话，且中段 system 可能触发模板兼容问题；
+      - system 文本是【确定性】改写 —— 预热与实际请求走同一管线，前缀天然对齐，
+        不破坏 KV 复用（与阶段 D 的档位注入属同一类改动：改的是模型看到的提示）。
+    只在请求带非空 tools 时生效；config.tools.error_policy=false 可整体关闭。
+    system content 不是纯字符串（多模态数组）时跳过，不猜。
+    返回 (bytes, 说明或 None, 附加字符数)。
+    """
+    if not (CFG.get("tools") or {}).get("error_policy"):
+        return body_bytes, None, 0
+    try:
+        d = json.loads(body_bytes.decode("utf-8"))
+    except Exception:
+        return body_bytes, None, 0
+    if not isinstance(d, dict):
+        return body_bytes, None, 0
+    tools = d.get("tools")
+    if not isinstance(tools, list) or not tools:
+        return body_bytes, None, 0
+    msgs = d.get("messages")
+    if not isinstance(msgs, list):
+        return body_bytes, None, 0
+    for m in msgs:
+        if isinstance(m, dict) and m.get("role") == "system" \
+                and isinstance(m.get("content"), str):
+            if TOOL_POLICY_BLOCK in m["content"]:
+                return body_bytes, None, 0
+            m["content"] = m["content"] + TOOL_POLICY_BLOCK
+            return (json.dumps(d, ensure_ascii=False).encode("utf-8"),
+                    "并入首条 system 尾部 %d 字符" % len(TOOL_POLICY_BLOCK),
+                    len(TOOL_POLICY_BLOCK))
+    return body_bytes, None, 0
+
+
+def pick_newest_capture(min_chars=20000):
+    """挑一份“像 Agent 请求”的抓包来预热。
+
+    两条都要满足：
+      1) 体积够大（真实 Agent 请求约 22 万字符）——否则会挑到自己发的小测试请求
+         （一两百字节），预热等于空转；
+      2) 时间最新——WorkBuddy 的 system prompt 会随版本 / 界面语言 / 技能集
+         变化而改变（实测 05:31 的 system 35,369 字符 vs 12:21 的 52,514 字符，
+         公共前缀只剩 1,382 字符，拿旧版预热 = 完全没热）。所以必须用【当前
+         版本产生的最后一份】大请求来预热。
+    """
+    cands = []
+    d = cap_dir()
+    for f in os.listdir(d):
+        if f.startswith("req_") and f.endswith(".json"):
+            p = os.path.join(d, f)
+            try:
+                cands.append((os.path.getsize(p), os.path.getmtime(p), p))
+            except OSError:
+                pass
+    if not cands:
+        return None
+    big = [c for c in cands if c[0] >= min_chars]
+    pool = big or cands
+    pool.sort(key=lambda c: c[1])          # 取 mtime 最新
+    return pool[-1][2]
+
+
+EFFORT_LEVELS = ("xhigh", "medium", "low")
+EFFORT_OFF = ("off", "none", "false", "no", "disabled")
+
+
+def client_thinking_intent(d):
+    r"""客户端是否已显式表达思考意图（D2：显式请求参数优先，代理不得无声覆盖）。
+
+    只认服务端真正会读的字段（源码 server-common.cpp 第 1296–1321 行）：
+        顶层                  reasoning_effort
+        chat_template_kwargs  reasoning_effort / enable_thinking
+    另登记请求级预算字段（reasoning_budget_tokens，别名 thinking_budget_tokens）。
+    返回 (来源描述或 None, 明细 dict)。
+    """
+    found = []
+    detail = {}
+    top = d.get("reasoning_effort")
+    if isinstance(top, str) and top.strip():
+        found.append("顶层 reasoning_effort=%s" % top.strip())
+        detail["reasoning_effort_top"] = top.strip()
+    ck = d.get("chat_template_kwargs")
+    if isinstance(ck, dict):
+        if "reasoning_effort" in ck:
+            found.append("模板参数 reasoning_effort=%r" % (ck["reasoning_effort"],))
+            detail["reasoning_effort_kwargs"] = ck["reasoning_effort"]
+        if "enable_thinking" in ck:
+            found.append("模板参数 enable_thinking=%r" % (ck["enable_thinking"],))
+            detail["enable_thinking_kwargs"] = ck["enable_thinking"]
+    bud = d.get("reasoning_budget_tokens", d.get("thinking_budget_tokens"))
+    if bud is not None:
+        detail["reasoning_budget_tokens"] = bud
+    return ("; ".join(found) if found else None), detail
+
+
+def apply_thinking_policy(body_bytes):
+    r"""思考档位注入 + 请求级预算注入（阶段 D2 / D3）。返回 (body, 说明, 来源, 已注入项)。
+
+    优先级（方案 §D2）：显式请求参数 > 代理配置的任务档 > 服务默认。
+    实测结论（无需 GPU，用 /apply-template 文本判定，见 results\stage_d_probe.txt）：
+      - 顶层 reasoning_effort 覆盖 chat_template_kwargs.reasoning_effort（源码解析顺序在后）
+      - 顶层 reasoning_effort="none" 与 kwargs.enable_thinking=false 都关闭思考；
+        none 会被 erase，不会被丢给模板
+      - 模板只接受 xhigh/medium/low，其它值（含 "none"）会让模板 raise_exception
+        => 代理绝不能把 "none" 当档位传进模板
+    预算注入（D3）默认全关：只有 config.budget.policy 对应项为 true 才注入，
+    且绝不覆盖客户端已给出的 max_tokens / 思考预算 / 关闭思考。
+    客户端一旦表达思考意图（档位或思考预算），代理就不碰任何思考类参数；
+    但 max_tokens 是总生成长度、与思考语义无关，仍按 policy 独立生效。
+    """
+    try:
+        d = json.loads(body_bytes.decode("utf-8"))
+    except Exception:
+        return body_bytes, None, "unparsed", None
+    if not isinstance(d, dict) or "messages" not in d:
+        return body_bytes, None, "not_chat", None
+    applied = {}
+    intent, detail = client_thinking_intent(d)
+    if intent:
+        src = "client"
+        notes = ["客户端已显式指定（%s），代理不注入思考类参数" % intent]
+    elif detail.get("reasoning_budget_tokens") is not None:
+        src = "client_budget"
+        notes = ["客户端已带请求级思考预算 %r，代理不注入思考类参数"
+                 % (detail["reasoning_budget_tokens"],)]
+    else:
+        src = "none"
+        notes = []
+        eff = (getattr(ARGS, "effort", None) or "").strip().lower()
+        if eff:
+            ck = d.get("chat_template_kwargs")
+            if not isinstance(ck, dict):
+                ck = {}
+            if eff in EFFORT_OFF:
+                ck["enable_thinking"] = False
+                src = "proxy_profile"
+                applied["enable_thinking"] = False
+                notes.append("注入 enable_thinking=false（关闭思考）")
+            elif eff in EFFORT_LEVELS:
+                ck["reasoning_effort"] = eff
+                src = "proxy_profile"
+                applied["reasoning_effort"] = eff
+                notes.append("注入 reasoning_effort=%s" % eff)
+            else:
+                src = "invalid"
+                notes.append("配置档位 %r 不在模板支持范围（xhigh/medium/low），跳过注入" % eff)
+            if src == "proxy_profile":
+                d["chat_template_kwargs"] = ck
+
+    # 客户端已表达思考意图时，代理不碰任何"思考类"参数（档位与思考预算）；
+    # max_tokens 是总生成长度，与思考语义无关，仍按 D3 policy 独立生效。
+    client_thinking = src in ("client", "client_budget")
+    kw = d.get("chat_template_kwargs")
+    thinking_off = (isinstance(kw, dict) and kw.get("enable_thinking") is False) \
+        or d.get("reasoning_effort") == "none"
+
+    # ---- D3：请求级预算注入（config.budget.policy 默认两项 false = 不注入）----
+    bu = (RAW_CFG or {}).get("budget") or {}
+    po = bu.get("policy") or {}
+    if po.get("apply_request_max_tokens") and bu.get("request_max_tokens") is not None:
+        if "max_tokens" not in d and "max_completion_tokens" not in d:
+            d["max_tokens"] = int(bu["request_max_tokens"])
+            applied["max_tokens"] = d["max_tokens"]
+            notes.append("注入 max_tokens=%s" % d["max_tokens"])
+    if po.get("apply_thinking_budget") and bu.get("thinking_budget_tokens") is not None:
+        if (not thinking_off and not client_thinking
+                and "reasoning_budget_tokens" not in d
+                and "thinking_budget_tokens" not in d):
+            d["reasoning_budget_tokens"] = int(bu["thinking_budget_tokens"])
+            applied["reasoning_budget_tokens"] = d["reasoning_budget_tokens"]
+            notes.append("注入 reasoning_budget_tokens=%s" % d["reasoning_budget_tokens"])
+
+    if not applied:
+        # 没有任何注入：原样返回原始字节，不做无谓的重新序列化
+        if src == "none":
+            return body_bytes, None, src, None
+        return body_bytes, ("；".join(notes) if notes else None), src, None
+    return (json.dumps(d, ensure_ascii=False).encode("utf-8"),
+            ("；".join(notes) if notes else None), src, applied)
+
+
+# ================================================================ 输入预算闸门（阶段 E）
+CTX_WIN = {"tokens": None, "at": 0.0, "source": None}
+
+
+def budget_gate_cfg():
+    """闸门配置（唯一权威：config\\bonsai-agent.json 的 budget 段）。"""
+    bu = (RAW_CFG or {}).get("budget") or {}
+    g = bu.get("gate") or {}
+    return {
+        "enabled": bool(g.get("enabled", True)),
+        "mode": str(g.get("mode") or "warn").lower(),
+        "plan_max_tokens": int(bu.get("request_max_tokens") or 0),
+        "reserve": int(bu.get("context_reserve_tokens") or 0),
+        "floor": float(g.get("chars_per_token_floor") or 3.0),
+    }
+
+
+def effective_context_window():
+    """有效上下文窗口（token）。优先问后端 /props，取不到退回配置，来源如实记录。
+
+    60 秒内复用上次结果，避免每个请求都打一次 /props。
+    """
+    now = time.monotonic()
+    if CTX_WIN["tokens"] and (now - CTX_WIN["at"]) < 60.0:
+        return CTX_WIN["tokens"], CTX_WIN["source"]
+    p = http_get_json(ARGS.upstream, "/props", 3.0)
+    n, src = None, "server /props"
+    if isinstance(p, dict):
+        if isinstance(p.get("n_ctx"), int):
+            n = p["n_ctx"]
+        else:
+            d = p.get("default_generation_settings") or {}
+            if isinstance(d, dict):
+                if isinstance(d.get("n_ctx"), int):
+                    n = d["n_ctx"]
+                else:
+                    pr = d.get("params") or {}
+                    if isinstance(pr, dict) and isinstance(pr.get("n_ctx"), int):
+                        n = pr["n_ctx"]
+    if n is None:
+        n = int(((RAW_CFG or {}).get("budget") or {}).get("context_window_tokens") or 65536)
+        src = "配置/默认值（/props 不可达）"
+    CTX_WIN.update({"tokens": n, "at": now, "source": src})
+    return n, src
+
+
+def upstream_json(path, obj, timeout=30.0):
+    """向本机后端 POST 一个 JSON。失败返回 (None, 说明)。"""
+    conn = None
+    try:
+        conn = http.client.HTTPConnection(CFG["upstream_host"], int(ARGS.upstream),
+                                          timeout=float(timeout))
+        conn.request("POST", path,
+                     body=json.dumps(obj, ensure_ascii=False).encode("utf-8"),
+                     headers={"Content-Type": "application/json"})
+        r = conn.getresponse()
+        raw = r.read()
+        if r.status != 200:
+            return None, "status=%d" % r.status
+        return json.loads(raw.decode("utf-8", "ignore")), None
+    except Exception as e:
+        return None, repr(e)
+    finally:
+        if conn is not None:
+            try:
+                conn.close()
+            except Exception:
+                pass
+
+
+def exact_input_tokens(body_bytes, timeout=30.0):
+    """精确核算【代理变换后】的输入 token（不改请求、不做推理、不占推理槽位）。
+
+    与 /v1/chat/completions 共用 oaicompat_chat_params_parse（server-context.cpp 第 4950-4961 行），
+    因此 /apply-template 渲染出的 prompt 与真正推理时逐字节一致。
+    返回 (tokens 或 None, 说明, 耗时ms)；取不到时 tokens=None —— 记为 unknown，不谎报安全。
+    """
+    t0 = time.monotonic()
+    try:
+        d = json.loads(body_bytes.decode("utf-8", "ignore"))
+    except Exception:
+        return None, "unparsed", 0.0
+    if not isinstance(d, dict) or "messages" not in d:
+        return None, "not_chat", 0.0
+    tpl, err = upstream_json("/apply-template", d, timeout)
+    if err or not isinstance(tpl, dict) or "prompt" not in tpl:
+        return None, "apply-template 失败 %s" % (err or "无 prompt 字段"), ms_since(t0)
+    tk, err2 = upstream_json("/tokenize",
+                             {"content": tpl["prompt"], "add_special": False,
+                              "parse_special": True}, timeout)
+    if err2:
+        return None, "tokenize 失败 %s" % err2, ms_since(t0)
+    if isinstance(tk, list):
+        n = len(tk)
+    elif isinstance(tk, dict) and isinstance(tk.get("tokens"), list):
+        n = len(tk["tokens"])
+    else:
+        return None, "tokenize 返回形态未知", ms_since(t0)
+    return n, None, ms_since(t0)
+
+
+def check_input_budget(body_bytes):
+    """生成前输入预算判定（方案 §7）。返回 (action, info)。
+
+    action ∈ disabled / skip（上界估算即可安全放行）/ pass / over / unknown
+    """
+    g = budget_gate_cfg()
+    win, wsrc = effective_context_window()
+    need_gen = g["plan_max_tokens"] + g["reserve"]
+    info = {
+        "enabled": g["enabled"], "mode": g["mode"], "window": win,
+        "window_source": wsrc, "planned_gen": g["plan_max_tokens"], "reserve": g["reserve"],
+        "method": None, "input_tokens": None, "required": None, "headroom": None,
+        "verdict": None, "elapsed_ms": 0.0,
+    }
+    if not g["enabled"]:
+        info["verdict"] = "闸门已关闭"
+        return "disabled", info
+
+    # 便宜路径：字节上界估算（tokens <= bytes / floor）。只用于"跳过精确计数"，
+    # 不用于最终判定；宁可多算不可少算。
+    est_upper = int(len(body_bytes) / max(1.0, g["floor"]))
+    info["est_upper_tokens"] = est_upper
+    if est_upper + need_gen <= win:
+        info["method"] = "chars_upper_bound"
+        info["verdict"] = "在预算内(便宜路径)"
+        return "skip", info
+
+    n, err, ms = exact_input_tokens(body_bytes)
+    info["method"] = "exact(apply-template+tokenize)"
+    info["elapsed_ms"] = ms
+    if n is None:
+        info["verdict"] = "未知(%s)" % err
+        return "unknown", info
+    req = n + need_gen
+    info["input_tokens"] = n
+    info["required"] = req
+    info["headroom"] = win - req
+    info["input_pct_of_window"] = round(100.0 * n / win, 2) if win else None
+    if req > win:
+        info["verdict"] = "超预算"
+        return "over", info
+    info["verdict"] = "在预算内(精确)"
+    return "pass", info
+
+
+# ================================================================ 增量 SSE 解析
+class SSEParser:
+    """只观察、不改字节的增量 SSE 解析器（方案 §C1）。
+
+    调用方原样把网络块转发给客户端，再 feed() 给本类做监控统计，
+    因此“网络分块方式”与“转发字节”完全解耦：转发不会因为解析而丢字节或重复。
+    """
+
+    def __init__(self):
+        self._dec = codecs.getincrementaldecoder("utf-8")(errors="replace")
+        self._buf = ""
+        self._pending_data = ""      # 被拆到多行 data: 的残余
+        self.events = 0
+        self.heartbeats = 0
+        self.done = False
+        self.other = 0
+        self.finish_reason = None
+        self.stop_type = None
+        self.timings = None
+        self.usage = None
+        self.model = None
+        self.saw_error = None
+        self.role = None
+        self.reasoning_chars = 0
+        self.answer_chars = 0
+        self.tool_arg_chars = 0
+        self.tool_calls = 0
+
+    # ---------- 对外 ----------
+    def feed(self, chunk):
+        """喂一个网络块，返回本次产生的“信号”列表。"""
+        out = []
+        text = self._dec.decode(chunk)
+        if text:
+            self._buf += text
+        while True:
+            m = re.search(r"\r\n|\n|\r", self._buf)
+            if not m:
+                break
+            line = self._buf[:m.start()]
+            self._buf = self._buf[m.end():]
+            if line == "":
+                continue                      # 事件分隔：不给客户端造成区别
+            if line.startswith(":"):
+                self.heartbeats += 1
+                out.append({"kind": "heartbeat"})
+                continue
+            field, _, value = line.partition(":")
+            if value.startswith(" "):
+                value = value[1:]
+            if field != "data":
+                continue                      # event:/id:/retry: 不参与统计
+            self._handle_data(value, out)
+        return out
+
+    # ---------- 内部 ----------
+    def _handle_data(self, value, out):
+        if self._pending_data:
+            value = self._pending_data + value
+            self._pending_data = ""
+        if value.strip() == "[DONE]":
+            self.done = True
+            out.append({"kind": "done"})
+            return
+        try:
+            obj = json.loads(value)
+        except Exception:
+            # 可能是“一条 JSON 被拆到多行 data:”；留到下一次拼接再试
+            self._pending_data = value
+            self.other += 1
+            out.append({"kind": "other"})
+            return
+        self.events += 1
+        out.append(self._consume(obj))
+
+    def _consume(self, obj):
+        sig = {"kind": "data", "reasoning_chars": 0, "content_chars": 0,
+               "tool_arg_chars": 0, "finish_reason": None, "stop_type": None}
+        if not isinstance(obj, dict):
+            return sig
+        if obj.get("model"):
+            self.model = obj["model"]
+        if obj.get("stop_type") is not None:
+            self.stop_type = obj["stop_type"]
+            sig["stop_type"] = self.stop_type
+        if isinstance(obj.get("timings"), dict):
+            self.timings = obj["timings"]
+        if isinstance(obj.get("usage"), dict):
+            self.usage = obj["usage"]
+        if obj.get("error"):
+            self.saw_error = obj["error"]
+        ch = obj.get("choices") or [None]
+        ch = ch[0] if ch else None
+        if isinstance(ch, dict):
+            if ch.get("finish_reason") is not None:
+                self.finish_reason = ch["finish_reason"]
+                sig["finish_reason"] = self.finish_reason
+            d = ch.get("delta")
+            if isinstance(d, dict):
+                if d.get("role"):
+                    self.role = d["role"]
+                r = d.get("reasoning_content")
+                if isinstance(r, str) and r:
+                    self.reasoning_chars += len(r)
+                    sig["reasoning_chars"] = len(r)
+                c = d.get("content")
+                if isinstance(c, str) and c:
+                    self.answer_chars += len(c)
+                    sig["content_chars"] = len(c)
+                for tc in (d.get("tool_calls") or []):
+                    self.tool_calls += 1
+                    fn = (tc or {}).get("function") or {}
+                    a = fn.get("arguments")
+                    if isinstance(a, str) and a:
+                        self.tool_arg_chars += len(a)
+                        sig["tool_arg_chars"] = len(a)
+        return sig
+
+
+# ================================================================ 抓包分析
+def analyze(body_bytes, n):
+    try:
+        d = json.loads(body_bytes.decode("utf-8", "ignore"))
+    except Exception:
+        return None
+
+    msgs = d.get("messages") or []
+    tools = d.get("tools") or []
+    sys_txt = ""
+    for m in msgs:
+        if m.get("role") == "system":
+            c = m.get("content")
+            sys_txt = c if isinstance(c, str) else json.dumps(c, ensure_ascii=False)
+            break
+    tool_txt = json.dumps(tools, ensure_ascii=False, sort_keys=True)
+    body_txt = body_bytes.decode("utf-8", "ignore")
+
+    rec = {
+        "n": n,
+        "ts": now_iso(),
+        "body_chars": len(body_txt),
+        "n_messages": len(msgs),
+        "n_tools": len(tools),
+        "system_chars": len(sys_txt),
+        "tools_chars": len(tool_txt),
+        "system_head": sys_txt[:180],
+        "system_tail": sys_txt[-180:],
+    }
+
+    # Agent 级请求（体积大）才叫 req_*，自己的小测试单独放，免得被当成预热素材
+    prefix = "req" if len(body_txt) >= 20000 else "small"
+    try:
+        with open(os.path.join(cap_dir(), "%s_%03d_%s.json"
+                               % (prefix, n, time.strftime("%H%M%S"))),
+                  "w", encoding="utf-8") as f:
+            f.write(body_txt)
+    except Exception as e:
+        print("     [抓包] 写入失败 %r" % (e,), flush=True)
+
+    prev = STATE.get("last")
+    if prev:
+        r = {
+            "d_full": common_prefix_len(body_txt, prev["body_txt"]),
+            "d_sys": common_prefix_len(sys_txt, prev["sys_txt"]),
+        }
+        r["pct_full"] = r["d_full"] / max(1, len(body_txt))
+        r["pct_sys"] = r["d_sys"] / max(1, len(sys_txt))
+        rec["diff"] = r
+
+    STATE["last"] = {"body_txt": body_txt, "sys_txt": sys_txt}
+    return rec
+
+
+def print_analyze(rec):
+    print("\n[#%d] system=%d tools=%d msgs=%d" % (
+        rec["n"], rec["system_chars"], rec["tools_chars"], rec["n_messages"]),
+        flush=True)
+    d = rec.get("diff")
+    if d:
+        print("     与上一请求公共前缀 %.1f%%" % (d["pct_full"] * 100), flush=True)
+
+
+# ================================================================ 每请求日志（方案 §C4）
+def new_record(rid, method, path, t0):
+    return {
+        "request_id": rid,
+        "start_at": now_iso(),
+        "end_at": None,
+        "method": method,
+        "path": path,
+        "model": None,
+        "config_hash": CONFIG_HASH,
+        "profile": eff_profile(),
+        "effort_source": None,
+        "effort_effective": None,
+        "budget_applied": None,
+        "budget_check": None,
+        "n": None,
+        "status": None,
+        "finish_reason": None,
+        "stop_type": None,
+        "truncated": None,
+        "input_tokens_total": None,
+        "prompt_evaluated_tokens": None,
+        "cache_reused_tokens": None,
+        "reasoning_tokens": None,
+        "answer_tokens": None,
+        "tool_argument_tokens": None,
+        "completion_tokens": None,
+        "cache_reuse": "未知",
+        "cache_reuse_ratio": None,
+        "queue_ms": None,
+        "connect_ms": None,
+        "first_response_ms": None,
+        "prefill_ms": None,
+        "first_stream_event_ms": None,
+        "first_reasoning_ms": None,
+        "first_visible_content_ms": None,
+        "generation_ms": None,
+        "wall_ms": None,
+        "decode_tps": None,
+        "client_disconnected": False,
+        "timeout_kind": None,
+        "error_type": None,
+        "server_busy_at_start": None,
+        "release_verified": None,
+        "release_ms": None,
+        "sse_events": 0,
+        "sse_heartbeats": 0,
+        "tool_calls": 0,
+        "max_token_stall_ms": 0,
+        "est_reasoning_chars": 0,
+        "est_answer_chars": 0,
+        "est_tool_arg_chars": 0,
+        "notes": [],
+    }
+
+
+def apply_server_counters(rec, timings, usage):
+    """把服务端 timings/usage 灌进记录；拿不到的字段保持 null 并说明。"""
+    if isinstance(timings, dict):
+        rec["prompt_evaluated_tokens"] = timings.get("prompt_n")
+        rec["cache_reused_tokens"] = timings.get("cache_n")
+        if timings.get("prompt_ms") is not None:
+            rec["prefill_ms"] = round(float(timings["prompt_ms"]), 1)
+        if timings.get("predicted_per_second") is not None:
+            rec["decode_tps"] = round(float(timings["predicted_per_second"]), 2)
+        if timings.get("predicted_n") is not None:
+            rec["answer_tokens"] = timings["predicted_n"]
+    else:
+        rec["notes"].append("服务端未返回 timings（拿不到 prefill/复用计数）")
+    if isinstance(usage, dict):
+        rec["input_tokens_total"] = usage.get("prompt_tokens")
+        rec["completion_tokens"] = usage.get("completion_tokens")
+        det = usage.get("completion_tokens_details") or {}
+        if isinstance(det, dict) and det.get("reasoning_tokens"):
+            rec["reasoning_tokens"] = det["reasoning_tokens"]
+        else:
+            rec["notes"].append("服务端 usage.reasoning_tokens 缺失或为 0"
+                                "（该值在本机实现里恒为 0，不能据此判断没有思考）")
+    else:
+        rec["notes"].append("服务端未返回 usage（拿不到 token 总数）")
+    pn, cn = rec["prompt_evaluated_tokens"], rec["cache_reused_tokens"]
+    rec["cache_reuse"] = reuse_class(pn, cn)
+    rec["cache_reuse_ratio"] = reuse_ratio(pn, cn)
+    fr, st = rec.get("finish_reason"), rec.get("stop_type")
+    if fr is None and st is None:
+        rec["truncated"] = None
+    else:
+        rec["truncated"] = bool(fr == "length" or st == "limit")
+
+
+def finalize_record(rec):
+    if rec.get("wall_ms") is None:
+        rec["wall_ms"] = rec.get("generation_ms")
+    if rec.get("first_stream_event_ms") is not None and rec.get("wall_ms") is not None:
+        rec["generation_ms"] = round(rec["wall_ms"] - rec["first_stream_event_ms"], 1)
+    rec["end_at"] = now_iso()
+
+
+def write_request_record(rec):
+    p = CFG["request_log"]
+    try:
+        d = os.path.dirname(p)
+        if d:
+            os.makedirs(d, exist_ok=True)
+        line = json.dumps(rec, ensure_ascii=False)
+        with LOG_LOCK:
+            with open(p, "a", encoding="utf-8") as f:
+                f.write(line + "\n")
+    except Exception as e:
+        print("[日志] 写 requests.jsonl 失败 %r" % (e,), flush=True)
+
+
+def append_timings(rec):
+    """兼容旧的 capture\\timings.jsonl（verdict.txt 与历史工具读它）。
+
+    注意：不再写 hit 字段（旧的 prompt_n<1500 绝对判据已删除），
+    改为 reuse 分档 + reuse_ratio。
+    """
+    if rec.get("prompt_evaluated_tokens") is None:
+        return
+    item = {
+        "ts": rec["start_at"],
+        "kind": "对话",
+        "request_id": rec["request_id"],
+        "prompt_n": rec["prompt_evaluated_tokens"],
+        "cache_n": rec["cache_reused_tokens"],
+        "prefill_s": round((rec["prefill_ms"] or 0) / 1000.0, 2)
+        if rec["prefill_ms"] is not None else None,
+        "reuse": rec["cache_reuse"],
+        "reuse_ratio": rec["cache_reuse_ratio"],
+        "decode_tps": rec["decode_tps"],
+        "wall_s": round((rec["wall_ms"] or 0) / 1000.0, 2)
+        if rec["wall_ms"] is not None else None,
+    }
+    try:
+        with open(timings_path(), "a", encoding="utf-8") as f:
+            f.write(json.dumps(item, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+
+def print_summary(rec):
+    flag = ""
+    if rec.get("client_disconnected"):
+        flag += " [客户端断开]"
+    if rec.get("timeout_kind"):
+        flag += " [超时:%s]" % rec["timeout_kind"]
+    if rec.get("error_type"):
+        flag += " [错误]"
+    print("[%s %s] %s %s queue=%sms ttfb=%sms first_ev=%sms wall=%sms "
+          "reuse=%s pn=%s cn=%s decode=%st/s finish=%s%s"
+          % (rec["request_id"], rec["start_at"], rec.get("status"), rec["path"],
+             rec.get("queue_ms"), rec.get("first_response_ms"),
+             rec.get("first_stream_event_ms"), rec.get("wall_ms"),
+             rec.get("cache_reuse"), rec.get("prompt_evaluated_tokens"),
+             rec.get("cache_reused_tokens"), rec.get("decode_tps"),
+             rec.get("finish_reason") or rec.get("stop_type"), flag), flush=True)
+
+
+# ================================================================ 判定文件
+def write_verdict():
+    """缓存复用判定：按服务端 prompt_n/cache_n 分档，不再用绝对阈值。"""
+    lines = ["Bonsai 前缀稳定性 & 缓存复用判定", "=" * 62, ""]
+    recs = []
+    p = timings_path()
+    if os.path.exists(p):
+        for ln in open(p, encoding="utf-8"):
+            ln = ln.strip()
+            if ln:
+                try:
+                    recs.append(json.loads(ln))
+                except Exception:
+                    pass
+    if not recs:
+        lines.append("还没有 timings 记录。让 WorkBuddy 发一条消息再看。")
+    else:
+        lines.append("%-20s %-7s %9s %8s %-10s %8s %s" %
+                     ("时间", "类型", "prompt_n", "cache_n", "复用", "prefill", "decode"))
+        lines.append("-" * 62)
+        for r in recs[-25:]:
+            lines.append("%-20s %-7s %9s %8s %-10s %8s %s" % (
+                r.get("ts", ""), r.get("kind", ""), r.get("prompt_n"),
+                r.get("cache_n"),
+                r.get("reuse") or reuse_class(r.get("prompt_n"), r.get("cache_n")),
+                r.get("prefill_s", ""), r.get("decode_tps", "")))
+        chat = [r for r in recs if r.get("kind") not in ("预热", "启动预热", "体检")]
+        if chat:
+            cnt = {}
+            for r in chat:
+                k = r.get("reuse") or reuse_class(r.get("prompt_n"), r.get("cache_n"))
+                cnt[k] = cnt.get(k, 0) + 1
+            lines += ["", "对话请求复用分布（共 %d 条）: %s"
+                      % (len(chat), "  ".join("%s=%d" % (k, v)
+                                              for k, v in sorted(cnt.items())))]
+    lines += ["",
+              "判据（方案 §C4）：按 cache_n/(cache_n+prompt_n) 分档",
+              "  无复用 / 部分复用（<90%）/ 高比例复用（>=90%）/ 未知（拿不到计数）",
+              "  旧的“prompt_n 小于 1500 即算命中”绝对阈值已删除，"
+              "避免部分命中被误报为全量重算、小请求被误报为命中。"]
+    txt = "\n".join(lines)
+    try:
+        with open(os.path.join(cap_dir(), "verdict.txt"), "w", encoding="utf-8") as f:
+            f.write(txt)
+    except Exception:
+        pass
+    return txt
+
+
+# ================================================================ 上游读取（C1/C2）
+def read_chunks(resp, sock, idle_s, deadline):
+    """有数据即返回的读取器（read1），并按 idle/整档超时抛 UpstreamTimeout。"""
+    read1 = getattr(resp, "read1", None)
+    while True:
+        remain = deadline - time.monotonic()
+        if remain <= 0:
+            raise UpstreamTimeout("overall")
+        if sock is not None:
+            try:
+                sock.settimeout(max(0.1, min(float(idle_s), remain)))
+            except Exception:
+                pass
+        try:
+            chunk = read1(65536) if read1 else resp.read(65536)
+        except socket.timeout:
+            raise UpstreamTimeout("no_data")
+        if not chunk:
+            return
+        yield chunk
+
+
+def write_client(handler, data):
+    try:
+        handler.wfile.write(data)
+        handler.wfile.flush()
+    except Exception as e:      # BrokenPipe/ConnectionReset/socket.timeout/OSError...
+        raise ClientGone(repr(e))
+
+
+def client_gone_peek(handler, grace_s=0.0):
+    """非阻塞看一眼客户端：已关闭/复位 -> True（方案 §C2 取消检测）。
+
+    只写不读时，内核可能把数据放进缓冲区而不立刻报错（写小包尤其如此），
+    所以光靠“写失败”会漏判取消；MSG_PEEK 不会把数据取走，不影响正常请求。
+
+    三种判据都算“客户端已不可用”：
+      - recv 读到 EOF（对端正常关闭，b""）；
+      - recv 抛复位/中止类异常（对端 RST —— 关闭后仍收到我们发去的字节时会回 RST）；
+      - socket 已不可用。
+    grace_s>0 时在窗口内轮询：RST 需要一点时间才能回来，给一个很短的窗口能显著
+    提高“已写入数据后的取消”检出率；正常请求在这个窗口里只是多等这一段。
+    """
+    try:
+        s = handler.connection
+    except Exception:
+        return True
+    deadline = time.monotonic() + max(0.0, float(grace_s))
+    while True:
+        try:
+            r, _, _ = select.select([s], [], [], 0)
+        except Exception:
+            return True
+        if r:
+            try:
+                return s.recv(1, socket.MSG_PEEK) == b""
+            except socket.timeout:
+                pass
+            except Exception:
+                return True      # 复位/中止 -> 客户端已跑掉
+        if time.monotonic() >= deadline:
+            return False
+        time.sleep(0.02)
+
+
+def is_stream_request(body):
+    if not body:
+        return False
+    try:
+        d = json.loads(body.decode("utf-8", "ignore"))
+    except Exception:
+        return False
+    return bool(isinstance(d, dict) and d.get("stream"))
+
+
+# ================================================================ 代理
+class Handler(BaseHTTPRequestHandler):
+    protocol_version = "HTTP/1.1"
+    server_version = "bonsai-proxy/3.0"
+
+    def log_message(self, fmt, *a):
+        pass
+
+    # ---------- 工具 ----------
+    def _send_json(self, code, obj):
+        msg = json.dumps(obj, ensure_ascii=False).encode("utf-8")
+        try:
+            self.send_response(code)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(msg)))
+            self.send_header("Connection", "close")
+            self.close_connection = True
+            self.end_headers()
+            self.wfile.write(msg)
+        except Exception:
+            pass
+
+    def _read_client_body(self):
+        ln = int(self.headers.get("Content-Length") or 0)
+        return self.rfile.read(ln) if ln else None
+
+    # ---------- 主流程 ----------
+    def _forward(self, method):
+        t0 = time.monotonic()
+        rid = uuid.uuid4().hex[:16]
+        body = self._read_client_body()
+        is_chat = "/chat/completions" in self.path
+        is_inference = is_chat or "/completions" in self.path
+        rec = new_record(rid, method, self.path, t0)
+        # 客户端写超时：对端卡死/跑掉时不能把单槽代理一起卡住（方案 §C2）
+        try:
+            self.connection.settimeout(float(CFG["timeouts"]["client_write_s"]))
+        except Exception:
+            pass
+
+        # ---- 抓包 / 瘦身 / 思考档位（仅对话请求）----
+        if body and is_chat:
+            with STATE["lock"]:
+                STATE["n"] += 1
+                n = STATE["n"]
+            rec["n"] = n
+            arec = analyze(body, n)
+            if arec:
+                print_analyze(arec)
+            # ---- 请求瘦身（阶段 F：按 config.slimming 三项逐项生效）----
+            if not keep_location():
+                body, saved, slim_detail = slim_tools(body)
+                sc = slim_detail.get("saved_chars") or {}
+                rec["slim"] = slim_detail
+                if saved:
+                    print("     [瘦身] 省 %d 字符（location=%d / deferred=%d / subagent=%d）"
+                          % (saved, sc.get("locations", 0), sc.get("deferred_tools", 0),
+                             sc.get("subagents", 0)), flush=True)
+            else:
+                rec["slim"] = {"closed": True}
+            # ---- 工具体契约加固（F1）+ 工具参数审计观测量 ----
+            if (CFG.get("tools") or {}).get("schema_hardening"):
+                body, hard = harden_tool_schemas(body)
+                if hard.get("rewritten"):
+                    rec["tools_hardened"] = hard["rewritten"]
+                    print("     [工具体] 契约加固 %s（%+d 字符）"
+                          % (",".join(hard["rewritten"]), hard["chars_delta"]), flush=True)
+            # ---- 工具错误恢复策略块（F4）----
+            body, pol_note, _pol_chars = apply_tool_error_policy(body)
+            if pol_note:
+                rec["tool_policy"] = pol_note
+            audit = tool_arg_audit(body)
+            if audit:
+                rec["tool_arg_audit"] = audit
+                print("     [工具审计] show_widget 调用 %d 次（合法 %d / 不合法 %d）；"
+                      "工具失败 %d 次%s"
+                      % (audit["calls"], audit["valid"], audit["invalid"],
+                         audit["tool_failures"],
+                         ("；同一错误已重复：%s" % audit["repeated_identical_error"])
+                         if audit["repeated_identical_error"] else ""), flush=True)
+            body, note, effort_src, applied = apply_thinking_policy(body)
+            rec["effort_source"] = effort_src
+            applied = applied or {}
+            if "enable_thinking" in applied:
+                rec["effort_effective"] = "off(enable_thinking=false)"
+            elif applied.get("reasoning_effort"):
+                rec["effort_effective"] = applied["reasoning_effort"]
+            elif effort_src == "client":
+                rec["effort_effective"] = "客户端指定"
+            rec["budget_applied"] = {k: v for k, v in applied.items()
+                                     if k in ("max_tokens", "reasoning_budget_tokens")} or None
+            if note:
+                print("     [effort] %s" % note, flush=True)
+            rec["profile"] = eff_profile()
+
+            # ---- 输入预算闸门（阶段 E）：必须在排队/占槽之前判定 ----
+            act, binfo = check_input_budget(body)
+            rec["budget_check"] = binfo
+            if act == "over":
+                msg = ("输入超预算：输入 %s + 计划生成 %s + 余量 %s = %s > 窗口 %s（超 %s tok）"
+                       % (binfo["input_tokens"], binfo["planned_gen"], binfo["reserve"],
+                          binfo["required"], binfo["window"], -(binfo["headroom"] or 0)))
+                if binfo["mode"] == "reject":
+                    rec["notes"].append(msg + "；按配置 reject，未发起推理（不占槽位）")
+                    rec["status"] = 400
+                    rec["error_type"] = "input_over_budget"
+                    rec["wall_ms"] = ms_since(t0)
+                    finalize_record(rec)
+                    write_request_record(rec)
+                    print_summary(rec)
+                    print("     [预算] %s -> 生成前拒绝（400，不消耗槽位）" % msg, flush=True)
+                    self._send_json(400, {"error": {
+                        "message": "input over budget: " + msg +
+                                   "。请先减少输入（历史整理 / 拆分任务）或降低计划生成预算后重试。",
+                        "type": "input_over_budget", "code": "input_over_budget",
+                        "budget": binfo}})
+                    return
+                rec["notes"].append(msg + "；按配置 warn，仍转发")
+                print("     [预算] %s -> warn，仍转发" % msg, flush=True)
+            elif act == "unknown":
+                rec["notes"].append("预算检查未知：%s（不据此放行，仅记录）" % binfo["verdict"])
+                print("     [预算] 精确计数失败：%s（记录为未知，不影响转发）"
+                      % binfo["verdict"], flush=True)
+            elif act == "pass":
+                print("     [预算] %s 输入=%s tok（%s，%.0f ms）"
+                      % (binfo["verdict"], binfo["input_tokens"], binfo["method"],
+                         binfo["elapsed_ms"]), flush=True)
+
+        # ---- 排队（C3）：单槽串行化 ----
+        locked = False
+        if is_inference and method == "POST":
+            tq = time.monotonic()
+            holder = INFLIGHT.get("rid")
+            rec["server_busy_at_start"] = backend_busy(ARGS.upstream)
+            if holder:
+                print("     [排队] 后端单槽已被 %s 占用，本请求排队等待 ..." % holder,
+                      flush=True)
+            locked = INFER_LOCK.acquire(timeout=max(1.0, float(CFG["timeouts"]["overall_s"])))
+            rec["queue_ms"] = ms_since(tq)
+            if not locked:
+                rec["timeout_kind"] = "queue"
+                rec["notes"].append("排队超时：单槽长时间被占用")
+                rec["wall_ms"] = ms_since(t0)
+                finalize_record(rec)
+                write_request_record(rec)
+                print_summary(rec)
+                self._send_json(503, {"error": {"message": "proxy queue timeout"}})
+                return
+            INFLIGHT["rid"] = rid
+            INFLIGHT["started"] = time.monotonic()
+            if rec["queue_ms"] and rec["queue_ms"] >= 200:
+                print("     [排队] 等待 %.0f ms 后获得槽位" % rec["queue_ms"], flush=True)
+
+        try:
+            self._relay(method, body, is_stream_request(body), is_chat, rec, t0)
+        finally:
+            if locked:
+                if INFLIGHT.get("rid") == rid:
+                    INFLIGHT["rid"] = None
+                    INFLIGHT["started"] = None
+                try:
+                    INFER_LOCK.release()
+                except Exception:
+                    pass
+
+        rec["wall_ms"] = ms_since(t0)
+        finalize_record(rec)
+        write_request_record(rec)
+        if is_chat:
+            append_timings(rec)
+        print_summary(rec)
+
+    # ---------- 转发 ----------
+    def _relay(self, method, body, streaming, is_chat, rec, t0):
+        to = CFG["timeouts"]
+        host = CFG["upstream_host"]
+        port = int(ARGS.upstream)
+        conn = http.client.HTTPConnection(host, port, timeout=float(to["connect_s"]))
+        try:
+            t_conn = time.monotonic()
+            try:
+                conn.connect()
+            except Exception as e:
+                rec["error_type"] = "connect: %r" % (e,)
+                rec["wall_ms"] = ms_since(t0)
+                self._send_json(502, {"error": {"message":
+                                                "proxy upstream connect failed: %r" % (e,)}})
+                return
+            rec["connect_ms"] = ms_since(t_conn)
+            try:
+                conn.sock.settimeout(float(to["first_response_s"]))
+            except Exception:
+                pass
+
+            headers = {k: v for k, v in self.headers.items() if k.lower() not in HOP}
+            try:
+                conn.request(method, self.path, body=body, headers=headers)
+            except Exception as e:
+                rec["error_type"] = "request: %r" % (e,)
+                rec["wall_ms"] = ms_since(t0)
+                self._send_json(502, {"error": {"message":
+                                                "proxy upstream request failed: %r" % (e,)}})
+                return
+
+            try:
+                resp = conn.getresponse()
+            except socket.timeout:
+                rec["timeout_kind"] = "first_response"
+                rec["wall_ms"] = ms_since(t0)
+                self._send_json(504, {"error": {"message":
+                                                "upstream first-response timeout"
+                                                " (%.1fs)" % float(to["first_response_s"])}})
+                return
+            except Exception as e:
+                rec["error_type"] = "getresponse: %r" % (e,)
+                rec["wall_ms"] = ms_since(t0)
+                self._send_json(502, {"error": {"message": "proxy upstream error: %r" % (e,)}})
+                return
+            rec["first_response_ms"] = ms_since(t0)
+            rec["status"] = resp.status
+
+            # ---- 响应头透传（不给 Content-Length；用 Connection: close 划边界）----
+            self.send_response(resp.status, resp.reason)
+            for k, v in resp.getheaders():
+                if k.lower() in ("transfer-encoding", "connection", "content-length",
+                                 "keep-alive"):
+                    continue
+                self.send_header(k, v)
+            self.send_header("Connection", "close")
+            self.close_connection = True
+            self.end_headers()
+
+            parser = SSEParser() if streaming else None
+            buf = bytearray()
+            deadline = t0 + float(to["overall_s"])
+            last_progress = time.monotonic()
+            try:
+                for chunk in read_chunks(resp, conn.sock, float(to["stream_idle_s"]),
+                                         deadline):
+                    if rec["first_stream_event_ms"] is None:
+                        rec["first_stream_event_ms"] = ms_since(t0)
+                    write_client(self, chunk)
+                    if client_gone_peek(self):
+                        raise ClientGone("peer closed (MSG_PEEK EOF)")
+                    if parser is not None:
+                        for s in parser.feed(chunk):
+                            if s.get("kind") == "heartbeat":
+                                continue
+                            if s.get("content_chars") or s.get("reasoning_chars") \
+                                    or s.get("tool_arg_chars"):
+                                last_progress = time.monotonic()
+                                if s.get("reasoning_chars") \
+                                        and rec["first_reasoning_ms"] is None:
+                                    rec["first_reasoning_ms"] = ms_since(t0)
+                                if s.get("content_chars") \
+                                        and rec["first_visible_content_ms"] is None:
+                                    rec["first_visible_content_ms"] = ms_since(t0)
+                            if s.get("finish_reason") is not None:
+                                rec["finish_reason"] = s["finish_reason"]
+                            if s.get("stop_type") is not None:
+                                rec["stop_type"] = s["stop_type"]
+                        rec["sse_events"] = parser.events
+                        rec["sse_heartbeats"] = parser.heartbeats
+                        stall = (time.monotonic() - last_progress) * 1000.0
+                        rec["max_token_stall_ms"] = max(rec["max_token_stall_ms"],
+                                                        round(stall))
+                    elif len(buf) < 4 * 1024 * 1024:
+                        buf += chunk
+            except ClientGone as e:
+                rec["client_disconnected"] = True
+                rec["error_type"] = rec["error_type"] or ("client_gone: %s" % e)
+            except UpstreamTimeout as e:
+                rec["timeout_kind"] = e.kind
+            except Exception as e:
+                rec["error_type"] = "stream: %r" % (e,)
+
+            # ---- 收尾：服务端计数与终止状态 ----
+            # 上游自然结束（EOF）却没见到 [DONE]：也可能是因为客户端已取消，
+            # 而 RST 需要一点时间才回来，所以在很短的窗口内再判一次。
+            if not rec["client_disconnected"] and rec["timeout_kind"] is None \
+                    and rec["error_type"] is None and parser is not None \
+                    and not parser.done and client_gone_peek(self, grace_s=0.3):
+                rec["client_disconnected"] = True
+                rec["notes"].append("流结束时客户端已断开（取消）")
+            if parser is not None:
+                if parser.timings or parser.usage:
+                    apply_server_counters(rec, parser.timings, parser.usage)
+                else:
+                    apply_server_counters(rec, None, None)
+                rec["model"] = rec["model"] or parser.model
+                rec["finish_reason"] = rec["finish_reason"] or parser.finish_reason
+                rec["stop_type"] = rec["stop_type"] or parser.stop_type
+                rec["est_reasoning_chars"] = parser.reasoning_chars
+                rec["est_answer_chars"] = parser.answer_chars
+                rec["est_tool_arg_chars"] = parser.tool_arg_chars
+                rec["tool_calls"] = parser.tool_calls
+                if not parser.done and not rec["client_disconnected"] \
+                        and rec["timeout_kind"] is None and rec["error_type"] is None:
+                    rec["notes"].append("流式结束但未见 data: [DONE]"
+                                        "（断流或非标准终止，不能当成正常完成）")
+                if parser.saw_error:
+                    rec["notes"].append("上游返回 error 字段: %s"
+                                        % json.dumps(parser.saw_error,
+                                                     ensure_ascii=False)[:200])
+            else:
+                blob = bytes(buf)
+                if blob:
+                    try:
+                        obj = json.loads(blob.decode("utf-8", "ignore"))
+                    except Exception as e:
+                        rec["notes"].append("非流式响应不是完整 JSON（%r）" % (e,))
+                        obj = None
+                    if isinstance(obj, dict):
+                        rec["model"] = rec["model"] or obj.get("model")
+                        rec["stop_type"] = obj.get("stop_type")
+                        ch = (obj.get("choices") or [{}])[0] or {}
+                        rec["finish_reason"] = ch.get("finish_reason")
+                        apply_server_counters(rec, obj.get("timings"), obj.get("usage"))
+        finally:
+            try:
+                conn.close()
+            except Exception:
+                pass
+            # ---- 取消/超时：验证后端是否真的释放了槽位（C2）----
+            # 放在 finally 里：first_response 这类“早退”路径也必须做这项验证，
+            # 不能因为提前 return 就漏掉（不假设 close 即取消）。
+            if rec["client_disconnected"] or rec["timeout_kind"]:
+                ok, ms = verify_backend_release(port, float(to["release_wait_s"]))
+                rec["release_verified"] = ok
+                rec["release_ms"] = ms
+                rec["notes"].append("取消/超时后 /slots 释放验证：%s（%sms）"
+                                    % ("已释放" if ok else
+                                       ("未释放" if ok is False else "未知"), ms))
+
+    # ---------- HTTP 方法 ----------
+    def do_GET(self):
+        self._forward("GET")
+
+    def do_POST(self):
+        self._forward("POST")
+
+    def do_PUT(self):
+        self._forward("PUT")
+
+    def do_DELETE(self):
+        self._forward("DELETE")
+
+    def do_OPTIONS(self):
+        self._forward("OPTIONS")
+
+
+# ================================================================ 预热
+def prewarm(path=None, upstream=8081, tag="预热"):
+    """重放一份真实请求体（max_tokens=1），把 KV 缓存焐热。
+
+    走与真实请求相同的转换管线（瘦身 + 思考档位），否则前缀不匹配 = 白做。
+    先等后端空闲（不抢正在执行的用户任务），再发一次；整体超时用 overall_s。
+    """
+    path = path or pick_newest_capture()
+    if not path or not os.path.exists(path):
+        print("[%s] 没有可用请求体（capture/req_*.json 为空），跳过" % tag, flush=True)
+        return None
+    try:
+        d = json.load(open(path, encoding="utf-8"))
+    except Exception as e:
+        print("[%s] 读取失败 %r" % (tag, e), flush=True)
+        return None
+    body = dict(d)
+    body["stream"] = False
+    body.pop("stream_options", None)
+    body["max_tokens"] = 1
+    raw = json.dumps(body, ensure_ascii=False).encode("utf-8")
+    if not keep_location():
+        raw, sl, sl_detail = slim_tools(raw)
+        sc = sl_detail.get("saved_chars") or {}
+        if sl:
+            print("[%s] 瘦身：省 %d 字符（location=%d / deferred=%d / subagent=%d）"
+                  "（与真实请求走同一管线）"
+                  % (tag, sl, sc.get("locations", 0), sc.get("deferred_tools", 0),
+                     sc.get("subagents", 0)), flush=True)
+    raw, _hard = harden_tool_schemas(raw)
+    raw, _pn, _pc = apply_tool_error_policy(raw)
+    data, note, _src, _ap = apply_thinking_policy(raw)
+    if note:
+        print("[%s] 按 --effort=%s 构造（与实际请求前缀保持一致，否则预热白做）"
+              % (tag, note), flush=True)
+
+    to = CFG["timeouts"]
+    if not wait_backend_idle(upstream, 60.0):
+        print("[%s] 后端持续忙（60 秒内未见空闲）→ 跳过本次预热，不抢槽。" % tag,
+              flush=True)
+        return None
+
+    INFER_LOCK.acquire(timeout=60.0)
+    t0 = time.time()
+    conn = http.client.HTTPConnection(CFG["upstream_host"], int(upstream),
+                                      timeout=float(to["connect_s"]))
+    try:
+        conn.request("POST", "/v1/chat/completions", body=data,
+                     headers={"Content-Type": "application/json"})
+        try:
+            conn.sock.settimeout(float(to["overall_s"]))
+        except Exception:
+            pass
+        try:
+            r = conn.getresponse()
+            out = json.loads(r.read().decode("utf-8", "ignore"))
+        except Exception as e:
+            print("[%s] 失败 %r（上游还没起来？）" % (tag, e), flush=True)
+            return None
+    finally:
+        try:
+            conn.close()
+        except Exception:
+            pass
+        try:
+            INFER_LOCK.release()
+        except Exception:
+            pass
+    dt = time.time() - t0
+    tm = out.get("timings") or {}
+    pn = tm.get("prompt_n")
+    cn = tm.get("cache_n")
+    cls = reuse_class(pn, cn)
+    print("[%s] 用 %s" % (tag, os.path.basename(path)), flush=True)
+    print("       prompt_n=%s  cache_n=%s  复用=%s  prefill=%.1f s  wall=%.1f s"
+          % (pn, cn, cls, (tm.get("prompt_ms") or 0) / 1000.0, dt), flush=True)
+    if cls in ("无复用", "部分复用"):
+        print("       >> 原来还没热，全量/部分 prefill %.1f 秒。现在已焐热，"
+              "WorkBuddy 首条消息将直接命中。" % dt, flush=True)
+    else:
+        print("       >> 缓存已是热的（%s），无需重算。" % cls, flush=True)
+    try:
+        with open(timings_path(), "a", encoding="utf-8") as f:
+            f.write(json.dumps({"ts": now_iso(), "kind": tag,
+                                "src": os.path.basename(path),
+                                "prompt_n": pn, "cache_n": cn,
+                                "reuse": cls, "reuse_ratio": reuse_ratio(pn, cn),
+                                "prefill_s": round((tm.get("prompt_ms") or 0) / 1000.0, 2),
+                                "wall_s": round(dt, 2)}, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+    return pn
+
+
+# ================================================================ 启动
+def serve():
+    global ARGS
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--port", type=int, default=8080)
+    ap.add_argument("--upstream", type=int, default=8081)
+    ap.add_argument("--config", default=DEFAULT_CONFIG,
+                    help="唯一权威配置（stage C 起由 launcher 传入）")
+    ap.add_argument("--warm", action="store_true", help="启动时用最近的请求体预热 KV")
+    ap.add_argument("--warm-file", default=None)
+    ap.add_argument("--effort", default=None,
+                    choices=["off", "low", "medium", "xhigh"],
+                    help="给对话请求注入思考档位，不改客户端。off=关闭思考；"
+                         "medium=不注入任何思考指令（模型自然行为，推荐 Agent 场景）")
+    ap.add_argument("--keep-location", action="store_true",
+                    help="不剥离 (location: ...)（关闭瘦身，用于 A/B 对照）")
+    ARGS = ap.parse_args()
+    load_runtime(ARGS.config)
+
+    # 把生效的思考档位落盘，供预热/诊断对齐（档位是 system 前缀的一部分，
+    # 预热用错档位 = 前缀不匹配 = 等于没预热）。
+    eff = eff_profile()
+    try:
+        with open(effort_file(), "w", encoding="utf-8") as f:
+            f.write(eff)
+    except Exception:
+        pass
+
+    to = CFG["timeouts"]
+    print("=" * 66)
+    print(" Bonsai 抓包代理 v3   :%d  -->  llama-server %s:%d"
+          % (ARGS.port, CFG["upstream_host"], ARGS.upstream))
+    print("   配置      : %s  指纹=%s" % (ARGS.config,
+                                          (CONFIG_HASH or "")[:16] or "(默认值)"))
+    print("   抓包目录  : %s" % cap_dir())
+    print("   每请求日志: %s" % CFG["request_log"])
+    print("   超时      : connect=%ss  first_response=%ss  stream_idle=%ss  overall=%ss"
+          % (to["connect_s"], to["first_response_s"], to["stream_idle_s"], to["overall_s"]))
+    if ARGS.effort:
+        print("   思考档位  : 未显式指定时注入 reasoning_effort=%s；客户端已指定则不覆盖"
+              % ARGS.effort)
+    s = CFG.get("slimming") or {}
+    if keep_location():
+        print("   请求瘦身  : 关闭（--keep-location 或三项全 false）")
+    else:
+        print("   请求瘦身  : 逐项（阶段 F 起各自独立）-> ① location=%s "
+              "② deferred 清单=%s（关=保留名册） ③ subagent 清单=%s（关=保留名册）"
+              % (s.get("locations"), s.get("deferred_tools"), s.get("subagents")))
+    tl = CFG.get("tools") or {}
+    print("   工具体    : 契约加固=%s（show_widget.loading_messages 精确化） / "
+          "错误恢复策略块=%s"
+          % (bool(tl.get("schema_hardening")), bool(tl.get("error_policy"))))
+    print("   流式读取  : read1（有数据即返回）+ 独立增量 SSE 解析器")
+    print("   排队      : 本代理串行化需要推理的请求（后端 -np 1 单槽），排队时间入日志")
+    print("=" * 66, flush=True)
+
+    if ARGS.warm or ARGS.warm_file:
+        threading.Thread(target=prewarm,
+                         args=(ARGS.warm_file, ARGS.upstream, "启动预热"),
+                         daemon=True).start()
+
+    srv = ThreadingHTTPServer(("127.0.0.1", ARGS.port), Handler)
+    try:
+        srv.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        print(write_verdict())
+
+
+if __name__ == "__main__":
+    if "--verdict" in sys.argv:
+        load_runtime(DEFAULT_CONFIG)
+        print(write_verdict())
+    else:
+        serve()

@@ -1,0 +1,276 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 8,
+  "task_text": "创建results/pelican.svg：鹈鹕骑自行车，车轮旋转、身体轻微起伏，单SVG不超过120行，无外部资源。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B-s8-3",
+  "max_tokens": 8192,
+  "stop_reason": "model_finished",
+  "rounds": 11,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 79.62,
+      "ttft_s": 1.21,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 5359,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "wall_s": 3.11,
+      "ttft_s": 2.12,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 49,
+      "tool_calls": [
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "wall_s": 113.53,
+      "ttft_s": 1.93,
+      "finish": "tool_calls",
+      "content_chars": 154,
+      "reasoning_chars": 11690,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 4,
+      "wall_s": 3.81,
+      "ttft_s": 0.54,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 77,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 5,
+      "wall_s": 1.26,
+      "ttft_s": 0.42,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 22,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 6,
+      "wall_s": 6.6,
+      "ttft_s": 0.31,
+      "finish": "tool_calls",
+      "content_chars": 255,
+      "reasoning_chars": 327,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 7,
+      "wall_s": 1.44,
+      "ttft_s": 0.46,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 54,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 8,
+      "wall_s": 3.29,
+      "ttft_s": 0.35,
+      "finish": "tool_calls",
+      "content_chars": 166,
+      "reasoning_chars": 194,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 9,
+      "wall_s": 1.46,
+      "ttft_s": 0.34,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 79,
+      "tool_calls": [
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 10,
+      "wall_s": 8.37,
+      "ttft_s": 0.29,
+      "finish": "tool_calls",
+      "content_chars": 768,
+      "reasoning_chars": 466,
+      "tool_calls": [
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 11,
+      "wall_s": 7.39,
+      "ttft_s": 0.64,
+      "finish": "stop",
+      "content_chars": 890,
+      "reasoning_chars": 133,
+      "tool_calls": [],
+      "error": null
+    }
+  ],
+  "wall_s": 229.9,
+  "tool_retries": 2,
+  "proxy_records": 11,
+  "prompt_n": [
+    641,
+    1326,
+    1299,
+    104,
+    159,
+    78,
+    227,
+    128,
+    111,
+    58,
+    307
+  ],
+  "cache_n": [
+    109,
+    746,
+    2068,
+    3363,
+    3463,
+    3618,
+    3692,
+    3915,
+    4039,
+    4146,
+    4200
+  ],
+  "prefill_ms": [
+    1017.0,
+    1888.5,
+    1873.7,
+    279.5,
+    356.7,
+    249.2,
+    422.5,
+    290.3,
+    269.4,
+    220.5,
+    566.6
+  ],
+  "decode_tps": [
+    44.91,
+    42.22,
+    42.74,
+    43.8,
+    43.17,
+    43.71,
+    43.07,
+    43.29,
+    40.95,
+    43.33,
+    42.93
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "reasoning_tokens": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "answer_tokens": [
+    3522,
+    43,
+    4771,
+    144,
+    37,
+    276,
+    43,
+    128,
+    47,
+    351,
+    291
+  ],
+  "est_reasoning_chars": [
+    5359,
+    49,
+    11690,
+    77,
+    22,
+    327,
+    54,
+    194,
+    79,
+    466,
+    133
+  ],
+  "wall_ms": [
+    79609.0,
+    3093.0,
+    113516.0,
+    3781.0,
+    1234.0,
+    6594.0,
+    1437.0,
+    3266.0,
+    1438.0,
+    8360.0,
+    7375.0
+  ],
+  "cache_reuse": [
+    "部分复用",
+    "部分复用",
+    "部分复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用",
+    "高比例复用"
+  ],
+  "config_hash": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+  "at": "2026-09-28 03:21:57"
+}

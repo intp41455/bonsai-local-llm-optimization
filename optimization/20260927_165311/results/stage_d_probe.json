@@ -1,0 +1,386 @@
+{
+ "head": {
+  "started_at": "2026-09-27 18:45:31",
+  "build_info": "b181-9ef3205",
+  "model_alias": "bonsai-2-27b",
+  "busy_at_start": false,
+  "prompt": "一个箱子里有若干个苹果。若每次取 3 个，最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。",
+  "seed": 1234,
+  "max_tokens": 512,
+  "ended_at": "2026-09-27 18:57:56"
+ },
+ "d2_apply_template": [
+  {
+   "case": "base_no_param",
+   "request": {},
+   "status": 200,
+   "classify": "xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "果。若每次取 3 个，最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n"
+  },
+  {
+   "case": "toplevel_xhigh",
+   "request": {
+    "reasoning_effort": "xhigh"
+   },
+   "status": 200,
+   "classify": "xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "果。若每次取 3 个，最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n"
+  },
+  {
+   "case": "toplevel_medium",
+   "request": {
+    "reasoning_effort": "medium"
+   },
+   "status": 200,
+   "classify": "无xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "果。若每次取 3 个，最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n"
+  },
+  {
+   "case": "toplevel_low",
+   "request": {
+    "reasoning_effort": "low"
+   },
+   "status": 200,
+   "classify": "无xhigh行/low行/尾部形态未识别",
+   "prompt_tail": "果。若每次取 3 个，最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n"
+  },
+  {
+   "case": "kwargs_medium",
+   "request": {
+    "chat_template_kwargs": {
+     "reasoning_effort": "medium"
+    }
+   },
+   "status": 200,
+   "classify": "无xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "果。若每次取 3 个，最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n"
+  },
+  {
+   "case": "kwargs_low",
+   "request": {
+    "chat_template_kwargs": {
+     "reasoning_effort": "low"
+    }
+   },
+   "status": 200,
+   "classify": "无xhigh行/low行/尾部形态未识别",
+   "prompt_tail": "果。若每次取 3 个，最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n"
+  },
+  {
+   "case": "toplevel_none",
+   "request": {
+    "reasoning_effort": "none"
+   },
+   "status": 200,
+   "classify": "无xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+  },
+  {
+   "case": "kwargs_enable_thinking_false",
+   "request": {
+    "chat_template_kwargs": {
+     "enable_thinking": false
+    }
+   },
+   "status": 200,
+   "classify": "无xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+  },
+  {
+   "case": "conflict_toplevel_xhigh__kwargs_low",
+   "request": {
+    "reasoning_effort": "xhigh",
+    "chat_template_kwargs": {
+     "reasoning_effort": "low"
+    }
+   },
+   "status": 200,
+   "classify": "xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "果。若每次取 3 个，最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n"
+  },
+  {
+   "case": "conflict_toplevel_none__kwargs_xhigh",
+   "request": {
+    "reasoning_effort": "none",
+    "chat_template_kwargs": {
+     "reasoning_effort": "xhigh"
+    }
+   },
+   "status": 200,
+   "classify": "无xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+  },
+  {
+   "case": "conflict_toplevel_none__kwargs_thinking_true",
+   "request": {
+    "reasoning_effort": "none",
+    "chat_template_kwargs": {
+     "enable_thinking": true
+    }
+   },
+   "status": 200,
+   "classify": "xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "果。若每次取 3 个，最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n"
+  },
+  {
+   "case": "conflict_toplevel_medium__kwargs_thinking_false",
+   "request": {
+    "reasoning_effort": "medium",
+    "chat_template_kwargs": {
+     "enable_thinking": false
+    }
+   },
+   "status": 200,
+   "classify": "无xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "最后剩 2 个；每次取 5 个，最后剩 3 个；每次取 7 个，最后剩 2 个。苹果总数小于 200，求可能的最大数量。请给出最终数字。<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+  },
+  {
+   "case": "invalid_kwargs_none",
+   "request": {
+    "chat_template_kwargs": {
+     "reasoning_effort": "none"
+    }
+   },
+   "status": 500,
+   "classify": "无xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "eption: Unexpected reasoning effort none. Supported types are xhigh (default), medium, and low.\",\"type\":\"server_error\"}}"
+  },
+  {
+   "case": "invalid_toplevel_high",
+   "request": {
+    "reasoning_effort": "high"
+   },
+   "status": 500,
+   "classify": "无xhigh行/无low行/尾部形态未识别",
+   "prompt_tail": "eption: Unexpected reasoning effort high. Supported types are xhigh (default), medium, and low.\",\"type\":\"server_error\"}}"
+  }
+ ],
+ "d1_runs": [
+  {
+   "run": "nat_nobudget",
+   "request_extra": {},
+   "max_tokens": 512,
+   "seed": 1234,
+   "reasoning": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time, leftover 3; take 7 each time, leftover 2. Total apples < 200, find possible maximum quantity. Give final number.\n\nNeed solve congruences: N ≡ 2 mod 3, ≡3 mod5, ≡2 mod7, N<200 max.\n\nLet's compute. Conditions: mod3 2; mod7 2; mod5 3. Combine first and third: N ≡2 mod lcm(3,7)=21. So N=21k+2. Need mod5: 21k+2 ≡ 1*k+2 ≡3 mod5 => k ≡1 mod5. So N=21(5t+1)+2=105t+23. N<200: t=0,1 gives 23,128. Max 128. Check: 128/3 = 42 rem2; /5 rem3; /7 rem2 (7*18=126 rem2). yes.\n\nNeed final number only? User: 请给出最终数字. Could answer just 128 maybe with brief. Since desired oververbosity 9 but user requests final number. Need final likely 128. Ensure no mistake: \"每次取 3 个，最后剩 2 个\" could mean repeatedly take 3 until cannot? Equivalent modulo. yes.\n\nNeed final: 128. Could include one sentence? They ask final number. I'll output just 128 maybe. But final answer maybe with minimal. Use Chinese? final number.\n",
+   "content": "128",
+   "n_reasoning_delta": 374,
+   "n_content_delta": 3,
+   "ttfb_ms": 9563.0,
+   "first_reasoning_ms": 9563.0,
+   "first_content_ms": 204188.0,
+   "last_reasoning_ms": 202625.0,
+   "total_ms": 205844.0,
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 389,
+    "prompt_tokens": 120,
+    "total_tokens": 509,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "error": null,
+   "saw_budget_message": false,
+   "reasoning_chars": 1003,
+   "content_chars": 3,
+   "reasoning_tokens_precise": 383,
+   "content_tokens_precise": 3,
+   "reasoning_head": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time, leftover 3; take 7 each time, leftover 2. Total apples < 200, find possible maximum quantity. Give final numb",
+   "reasoning_tail": "an repeatedly take 3 until cannot? Equivalent modulo. yes.\n\nNeed final: 128. Could include one sentence? They ask final number. I'll output just 128 maybe. But final answer maybe with minimal. Use Chinese? final number.\n",
+   "content_tail": "128"
+  },
+  {
+   "run": "bud32",
+   "request_extra": {
+    "reasoning_budget_tokens": 32
+   },
+   "max_tokens": 512,
+   "seed": 1234,
+   "reasoning": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,",
+   "content": "Let's solve carefully. We need possible maximum count under 200 satisfying:\nN ≡ 2 mod 3\nN ≡ 3 mod 5\nN ≡ 2 mod 7\nFind maximum less than 200.\n\nCRT. Conditions:\nN ≡ 2 mod 3 and ≡2 mod7 => N≡2 mod 21.\nAlso ≡3 mod5.\nLet N=21k+2. Need 21k+2 ≡3 mod5 => 1k+2 ≡3 => k≡1 mod5. So k=5m+1. N=21(5m+1)+2=105m+23. Under 200: m=0 gives 23; m=1 gives 128; m=2 gives 233 >200. Max=128. Check: 128/3 rem2, /5 rem3, /7 rem2 (126 rem2). So answer 128.\n\nNeed final only maybe include brief. Final number.\n</think>\n\n128",
+   "n_reasoning_delta": 31,
+   "n_content_delta": 242,
+   "ttfb_ms": 2031.0,
+   "first_reasoning_ms": 2031.0,
+   "first_content_ms": 19359.0,
+   "last_reasoning_ms": 17593.0,
+   "total_ms": 152812.0,
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 286,
+    "prompt_tokens": 120,
+    "total_tokens": 406,
+    "prompt_tokens_details": {
+     "cached_tokens": 116
+    }
+   },
+   "error": null,
+   "saw_budget_message": false,
+   "reasoning_chars": 110,
+   "content_chars": 497,
+   "reasoning_tokens_precise": 31,
+   "content_tokens_precise": 252,
+   "reasoning_head": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,",
+   "reasoning_tail": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,",
+   "content_tail": " N=21(5m+1)+2=105m+23. Under 200: m=0 gives 23; m=1 gives 128; m=2 gives 233 >200. Max=128. Check: 128/3 rem2, /5 rem3, /7 rem2 (126 rem2). So answer 128.\n\nNeed final only maybe include brief. Final number.\n</think>\n\n128"
+  },
+  {
+   "run": "bud128",
+   "request_extra": {
+    "reasoning_budget_tokens": 128
+   },
+   "max_tokens": 512,
+   "seed": 1234,
+   "reasoning": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time, leftover 3; take 7 each time, leftover 2. Total apples < 200, find possible maximum quantity. Give final number.\n\nNeed solve congruences: N ≡ 2 mod 3, ≡3 mod5, ≡2 mod7, N<200 max.\n\nLet's compute. Conditions: mod3 2; mod7 2; mod5 3. Combine first and third: N ≡2",
+   "content": "满足条件的最大数量是 **167**。",
+   "n_reasoning_delta": 123,
+   "n_content_delta": 10,
+   "ttfb_ms": 1625.0,
+   "first_reasoning_ms": 1625.0,
+   "first_content_ms": 67453.0,
+   "last_reasoning_ms": 65922.0,
+   "total_ms": 72641.0,
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 141,
+    "prompt_tokens": 120,
+    "total_tokens": 261,
+    "prompt_tokens_details": {
+     "cached_tokens": 116
+    }
+   },
+   "error": null,
+   "saw_budget_message": false,
+   "reasoning_chars": 372,
+   "content_chars": 19,
+   "reasoning_tokens_precise": 128,
+   "content_tokens_precise": 10,
+   "reasoning_head": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time, leftover 3; take 7 each time, leftover 2. Total apples < 200, find possible maximum quantity. Give final numb",
+   "reasoning_tail": " Total apples < 200, find possible maximum quantity. Give final number.\n\nNeed solve congruences: N ≡ 2 mod 3, ≡3 mod5, ≡2 mod7, N<200 max.\n\nLet's compute. Conditions: mod3 2; mod7 2; mod5 3. Combine first and third: N ≡2",
+   "content_tail": "满足条件的最大数量是 **167**。"
+  },
+  {
+   "run": "bud0",
+   "request_extra": {
+    "reasoning_budget_tokens": 0
+   },
+   "max_tokens": 512,
+   "seed": 1234,
+   "reasoning": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time, leftover 3; take 7 each time, leftover 2. Total apples < 200, find possible maximum quantity. Give final number.\n\nNeed solve congruences: N ≡ 2 mod 3, ≡3 mod5, ≡2 mod7, N<200 max.\n\nLet's compute. Conditions: mod3 2; mod7 2; mod5 3. Combine first and third: N ≡2 mod lcm(3,7)=21. So N=21k+2. Need mod5: 21k+2 ≡ 1*k+2 ≡3 mod5 => k ≡1 mod5. So N=21(5t+1)+2=105t+23. N<200: t=0,1 gives 23,128. Max 128. Check: 128/3 = 42 rem2; /5 rem3; /7 rem2 (7*18=126 rem2). yes.\n\nNeed final number only? User: 请给出最终数字. Could answer just 128 maybe with brief. Since desired oververbosity 9 but user requests final number. Need final likely 128. Ensure no mistake: \"每次取 3 个，最后剩 2 个\" could mean repeatedly take 3 until cannot? Equivalent modulo. yes.\n\nNeed final: 128. Could include one sentence? They ask final number. I'll output just 128 maybe. But final answer maybe with minimal. Use Chinese? final number.\n",
+   "content": "128",
+   "n_reasoning_delta": 374,
+   "n_content_delta": 3,
+   "ttfb_ms": 1578.0,
+   "first_reasoning_ms": 1578.0,
+   "first_content_ms": 185281.0,
+   "last_reasoning_ms": 184187.0,
+   "total_ms": 186422.0,
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 389,
+    "prompt_tokens": 120,
+    "total_tokens": 509,
+    "prompt_tokens_details": {
+     "cached_tokens": 116
+    }
+   },
+   "error": null,
+   "saw_budget_message": false,
+   "reasoning_chars": 1003,
+   "content_chars": 3,
+   "reasoning_tokens_precise": 383,
+   "content_tokens_precise": 3,
+   "reasoning_head": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time, leftover 3; take 7 each time, leftover 2. Total apples < 200, find possible maximum quantity. Give final numb",
+   "reasoning_tail": "an repeatedly take 3 until cannot? Equivalent modulo. yes.\n\nNeed final: 128. Could include one sentence? They ask final number. I'll output just 128 maybe. But final answer maybe with minimal. Use Chinese? final number.\n",
+   "content_tail": "128"
+  },
+  {
+   "run": "bud32_msg",
+   "request_extra": {
+    "reasoning_budget_tokens": 32,
+    "reasoning_budget_message": "Now produce the complete answer."
+   },
+   "max_tokens": 512,
+   "seed": 1234,
+   "reasoning": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,Now produce the complete answer.",
+   "content": "157",
+   "n_reasoning_delta": 37,
+   "n_content_delta": 3,
+   "ttfb_ms": 1407.0,
+   "first_reasoning_ms": 1407.0,
+   "first_content_ms": 14344.0,
+   "last_reasoning_ms": 13297.0,
+   "total_ms": 15469.0,
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 43,
+    "prompt_tokens": 120,
+    "total_tokens": 163,
+    "prompt_tokens_details": {
+     "cached_tokens": 116
+    }
+   },
+   "error": null,
+   "saw_budget_message": true,
+   "reasoning_chars": 142,
+   "content_chars": 3,
+   "reasoning_tokens_precise": 37,
+   "content_tokens_precise": 3,
+   "reasoning_head": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,Now produce the complete answer.",
+   "reasoning_tail": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,Now produce the complete answer.",
+   "content_tail": "157"
+  },
+  {
+   "run": "alias_thinking_32",
+   "request_extra": {
+    "thinking_budget_tokens": 32
+   },
+   "max_tokens": 512,
+   "seed": 1234,
+   "reasoning": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,",
+   "content": "Let's solve carefully. We need possible maximum count under 200 satisfying:\nN ≡ 2 mod 3\nN ≡ 3 mod 5\nN ≡ 2 mod 7\nFind maximum less than 200.\n\nCRT. Conditions:\nN ≡ 2 mod 3 and ≡2 mod7 => N≡2 mod 21.\nAlso ≡3 mod5.\nLet N=21k+2. Need 21k+2 ≡3 mod5 => 1k+2 ≡3 => k≡1 mod5. So k=5m+1. N=21(5m+1)+2=105m+23. Under 200: m=0 gives 23; m=1 gives 128; m=2 gives 233 >200. Max=128. Check: 128/3 rem2, /5 rem3, /7 rem2 (126 rem2). So answer 128.\n\nNeed final only maybe include brief. Final number.\n</think>\n\n128",
+   "n_reasoning_delta": 31,
+   "n_content_delta": 242,
+   "ttfb_ms": 1234.0,
+   "first_reasoning_ms": 1234.0,
+   "first_content_ms": 14359.0,
+   "last_reasoning_ms": 13187.0,
+   "total_ms": 111437.0,
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 286,
+    "prompt_tokens": 120,
+    "total_tokens": 406,
+    "prompt_tokens_details": {
+     "cached_tokens": 116
+    }
+   },
+   "error": null,
+   "saw_budget_message": false,
+   "reasoning_chars": 110,
+   "content_chars": 497,
+   "reasoning_tokens_precise": 31,
+   "content_tokens_precise": 252,
+   "reasoning_head": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,",
+   "reasoning_tail": "We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,",
+   "content_tail": " N=21(5m+1)+2=105m+23. Under 200: m=0 gives 23; m=1 gives 128; m=2 gives 233 >200. Max=128. Check: 128/3 rem2, /5 rem3, /7 rem2 (126 rem2). So answer 128.\n\nNeed final only maybe include brief. Final number.\n</think>\n\n128"
+  }
+ ],
+ "verdict": {
+  "budget_supported": false,
+  "nat_reasoning_tokens": 383,
+  "bud0_reasoning_tokens": 383,
+  "bud32_reasoning_tokens": 31,
+  "bud128_reasoning_tokens": 128,
+  "alias_reasoning_tokens": 31,
+  "bud32_below_half_of_nat": true,
+  "alias_equals_named_field": true,
+  "reason": "natural=383, budget0=383 -> 请求级预算未证明生效",
+  "d2_top_level_overrides_kwargs": true,
+  "d2_top_none_disables_thinking": false,
+  "d2_kwargs_false_disables_thinking": false,
+  "d2_template_default_is_xhigh": true,
+  "d2_medium_injects_nothing": true,
+  "d2_template_rejects_none_as_effort": false
+ }
+}

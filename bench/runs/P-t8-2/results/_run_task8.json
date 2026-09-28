@@ -1,0 +1,156 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 8,
+  "task_text": "创建results/pelican.svg：鹈鹕骑自行车，车轮旋转、身体轻微起伏，单SVG不超过120行，无外部资源。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\P-t8-2",
+  "max_tokens": 8192,
+  "stop_reason": "model_finished",
+  "rounds": 11,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 80.26,
+      "ttft_s": 1.23,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 5359,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "wall_s": 3.16,
+      "ttft_s": 2.16,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 49,
+      "tool_calls": [
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "wall_s": 114.13,
+      "ttft_s": 1.95,
+      "finish": "tool_calls",
+      "content_chars": 154,
+      "reasoning_chars": 11690,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 4,
+      "wall_s": 3.85,
+      "ttft_s": 0.56,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 77,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 5,
+      "wall_s": 1.32,
+      "ttft_s": 0.42,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 22,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 6,
+      "wall_s": 6.62,
+      "ttft_s": 0.3,
+      "finish": "tool_calls",
+      "content_chars": 255,
+      "reasoning_chars": 327,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 7,
+      "wall_s": 1.51,
+      "ttft_s": 0.47,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 54,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 8,
+      "wall_s": 3.29,
+      "ttft_s": 0.35,
+      "finish": "tool_calls",
+      "content_chars": 166,
+      "reasoning_chars": 194,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 9,
+      "wall_s": 1.42,
+      "ttft_s": 0.35,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 79,
+      "tool_calls": [
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 10,
+      "wall_s": 8.37,
+      "ttft_s": 0.28,
+      "finish": "tool_calls",
+      "content_chars": 768,
+      "reasoning_chars": 466,
+      "tool_calls": [
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 11,
+      "wall_s": 7.38,
+      "ttft_s": 0.61,
+      "finish": "stop",
+      "content_chars": 890,
+      "reasoning_chars": 133,
+      "tool_calls": [],
+      "error": null
+    }
+  ],
+  "wall_s": 231.4,
+  "tool_retries": 2,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 06:12:16"
+}

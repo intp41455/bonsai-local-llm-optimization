@@ -1,0 +1,168 @@
+{
+  "harness": "local-script (无压缩器)",
+  "task": 10,
+  "variant": "normal-5round",
+  "compression_variant": "未实现（本地 harness 无压缩器）",
+  "tail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 5.19,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 23.03,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 2.29,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 4.13,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 4.88,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 3.74,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "tool_calls": [
+        "list_dir"
+      ]
+    }
+  ],
+  "tail_note": "五轮摘要之后补的收尾轮（原驱动在末轮直接退出，会把模型已发起的工具链截断）",
+  "final_summary_exists": true,
+  "slices": [
+    {
+      "name": "slice1.log",
+      "lines": [
+        1,
+        200
+      ],
+      "sha256": "69c67f7b26b50d1fe156ceb4a787b5745b488a8876f932e5a6329080920e4001",
+      "chars": 2506
+    },
+    {
+      "name": "slice2.log",
+      "lines": [
+        201,
+        400
+      ],
+      "sha256": "ae5898e9138fea108b3115bf4347cf9a64166c82c450a747e4cf15023a1aeccc",
+      "chars": 2600
+    },
+    {
+      "name": "slice3.log",
+      "lines": [
+        401,
+        600
+      ],
+      "sha256": "e2490f6a058a0cc06c9ad12d23cc2a87154ddac3ef7dc4bc598a1e35f18cd553",
+      "chars": 2600
+    },
+    {
+      "name": "slice4.log",
+      "lines": [
+        601,
+        800
+      ],
+      "sha256": "2100d53371cecce5d30cf9a3e404d27919b9deb958fe7b101f0aadcfaec3d988",
+      "chars": 2600
+    },
+    {
+      "name": "slice5.log",
+      "lines": [
+        801,
+        1000
+      ],
+      "sha256": "0bc08defa2d332ff90eb53d49e1e7a25b68a600ac8f04c2c8ce3c6556925176c",
+      "chars": 2608
+    }
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "wall_s": 6.65,
+      "ttft_s": 3.36,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 545,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 7.55,
+      "ttft_s": 2.55,
+      "finish": "stop",
+      "content_chars": 179,
+      "reasoning_chars": 344,
+      "tool_calls": []
+    },
+    {
+      "round": 3,
+      "wall_s": 7.19,
+      "ttft_s": 2.71,
+      "finish": "stop",
+      "content_chars": 178,
+      "reasoning_chars": 295,
+      "tool_calls": []
+    },
+    {
+      "round": 4,
+      "wall_s": 6.62,
+      "ttft_s": 2.71,
+      "finish": "stop",
+      "content_chars": 160,
+      "reasoning_chars": 209,
+      "tool_calls": []
+    },
+    {
+      "round": 5,
+      "wall_s": 6.89,
+      "ttft_s": 2.77,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 557,
+      "tool_calls": [
+        "list_dir"
+      ]
+    }
+  ],
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "at": "2026-09-27 22:27:54"
+}

@@ -1,0 +1,86 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 2,
+  "task_text": "统计sales.csv去重后已支付订单数量与总额，按order_id去重，写results/sales.json，仅用count和amount两个键。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B",
+  "stop_reason": "model_finished",
+  "rounds": 4,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 74.39,
+      "ttft_s": 54.22,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 70,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 25.97,
+      "ttft_s": 5.55,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 63,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 156.35,
+      "ttft_s": 9.26,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 469,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 85.51,
+      "ttft_s": 7.22,
+      "finish": "stop",
+      "content_chars": 112,
+      "reasoning_chars": 391,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 342.2,
+  "tool_retries": 0,
+  "proxy_records": 4,
+  "prompt_n": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "cache_n": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "prefill_ms": [
+    53985.4,
+    5508.1,
+    9230.3,
+    7177.8
+  ],
+  "decode_tps": [
+    2.03,
+    2.01,
+    1.99,
+    3.67
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "at": "2026-09-27 20:10:25"
+}

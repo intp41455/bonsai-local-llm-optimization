@@ -1,0 +1,58 @@
+===== G4 只读内存快照 [变更后 / --cache-ram 1024] =====
+采集方式 = .stage\g4_mem_snapshot.ps1 -Label postC1_cram1024（只读；不加载推理）
+采集时间 = 2026-09-27 23:13:36
+说明     = 原 ps1 中文字面量在 PowerShell 5.1（脚本无 BOM）下回显为乱码，本文件由 python 以 UTF-8
+           重新誊写；下列数值与采集当时原始输出逐项一致，未做任何加工或估算。
+
+[后端进程]
+backend_pid            = 35084
+backend_start          = 2026/9/27 23:05:39
+backend_uptime         = 00:07:57
+WS_MB                  = 7361.2
+PEAK_WS_MB             = 7715.9
+PRIVATE_MB             = 9786.7
+
+[perfmon \Process(llama-server)\*]
+working set                    = 7718789120
+working set - private          = 1954889728
+private bytes                  = 10262142976
+page file bytes                = 10262142976
+page faults/sec                = 0
+
+[全机内存 \Memory\*]
+MemoryCompression_WS_MB             = 1494.3
+available mbytes                    = 6809
+committed bytes                     = 38349787136
+standby cache normal priority bytes = 7004262400
+pages input/sec                     = 951
+page reads/sec                      = 126
+page writes/sec                     = 0
+
+[页面文件 Win32_PageFileUsage]
+pagefile C:\pagefile.sys  Alloc=8192MB  CurrentUsage=338MB Peak=592MB
+pagefile D:\pagefile.sys  Alloc=65536MB CurrentUsage=300MB Peak=564MB
+
+[GPU] nvidia-smi: memory.used=7131 MiB / memory.total=8151 MiB / utilization=2 %
+
+[/metrics 相关]
+llamacpp:prompt_tokens_total          9814
+llamacpp:prompt_tokens_cached_total   76061
+llamacpp:tokens_predicted_total       4758
+llamacpp:n_tokens_max                 7096
+
+[后端命令行核对]
+cache_ram_in_cmdline = True
+cache_ram_value      = 1024
+（完整命令行末： ... --alias bonsai-2-27b --cache-ram 1024 ）
+
+[日志] prompt cache 淘汰条目数（making room for prompt cache entry）= 14
+
+[采样波动说明]
+同一进程两次瞬时采样：WS - private = 1,954,910,208 B（23:12:07）与 1,954,889,728 B（23:13:36）；
+pages input/sec = 2 与 951。→ 瞬时计数器波动明显，不作为归因依据。
+本文件所用值为 23:13:36 一次采集的原始值。
+
+===== 对照基线（变更前）=====
+文件：baseline\stageG_G4_hostmem_readonly_v2.txt（uptime ≈81 min；n_tokens_max=64,358；含真实长上下文使用）
+Private Bytes = 17,796,993,024 B = 16.58 GiB
+差值 = 7,534,850,048 B = 7.017 GiB；--cache-ram 上限差 = 7,168 MiB = 7.000 GiB（偏差 0.25%）

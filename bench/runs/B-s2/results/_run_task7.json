@@ -1,0 +1,184 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 7,
+  "task_text": "创建results/status.html，展示项目代号和五条约束，单文件离线打开，无外部资源。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B-s2",
+  "stop_reason": "model_finished",
+  "rounds": 7,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 3.05,
+      "ttft_s": 1.22,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 254,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 2.63,
+      "ttft_s": 0.29,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 108,
+      "tool_calls": [
+        "read_file",
+        "read_file",
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 7.09,
+      "ttft_s": 1.35,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 709,
+      "tool_calls": [
+        "read_file",
+        "read_file",
+        "list_dir"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 1.48,
+      "ttft_s": 0.56,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 57,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 29.78,
+      "ttft_s": 0.34,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 1206,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 2.6,
+      "ttft_s": 1.61,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 67,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 7,
+      "wall_s": 6.45,
+      "ttft_s": 1.55,
+      "finish": "stop",
+      "content_chars": 316,
+      "reasoning_chars": 186,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 53.1,
+  "tool_retries": 0,
+  "proxy_records": 7,
+  "prompt_n": [
+    630,
+    84,
+    869,
+    269,
+    113,
+    1043,
+    1017
+  ],
+  "cache_n": [
+    109,
+    735,
+    815,
+    1680,
+    1945,
+    2054,
+    3093
+  ],
+  "prefill_ms": [
+    1046.0,
+    257.3,
+    1296.0,
+    510.3,
+    271.3,
+    1552.1,
+    1498.3
+  ],
+  "decode_tps": [
+    43.8,
+    45.35,
+    44.61,
+    44.53,
+    44.49,
+    43.1,
+    42.45
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "reasoning_tokens": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "answer_tokens": [
+    81,
+    107,
+    257,
+    42,
+    1310,
+    44,
+    209
+  ],
+  "est_reasoning_chars": [
+    254,
+    108,
+    709,
+    57,
+    1206,
+    67,
+    186
+  ],
+  "wall_ms": [
+    3031.0,
+    2625.0,
+    7079.0,
+    1469.0,
+    29750.0,
+    2609.0,
+    6422.0
+  ],
+  "cache_reuse": [
+    "部分复用",
+    "部分复用",
+    "部分复用",
+    "部分复用",
+    "高比例复用",
+    "部分复用",
+    "部分复用"
+  ],
+  "config_hash": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+  "at": "2026-09-28 01:26:00"
+}

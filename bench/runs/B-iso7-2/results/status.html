@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目状态 · 松针</title>
+<style>
+  :root{
+    --bg:#f4f1ea;
+    --card:#ffffff;
+    --ink:#2b2b2b;
+    --muted:#6b6b6b;
+    --accent:#2f6f4f;
+    --line:#e3ded3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .card{
+    width:100%;
+    max-width:640px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    overflow:hidden;
+  }
+  .head{
+    background:var(--accent);
+    color:#fff;
+    padding:28px 32px;
+  }
+  .head .kicker{
+    font-size:13px;
+    letter-spacing:.18em;
+    opacity:.85;
+    margin-bottom:8px;
+  }
+  .head h1{
+    font-size:30px;
+    font-weight:700;
+    letter-spacing:.04em;
+  }
+  .head p{
+    margin-top:6px;
+    font-size:14px;
+    opacity:.9;
+  }
+  .body{padding:28px 32px 32px}
+  .section-title{
+    font-size:15px;
+    font-weight:700;
+    color:var(--muted);
+    letter-spacing:.12em;
+    margin-bottom:14px;
+    text-transform:none;
+  }
+  .code{
+    display:inline-block;
+    background:#eef4ef;
+    border:1px solid #cfe0d6;
+    color:var(--accent);
+    font-size:22px;
+    font-weight:700;
+    padding:8px 18px;
+    border-radius:10px;
+    margin-bottom:26px;
+  }
+  ol.constraints{
+    list-style:none;
+    counter-reset:c;
+  }
+  ol.constraints li{
+    counter-increment:c;
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:14px 16px;
+    margin-bottom:10px;
+    background:#faf8f3;
+    border:1px solid var(--line);
+    border-radius:10px;
+  }
+  ol.constraints li::before{
+    content:counter(c,decimal-leading-zero);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:26px;height:26px;
+    flex:0 0 26px;
+    background:var(--accent);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    border-radius:8px;
+  }
+  ol.constraints li .label{
+    font-weight:700;
+    min-width:96px;
+  }
+  ol.constraints li .desc{
+    color:var(--muted);
+    font-size:14px;
+  }
+  .foot{
+    padding:16px 32px;
+    border-top:1px solid var(--line);
+    font-size:12px;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="head">
+      <div class="kicker">PROJECT STATUS</div>
+      <h1>项目状态</h1>
+      <p>单文件离线页面 · 无外部资源</p>
+    </div>
+    <div class="body">
+      <div class="section-title">项目代号</div>
+      <span class="code">松针</span>
+
+      <div class="section-title">五条约束</div>
+      <ol class="constraints">
+        <li><span class="label">交付格式</span><span class="desc">Markdown</span></li>
+        <li><span class="label">源文件保护</span><span class="desc">禁止修改 source.txt</span></li>
+        <li><span class="label">输出目录</span><span class="desc">results</span></li>
+        <li><span class="label">预算单位</span><span class="desc">人民币元</span></li>
+        <li><span class="label">项目代号</span><span class="desc">松针</span></li>
+      </ol>
+    </div>
+    <div class="foot">
+      <span>来源：notes.txt</span>
+      <span>离线打开 · 无外部依赖</span>
+    </div>
+  </div>
+</body>
+</html>

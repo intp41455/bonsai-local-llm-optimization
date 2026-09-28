@@ -1,0 +1,80 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 7,
+  "task_text": "创建results/status.html，展示项目代号和五条约束，单文件离线打开，无外部资源。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\A-s3",
+  "stop_reason": "model_finished",
+  "rounds": 5,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.92,
+      "ttft_s": 1.23,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 274,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 2.61,
+      "ttft_s": 0.44,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 108,
+      "tool_calls": [
+        "read_file",
+        "read_file",
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 30.16,
+      "ttft_s": 1.51,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 465,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 44.38,
+      "ttft_s": 1.97,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 2434,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 7.15,
+      "ttft_s": 2.01,
+      "finish": "stop",
+      "content_chars": 381,
+      "reasoning_chars": 151,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 87.2,
+  "tool_retries": 0,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 01:42:40"
+}

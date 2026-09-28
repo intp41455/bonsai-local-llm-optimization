@@ -1,0 +1,50 @@
+{
+  "_note": "第10项固定切片（方案 §14.2），后续复用",
+  "slices": [
+    {
+      "name": "slice1.log",
+      "lines": [
+        1,
+        200
+      ],
+      "sha256": "69c67f7b26b50d1fe156ceb4a787b5745b488a8876f932e5a6329080920e4001",
+      "chars": 2506
+    },
+    {
+      "name": "slice2.log",
+      "lines": [
+        201,
+        400
+      ],
+      "sha256": "ae5898e9138fea108b3115bf4347cf9a64166c82c450a747e4cf15023a1aeccc",
+      "chars": 2600
+    },
+    {
+      "name": "slice3.log",
+      "lines": [
+        401,
+        600
+      ],
+      "sha256": "e2490f6a058a0cc06c9ad12d23cc2a87154ddac3ef7dc4bc598a1e35f18cd553",
+      "chars": 2600
+    },
+    {
+      "name": "slice4.log",
+      "lines": [
+        601,
+        800
+      ],
+      "sha256": "2100d53371cecce5d30cf9a3e404d27919b9deb958fe7b101f0aadcfaec3d988",
+      "chars": 2600
+    },
+    {
+      "name": "slice5.log",
+      "lines": [
+        801,
+        1000
+      ],
+      "sha256": "0bc08defa2d332ff90eb53d49e1e7a25b68a600ac8f04c2c8ce3c6556925176c",
+      "chars": 2608
+    }
+  ]
+}

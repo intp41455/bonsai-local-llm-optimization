@@ -1,0 +1,98 @@
+{
+  "started": "2026-09-27 19:14:17",
+  "proxy_sha256": "42a50d658e68b5293e218169cf8dbbe27abcb972fbdb886aa66a0aad8809b929",
+  "config_hash": null,
+  "n_ctx": 65536,
+  "budget_cfg": {
+    "request_max_tokens": 8192,
+    "thinking_budget_tokens": 2048,
+    "context_reserve_tokens": 1024,
+    "policy": {
+      "apply_request_max_tokens": false,
+      "apply_thinking_budget": false
+    },
+    "_note": "候选值取自方案 D3 日常 A（medium / 思考 2048 / 总生成 8192）。policy.*=false 表示阶段 B 只登记不注入：总生成预算含思考+答案，且请求级 reasoning_budget_tokens 是否被当前二进制支持须先由阶段 D 行为验证；验证通过后逐项打开并记录证据。不使用旧手册的 20480/24576 作为新日常值。"
+  },
+  "capture": {
+    "path": "D:\\Bonsai-demo\\capture\\req_012_135949.json",
+    "chars": 296318
+  },
+  "variants": {
+    "A0_client_raw": {
+      "prompt_tokens_add_special_false": 69113,
+      "prompt_tokens_add_special_true": 69113,
+      "apply_template_ms": 62.0,
+      "tokenize_ms": 172.0,
+      "prompt_chars": 274310
+    },
+    "A1_slimmed": {
+      "prompt_tokens_add_special_false": 60499,
+      "prompt_tokens_add_special_true": 60499,
+      "apply_template_ms": 63.0,
+      "tokenize_ms": 94.0,
+      "prompt_chars": 244592
+    },
+    "A2_final": {
+      "prompt_tokens_add_special_false": 60461,
+      "prompt_tokens_add_special_true": 60461,
+      "apply_template_ms": 78.0,
+      "tokenize_ms": 94.0,
+      "prompt_chars": 244648
+    }
+  },
+  "breakdown": {
+    "base_tokens": 60461,
+    "segments": {
+      "tools_fixed": {
+        "tokens_without": 36439,
+        "delta_tokens": 24022,
+        "apply_ms": 15.0,
+        "tokenize_ms": 63.0
+      },
+      "system_fixed": {
+        "tokens_without": 45996,
+        "delta_tokens": 14465,
+        "apply_ms": 62.0,
+        "tokenize_ms": 63.0
+      },
+      "history": {
+        "tokens_without": 38544,
+        "delta_tokens": 21917,
+        "apply_ms": 47.0,
+        "tokenize_ms": 78.0
+      }
+    },
+    "fixed_overhead_tools_plus_system": 38487,
+    "fixed_overhead_pct": 63.66
+  },
+  "budget": {
+    "n_ctx": 65536,
+    "n_ctx_source": "server /props",
+    "input_tokens": 60461,
+    "planned_total_generation": 8192,
+    "context_reserve": 1024,
+    "required": 69677,
+    "headroom_tokens": -4141,
+    "verdict": "超预算(生成前应拒绝/告警)",
+    "input_pct_of_window": 92.26,
+    "input_alone_pct": 92.26,
+    "target_range_tokens": [
+      8192,
+      24576
+    ],
+    "input_vs_target": "高于目标上限 24k"
+  },
+  "timing_ms": {
+    "total": 1328.0
+  },
+  "slimming": {
+    "saved_chars": 28327,
+    "saved_tokens": 8614,
+    "saved_pct": 12.46,
+    "note": "注入 reasoning_effort=medium",
+    "effort_source": "proxy_profile",
+    "effort_applied": {
+      "reasoning_effort": "medium"
+    }
+  }
+}

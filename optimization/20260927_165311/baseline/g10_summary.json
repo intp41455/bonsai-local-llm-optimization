@@ -1,0 +1,3876 @@
+{
+  "fingerprint": {
+    "phase": "G10",
+    "design": "dedicated driver 2x2: driver policy {N=no local error policy, L=harness-equivalent local policy + runtime hint} x proxy tools.error_policy {P=true :8084, Q=false :8085}; 3 failing probes x 2 rounds",
+    "started_at": "2026-09-28 06:52:18",
+    "harness_sha256": "f06852086dca5f5e2cf3e1cc624eee74af29888b6d42cdf4cc7431907ca97f6e",
+    "proxy_v3_sha256": "6acfb9c5914595ec567f5b9d4db2da188e99c1bf635b36c017bc0532026340f5",
+    "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+    "config_extra_args": [
+      "--cache-ram",
+      "1024"
+    ],
+    "sys_prompt_full_chars": 628,
+    "sys_prompt_N_chars": 283,
+    "sys_prompt_policy_delta_chars": 345,
+    "max_tokens": 8192,
+    "max_rounds": 12,
+    "time_cap": 600,
+    "rounds": [
+      1,
+      2
+    ],
+    "cells": [
+      "N+P",
+      "N+Q",
+      "L+P",
+      "L+Q"
+    ],
+    "probes": [
+      {
+        "name": "locked",
+        "task": "运行 probe/locked.py；把它是否成功、以及失败时的错误原文，写入 results/probe_locked.md。",
+        "call": "run_python probe/locked.py",
+        "files": [
+          "probe/locked.py"
+        ]
+      },
+      {
+        "name": "boom",
+        "task": "运行 probe/boom.py；把它是否成功、以及失败时的错误原文，写入 results/probe_boom.md。",
+        "call": "run_python probe/boom.py",
+        "files": [
+          "probe/boom.py"
+        ]
+      },
+      {
+        "name": "absent",
+        "task": "读取 probe/absent.txt，把文件内容原样写入 results/probe_absent.md。",
+        "call": "read_file probe/absent.txt",
+        "files": []
+      }
+    ],
+    "port_P": 8084,
+    "port_Q": 8085,
+    "upstream": 8081,
+    "note": "专用驱动；口径与标准 harness 不同，结论仅适用于『客户端不自带错误策略』的情形",
+    "prod_reqlog_lines_before": 695,
+    "prod_timings_lines_before": 905,
+    "netstat_before": [
+      "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+      "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+    ],
+    "health_8080_before": [
+      200,
+      "{\"status\":\"ok\"}"
+    ],
+    "health_8081_before": [
+      200,
+      "{\"status\":\"ok\"}"
+    ],
+    "arms": {
+      "P": {
+        "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\P\\config.json",
+        "config_sha256": "ca12c25dac4fa067d0bc8ec801d159da75ff78c7eda17a157a9e3b1c181f48dc",
+        "changed_top_keys": [
+          "logging",
+          "prewarm",
+          "proxy"
+        ],
+        "tools_diff_keys": [],
+        "behavior_unchanged_except_tools": true,
+        "error_policy": true,
+        "backend_extra_args": [
+          "--cache-ram",
+          "1024"
+        ],
+        "prewarm_enabled": false
+      },
+      "Q": {
+        "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\Q\\config.json",
+        "config_sha256": "72f510433d0038afd2b74f99ace1fb684214a48acdda6964b2a1d5b13d7b9e81",
+        "changed_top_keys": [
+          "logging",
+          "prewarm",
+          "proxy",
+          "tools"
+        ],
+        "tools_diff_keys": [
+          "error_policy"
+        ],
+        "behavior_unchanged_except_tools": true,
+        "error_policy": false,
+        "backend_extra_args": [
+          "--cache-ram",
+          "1024"
+        ],
+        "prewarm_enabled": false
+      }
+    },
+    "ended_at": "2026-09-28 06:58:27",
+    "netstat_after": [
+      "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+      "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+    ],
+    "health_8080_after": [
+      200,
+      "{\"status\":\"ok\"}"
+    ],
+    "health_8081_after": [
+      200,
+      "{\"status\":\"ok\"}"
+    ],
+    "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+    "prod_reqlog_lines_after": 699,
+    "prod_timings_lines_after": 905
+  },
+  "summary": {
+    "grid": {
+      "N+P": {
+        "error_policy": true,
+        "driver_local_policy": false,
+        "per_probe": {
+          "locked": {
+            "n": 2,
+            "rounds": [
+              4,
+              4
+            ],
+            "same_call_repeats": [
+              0,
+              0
+            ],
+            "max_same_key": [
+              1,
+              1
+            ],
+            "longest_same_run": [
+              1,
+              1
+            ],
+            "probe_call_count": [
+              1,
+              1
+            ],
+            "probe_unique_keys": [
+              1,
+              1
+            ],
+            "stop_reasons": [
+              "model_finished",
+              "model_finished"
+            ],
+            "final_no_toolcall": [
+              true,
+              true
+            ],
+            "report_exists": [
+              true,
+              true
+            ],
+            "report_sha256": [
+              "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c",
+              "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c"
+            ],
+            "wall_s": [
+              10.3,
+              9.6
+            ],
+            "policy_block_seen": [
+              true,
+              true
+            ]
+          },
+          "boom": {
+            "n": 2,
+            "rounds": [
+              4,
+              4
+            ],
+            "same_call_repeats": [
+              0,
+              0
+            ],
+            "max_same_key": [
+              1,
+              1
+            ],
+            "longest_same_run": [
+              1,
+              1
+            ],
+            "probe_call_count": [
+              1,
+              1
+            ],
+            "probe_unique_keys": [
+              1,
+              1
+            ],
+            "stop_reasons": [
+              "model_finished",
+              "model_finished"
+            ],
+            "final_no_toolcall": [
+              true,
+              true
+            ],
+            "report_exists": [
+              true,
+              true
+            ],
+            "report_sha256": [
+              "92009f9c3899fcf9ffe374b68e4c33ddb1f4fc2c259a026684a434720708bb1a",
+              "4c14a350c0b65f709b903f5ba942566521e06b7a2a3d82bddf495ea3ddbe8e7a"
+            ],
+            "wall_s": [
+              13.1,
+              13.5
+            ],
+            "policy_block_seen": [
+              true,
+              true
+            ]
+          },
+          "absent": {
+            "n": 2,
+            "rounds": [
+              7,
+              12
+            ],
+            "same_call_repeats": [
+              2,
+              6
+            ],
+            "max_same_key": [
+              3,
+              4
+            ],
+            "longest_same_run": [
+              1,
+              1
+            ],
+            "probe_call_count": [
+              1,
+              3
+            ],
+            "probe_unique_keys": [
+              1,
+              1
+            ],
+            "stop_reasons": [
+              "model_finished",
+              "model_finished"
+            ],
+            "final_no_toolcall": [
+              true,
+              true
+            ],
+            "report_exists": [
+              false,
+              false
+            ],
+            "report_sha256": [
+              null,
+              null
+            ],
+            "wall_s": [
+              15.5,
+              36.9
+            ],
+            "policy_block_seen": [
+              true,
+              true
+            ]
+          }
+        }
+      },
+      "N+Q": {
+        "error_policy": false,
+        "driver_local_policy": false,
+        "per_probe": {
+          "locked": {
+            "n": 2,
+            "rounds": [
+              4,
+              4
+            ],
+            "same_call_repeats": [
+              0,
+              0
+            ],
+            "max_same_key": [
+              1,
+              1
+            ],
+            "longest_same_run": [
+              1,
+              1
+            ],
+            "probe_call_count": [
+              1,
+              1
+            ],
+            "probe_unique_keys": [
+              1,
+              1
+            ],
+            "stop_reasons": [
+              "model_finished",
+              "model_finished"
+            ],
+            "final_no_toolcall": [
+              true,
+              true
+            ],
+            "report_exists": [
+              true,
+              true
+            ],
+            "report_sha256": [
+              "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e",
+              "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e"
+            ],
+            "wall_s": [
+              9.2,
+              9.5
+            ],
+            "policy_block_seen": [
+              false,
+              false
+            ]
+          },
+          "boom": {
+            "n": 2,
+            "rounds": [
+              4,
+              4
+            ],
+            "same_call_repeats": [
+              0,
+              0
+            ],
+            "max_same_key": [
+              1,
+              1
+            ],
+            "longest_same_run": [
+              1,
+              1
+            ],
+            "probe_call_count": [
+              1,
+              1
+            ],
+            "probe_unique_keys": [
+              1,
+              1
+            ],
+            "stop_reasons": [
+              "model_finished",
+              "model_finished"
+            ],
+            "final_no_toolcall": [
+              true,
+              true
+            ],
+            "report_exists": [
+              true,
+              true
+            ],
+            "report_sha256": [
+              "1b39e075a6e2b759e95fb4e40e7aa0439cb2afc508a2a544d2e36212ad477511",
+              "27cc3ec74edbca2b47704fc615aadddfcb3c2c6465de5256edcede1dfa084716"
+            ],
+            "wall_s": [
+              10.9,
+              11.1
+            ],
+            "policy_block_seen": [
+              false,
+              false
+            ]
+          },
+          "absent": {
+            "n": 2,
+            "rounds": [
+              12,
+              12
+            ],
+            "same_call_repeats": [
+              6,
+              7
+            ],
+            "max_same_key": [
+              5,
+              6
+            ],
+            "longest_same_run": [
+              2,
+              2
+            ],
+            "probe_call_count": [
+              2,
+              2
+            ],
+            "probe_unique_keys": [
+              1,
+              1
+            ],
+            "stop_reasons": [
+              "max_rounds",
+              "max_rounds"
+            ],
+            "final_no_toolcall": [
+              false,
+              false
+            ],
+            "report_exists": [
+              false,
+              false
+            ],
+            "report_sha256": [
+              null,
+              null
+            ],
+            "wall_s": [
+              20.9,
+              23.9
+            ],
+            "policy_block_seen": [
+              false,
+              false
+            ]
+          }
+        }
+      },
+      "L+P": {
+        "error_policy": true,
+        "driver_local_policy": true,
+        "per_probe": {
+          "locked": {
+            "n": 2,
+            "rounds": [
+              4,
+              4
+            ],
+            "same_call_repeats": [
+              0,
+              0
+            ],
+            "max_same_key": [
+              1,
+              1
+            ],
+            "longest_same_run": [
+              1,
+              1
+            ],
+            "probe_call_count": [
+              1,
+              1
+            ],
+            "probe_unique_keys": [
+              1,
+              1
+            ],
+            "stop_reasons": [
+              "model_finished",
+              "model_finished"
+            ],
+            "final_no_toolcall": [
+              true,
+              true
+            ],
+            "report_exists": [
+              true,
+              true
+            ],
+            "report_sha256": [
+              "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e",
+              "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e"
+            ],
+            "wall_s": [
+              9.5,
+              9.7
+            ],
+            "policy_block_seen": [
+              true,
+              true
+            ]
+          },
+          "boom": {
+            "n": 2,
+            "rounds": [
+              4,
+              4
+            ],
+            "same_call_repeats": [
+              0,
+              0
+            ],
+            "max_same_key": [
+              1,
+              1
+            ],
+            "longest_same_run": [
+              1,
+              1
+            ],
+            "probe_call_count": [
+              1,
+              1
+            ],
+            "probe_unique_keys": [
+              1,
+              1
+            ],
+            "stop_reasons": [
+              "model_finished",
+              "model_finished"
+            ],
+            "final_no_toolcall": [
+              true,
+              true
+            ],
+            "report_exists": [
+              true,
+              true
+            ],
+            "report_sha256": [
+              "76295da19b5837733d45b033c72946230419b40938e2fc0ee2b8462b56663e66",
+              "56148ab95ad59abf5b499ce336d277e2e88fef8993102dda92e8db2f35ec687a"
+            ],
+            "wall_s": [
+              14.8,
+              15.1
+            ],
+            "policy_block_seen": [
+              true,
+              true
+            ]
+          },
+          "absent": {
+            "n": 2,
+            "rounds": [
+              12,
+              12
+            ],
+            "same_call_repeats": [
+              5,
+              5
+            ],
+            "max_same_key": [
+              6,
+              6
+            ],
+            "longest_same_run": [
+              2,
+              2
+            ],
+            "probe_call_count": [
+              2,
+              2
+            ],
+            "probe_unique_keys": [
+              2,
+              2
+            ],
+            "stop_reasons": [
+              "max_rounds",
+              "max_rounds"
+            ],
+            "final_no_toolcall": [
+              false,
+              false
+            ],
+            "report_exists": [
+              false,
+              false
+            ],
+            "report_sha256": [
+              null,
+              null
+            ],
+            "wall_s": [
+              22.1,
+              22.2
+            ],
+            "policy_block_seen": [
+              true,
+              true
+            ]
+          }
+        }
+      },
+      "L+Q": {
+        "error_policy": false,
+        "driver_local_policy": true,
+        "per_probe": {
+          "locked": {
+            "n": 2,
+            "rounds": [
+              4,
+              4
+            ],
+            "same_call_repeats": [
+              0,
+              0
+            ],
+            "max_same_key": [
+              1,
+              1
+            ],
+            "longest_same_run": [
+              1,
+              1
+            ],
+            "probe_call_count": [
+              1,
+              1
+            ],
+            "probe_unique_keys": [
+              1,
+              1
+            ],
+            "stop_reasons": [
+              "model_finished",
+              "model_finished"
+            ],
+            "final_no_toolcall": [
+              true,
+              true
+            ],
+            "report_exists": [
+              true,
+              true
+            ],
+            "report_sha256": [
+              "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c",
+              "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c"
+            ],
+            "wall_s": [
+              9.3,
+              9.9
+            ],
+            "policy_block_seen": [
+              false,
+              false
+            ]
+          },
+          "boom": {
+            "n": 2,
+            "rounds": [
+              4,
+              4
+            ],
+            "same_call_repeats": [
+              0,
+              0
+            ],
+            "max_same_key": [
+              1,
+              1
+            ],
+            "longest_same_run": [
+              1,
+              1
+            ],
+            "probe_call_count": [
+              1,
+              1
+            ],
+            "probe_unique_keys": [
+              1,
+              1
+            ],
+            "stop_reasons": [
+              "model_finished",
+              "model_finished"
+            ],
+            "final_no_toolcall": [
+              true,
+              true
+            ],
+            "report_exists": [
+              true,
+              true
+            ],
+            "report_sha256": [
+              "e25bdad7ac79aec29f34b4283c2c5c5858e2255ab83e7026b9634d20ef3ac4c6",
+              "712372854a4d4e975188f0eb927f19c3f5895bd33f56da1184c72052ba6555b0"
+            ],
+            "wall_s": [
+              14.5,
+              12.8
+            ],
+            "policy_block_seen": [
+              false,
+              false
+            ]
+          },
+          "absent": {
+            "n": 2,
+            "rounds": [
+              12,
+              12
+            ],
+            "same_call_repeats": [
+              5,
+              5
+            ],
+            "max_same_key": [
+              6,
+              6
+            ],
+            "longest_same_run": [
+              2,
+              2
+            ],
+            "probe_call_count": [
+              2,
+              2
+            ],
+            "probe_unique_keys": [
+              2,
+              2
+            ],
+            "stop_reasons": [
+              "max_rounds",
+              "max_rounds"
+            ],
+            "final_no_toolcall": [
+              false,
+              false
+            ],
+            "report_exists": [
+              false,
+              false
+            ],
+            "report_sha256": [
+              null,
+              null
+            ],
+            "wall_s": [
+              21.8,
+              21.7
+            ],
+            "policy_block_seen": [
+              false,
+              false
+            ]
+          }
+        }
+      }
+    },
+    "marginal_effect_of_block_without_local_policy": {
+      "compare": "N+P vs N+Q",
+      "note": "块在客户端不自带错误策略时的独立边际效果（越小越说明两者等价）"
+    },
+    "redundancy_vs_local_policy": {
+      "compare": "L+P vs L+Q",
+      "note": "客户端已自带同义策略时，块是否冗余"
+    }
+  },
+  "records": [
+    {
+      "run_id": "P-N-locked-1",
+      "arm": "P",
+      "driver_policy": "N",
+      "probe": "locked",
+      "sample": 1,
+      "port": 8084,
+      "task_text": "运行 probe/locked.py；把它是否成功、以及失败时的错误原文，写入 results/probe_locked.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 10.3,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 157,
+      "final_content": "已完成。\n\n- 运行 `probe/locked.py`：**失败**（退出码 1）\n- 错误原文：`ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).`\n- 已写入 `results/probe_locked.md`",
+      "report_exists": true,
+      "report_chars": 161,
+      "report_sha256": "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c",
+      "report_text": "# probe/locked.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n- **错误原文 (stderr)**:\n  ```\n  ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).\n  ```\n",
+      "artifacts": {
+        "probe/locked.py": "72428d4902ff3bb0733033bcacadcbd806a4b54c71663cf97dcef1cac5c3014e",
+        "results/probe_locked.md": "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c"
+      },
+      "artifact_digest": "2814fce8e3d3d965da57c59a1825e20070bfb57b0156477d4f4ca0b02247e200",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 3.57,
+          "ttft_s": 1.9,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.58,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 97,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 3.13,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.94,
+          "ttft_s": 0.43,
+          "finish": "stop",
+          "content_chars": 157,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:52:29"
+    },
+    {
+      "run_id": "P-N-boom-1",
+      "arm": "P",
+      "driver_policy": "N",
+      "probe": "boom",
+      "sample": 1,
+      "port": 8084,
+      "task_text": "运行 probe/boom.py；把它是否成功、以及失败时的错误原文，写入 results/probe_boom.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 13.1,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 415,
+      "final_content": "已完成。\n\n**运行结果：** `probe/boom.py` **失败**（exit code = 1）。\n\n**错误原文：**\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\P-N-boom-1\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n\n该结果（含成功/失败状态与错误原文）已写入 `results/probe_boom.md`。",
+      "report_exists": true,
+      "report_chars": 363,
+      "report_sha256": "92009f9c3899fcf9ffe374b68e4c33ddb1f4fc2c259a026684a434720708bb1a",
+      "report_text": "# probe/boom.py 运行结果\n\n## 是否成功\n**失败**（exit code = 1）\n\n## 错误原文\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\P-N-boom-1\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n",
+      "artifacts": {
+        "probe/boom.py": "3c4ae7ea90d9ae2de6fe7d2953d02b16a427cbdaf948bf1823bf96c5bf7e3c2b",
+        "results/probe_boom.md": "92009f9c3899fcf9ffe374b68e4c33ddb1f4fc2c259a026684a434720708bb1a"
+      },
+      "artifact_digest": "e0fbf5abd0721e8f7388a08e083e4c5d30e27d54794dd35f35c3eda0134fdaf8",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.72,
+          "ttft_s": 0.99,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 189,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.38,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 76,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 4.87,
+          "ttft_s": 0.43,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 89,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 4.13,
+          "ttft_s": 0.46,
+          "finish": "stop",
+          "content_chars": 415,
+          "reasoning_chars": 24,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:52:42"
+    },
+    {
+      "run_id": "P-N-absent-1",
+      "arm": "P",
+      "driver_policy": "N",
+      "probe": "absent",
+      "sample": 1,
+      "port": 8084,
+      "task_text": "读取 probe/absent.txt，把文件内容原样写入 results/probe_absent.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "model_finished",
+      "rounds": 7,
+      "wall_s": 15.5,
+      "same_call_repeats": 2,
+      "max_same_key": 3,
+      "longest_same_run": 1,
+      "repeat_detail": [
+        {
+          "key": "list_dir|{\"path\":\".\"}",
+          "n": 3
+        }
+      ],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 1,
+      "final_no_toolcall": true,
+      "final_content_chars": 269,
+      "final_content": "我检查了当前工作目录，但 `probe/absent.txt` 文件不存在，目录也是空的，因此无法读取其内容。\n\n具体情况：\n- 读取 `probe/absent.txt` 返回：`ERROR: file not found: probe\\absent.txt`\n- 当前工作目录 `.` 下没有任何文件/目录\n\n由于源文件不存在，我无法\"原样\"写入其内容（不能凭空编造内容）。请确认文件路径是否正确，或把 `probe/absent.txt` 放到当前工作目录下，我再帮你读取并写入 `results/probe_absent.md`。",
+      "report_exists": false,
+      "report_chars": null,
+      "report_sha256": null,
+      "report_text": null,
+      "artifacts": {},
+      "artifact_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact_n": 0,
+      "proxy_records": 7,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.4,
+          "ttft_s": 0.98,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 125,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.2,
+          "ttft_s": 0.3,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 61,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 1.16,
+          "ttft_s": 0.26,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 72,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.29,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 81,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 5,
+          "wall_s": 1.24,
+          "ttft_s": 0.27,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 6,
+          "wall_s": 2.26,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 196,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 7,
+          "wall_s": 5.93,
+          "ttft_s": 0.27,
+          "finish": "stop",
+          "content_chars": 269,
+          "reasoning_chars": 514,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:52:58"
+    },
+    {
+      "run_id": "Q-N-locked-1",
+      "arm": "Q",
+      "driver_policy": "N",
+      "probe": "locked",
+      "sample": 1,
+      "port": 8085,
+      "task_text": "运行 probe/locked.py；把它是否成功、以及失败时的错误原文，写入 results/probe_locked.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 9.2,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 167,
+      "final_content": "已完成。\n\n- 运行 `probe/locked.py`：**失败**（退出码 1）\n- 错误原文已写入 `results/probe_locked.md`：\n  ```\n  ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).\n  ```",
+      "report_exists": true,
+      "report_chars": 156,
+      "report_sha256": "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e",
+      "report_text": "# probe/locked.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n- **错误原文 (stderr)**:\n\n```\nERROR: E_LOCKED: resource is locked by another process (holder pid 4242).\n```\n",
+      "artifacts": {
+        "probe/locked.py": "72428d4902ff3bb0733033bcacadcbd806a4b54c71663cf97dcef1cac5c3014e",
+        "results/probe_locked.md": "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e"
+      },
+      "artifact_digest": "22597cc50977aa3b7e8aed6208b5ec1b63e84a576452749e1028ae0ce89234fb",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.61,
+          "ttft_s": 1.03,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 168,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.55,
+          "ttft_s": 0.33,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 104,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 3.07,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.94,
+          "ttft_s": 0.38,
+          "finish": "stop",
+          "content_chars": 167,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:53:07"
+    },
+    {
+      "run_id": "Q-N-boom-1",
+      "arm": "Q",
+      "driver_policy": "N",
+      "probe": "boom",
+      "sample": 1,
+      "port": 8085,
+      "task_text": "运行 probe/boom.py；把它是否成功、以及失败时的错误原文，写入 results/probe_boom.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 10.9,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 184,
+      "final_content": "已完成。\n\n- **运行结果**：`probe/boom.py` **失败**（退出码 1）。\n- **错误原文**：`RuntimeError: E_PARSE: config field 'amount' has the wrong shape`（完整 traceback 已写入）。\n- **输出文件**：已写入 `results/probe_boom.md`。",
+      "report_exists": true,
+      "report_chars": 371,
+      "report_sha256": "1b39e075a6e2b759e95fb4e40e7aa0439cb2afc508a2a544d2e36212ad477511",
+      "report_text": "# probe/boom.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n\n## 错误原文 (stderr)\n\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\Q-N-boom-1\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n",
+      "artifacts": {
+        "probe/boom.py": "3c4ae7ea90d9ae2de6fe7d2953d02b16a427cbdaf948bf1823bf96c5bf7e3c2b",
+        "results/probe_boom.md": "1b39e075a6e2b759e95fb4e40e7aa0439cb2afc508a2a544d2e36212ad477511"
+      },
+      "artifact_digest": "17388f6fc9cfc6d897671ab49f13251c9747fec629cf5194af55317f39e5301f",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.46,
+          "ttft_s": 0.86,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 164,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.35,
+          "ttft_s": 0.3,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 77,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 4.9,
+          "ttft_s": 0.38,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 89,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 2.2,
+          "ttft_s": 0.44,
+          "finish": "stop",
+          "content_chars": 184,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:53:18"
+    },
+    {
+      "run_id": "Q-N-absent-1",
+      "arm": "Q",
+      "driver_policy": "N",
+      "probe": "absent",
+      "sample": 1,
+      "port": 8085,
+      "task_text": "读取 probe/absent.txt，把文件内容原样写入 results/probe_absent.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "max_rounds",
+      "rounds": 12,
+      "wall_s": 20.9,
+      "same_call_repeats": 6,
+      "max_same_key": 5,
+      "longest_same_run": 2,
+      "repeat_detail": [
+        {
+          "key": "list_dir|{\"path\":\".\"}",
+          "n": 5
+        },
+        {
+          "key": "list_dir|{\"path\":\"probe\"}",
+          "n": 2
+        },
+        {
+          "key": "read_file|{\"path\":\"probe/absent.txt\"}",
+          "n": 2
+        }
+      ],
+      "probe_call_count": 2,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 1,
+      "final_no_toolcall": false,
+      "final_content_chars": null,
+      "final_content": null,
+      "report_exists": false,
+      "report_chars": null,
+      "report_sha256": null,
+      "report_text": null,
+      "artifacts": {},
+      "artifact_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact_n": 0,
+      "proxy_records": 12,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.39,
+          "ttft_s": 1.0,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 122,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.18,
+          "ttft_s": 0.28,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 61,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 1.19,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 72,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.33,
+          "ttft_s": 0.36,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 81,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 5,
+          "wall_s": 1.23,
+          "ttft_s": 0.27,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 6,
+          "wall_s": 2.28,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 196,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 7,
+          "wall_s": 2.36,
+          "ttft_s": 0.36,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 8,
+          "wall_s": 1.23,
+          "ttft_s": 0.27,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 83,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 9,
+          "wall_s": 1.4,
+          "ttft_s": 0.27,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 90,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 10,
+          "wall_s": 1.59,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 135,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 11,
+          "wall_s": 1.28,
+          "ttft_s": 0.3,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 86,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 12,
+          "wall_s": 3.42,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 488,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:53:39"
+    },
+    {
+      "run_id": "P-L-locked-1",
+      "arm": "P",
+      "driver_policy": "L",
+      "probe": "locked",
+      "sample": 1,
+      "port": 8084,
+      "task_text": "运行 probe/locked.py；把它是否成功、以及失败时的错误原文，写入 results/probe_locked.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 9.5,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 166,
+      "final_content": "已完成。\n\n- 运行 `probe/locked.py`：**失败**，退出码 1\n- 错误原文（stderr）：`ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).`\n- 结果已写入 `results/probe_locked.md`",
+      "report_exists": true,
+      "report_chars": 156,
+      "report_sha256": "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e",
+      "report_text": "# probe/locked.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n- **错误原文 (stderr)**:\n\n```\nERROR: E_LOCKED: resource is locked by another process (holder pid 4242).\n```\n",
+      "artifacts": {
+        "probe/locked.py": "72428d4902ff3bb0733033bcacadcbd806a4b54c71663cf97dcef1cac5c3014e",
+        "results/probe_locked.md": "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e"
+      },
+      "artifact_digest": "22597cc50977aa3b7e8aed6208b5ec1b63e84a576452749e1028ae0ce89234fb",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.94,
+          "ttft_s": 1.23,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.5,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 97,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 3.06,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.94,
+          "ttft_s": 0.38,
+          "finish": "stop",
+          "content_chars": 166,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:53:48"
+    },
+    {
+      "run_id": "P-L-boom-1",
+      "arm": "P",
+      "driver_policy": "L",
+      "probe": "boom",
+      "sample": 1,
+      "port": 8084,
+      "task_text": "运行 probe/boom.py；把它是否成功、以及失败时的错误原文，写入 results/probe_boom.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 14.8,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 503,
+      "final_content": "已完成。\n\n**运行结果：** `probe/boom.py` **失败**（exit code = 1）。\n\n**错误原文：**\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\P-L-boom-1\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n\n该脚本只有一行，主动抛出 `RuntimeError`，报错信息为 `E_PARSE: config field 'amount' has the wrong shape`。\n\n结果（含成功/失败状态与错误原文）已写入 `results/probe_boom.md`。",
+      "report_exists": true,
+      "report_chars": 465,
+      "report_sha256": "76295da19b5837733d45b033c72946230419b40938e2fc0ee2b8462b56663e66",
+      "report_text": "# probe/boom.py 运行结果\n\n## 是否成功\n**失败**（exit code = 1）\n\n## 错误原文（stderr）\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\P-L-boom-1\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n\n## 说明\n脚本仅有一行，主动抛出 `RuntimeError`，报错信息为：\n`E_PARSE: config field 'amount' has the wrong shape`\n",
+      "artifacts": {
+        "probe/boom.py": "3c4ae7ea90d9ae2de6fe7d2953d02b16a427cbdaf948bf1823bf96c5bf7e3c2b",
+        "results/probe_boom.md": "76295da19b5837733d45b033c72946230419b40938e2fc0ee2b8462b56663e66"
+      },
+      "artifact_digest": "fc16085ab004a1970b70bc431d895161ed4fc6b03ddfd9bc63cfdd68caa756c0",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.82,
+          "ttft_s": 1.07,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 189,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.34,
+          "ttft_s": 0.28,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 76,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 5.72,
+          "ttft_s": 0.4,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 89,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 4.94,
+          "ttft_s": 0.51,
+          "finish": "stop",
+          "content_chars": 503,
+          "reasoning_chars": 24,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:54:03"
+    },
+    {
+      "run_id": "P-L-absent-1",
+      "arm": "P",
+      "driver_policy": "L",
+      "probe": "absent",
+      "sample": 1,
+      "port": 8084,
+      "task_text": "读取 probe/absent.txt，把文件内容原样写入 results/probe_absent.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "max_rounds",
+      "rounds": 12,
+      "wall_s": 22.1,
+      "same_call_repeats": 5,
+      "max_same_key": 6,
+      "longest_same_run": 2,
+      "repeat_detail": [
+        {
+          "key": "list_dir|{\"path\":\".\"}",
+          "n": 6
+        }
+      ],
+      "probe_call_count": 2,
+      "probe_unique_keys": 2,
+      "probe_first_error_round": 1,
+      "final_no_toolcall": false,
+      "final_content_chars": null,
+      "final_content": null,
+      "report_exists": false,
+      "report_chars": null,
+      "report_sha256": null,
+      "report_text": null,
+      "artifacts": {},
+      "artifact_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact_n": 0,
+      "proxy_records": 12,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.58,
+          "ttft_s": 1.09,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 129,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.19,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 61,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 1.16,
+          "ttft_s": 0.25,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 72,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.29,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 81,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 5,
+          "wall_s": 2.26,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 181,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 6,
+          "wall_s": 2.34,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 207,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 7,
+          "wall_s": 1.42,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 90,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 8,
+          "wall_s": 1.39,
+          "ttft_s": 0.3,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 94,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 9,
+          "wall_s": 1.39,
+          "ttft_s": 0.38,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 96,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 10,
+          "wall_s": 2.32,
+          "ttft_s": 0.35,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 11,
+          "wall_s": 2.3,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 12,
+          "wall_s": 2.41,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 186,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:54:25"
+    },
+    {
+      "run_id": "Q-L-locked-1",
+      "arm": "Q",
+      "driver_policy": "L",
+      "probe": "locked",
+      "sample": 1,
+      "port": 8085,
+      "task_text": "运行 probe/locked.py；把它是否成功、以及失败时的错误原文，写入 results/probe_locked.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 9.3,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 157,
+      "final_content": "已完成。\n\n- 运行 `probe/locked.py`：**失败**（退出码 1）\n- 错误原文：`ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).`\n- 已写入 `results/probe_locked.md`",
+      "report_exists": true,
+      "report_chars": 161,
+      "report_sha256": "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c",
+      "report_text": "# probe/locked.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n- **错误原文 (stderr)**:\n  ```\n  ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).\n  ```\n",
+      "artifacts": {
+        "probe/locked.py": "72428d4902ff3bb0733033bcacadcbd806a4b54c71663cf97dcef1cac5c3014e",
+        "results/probe_locked.md": "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c"
+      },
+      "artifact_digest": "2814fce8e3d3d965da57c59a1825e20070bfb57b0156477d4f4ca0b02247e200",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.73,
+          "ttft_s": 1.08,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.56,
+          "ttft_s": 0.36,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 97,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 3.09,
+          "ttft_s": 0.27,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.92,
+          "ttft_s": 0.42,
+          "finish": "stop",
+          "content_chars": 157,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:54:35"
+    },
+    {
+      "run_id": "Q-L-boom-1",
+      "arm": "Q",
+      "driver_policy": "L",
+      "probe": "boom",
+      "sample": 1,
+      "port": 8085,
+      "task_text": "运行 probe/boom.py；把它是否成功、以及失败时的错误原文，写入 results/probe_boom.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 14.5,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 411,
+      "final_content": "已完成。\n\n**运行结果：** `probe/boom.py` **失败**（exit code = 1）。\n\n**错误原文：**\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\Q-L-boom-1\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n\n结果（含成功状态与错误原文）已写入 `results/probe_boom.md`。",
+      "report_exists": true,
+      "report_chars": 502,
+      "report_sha256": "e25bdad7ac79aec29f34b4283c2c5c5858e2255ab83e7026b9634d20ef3ac4c6",
+      "report_text": "# probe/boom.py 运行结果\n\n## 是否成功\n**失败**（exit code = 1）\n\n## 错误原文（stderr）\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\Q-L-boom-1\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n\n## 说明\n脚本仅包含一行 `raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")`，因此必然抛出 `RuntimeError` 并退出，exit code 为 1。\n",
+      "artifacts": {
+        "probe/boom.py": "3c4ae7ea90d9ae2de6fe7d2953d02b16a427cbdaf948bf1823bf96c5bf7e3c2b",
+        "results/probe_boom.md": "e25bdad7ac79aec29f34b4283c2c5c5858e2255ab83e7026b9634d20ef3ac4c6"
+      },
+      "artifact_digest": "960982f4118e3970ffb036d4425e749703e7cd1f1209d31dda58c3eb01bc16b6",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.71,
+          "ttft_s": 0.98,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 164,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.36,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 74,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 5.98,
+          "ttft_s": 0.42,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 89,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 4.35,
+          "ttft_s": 0.58,
+          "finish": "stop",
+          "content_chars": 411,
+          "reasoning_chars": 43,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:54:49"
+    },
+    {
+      "run_id": "Q-L-absent-1",
+      "arm": "Q",
+      "driver_policy": "L",
+      "probe": "absent",
+      "sample": 1,
+      "port": 8085,
+      "task_text": "读取 probe/absent.txt，把文件内容原样写入 results/probe_absent.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "max_rounds",
+      "rounds": 12,
+      "wall_s": 21.8,
+      "same_call_repeats": 5,
+      "max_same_key": 6,
+      "longest_same_run": 2,
+      "repeat_detail": [
+        {
+          "key": "list_dir|{\"path\":\".\"}",
+          "n": 6
+        }
+      ],
+      "probe_call_count": 2,
+      "probe_unique_keys": 2,
+      "probe_first_error_round": 1,
+      "final_no_toolcall": false,
+      "final_content_chars": null,
+      "final_content": null,
+      "report_exists": false,
+      "report_chars": null,
+      "report_sha256": null,
+      "report_text": null,
+      "artifacts": {},
+      "artifact_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact_n": 0,
+      "proxy_records": 12,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.52,
+          "ttft_s": 1.09,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 128,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.18,
+          "ttft_s": 0.28,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 61,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 1.17,
+          "ttft_s": 0.27,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 72,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.28,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 81,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 5,
+          "wall_s": 2.11,
+          "ttft_s": 0.3,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 145,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 6,
+          "wall_s": 2.36,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 207,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 7,
+          "wall_s": 1.41,
+          "ttft_s": 0.26,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 90,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 8,
+          "wall_s": 1.37,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 94,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 9,
+          "wall_s": 1.35,
+          "ttft_s": 0.36,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 96,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 10,
+          "wall_s": 2.32,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 11,
+          "wall_s": 2.3,
+          "ttft_s": 0.28,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 12,
+          "wall_s": 2.41,
+          "ttft_s": 0.33,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 186,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:55:11"
+    },
+    {
+      "run_id": "Q-L-locked-2",
+      "arm": "Q",
+      "driver_policy": "L",
+      "probe": "locked",
+      "sample": 2,
+      "port": 8085,
+      "task_text": "运行 probe/locked.py；把它是否成功、以及失败时的错误原文，写入 results/probe_locked.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 9.9,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 157,
+      "final_content": "已完成。\n\n- 运行 `probe/locked.py`：**失败**（退出码 1）\n- 错误原文：`ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).`\n- 已写入 `results/probe_locked.md`",
+      "report_exists": true,
+      "report_chars": 161,
+      "report_sha256": "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c",
+      "report_text": "# probe/locked.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n- **错误原文 (stderr)**:\n  ```\n  ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).\n  ```\n",
+      "artifacts": {
+        "probe/locked.py": "72428d4902ff3bb0733033bcacadcbd806a4b54c71663cf97dcef1cac5c3014e",
+        "results/probe_locked.md": "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c"
+      },
+      "artifact_digest": "2814fce8e3d3d965da57c59a1825e20070bfb57b0156477d4f4ca0b02247e200",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.82,
+          "ttft_s": 1.12,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.77,
+          "ttft_s": 0.37,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 97,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 3.31,
+          "ttft_s": 0.33,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.92,
+          "ttft_s": 0.42,
+          "finish": "stop",
+          "content_chars": 157,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:55:21"
+    },
+    {
+      "run_id": "Q-L-boom-2",
+      "arm": "Q",
+      "driver_policy": "L",
+      "probe": "boom",
+      "sample": 2,
+      "port": 8085,
+      "task_text": "运行 probe/boom.py；把它是否成功、以及失败时的错误原文，写入 results/probe_boom.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 12.8,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 409,
+      "final_content": "已完成。\n\n- **运行结果**：`probe/boom.py` **失败**（退出码 1）。\n- **错误原文**：\n  ```\n  Traceback (most recent call last):\n    File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\Q-L-boom-2\\probe\\boom.py\", line 1, in <module>\n      raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\n  RuntimeError: E_PARSE: config field 'amount' has the wrong shape\n  ```\n- 已将上述内容写入 `results/probe_boom.md`。",
+      "report_exists": true,
+      "report_chars": 365,
+      "report_sha256": "712372854a4d4e975188f0eb927f19c3f5895bd33f56da1184c72052ba6555b0",
+      "report_text": "# probe/boom.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n- **错误原文**:\n\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\Q-L-boom-2\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n",
+      "artifacts": {
+        "probe/boom.py": "3c4ae7ea90d9ae2de6fe7d2953d02b16a427cbdaf948bf1823bf96c5bf7e3c2b",
+        "results/probe_boom.md": "712372854a4d4e975188f0eb927f19c3f5895bd33f56da1184c72052ba6555b0"
+      },
+      "artifact_digest": "e9ed3481c0c451b663f428965e6ba886aad70dd7c93292cfebdb273565ebafc8",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.52,
+          "ttft_s": 0.92,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 164,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.33,
+          "ttft_s": 0.28,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 74,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 4.9,
+          "ttft_s": 0.39,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 89,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 4.06,
+          "ttft_s": 0.49,
+          "finish": "stop",
+          "content_chars": 409,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:55:34"
+    },
+    {
+      "run_id": "Q-L-absent-2",
+      "arm": "Q",
+      "driver_policy": "L",
+      "probe": "absent",
+      "sample": 2,
+      "port": 8085,
+      "task_text": "读取 probe/absent.txt，把文件内容原样写入 results/probe_absent.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "max_rounds",
+      "rounds": 12,
+      "wall_s": 21.7,
+      "same_call_repeats": 5,
+      "max_same_key": 6,
+      "longest_same_run": 2,
+      "repeat_detail": [
+        {
+          "key": "list_dir|{\"path\":\".\"}",
+          "n": 6
+        }
+      ],
+      "probe_call_count": 2,
+      "probe_unique_keys": 2,
+      "probe_first_error_round": 1,
+      "final_no_toolcall": false,
+      "final_content_chars": null,
+      "final_content": null,
+      "report_exists": false,
+      "report_chars": null,
+      "report_sha256": null,
+      "report_text": null,
+      "artifacts": {},
+      "artifact_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact_n": 0,
+      "proxy_records": 12,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.49,
+          "ttft_s": 1.08,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 128,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.16,
+          "ttft_s": 0.27,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 61,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 1.16,
+          "ttft_s": 0.26,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 72,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.26,
+          "ttft_s": 0.32,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 81,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 5,
+          "wall_s": 2.15,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 145,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 6,
+          "wall_s": 2.26,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 172,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 7,
+          "wall_s": 1.4,
+          "ttft_s": 0.26,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 90,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 8,
+          "wall_s": 1.4,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 94,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 9,
+          "wall_s": 1.41,
+          "ttft_s": 0.36,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 96,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 10,
+          "wall_s": 2.33,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 11,
+          "wall_s": 2.29,
+          "ttft_s": 0.28,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 12,
+          "wall_s": 2.4,
+          "ttft_s": 0.32,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 186,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:55:55"
+    },
+    {
+      "run_id": "P-L-locked-2",
+      "arm": "P",
+      "driver_policy": "L",
+      "probe": "locked",
+      "sample": 2,
+      "port": 8084,
+      "task_text": "运行 probe/locked.py；把它是否成功、以及失败时的错误原文，写入 results/probe_locked.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 9.7,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 166,
+      "final_content": "已完成。\n\n- 运行 `probe/locked.py`：**失败**，退出码 1\n- 错误原文（stderr）：`ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).`\n- 结果已写入 `results/probe_locked.md`",
+      "report_exists": true,
+      "report_chars": 156,
+      "report_sha256": "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e",
+      "report_text": "# probe/locked.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n- **错误原文 (stderr)**:\n\n```\nERROR: E_LOCKED: resource is locked by another process (holder pid 4242).\n```\n",
+      "artifacts": {
+        "probe/locked.py": "72428d4902ff3bb0733033bcacadcbd806a4b54c71663cf97dcef1cac5c3014e",
+        "results/probe_locked.md": "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e"
+      },
+      "artifact_digest": "22597cc50977aa3b7e8aed6208b5ec1b63e84a576452749e1028ae0ce89234fb",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 3.03,
+          "ttft_s": 1.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.56,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 97,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 3.09,
+          "ttft_s": 0.32,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 2.0,
+          "ttft_s": 0.42,
+          "finish": "stop",
+          "content_chars": 166,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:56:05"
+    },
+    {
+      "run_id": "P-L-boom-2",
+      "arm": "P",
+      "driver_policy": "L",
+      "probe": "boom",
+      "sample": 2,
+      "port": 8084,
+      "task_text": "运行 probe/boom.py；把它是否成功、以及失败时的错误原文，写入 results/probe_boom.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 15.1,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 501,
+      "final_content": "已完成。\n\n**运行结果：** `probe/boom.py` **失败**（exit code = 1）。\n\n**错误原文：**\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\P-L-boom-2\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n\n该脚本只有一行，主动抛出 `RuntimeError`，报错为 `E_PARSE: config field 'amount' has the wrong shape`。\n\n结果（含成功/失败状态与错误原文）已写入 `results/probe_boom.md`。",
+      "report_exists": true,
+      "report_chars": 465,
+      "report_sha256": "56148ab95ad59abf5b499ce336d277e2e88fef8993102dda92e8db2f35ec687a",
+      "report_text": "# probe/boom.py 运行结果\n\n## 是否成功\n**失败**（exit code = 1）\n\n## 错误原文（stderr）\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\P-L-boom-2\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n\n## 说明\n脚本仅有一行，主动抛出 `RuntimeError`，报错信息为：\n`E_PARSE: config field 'amount' has the wrong shape`\n",
+      "artifacts": {
+        "probe/boom.py": "3c4ae7ea90d9ae2de6fe7d2953d02b16a427cbdaf948bf1823bf96c5bf7e3c2b",
+        "results/probe_boom.md": "56148ab95ad59abf5b499ce336d277e2e88fef8993102dda92e8db2f35ec687a"
+      },
+      "artifact_digest": "f3d7cfb27e4c0051ba5078dbc5776a924a5c13327903e61924587def69241bf6",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.93,
+          "ttft_s": 1.11,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 189,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.4,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 76,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 5.8,
+          "ttft_s": 0.43,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 89,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 4.91,
+          "ttft_s": 0.51,
+          "finish": "stop",
+          "content_chars": 501,
+          "reasoning_chars": 24,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:56:20"
+    },
+    {
+      "run_id": "P-L-absent-2",
+      "arm": "P",
+      "driver_policy": "L",
+      "probe": "absent",
+      "sample": 2,
+      "port": 8084,
+      "task_text": "读取 probe/absent.txt，把文件内容原样写入 results/probe_absent.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": true,
+      "runtime_hint_injected": true,
+      "sys_prompt_chars": 628,
+      "stop_reason": "max_rounds",
+      "rounds": 12,
+      "wall_s": 22.2,
+      "same_call_repeats": 5,
+      "max_same_key": 6,
+      "longest_same_run": 2,
+      "repeat_detail": [
+        {
+          "key": "list_dir|{\"path\":\".\"}",
+          "n": 6
+        }
+      ],
+      "probe_call_count": 2,
+      "probe_unique_keys": 2,
+      "probe_first_error_round": 1,
+      "final_no_toolcall": false,
+      "final_content_chars": null,
+      "final_content": null,
+      "report_exists": false,
+      "report_chars": null,
+      "report_sha256": null,
+      "report_text": null,
+      "artifacts": {},
+      "artifact_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact_n": 0,
+      "proxy_records": 12,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.61,
+          "ttft_s": 1.11,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 129,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.22,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 61,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 1.21,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 72,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.27,
+          "ttft_s": 0.32,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 81,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 5,
+          "wall_s": 2.28,
+          "ttft_s": 0.33,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 181,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 6,
+          "wall_s": 2.34,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 207,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 7,
+          "wall_s": 1.44,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 90,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 8,
+          "wall_s": 1.35,
+          "ttft_s": 0.27,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 94,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 9,
+          "wall_s": 1.38,
+          "ttft_s": 0.36,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 96,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 10,
+          "wall_s": 2.3,
+          "ttft_s": 0.32,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 11,
+          "wall_s": 2.32,
+          "ttft_s": 0.33,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 12,
+          "wall_s": 2.44,
+          "ttft_s": 0.36,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 186,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:56:42"
+    },
+    {
+      "run_id": "Q-N-locked-2",
+      "arm": "Q",
+      "driver_policy": "N",
+      "probe": "locked",
+      "sample": 2,
+      "port": 8085,
+      "task_text": "运行 probe/locked.py；把它是否成功、以及失败时的错误原文，写入 results/probe_locked.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 9.5,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 167,
+      "final_content": "已完成。\n\n- 运行 `probe/locked.py`：**失败**（退出码 1）\n- 错误原文已写入 `results/probe_locked.md`：\n  ```\n  ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).\n  ```",
+      "report_exists": true,
+      "report_chars": 156,
+      "report_sha256": "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e",
+      "report_text": "# probe/locked.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n- **错误原文 (stderr)**:\n\n```\nERROR: E_LOCKED: resource is locked by another process (holder pid 4242).\n```\n",
+      "artifacts": {
+        "probe/locked.py": "72428d4902ff3bb0733033bcacadcbd806a4b54c71663cf97dcef1cac5c3014e",
+        "results/probe_locked.md": "34cc9dbc9eda4f8bbe7ab78d8567d06c94b62acc738abaea756552ee1fad478e"
+      },
+      "artifact_digest": "22597cc50977aa3b7e8aed6208b5ec1b63e84a576452749e1028ae0ce89234fb",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.7,
+          "ttft_s": 1.12,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 168,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.6,
+          "ttft_s": 0.36,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 104,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 3.14,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 2.02,
+          "ttft_s": 0.44,
+          "finish": "stop",
+          "content_chars": 167,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:56:52"
+    },
+    {
+      "run_id": "Q-N-boom-2",
+      "arm": "Q",
+      "driver_policy": "N",
+      "probe": "boom",
+      "sample": 2,
+      "port": 8085,
+      "task_text": "运行 probe/boom.py；把它是否成功、以及失败时的错误原文，写入 results/probe_boom.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 11.1,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 177,
+      "final_content": "已完成。\n\n- **运行结果**：`probe/boom.py` **失败**（退出码 1）。\n- **错误原文**：`RuntimeError: E_PARSE: config field 'amount' has the wrong shape`（完整 traceback 已写入）。\n- 结果已写入 `results/probe_boom.md`。",
+      "report_exists": true,
+      "report_chars": 371,
+      "report_sha256": "27cc3ec74edbca2b47704fc615aadddfcb3c2c6465de5256edcede1dfa084716",
+      "report_text": "# probe/boom.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n\n## 错误原文 (stderr)\n\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\Q-N-boom-2\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n",
+      "artifacts": {
+        "probe/boom.py": "3c4ae7ea90d9ae2de6fe7d2953d02b16a427cbdaf948bf1823bf96c5bf7e3c2b",
+        "results/probe_boom.md": "27cc3ec74edbca2b47704fc615aadddfcb3c2c6465de5256edcede1dfa084716"
+      },
+      "artifact_digest": "ef0dd5b3ab67cb41a5f817fabfaffd32673f2dde5a3ca9043ca2a4b8a00218f7",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.47,
+          "ttft_s": 0.85,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 164,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.4,
+          "ttft_s": 0.33,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 77,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 4.98,
+          "ttft_s": 0.43,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 89,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 2.18,
+          "ttft_s": 0.47,
+          "finish": "stop",
+          "content_chars": 177,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:57:03"
+    },
+    {
+      "run_id": "Q-N-absent-2",
+      "arm": "Q",
+      "driver_policy": "N",
+      "probe": "absent",
+      "sample": 2,
+      "port": 8085,
+      "task_text": "读取 probe/absent.txt，把文件内容原样写入 results/probe_absent.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": false,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "max_rounds",
+      "rounds": 12,
+      "wall_s": 23.9,
+      "same_call_repeats": 7,
+      "max_same_key": 6,
+      "longest_same_run": 2,
+      "repeat_detail": [
+        {
+          "key": "list_dir|{\"path\":\".\"}",
+          "n": 6
+        },
+        {
+          "key": "list_dir|{\"path\":\"probe\"}",
+          "n": 2
+        },
+        {
+          "key": "read_file|{\"path\":\"probe/absent.txt\"}",
+          "n": 2
+        }
+      ],
+      "probe_call_count": 2,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 1,
+      "final_no_toolcall": false,
+      "final_content_chars": null,
+      "final_content": null,
+      "report_exists": false,
+      "report_chars": null,
+      "report_sha256": null,
+      "report_text": null,
+      "artifacts": {},
+      "artifact_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact_n": 0,
+      "proxy_records": 12,
+      "policy_block_seen": false,
+      "tool_policy": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.43,
+          "ttft_s": 1.04,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 122,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.22,
+          "ttft_s": 0.32,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 61,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 1.17,
+          "ttft_s": 0.27,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 72,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.32,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 81,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 5,
+          "wall_s": 1.26,
+          "ttft_s": 0.28,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 6,
+          "wall_s": 2.31,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 196,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 7,
+          "wall_s": 2.32,
+          "ttft_s": 0.32,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 8,
+          "wall_s": 1.27,
+          "ttft_s": 0.29,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 83,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 9,
+          "wall_s": 1.41,
+          "ttft_s": 0.28,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 90,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 10,
+          "wall_s": 3.41,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 486,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 11,
+          "wall_s": 1.35,
+          "ttft_s": 0.36,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 86,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 12,
+          "wall_s": 4.39,
+          "ttft_s": 0.27,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 703,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:57:27"
+    },
+    {
+      "run_id": "P-N-locked-2",
+      "arm": "P",
+      "driver_policy": "N",
+      "probe": "locked",
+      "sample": 2,
+      "port": 8084,
+      "task_text": "运行 probe/locked.py；把它是否成功、以及失败时的错误原文，写入 results/probe_locked.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 9.6,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 157,
+      "final_content": "已完成。\n\n- 运行 `probe/locked.py`：**失败**（退出码 1）\n- 错误原文：`ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).`\n- 已写入 `results/probe_locked.md`",
+      "report_exists": true,
+      "report_chars": 161,
+      "report_sha256": "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c",
+      "report_text": "# probe/locked.py 运行结果\n\n- **是否成功**: 失败\n- **退出码**: 1\n- **错误原文 (stderr)**:\n  ```\n  ERROR: E_LOCKED: resource is locked by another process (holder pid 4242).\n  ```\n",
+      "artifacts": {
+        "probe/locked.py": "72428d4902ff3bb0733033bcacadcbd806a4b54c71663cf97dcef1cac5c3014e",
+        "results/probe_locked.md": "ab44874c1911c247da94ad8ba48a83c021fdb856862ceee1591cf73ec16e8b8c"
+      },
+      "artifact_digest": "2814fce8e3d3d965da57c59a1825e20070bfb57b0156477d4f4ca0b02247e200",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.88,
+          "ttft_s": 1.21,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 182,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.57,
+          "ttft_s": 0.33,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 97,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 3.17,
+          "ttft_s": 0.32,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 91,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.97,
+          "ttft_s": 0.43,
+          "finish": "stop",
+          "content_chars": 157,
+          "reasoning_chars": 6,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:57:36"
+    },
+    {
+      "run_id": "P-N-boom-2",
+      "arm": "P",
+      "driver_policy": "N",
+      "probe": "boom",
+      "sample": 2,
+      "port": 8084,
+      "task_text": "运行 probe/boom.py；把它是否成功、以及失败时的错误原文，写入 results/probe_boom.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "model_finished",
+      "rounds": 4,
+      "wall_s": 13.5,
+      "same_call_repeats": 0,
+      "max_same_key": 1,
+      "longest_same_run": 1,
+      "repeat_detail": [],
+      "probe_call_count": 1,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 2,
+      "final_no_toolcall": true,
+      "final_content_chars": 415,
+      "final_content": "已完成。\n\n**运行结果：** `probe/boom.py` **失败**（exit code = 1）。\n\n**错误原文：**\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\P-N-boom-2\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n\n该结果（含成功/失败状态与错误原文）已写入 `results/probe_boom.md`。",
+      "report_exists": true,
+      "report_chars": 363,
+      "report_sha256": "4c14a350c0b65f709b903f5ba942566521e06b7a2a3d82bddf495ea3ddbe8e7a",
+      "report_text": "# probe/boom.py 运行结果\n\n## 是否成功\n**失败**（exit code = 1）\n\n## 错误原文\n```\nTraceback (most recent call last):\n  File \"D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g10\\runs\\P-N-boom-2\\probe\\boom.py\", line 1, in <module>\n    raise RuntimeError(\"E_PARSE: config field 'amount' has the wrong shape\")\nRuntimeError: E_PARSE: config field 'amount' has the wrong shape\n```\n",
+      "artifacts": {
+        "probe/boom.py": "3c4ae7ea90d9ae2de6fe7d2953d02b16a427cbdaf948bf1823bf96c5bf7e3c2b",
+        "results/probe_boom.md": "4c14a350c0b65f709b903f5ba942566521e06b7a2a3d82bddf495ea3ddbe8e7a"
+      },
+      "artifact_digest": "09b0d70f32af726bb0950b2929b1b1373ac98150b739b01a8bde2a227afa7a0a",
+      "artifact_n": 2,
+      "proxy_records": 4,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.8,
+          "ttft_s": 1.05,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 189,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.42,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 76,
+          "tool_calls": [
+            "run_python"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 4.95,
+          "ttft_s": 0.45,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 89,
+          "tool_calls": [
+            "write_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 4.26,
+          "ttft_s": 0.49,
+          "finish": "stop",
+          "content_chars": 415,
+          "reasoning_chars": 24,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:57:50"
+    },
+    {
+      "run_id": "P-N-absent-2",
+      "arm": "P",
+      "driver_policy": "N",
+      "probe": "absent",
+      "sample": 2,
+      "port": 8084,
+      "task_text": "读取 probe/absent.txt，把文件内容原样写入 results/probe_absent.md。",
+      "max_tokens": 8192,
+      "max_rounds": 12,
+      "error_policy": true,
+      "local_policy_in_prompt": false,
+      "runtime_hint_injected": false,
+      "sys_prompt_chars": 283,
+      "stop_reason": "model_finished",
+      "rounds": 12,
+      "wall_s": 36.9,
+      "same_call_repeats": 6,
+      "max_same_key": 4,
+      "longest_same_run": 1,
+      "repeat_detail": [
+        {
+          "key": "list_dir|{\"path\":\".\"}",
+          "n": 4
+        },
+        {
+          "key": "list_dir|{\"path\":\"probe\"}",
+          "n": 2
+        },
+        {
+          "key": "read_file|{\"path\":\"probe/absent.txt\"}",
+          "n": 3
+        }
+      ],
+      "probe_call_count": 3,
+      "probe_unique_keys": 1,
+      "probe_first_error_round": 1,
+      "final_no_toolcall": true,
+      "final_content_chars": 428,
+      "final_content": "我无法完成这个操作，原因是源文件不存在。\n\n我做了以下检查：\n- 读取 `probe/absent.txt` → 报错 `ERROR: file not found: probe\\absent.txt`\n- 列出 `probe` 目录 → 报错 `FileNotFoundError`（该目录不存在）\n- 列出当前目录 `.` → 结果为空，没有任何文件或子目录\n\n因此 `probe/absent.txt` 在当前工作目录下并不存在，我无法读取其内容，也就无法将其\"原样\"写入 `results/probe_absent.md`。我不会凭空编造文件内容。\n\n请确认以下之一：\n1. 文件是否位于其他路径？请提供正确路径。\n2. 是否应先创建 `probe/absent.txt`（并告诉我其内容），我再执行复制？\n3. 如果这是有意测试\"文件缺失\"的场景，请告诉我你希望我如何处理（例如写入一个说明文件缺失的占位内容）。\n\n告诉我你的选择后，我立即继续。",
+      "report_exists": false,
+      "report_chars": null,
+      "report_sha256": null,
+      "report_text": null,
+      "artifacts": {},
+      "artifact_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact_n": 0,
+      "proxy_records": 12,
+      "policy_block_seen": true,
+      "tool_policy": [
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符",
+        "并入首条 system 尾部 584 字符"
+      ],
+      "rounds_detail": [
+        {
+          "round": 1,
+          "wall_s": 2.45,
+          "ttft_s": 1.01,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 125,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 2,
+          "wall_s": 1.2,
+          "ttft_s": 0.3,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 61,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 3,
+          "wall_s": 1.19,
+          "ttft_s": 0.28,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 72,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 4,
+          "wall_s": 1.3,
+          "ttft_s": 0.35,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 81,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 5,
+          "wall_s": 1.61,
+          "ttft_s": 0.31,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 135,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 6,
+          "wall_s": 2.36,
+          "ttft_s": 0.35,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 196,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 7,
+          "wall_s": 3.73,
+          "ttft_s": 0.28,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 511,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 8,
+          "wall_s": 4.62,
+          "ttft_s": 0.3,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 708,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 9,
+          "wall_s": 1.35,
+          "ttft_s": 0.34,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 96,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 10,
+          "wall_s": 3.45,
+          "ttft_s": 0.32,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 471,
+          "tool_calls": [
+            "list_dir"
+          ],
+          "error": null
+        },
+        {
+          "round": 11,
+          "wall_s": 4.08,
+          "ttft_s": 0.35,
+          "finish": "tool_calls",
+          "content_chars": 0,
+          "reasoning_chars": 569,
+          "tool_calls": [
+            "read_file"
+          ],
+          "error": null
+        },
+        {
+          "round": 12,
+          "wall_s": 9.51,
+          "ttft_s": 0.35,
+          "finish": "stop",
+          "content_chars": 428,
+          "reasoning_chars": 818,
+          "tool_calls": [],
+          "error": null
+        }
+      ],
+      "at": "2026-09-28 06:58:27"
+    }
+  ]
+}

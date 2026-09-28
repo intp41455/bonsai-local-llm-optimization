@@ -1,0 +1,137 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 12,
+  "task_text": "创建results/summary.md，汇总sales.csv与logs/run.log统计，并列出实际生成文件路径。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\P-t12-1",
+  "max_tokens": 8192,
+  "stop_reason": "model_finished",
+  "rounds": 9,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.62,
+      "ttft_s": 1.07,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 211,
+      "tool_calls": [
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "wall_s": 1.66,
+      "ttft_s": 0.29,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 46,
+      "tool_calls": [
+        "read_file",
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "wall_s": 1.85,
+      "ttft_s": 0.39,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 51,
+      "tool_calls": [
+        "read_file",
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 4,
+      "wall_s": 18.12,
+      "ttft_s": 7.03,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 823,
+      "tool_calls": [
+        "read_file",
+        "read_file",
+        "read_file",
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 5,
+      "wall_s": 1.4,
+      "ttft_s": 0.5,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 59,
+      "tool_calls": [
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 6,
+      "wall_s": 1.46,
+      "ttft_s": 0.32,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 65,
+      "tool_calls": [
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 7,
+      "wall_s": 13.91,
+      "ttft_s": 0.29,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 576,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 8,
+      "wall_s": 3.41,
+      "ttft_s": 0.68,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 263,
+      "tool_calls": [
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 9,
+      "wall_s": 10.15,
+      "ttft_s": 0.65,
+      "finish": "stop",
+      "content_chars": 270,
+      "reasoning_chars": 489,
+      "tool_calls": [],
+      "error": null
+    }
+  ],
+  "wall_s": 54.6,
+  "tool_retries": 0,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 05:46:32"
+}

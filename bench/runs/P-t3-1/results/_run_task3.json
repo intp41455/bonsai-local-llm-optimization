@@ -1,0 +1,212 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 3,
+  "task_text": "修复calc.py的total_paid：仅汇总paid、按order_id去重；保留函数名并运行测试。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\P-t3-1",
+  "max_tokens": 8192,
+  "stop_reason": "model_finished",
+  "rounds": 15,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.05,
+      "ttft_s": 1.09,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 84,
+      "tool_calls": [
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "wall_s": 1.69,
+      "ttft_s": 0.3,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 31,
+      "tool_calls": [
+        "read_file",
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "wall_s": 4.19,
+      "ttft_s": 1.21,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 131,
+      "tool_calls": [
+        "read_file",
+        "read_file",
+        "read_file",
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 4,
+      "wall_s": 2.07,
+      "ttft_s": 0.59,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 78,
+      "tool_calls": [
+        "list_dir",
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 5,
+      "wall_s": 2.0,
+      "ttft_s": 0.32,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 77,
+      "tool_calls": [
+        "read_file",
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 6,
+      "wall_s": 11.24,
+      "ttft_s": 6.09,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 689,
+      "tool_calls": [
+        "list_dir",
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 7,
+      "wall_s": 14.79,
+      "ttft_s": 1.37,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 1590,
+      "tool_calls": [
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 8,
+      "wall_s": 11.73,
+      "ttft_s": 0.36,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 1176,
+      "tool_calls": [
+        "list_dir",
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 9,
+      "wall_s": 2.9,
+      "ttft_s": 0.46,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 283,
+      "tool_calls": [
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 10,
+      "wall_s": 3.23,
+      "ttft_s": 0.34,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 399,
+      "tool_calls": [
+        "list_dir"
+      ],
+      "error": null
+    },
+    {
+      "round": 11,
+      "wall_s": 15.13,
+      "ttft_s": 0.34,
+      "finish": "tool_calls",
+      "content_chars": 92,
+      "reasoning_chars": 1455,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 12,
+      "wall_s": 19.09,
+      "ttft_s": 0.46,
+      "finish": "tool_calls",
+      "content_chars": 44,
+      "reasoning_chars": 43,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 13,
+      "wall_s": 2.28,
+      "ttft_s": 1.33,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 25,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 14,
+      "wall_s": 1.9,
+      "ttft_s": 0.47,
+      "finish": "tool_calls",
+      "content_chars": 47,
+      "reasoning_chars": 81,
+      "tool_calls": [
+        "read_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 15,
+      "wall_s": 13.05,
+      "ttft_s": 0.49,
+      "finish": "stop",
+      "content_chars": 724,
+      "reasoning_chars": 632,
+      "tool_calls": [],
+      "error": null
+    }
+  ],
+  "wall_s": 107.4,
+  "tool_retries": 8,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 05:39:26"
+}

@@ -1,0 +1,79 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 5,
+  "task_text": "把results/constraints.md中的交付格式改为纯文本，其他保持不变；不存在则从notes.txt先创建。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\A-s3",
+  "stop_reason": "model_finished",
+  "rounds": 5,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.6,
+      "ttft_s": 1.2,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 80,
+      "tool_calls": [
+        "list_dir",
+        "read_file"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 1.2,
+      "ttft_s": 0.53,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 55,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 1.15,
+      "ttft_s": 0.45,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 39,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 4.91,
+      "ttft_s": 0.44,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 363,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 3.05,
+      "ttft_s": 0.5,
+      "finish": "stop",
+      "content_chars": 150,
+      "reasoning_chars": 196,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 12.9,
+  "tool_retries": 0,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 01:40:04"
+}

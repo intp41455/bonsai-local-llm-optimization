@@ -1,0 +1,35 @@
+变更前证据保全（只读）
+采集时间：2026-09-27 20:37:35
+目的：陛下已安排另一 agent 卸载 Windows 11 26200 预览版并更换 NVIDIA 驱动；
+      本快照固化"变更前"的 OS/驱动/虚拟化/崩溃证据，供变更后做前后对照。
+说明：本目录全部为只读采集结果；转储文件副本见上一级目录。
+      C 盘原件（Minidump / WER / 事件日志）可能被系统回退或清理，故先行固化。
+
+
+
+VirtualizationBasedSecurityStatus    : 2
+SecurityServicesConfigured           : {2, 5}
+SecurityServicesRunning              : {2, 5}
+CodeIntegrityPolicyEnforcementStatus : 2
+
+
+
+
+
+CachedDrtmAuthIndex                     : 0
+RequireMicrosoftSignedBootChain         : 1
+WasEnabledBy                            : 1
+EnableVirtualizationBasedSecurity       : 1
+HyperVVirtualizationBasedSecurityOptout : 0
+PSPath                                  : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlS
+                                          et\Control\DeviceGuard
+PSParentPath                            : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlS
+                                          et\Control
+PSChildName                             : DeviceGuard
+PSDrive                                 : HKLM
+PSProvider                              : Microsoft.PowerShell.Core\Registry
+
+
+
+
+[exit=1]

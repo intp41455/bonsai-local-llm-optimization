@@ -1,0 +1,117 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 2,
+  "task_text": "统计sales.csv去重后已支付订单数量与总额，按order_id去重，写results/sales.json，仅用count和amount两个键。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B-t2",
+  "stop_reason": "model_finished",
+  "rounds": 4,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.08,
+      "ttft_s": 1.21,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 41,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 1.18,
+      "ttft_s": 0.26,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 60,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 6.5,
+      "ttft_s": 0.33,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 412,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 6.69,
+      "ttft_s": 0.31,
+      "finish": "stop",
+      "content_chars": 112,
+      "reasoning_chars": 391,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 16.5,
+  "tool_retries": 0,
+  "proxy_records": 4,
+  "prompt_n": [
+    535,
+    64,
+    116,
+    87
+  ],
+  "cache_n": [
+    216,
+    747,
+    807,
+    919
+  ],
+  "prefill_ms": [
+    1136.4,
+    237.7,
+    280.6,
+    273.5
+  ],
+  "decode_tps": [
+    43.53,
+    44.76,
+    45.22,
+    44.96
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "reasoning_tokens": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "answer_tokens": [
+    39,
+    42,
+    280,
+    288
+  ],
+  "est_reasoning_chars": [
+    41,
+    60,
+    412,
+    391
+  ],
+  "wall_ms": [
+    2062.0,
+    1156.0,
+    6500.0,
+    6672.0
+  ],
+  "cache_reuse": [
+    "部分复用",
+    "高比例复用",
+    "部分复用",
+    "高比例复用"
+  ],
+  "config_hash": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+  "at": "2026-09-27 22:30:14"
+}

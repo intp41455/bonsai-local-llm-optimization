@@ -1,0 +1,130 @@
+{
+  "fingerprint": {
+    "phase": "G7",
+    "started_at": "2026-09-28 04:19:31",
+    "proxy_v2_sha256": "5daab527777684283bdfb1e3458ca9095e803168c1b2f751eb739a9f88fbc664",
+    "proxy_v3_sha256": "6acfb9c5914595ec567f5b9d4db2da188e99c1bf635b36c017bc0532026340f5",
+    "harness_sha256": "f06852086dca5f5e2cf3e1cc624eee74af29888b6d42cdf4cc7431907ca97f6e",
+    "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+    "netstat_before": [
+      "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+      "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+    ],
+    "health_8080_before": 200,
+    "health_8081_before": 200,
+    "timings_bytes_before": 166598,
+    "timings_lines_before": 905,
+    "ended_at": "2026-09-28 04:19:33",
+    "netstat_after": [
+      "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+      "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+    ],
+    "health_8080_after": 200,
+    "health_8081_after": 200,
+    "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+    "timings_bytes_after": 166598,
+    "timings_lines_after": 905
+  },
+  "diff": {
+    "sent_bytes": 1917,
+    "A_bytes": 1973,
+    "B_bytes": 2563,
+    "sent_sha256": "d32afaad867c32737341f826906c767020ceb97274e8bd9937fe6c795fb6c22a",
+    "A_sha256": "5371e6c26c0fdabd45ae6be8236ca6d581c3981d0c0f82f5773ad0600107294b",
+    "B_sha256": "9523a606cf10df77c81f883e05b4230136dbb28582f04f15f61ba72e13c81d02",
+    "A_is_byte_identical_to_sent": false,
+    "B_is_byte_identical_to_sent": false,
+    "A_equals_B_bytes": false,
+    "top_keys_A": [
+      "chat_template_kwargs",
+      "max_tokens",
+      "messages",
+      "model",
+      "stream",
+      "temperature",
+      "tool_choice",
+      "tools"
+    ],
+    "top_keys_B": [
+      "chat_template_kwargs",
+      "max_tokens",
+      "messages",
+      "model",
+      "stream",
+      "temperature",
+      "tool_choice",
+      "tools"
+    ],
+    "top_keys_equal": true,
+    "top_level_equal_except_messages": {
+      "chat_template_kwargs": {
+        "A_eq_B": true,
+        "A_eq_sent": false
+      },
+      "max_tokens": {
+        "A_eq_B": true,
+        "A_eq_sent": true
+      },
+      "model": {
+        "A_eq_B": true,
+        "A_eq_sent": true
+      },
+      "stream": {
+        "A_eq_B": true,
+        "A_eq_sent": true
+      },
+      "temperature": {
+        "A_eq_B": true,
+        "A_eq_sent": true
+      },
+      "tool_choice": {
+        "A_eq_B": true,
+        "A_eq_sent": true
+      },
+      "tools": {
+        "A_eq_B": true,
+        "A_eq_sent": true
+      }
+    },
+    "n_messages": {
+      "A": 2,
+      "B": 2,
+      "sent": 2
+    },
+    "roles_equal": true,
+    "roles": [
+      "system",
+      "user"
+    ],
+    "messages_diff": [
+      {
+        "i": 0,
+        "role_A": "system",
+        "A_content_chars": 628,
+        "B_content_chars": 1212,
+        "equal": false
+      },
+      {
+        "i": 1,
+        "role_A": "user",
+        "A_content_chars": 59,
+        "B_content_chars": 59,
+        "equal": true
+      }
+    ],
+    "sys_A_chars": 628,
+    "sys_B_chars": 1212,
+    "sys_delta_chars": 584,
+    "B_sys_starts_with_A_sys": true,
+    "B_sys_appended_text": "\n\n[tool-error recovery policy -- local runtime]\n1) If the same tool returns the SAME error twice, never resend the identical call: fix the exact field the error names (the error message states the field and the required shape/example), or switch to a different tool or approach.\n2) Never blindly repeat an action with side effects (writing files, sending messages, submitting forms, state-changing commands); re-check the current state first.\n3) Tool arguments must match the declared schema exactly; a field declared as a string stays a string even when its content looks like JSON.\n",
+    "v3_TOOL_POLICY_BLOCK_chars": 584,
+    "B_sys_appended_equals_v3_TOOL_POLICY_BLOCK": true,
+    "tools_equal_A_B": true,
+    "tools_equal_A_sent": true,
+    "A_semantically_equals_sent": false,
+    "B_semantically_equals_sent": false
+  },
+  "sent_body_sha256": "d32afaad867c32737341f826906c767020ceb97274e8bd9937fe6c795fb6c22a",
+  "sent_body_file": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g7\\sent_body.json",
+  "A_byte_diff_chars": 56
+}

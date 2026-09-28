@@ -1,0 +1,218 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 8,
+  "task_text": "创建results/pelican.svg：鹈鹕骑自行车，车轮旋转、身体轻微起伏，单SVG不超过120行，无外部资源。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\A-s8-3",
+  "max_tokens": 8192,
+  "stop_reason": "max_rounds",
+  "rounds": 16,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 174.08,
+      "ttft_s": 1.26,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 12986,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 2,
+      "wall_s": 3.49,
+      "ttft_s": 2.72,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 49,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 3,
+      "wall_s": 3.8,
+      "ttft_s": 0.43,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 119,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 4,
+      "wall_s": 1.25,
+      "ttft_s": 0.58,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 29,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 5,
+      "wall_s": 4.09,
+      "ttft_s": 0.45,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 160,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 6,
+      "wall_s": 1.96,
+      "ttft_s": 0.57,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 145,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 7,
+      "wall_s": 2.95,
+      "ttft_s": 0.47,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 181,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 8,
+      "wall_s": 1.76,
+      "ttft_s": 0.48,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 140,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 9,
+      "wall_s": 1.94,
+      "ttft_s": 0.44,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 56,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 10,
+      "wall_s": 1.28,
+      "ttft_s": 0.47,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 50,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 11,
+      "wall_s": 1.87,
+      "ttft_s": 0.44,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 39,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 12,
+      "wall_s": 1.29,
+      "ttft_s": 0.48,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 50,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 13,
+      "wall_s": 1.94,
+      "ttft_s": 0.44,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 53,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 14,
+      "wall_s": 1.51,
+      "ttft_s": 0.48,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 100,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    },
+    {
+      "round": 15,
+      "wall_s": 1.87,
+      "ttft_s": 0.42,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 50,
+      "tool_calls": [
+        "write_file"
+      ],
+      "error": null
+    },
+    {
+      "round": 16,
+      "wall_s": 1.4,
+      "ttft_s": 0.48,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 75,
+      "tool_calls": [
+        "run_python"
+      ],
+      "error": null
+    }
+  ],
+  "wall_s": 206.7,
+  "tool_retries": 0,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 03:18:07"
+}

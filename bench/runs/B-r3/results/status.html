@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目状态</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans", sans-serif;
+    background: #f4f6f8;
+    color: #2c3e50;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+  .card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    max-width: 640px;
+    width: 100%;
+    padding: 32px;
+  }
+  h1 {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .code {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  h2 {
+    font-size: 18px;
+    margin: 24px 0 12px;
+    color: #34495e;
+  }
+  ol {
+    padding-left: 24px;
+  }
+  li {
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  li strong {
+    color: #2c3e50;
+  }
+  footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e6ea;
+    font-size: 13px;
+    color: #7f8c8d;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>项目状态</h1>
+    <p>项目代号：<span class="code">松针</span></p>
+
+    <h2>五条约束</h2>
+    <ol>
+      <li><strong>交付格式：</strong>Markdown</li>
+      <li><strong>禁止修改：</strong>source.txt</li>
+      <li><strong>输出目录：</strong>results</li>
+      <li><strong>预算单位：</strong>人民币元</li>
+      <li><strong>已完成：</strong>sales.csv 的去重已支付统计（结果位于 results/sales.json），不得改写已完成文件</li>
+    </ol>
+
+    <footer>单文件离线页面 · 无外部资源</footer>
+  </div>
+</body>
+</html>

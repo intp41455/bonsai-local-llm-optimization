@@ -1,0 +1,179 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 12,
+  "task_text": "创建results/summary.md，汇总sales.csv与logs/run.log统计，并列出实际生成文件路径。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\A-s1",
+  "stop_reason": "model_finished",
+  "rounds": 14,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.42,
+      "ttft_s": 1.05,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 211,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 2.44,
+      "ttft_s": 0.45,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 87,
+      "tool_calls": [
+        "list_dir",
+        "list_dir",
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 1.47,
+      "ttft_s": 0.71,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 56,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 7.4,
+      "ttft_s": 6.21,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 119,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 8.33,
+      "ttft_s": 0.44,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 96,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 8.8,
+      "ttft_s": 0.87,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 93,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 7,
+      "wall_s": 2.76,
+      "ttft_s": 0.91,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 253,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 8,
+      "wall_s": 9.13,
+      "ttft_s": 0.6,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 60,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 9,
+      "wall_s": 1.79,
+      "ttft_s": 0.92,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 67,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 10,
+      "wall_s": 2.43,
+      "ttft_s": 0.93,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 73,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 11,
+      "wall_s": 4.59,
+      "ttft_s": 0.49,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 660,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 12,
+      "wall_s": 2.02,
+      "ttft_s": 0.48,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 56,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 13,
+      "wall_s": 1.3,
+      "ttft_s": 0.52,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 41,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 14,
+      "wall_s": 4.7,
+      "ttft_s": 0.45,
+      "finish": "stop",
+      "content_chars": 286,
+      "reasoning_chars": 65,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 59.7,
+  "tool_retries": 0,
+  "proxy_records": 0,
+  "prompt_n": [],
+  "cache_n": [],
+  "prefill_ms": [],
+  "decode_tps": [],
+  "finish_reasons": [],
+  "reasoning_tokens": [],
+  "answer_tokens": [],
+  "est_reasoning_chars": [],
+  "wall_ms": [],
+  "cache_reuse": [],
+  "config_hash": null,
+  "at": "2026-09-28 01:17:29"
+}

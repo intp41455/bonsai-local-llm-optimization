@@ -1,0 +1,251 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 3,
+  "task_text": "修复calc.py的total_paid：仅汇总paid、按order_id去重；保留函数名并运行测试。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B",
+  "stop_reason": "model_finished",
+  "rounds": 14,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 1.95,
+      "ttft_s": 1.02,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 84,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 1.77,
+      "ttft_s": 0.3,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 52,
+      "tool_calls": [
+        "read_file",
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 2.36,
+      "ttft_s": 0.36,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 58,
+      "tool_calls": [
+        "read_file",
+        "read_file",
+        "list_dir"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 2.29,
+      "ttft_s": 0.43,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 114,
+      "tool_calls": [
+        "read_file",
+        "read_file"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 2.72,
+      "ttft_s": 0.89,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 83,
+      "tool_calls": [
+        "read_file",
+        "read_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 2.86,
+      "ttft_s": 1.03,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 198,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 7,
+      "wall_s": 1.27,
+      "ttft_s": 0.29,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 66,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 8,
+      "wall_s": 11.77,
+      "ttft_s": 6.36,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 290,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 9,
+      "wall_s": 2.19,
+      "ttft_s": 0.44,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 167,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 10,
+      "wall_s": 5.26,
+      "ttft_s": 0.34,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 744,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 11,
+      "wall_s": 12.35,
+      "ttft_s": 0.34,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 144,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 12,
+      "wall_s": 3.0,
+      "ttft_s": 0.92,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 205,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 13,
+      "wall_s": 1.3,
+      "ttft_s": 0.3,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 51,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 14,
+      "wall_s": 6.16,
+      "ttft_s": 0.46,
+      "finish": "stop",
+      "content_chars": 385,
+      "reasoning_chars": 24,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 57.3,
+  "tool_retries": 3,
+  "proxy_records": 14,
+  "prompt_n": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "cache_n": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "prefill_ms": [
+    965.2,
+    241.8,
+    311.1,
+    376.5,
+    825.3,
+    988.9,
+    226.0,
+    6302.6,
+    386.3,
+    294.5,
+    298.1,
+    859.8,
+    255.2,
+    404.1
+  ],
+  "decode_tps": [
+    44.03,
+    45.6,
+    45.68,
+    44.05,
+    43.23,
+    43.21,
+    44.48,
+    41.59,
+    40.53,
+    41.86,
+    40.89,
+    39.3,
+    39.73,
+    39.51
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "at": "2026-09-27 21:47:04"
+}

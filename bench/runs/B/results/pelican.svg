@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#dceeff"/>
+  <rect y="255" width="400" height="45" fill="#b9b9b9"/>
+  <line x1="0" y1="277" x2="400" y2="277" stroke="#fff" stroke-width="4" stroke-dasharray="20 15"/>
+  <defs>
+    <g id="wheel">
+      <circle r="45" fill="#fff" stroke="#2b2b2b" stroke-width="5"/>
+      <g stroke="#2b2b2b" stroke-width="3">
+        <line x1="-45" y1="0" x2="45" y2="0"/>
+        <line x1="0" y1="-45" x2="0" y2="45"/>
+        <line x1="-32" y1="-32" x2="32" y2="32"/>
+        <line x1="-32" y1="32" x2="32" y2="-32"/>
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="0.8s" repeatCount="indefinite"/>
+      </g>
+      <circle r="7" fill="#2b2b2b"/>
+    </g>
+  </defs>
+  <use href="#wheel" x="130" y="210"/>
+  <use href="#wheel" x="270" y="210"/>
+  <g stroke="#7a1f1f" stroke-width="6" stroke-linecap="round" fill="none">
+    <line x1="130" y1="210" x2="195" y2="150"/>
+    <line x1="195" y1="150" x2="270" y2="210"/>
+    <line x1="195" y1="150" x2="200" y2="185"/>
+    <line x1="200" y1="185" x2="200" y2="135"/>
+    <line x1="200" y1="135" x2="218" y2="124"/>
+  </g>
+  <g transform="translate(200,185)">
+    <g>
+      <line x1="0" y1="0" x2="22" y2="0" stroke="#2b2b2b" stroke-width="4"/>
+      <circle cx="22" cy="0" r="4" fill="#2b2b2b"/>
+      <line x1="0" y1="0" x2="-22" y2="0" stroke="#2b2b2b" stroke-width="4"/>
+      <circle cx="-22" cy="0" r="4" fill="#2b2b2b"/>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="0.8s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  <g id="pelican">
+    <animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="0.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <path d="M158 148 L182 186" stroke="#f5d9a8" stroke-width="7" stroke-linecap="round"/>
+    <path d="M208 148 L200 186" stroke="#f5d9a8" stroke-width="7" stroke-linecap="round"/>
+    <ellipse cx="190" cy="118" rx="42" ry="30" fill="#f7f1e3" stroke="#e0d5bd" stroke-width="3"/>
+    <path d="M150 110 Q138 132 166 142 Q182 136 176 120 Z" fill="#e8e0c8" stroke="#d8cdb2" stroke-width="2"/>
+    <circle cx="228" cy="92" r="17" fill="#f7f1e3" stroke="#e0d5bd" stroke-width="3"/>
+    <polygon points="243,86 292,94 243,104" fill="#f2b134" stroke="#d99a1e" stroke-width="2"/>
+    <circle cx="233" cy="87" r="3" fill="#2b2b2b"/>
+  </g>
+</svg>

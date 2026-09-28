@@ -1,0 +1,870 @@
+[
+ {
+  "name": "agent-browser-e2e-verify",
+  "overrideKey": "agent-browser-e2e-verify",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\agent-browser-e2e-verify\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Agent 开发技能集",
+  "overrideKey": "agent-dev-skills",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\agent-dev-skills\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "技能仓库 拉取执行 依赖镜像",
+  "overrideKey": "agentic-awesome-skills",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\agentic-awesome-skills\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "ima copilot 平台学习与实操指南",
+  "overrideKey": "agi-action-copilot",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\agi-action-copilot\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "AI味去除器",
+  "overrideKey": "ai-text-humanizer",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\ai-text-humanizer\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "语音转写整理",
+  "overrideKey": "audio-transcript-format",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\audio-transcript-format\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "行为面试模拟教练",
+  "overrideKey": "behavioral-interview-simulator",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\behavioral-interview-simulator\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "B站视频总结",
+  "overrideKey": "bilibili-video-summary",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\bilibili-video-summary\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "browser-e2e-static-site",
+  "overrideKey": "browser-e2e-static-site",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\browser-e2e-static-site\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "浏览器自动化",
+  "overrideKey": "browser-use",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\browser-use\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "商务 HTML 演示文稿",
+  "overrideKey": "business-html-deck",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\business-html-deck\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "动动嘴改模型",
+  "overrideKey": "byom-config",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\byom-config\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "canvas-design（视觉设计）",
+  "overrideKey": "canvas-design",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\canvas-design\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "职业能力测评",
+  "overrideKey": "career-ability-assessment",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\career-ability-assessment\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "职业锚测评",
+  "overrideKey": "career-anchor",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\career-anchor\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "职业性格测评",
+  "overrideKey": "career-personality",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\career-personality\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "信息图制作",
+  "overrideKey": "chart-infographic",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\chart-infographic\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "数据可视化报告生成",
+  "overrideKey": "chart-visualization",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\chart-visualization\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "群聊转待办",
+  "overrideKey": "chat-to-todo",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\chat-to-todo\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "CI/CD 自动化",
+  "overrideKey": "ci-cd-and-automation",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\ci-cd-and-automation\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "腾讯云CloudBase",
+  "overrideKey": "cloudbase",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\cloudbase\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Cloudflare",
+  "overrideKey": "cloudflare",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\cloudflare\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "中文OCR",
+  "overrideKey": "cn-ocr",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\cn-ocr\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "数据洞察分析师",
+  "overrideKey": "data-insight-analyst",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\data-insight-analyst\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "数据库连接器",
+  "overrideKey": "db-connector",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\db-connector\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "去除AI味与提示词精简",
+  "overrideKey": "de-ai-writing",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\de-ai-writing\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "深度研究智能体",
+  "overrideKey": "deep-research-agent",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\deep-research-agent\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "destiny-master",
+  "overrideKey": "destiny-master",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\destiny-master\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "钉钉套件",
+  "overrideKey": "dingtalk-unified",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\dingtalk-unified\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "文档智能比对",
+  "overrideKey": "doc-compare",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\doc-compare\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "doc-format-validator",
+  "overrideKey": "doc-format-validator",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\doc-format-validator\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "文档处理体系",
+  "overrideKey": "document-processing-system",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\document-processing-system\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "docx-format-clone",
+  "overrideKey": "docx-format-clone",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\docx-format-clone\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "EdgeOne Pages Deploy",
+  "overrideKey": "edgeone-pages-deploy",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\edgeone-pages-deploy\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Excel 数据分析与自动化专家",
+  "overrideKey": "excel-pro",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\excel-pro\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Excel 表格处理",
+  "overrideKey": "excel-xlsx",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\excel-xlsx\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "经验循环",
+  "overrideKey": "experience-loop",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\experience-loop\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "free-api-wiring",
+  "overrideKey": "free-api-wiring",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\free-api-wiring\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "前端设计",
+  "overrideKey": "frontend-design",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\frontend-design\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "前端UI工程",
+  "overrideKey": "frontend-ui-engineering",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\frontend-ui-engineering\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "全栈开发",
+  "overrideKey": "fullstack-dev",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\fullstack-dev\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "github",
+  "overrideKey": "github",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\github\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "github-push-via-api",
+  "overrideKey": "github-push-via-api",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\github-push-via-api\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "沙箱内拉取 GitHub 仓库",
+  "overrideKey": "github-sandbox-fetch",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\github-sandbox-fetch\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Git 工作流",
+  "overrideKey": "github-workflow",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\github-workflow\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "职业兴趣测评",
+  "overrideKey": "holland-career-assessment",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\holland-career-assessment\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "HTML to PDF",
+  "overrideKey": "html-to-pdf",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\html-to-pdf__skillhub\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "html2pdf",
+  "overrideKey": "html2pdf",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\html2pdf\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "ima-skill",
+  "overrideKey": "ima-skill",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\ima-skill\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "腾讯ima",
+  "overrideKey": "ima-skills",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\ima-skills\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "图片文字识别 OCR",
+  "overrideKey": "image-ocr",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\image-ocr\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Infographic Maker",
+  "overrideKey": "infographic-maker",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\infographic-maker\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "办公高效技能",
+  "overrideKey": "办公高效技能",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\jm-jsjkxyjs02-cyr-406__skillhub\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "腾讯乐享",
+  "overrideKey": "lexiang-knowledge-base",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\lexiang-knowledge-base\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "llamacpp-vram-tuning",
+  "overrideKey": "llamacpp-vram-tuning",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\llamacpp-vram-tuning\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "本地文档与图片解析",
+  "overrideKey": "local-mineru",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\local-mineru\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "本地NPU文字识别",
+  "overrideKey": "local-ocr-npu",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\local-ocr-npu\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "长文本写作引擎",
+  "overrideKey": "long-text-writer",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\long-text-writer\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Excel 公式与数据整理",
+  "overrideKey": "lynxce-excel-helper",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\lynxce-excel-helper\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Skill 制作助手",
+  "overrideKey": "make-skill",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\make-skill\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "多平台内容采集助手",
+  "overrideKey": "media-extract",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\media-extract\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "月度绩效考核表生成",
+  "overrideKey": "monthly-kpi-form",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\monthly-kpi-form\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "OmniRoute AI 网关",
+  "overrideKey": "omniroute__skillhub",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\omniroute__skillhub\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "网页转PDF导出（PDF/Word/MD/HTML）",
+  "overrideKey": "pdf-web-export",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\pdf-web-export\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "绩效考核评语生成器",
+  "overrideKey": "performance-review-comments",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\performance-review-comments\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "述职与绩效考核",
+  "overrideKey": "performance-review-kit",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\performance-review-kit\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "海报生成器（社媒封面/分享卡/OG图）",
+  "overrideKey": "poster-maker",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\poster-maker\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "PowerBI运营分析",
+  "overrideKey": "powerbi-operations-analysis",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\powerbi-operations-analysis\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "杂志风网页PPT",
+  "overrideKey": "ppt-deck-cn",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\ppt-deck-cn\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "PPT设计",
+  "overrideKey": "ppt-design",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\ppt-design\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "私有化AI部署速查",
+  "overrideKey": "private-ai-deploy",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\private-ai-deploy\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "提示词生成",
+  "overrideKey": "prompt-generation",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\prompt-generation\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "無心堂起名",
+  "overrideKey": "qiming",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\qiming\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "简历诊断",
+  "overrideKey": "resume-diagnosis",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\resume-diagnosis\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "自我修正",
+  "overrideKey": "self-correction",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\self-correction__skillhub\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "发布上线",
+  "overrideKey": "shipping-and-launch",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\shipping-and-launch\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "技能发现与选型索引",
+  "overrideKey": "skill-discovery-index",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\skill-discovery-index\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "技能项目开发文档",
+  "overrideKey": "skill-project-dev-docs",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\skill-project-dev-docs\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "超级skill助手",
+  "overrideKey": "super-skill-helper",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\super-skill-helper__skillhub\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "瑞士风演示文稿",
+  "overrideKey": "swiss-deck-generator",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\swiss-deck-generator\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "ternary-gguf-8gb-deploy",
+  "overrideKey": "ternary-gguf-8gb-deploy",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\ternary-gguf-8gb-deploy\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "省 Token 任务路由器",
+  "overrideKey": "token-efficient-task-router",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\token-efficient-task-router\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "技能编排总纲",
+  "overrideKey": "using-agent-skills",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\using-agent-skills\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "视频内容识别与字幕提取",
+  "overrideKey": "video-content-extraction",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\video-content-extraction\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "视频截帧",
+  "overrideKey": "video-frames",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\video-frames\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "微信聊天分析助手",
+  "overrideKey": "wechat-analyzer",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\wechat-analyzer\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "微信WCDB本地解密与消息提取",
+  "overrideKey": "wechat-wcdb-local-extract",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\wechat-wcdb-local-extract\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Word 智能排版助手",
+  "overrideKey": "word-formatter__skillhub",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\word-formatter__skillhub\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "WorkBuddy专家生成器",
+  "overrideKey": "workbuddy-expert-generator",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\workbuddy-expert-generator\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "workbuddy-prompt-slimming",
+  "overrideKey": "workbuddy-prompt-slimming",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\workbuddy-prompt-slimming\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "自然改写",
+  "overrideKey": "write",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\write\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "微信数据查询 CLI（Windows 11）",
+  "overrideKey": "wx-cli-win",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\wx-cli-win\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Excel 表格处理",
+  "overrideKey": "xlsx",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\xlsx\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Office 文档引擎",
+  "overrideKey": "zagens-office",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\zagens-office\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "后端模式",
+  "overrideKey": "zxh-backend-patterns",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\zxh-backend-patterns\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "代码库上手",
+  "overrideKey": "zxh-codebase-onboarding",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\zxh-codebase-onboarding\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "Web 应用测试",
+  "overrideKey": "zxh-webapp-testing",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\zxh-webapp-testing\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "前端开发",
+  "overrideKey": "frontend-dev",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\前端开发\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "可视化拆书助手",
+  "overrideKey": "可视化拆书助手",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\可视化拆书助手\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "腾讯文档智能页面 · Smart Page",
+  "overrideKey": "smart-page",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\腾讯文档智能页面 · Smart Page\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "高品质前端设计",
+  "overrideKey": "impeccable",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\高品质前端设计\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "buddy-image-processing",
+  "overrideKey": "buddy-image-processing",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\buddy-image-processing\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "buddy-multimodal-generation",
+  "overrideKey": "buddy-multimodal-generation",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\buddy-multimodal-generation\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "cloud-service",
+  "overrideKey": "cloud-service",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\cloud-service\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "expert-manager",
+  "overrideKey": "expert-manager",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\expert-manager\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "geo-map-compliance-guard",
+  "overrideKey": "geo-map-compliance-guard",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\geo-map-compliance-guard\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "library",
+  "overrideKey": "library",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\library\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "marketplace-skill-installer",
+  "overrideKey": "marketplace-skill-installer",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\marketplace-skill-installer\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "recommend-connectors",
+  "overrideKey": "recommend-connectors",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\recommend-connectors\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "recommend-experts",
+  "overrideKey": "recommend-experts",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\recommend-experts\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "发布为应用",
+  "overrideKey": "发布为应用",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\sites\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "skill-creator",
+  "overrideKey": "skill-creator",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\skill-creator\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "tencent-docs-routing",
+  "overrideKey": "tencent-docs-routing",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\tencent-docs-routing\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "tencent-local-office-edit",
+  "overrideKey": "tencent-local-office-edit",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\tencent-local-office-edit\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "wb-finance-skill",
+  "overrideKey": "wb-finance-skill",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\wb-finance-skill\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "ppt-implement",
+  "overrideKey": "ppt-implement",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\plugins\\marketplaces\\cb_teams_marketplace\\plugins\\ppt-implement\\skills\\ppt-implement\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "tencent-docs-sheet-generation",
+  "overrideKey": "tencent-docs-sheet-generation",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\builtin-plugins\\sheetagent\\skills\\excel-generation\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "tencent-docs-sheetagent",
+  "overrideKey": "tencent-docs-sheetagent",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\builtin-plugins\\sheetagent\\skills\\excel-handler\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "tencent-docx",
+  "overrideKey": "tencent-docx",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\builtin-plugins\\tencent-docx\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "agent-browser",
+  "overrideKey": "agent-browser",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\plugins\\marketplaces\\codebuddy-plugins-official\\plugins\\agent-browser\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "tencent-docs",
+  "overrideKey": "tencent-docs",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\builtin-plugins\\tencent-docs-plugin\\skills\\tencent-docs\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "tencent-saas-docs",
+  "overrideKey": "tencent-saas-docs",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\builtin-plugins\\tencent-docs-plugin\\skills\\tencent-saas-docs\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "tencent-pptx",
+  "overrideKey": "tencent-pptx",
+  "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\builtin-plugins\\tencent-pptx\\skills\\tencent-pptx\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ },
+ {
+  "name": "ima-mcp",
+  "overrideKey": "ima-mcp",
+  "filePath": "C:\\Users\\intpj\\.workbuddy\\plugins\\marketplaces\\workbuddy-connector-plugins-official\\connectors\\ima-mcp\\skills\\ima-mcp\\SKILL.md",
+  "disable": false,
+  "disableModelInvocation": false
+ }
+]

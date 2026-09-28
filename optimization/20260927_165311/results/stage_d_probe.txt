@@ -1,0 +1,58 @@
+阶段 D 探测结果  2026-09-27 18:45:31 ~ 2026-09-27 18:57:56
+build_info=b181-9ef3205  起止 busy=False
+
+[D2] /apply-template 参数优先级（无需 GPU，文本判定）
+  base_no_param                              status=200  xhigh行/无low行/尾部形态未识别
+  toplevel_xhigh                             status=200  xhigh行/无low行/尾部形态未识别
+  toplevel_medium                            status=200  无xhigh行/无low行/尾部形态未识别
+  toplevel_low                               status=200  无xhigh行/low行/尾部形态未识别
+  kwargs_medium                              status=200  无xhigh行/无low行/尾部形态未识别
+  kwargs_low                                 status=200  无xhigh行/low行/尾部形态未识别
+  toplevel_none                              status=200  无xhigh行/无low行/尾部形态未识别
+  kwargs_enable_thinking_false               status=200  无xhigh行/无low行/尾部形态未识别
+  conflict_toplevel_xhigh__kwargs_low        status=200  xhigh行/无low行/尾部形态未识别
+  conflict_toplevel_none__kwargs_xhigh       status=200  无xhigh行/无low行/尾部形态未识别
+  conflict_toplevel_none__kwargs_thinking_true status=200  xhigh行/无low行/尾部形态未识别
+  conflict_toplevel_medium__kwargs_thinking_false status=200  无xhigh行/无low行/尾部形态未识别
+  invalid_kwargs_none                        status=500  无xhigh行/无low行/尾部形态未识别
+  invalid_toplevel_high                      status=500  无xhigh行/无low行/尾部形态未识别
+
+[D1] 预算对照（同一短题 / seed=1234 / cap=512）
+  run                  reason_t   cont_t   finish  total_ms  bud_msg   usage_ct
+  nat_nobudget              383        3     stop  205844.0    False        389
+  bud32                      31      252     stop  152812.0    False        286
+  bud128                    128       10     stop   72641.0    False        141
+  bud0                      383        3     stop  186422.0    False        389
+  bud32_msg                  37        3     stop   15469.0     True         43
+  alias_thinking_32          31      252     stop  111437.0    False        286
+
+[判定]
+  budget_supported                       False
+  nat_reasoning_tokens                   383
+  bud0_reasoning_tokens                  383
+  bud32_reasoning_tokens                 31
+  bud128_reasoning_tokens                128
+  alias_reasoning_tokens                 31
+  bud32_below_half_of_nat                True
+  alias_equals_named_field               True
+  d2_top_level_overrides_kwargs          True
+  d2_top_none_disables_thinking          False
+  d2_kwargs_false_disables_thinking      False
+  d2_template_default_is_xhigh           True
+  d2_medium_injects_nothing              True
+  d2_template_rejects_none_as_effort     False
+  reason                                 natural=383, budget0=383 -> 请求级预算未证明生效
+
+[证据摘录]
+  -- nat_nobudget reasoning_tail="nce? They ask final number. I'll output just 128 maybe. But final answer maybe with minimal. Use Chinese? final number.\n"
+     content_tail='128'
+  -- bud32 reasoning_tail='We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,'
+     content_tail='28/3 rem2, /5 rem3, /7 rem2 (126 rem2). So answer 128.\n\nNeed final only maybe include brief. Final number.\n</think>\n\n128'
+  -- bud128 reasoning_tail=" 2 mod 3, ≡3 mod5, ≡2 mod7, N<200 max.\n\nLet's compute. Conditions: mod3 2; mod7 2; mod5 3. Combine first and third: N ≡2"
+     content_tail='满足条件的最大数量是 **167**。'
+  -- bud0 reasoning_tail="nce? They ask final number. I'll output just 128 maybe. But final answer maybe with minimal. Use Chinese? final number.\n"
+     content_tail='128'
+  -- bud32_msg reasoning_tail=' User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,Now produce the complete answer.'
+     content_tail='157'
+  -- alias_thinking_32 reasoning_tail='We need solve problem. User Chinese: A box has some apples. If take 3 each time, leftover 2; take 5 each time,'
+     content_tail='28/3 rem2, /5 rem3, /7 rem2 (126 rem2). So answer 128.\n\nNeed final only maybe include brief. Final number.\n</think>\n\n128'

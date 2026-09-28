@@ -1,0 +1,98 @@
+{
+  "phase": "G8",
+  "design": "same v3 script; only tools.error_policy differs (P=true / Q=false)",
+  "started_at": "2026-09-28 04:30:39",
+  "harness_sha256": "f06852086dca5f5e2cf3e1cc624eee74af29888b6d42cdf4cc7431907ca97f6e",
+  "check_tasks_sha256": "ae549ca367fff01cb12ebaf657786d772251e918eea4d468cb6f1166c3fd234b",
+  "proxy_v3_sha256": "6acfb9c5914595ec567f5b9d4db2da188e99c1bf635b36c017bc0532026340f5",
+  "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "config_extra_args": [
+    "--cache-ram",
+    "1024"
+  ],
+  "tasks": [
+    8,
+    3,
+    6,
+    11
+  ],
+  "rounds": [
+    1,
+    2
+  ],
+  "max_tokens": 8192,
+  "max_rounds": 16,
+  "time_cap": 1500,
+  "port_P": 8084,
+  "port_Q": 8085,
+  "upstream": 8081,
+  "prod_reqlog_lines_before": 656,
+  "prod_timings_lines_before": 905,
+  "netstat_before": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "arms": {
+    "P": {
+      "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g8\\P\\config.json",
+      "config_sha256": "a622c886c50cc7d0e9566766a855bfba21b46af3924b9fe42a759ebcd9c25ad7",
+      "changed_top_keys": [
+        "logging",
+        "prewarm",
+        "proxy"
+      ],
+      "tools_diff_keys": [],
+      "behavior_unchanged_except_tools": true,
+      "error_policy": true,
+      "backend_extra_args": [
+        "--cache-ram",
+        "1024"
+      ],
+      "prewarm_enabled": false
+    },
+    "Q": {
+      "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g8\\Q\\config.json",
+      "config_sha256": "09f1d35b157c2d6292495bdaf08c8439956e04fd0db5e39213ff70b78312222c",
+      "changed_top_keys": [
+        "logging",
+        "prewarm",
+        "proxy",
+        "tools"
+      ],
+      "tools_diff_keys": [
+        "error_policy"
+      ],
+      "behavior_unchanged_except_tools": true,
+      "error_policy": false,
+      "backend_extra_args": [
+        "--cache-ram",
+        "1024"
+      ],
+      "prewarm_enabled": false
+    }
+  },
+  "ended_at": "2026-09-28 04:54:06",
+  "netstat_after": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "prod_reqlog_lines_after": 663,
+  "prod_timings_lines_after": 905
+}

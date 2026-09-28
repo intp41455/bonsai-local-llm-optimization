@@ -1,0 +1,177 @@
+# -*- coding: utf-8 -*-
+"""阶段 B 验收测试（离线，不启动/不重启/不停服务）
+
+覆盖方案验收项：
+  - 所有启动入口使用同一配置（无残留硬编码参数漂移）
+  - “忙”判定正确（忙时不探活、不重启）
+  - stop 在忙时拒绝（不杀用户任务）
+  - 在线进程命令行与配置生成的参数零差异（配置真的权威）
+  - 进程身份核对能区分“本项目进程”和“未知进程”
+"""
+import importlib.util
+import io
+import json
+import os
+import sys
+
+DEMO = r"D:\Bonsai-demo"
+LAUNCHER = os.path.join(DEMO, "launcher", "bonsai_launcher.py")
+CFG = os.path.join(DEMO, "config", "bonsai-agent.json")
+
+PASS, FAIL = [], []
+
+
+def check(name, cond, detail=""):
+    (PASS if cond else FAIL).append(name)
+    print("  [%s] %s%s" % ("PASS" if cond else "FAIL", name,
+                           ("  <- " + str(detail)) if (detail and not cond) else ""))
+
+
+def load_launcher():
+    spec = importlib.util.spec_from_file_location("bl", LAUNCHER)
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
+def main():
+    L = load_launcher()
+    cfg = L.load_config(CFG)
+    print("== 阶段 B 验收测试 ==")
+    print()
+
+    # 1) 权威配置路径
+    check("launcher 默认配置 = config\\bonsai-agent.json",
+          os.path.normcase(L.DEFAULT_CONFIG) == os.path.normcase(CFG), L.DEFAULT_CONFIG)
+
+    # 2) 忙判定
+    check("slots_busy: list[{is_processing:False}] -> False",
+          L.slots_busy([{"is_processing": False}]) is False)
+    check("slots_busy: list[{is_processing:True}] -> True",
+          L.slots_busy([{"is_processing": True}]) is True)
+    check("slots_busy: dict{is_processing:True} -> True",
+          L.slots_busy({"is_processing": True}) is True)
+    check("slots_busy: None -> False", L.slots_busy(None) is False)
+
+    # 3) 忙时拒绝停止（不杀用户任务）
+    saved_api = L.api
+    L.api = lambda base, path, timeout=5: [{"is_processing": True}]
+    rc = L.cmd_stop(cfg)
+    L.api = saved_api
+    check("忙时 cmd_stop 返回 4（拒绝停止）", rc == 4, "rc=%s" % rc)
+
+    # 4) 进程身份核对
+    live_backend_cl = (r"D:\Bonsai-demo\dist\bonsai2-8gb-combo\bin\llama-server.exe "
+                       r"-m D:/Bonsai-demo/models/bonsai2-gguf/27B/"
+                       r"Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf -ngl 99 -fa on -np 1 "
+                       r"-c 65536 -b 2048 -ub 512 -ctk q4_0 -ctv q4_0 --backend-sampling "
+                       r"--jinja --metrics --host 127.0.0.1 --port 8081 --alias bonsai-2-27b")
+    ours = {"ExecutablePath": os.path.join(DEMO, r"dist\bonsai2-8gb-combo\bin\llama-server.exe"),
+            "CommandLine": live_backend_cl}
+    check("is_our_backend: 真实在线命令行 -> True", L.is_our_backend(ours, cfg) is True)
+    foreign = {"ExecutablePath": r"C:\Windows\System32\notepad.exe",
+               "CommandLine": r"C:\Windows\System32\notepad.exe foo.txt"}
+    check("is_our_backend: 未知进程 -> False", L.is_our_backend(foreign, cfg) is False)
+    wrong_port = dict(ours)
+    wrong_port["CommandLine"] = live_backend_cl.replace("--port 8081", "--port 9099")
+    check("is_our_backend: 端口不符 -> False", L.is_our_backend(wrong_port, cfg) is False)
+
+    live_proxy_cl = (r"C:\Users\intpj\AppData\Local\Programs\Python\Python310\python.exe "
+                     r"-u proxy/bonsai_proxy.py --port 8080 --upstream 8081 --effort medium")
+    proxy_info = {"ExecutablePath": r"C:\Users\intpj\AppData\Local\Programs\Python\Python310\python.exe",
+                  "CommandLine": live_proxy_cl}
+    check("is_our_proxy: 真实在线命令行 -> True", L.is_our_proxy(proxy_info, cfg) is True)
+
+    # 5) 零漂移：真实在线命令行 vs 配置生成的参数
+    d = L.cmdline_diff(live_backend_cl, L.backend_args(cfg))
+    check("后端 在线 vs 配置 无差异", L.diff_empty(d), d)
+    d = L.cmdline_diff(live_proxy_cl, L.proxy_args(cfg))
+    check("代理 在线 vs 配置 无差异", L.diff_empty(d), d)
+
+    # 6) 差异检测确实有效（把 -c 改掉必须被检出）
+    drift_cl = live_backend_cl.replace("-c 65536", "-c 32768")
+    d = L.cmdline_diff(drift_cl, L.backend_args(cfg))
+    check("漂移检测: -c 32768 能被检出",
+          ("32768" in d.get("only_online", [])) and ("65536" in d.get("only_config", [])), d)
+
+    # 7) 入口脚本不含残留硬编码漂移
+    entries = [
+        os.path.join(DEMO, r"dist\bonsai2-8gb-combo\start_all_agent.bat"),
+        os.path.join(DEMO, r"dist\bonsai2-8gb-combo\start_bonsai_8gb_agent.bat"),
+        os.path.join(DEMO, r"dist\bonsai2-8gb-combo\start_capture.bat"),
+        os.path.join(DEMO, r"dist\bonsai2-8gb-combo\warm_kv.bat"),
+        os.path.join(DEMO, r"dist\bonsai2-8gb-combo\start-bonsai.ps1"),
+        os.path.join(DEMO, "serve.py"),
+        os.path.join(DEMO, "_restart_stack.py"),
+        os.path.join(DEMO, "warm_kv.py"),
+    ]
+    drift_tokens = ["--reasoning-budget 20480", "-n 24576", "-c 32768",
+                    "--temp 1.0", "--spec-type", "taskkill /F /IM", "KILLPORT"]
+    bad = []
+    for p in entries:
+        raw_lines = io.open(p, encoding="utf-8", errors="ignore").read().splitlines()
+        code_lines = []
+        in_doc = False
+        for ln in raw_lines:
+            s = ln.strip()
+            if s.count('"""') % 2 == 1:
+                in_doc = not in_doc
+                continue          # 文档字符串边界
+            if in_doc:
+                continue          # 文档字符串内部：允许记录“删掉了哪些旧参数”
+            if s.startswith("REM ") or s.startswith("REM\t") or s.startswith("rem ") \
+                    or s.startswith("::") or s.startswith("#") or s == "REM":
+                continue          # 注释
+            code_lines.append(ln)
+        txt = "\n".join(code_lines)
+        for t in drift_tokens:
+            if t in txt:
+                bad.append("%s : %s" % (os.path.basename(p), t))
+    check("8 个入口脚本(注释除外)无残留硬编码参数/盲杀", not bad, bad)
+
+    # 8) GBK BAT 可正确解码（中文不乱码）
+    bat = os.path.join(DEMO, r"dist\bonsai2-8gb-combo\start_all_agent.bat")
+    raw = open(bat, "rb").read()
+    gbk_txt = raw.decode("gbk", "strict")
+    check("start_all_agent.bat 以 GBK 解码成功且含中文标题",
+          "统一配置" in gbk_txt, gbk_txt[:80])
+
+    # 9) 预算只登记不注入（阶段 B 不应改变在线行为）
+    pol = (cfg.get("budget") or {}).get("policy") or {}
+    check("budget.policy 两项均为 false（阶段 B 不注入预算）",
+          pol.get("apply_request_max_tokens") is False
+          and pol.get("apply_thinking_budget") is False, pol)
+
+    # 10) 忙时 up 不得重启（逻辑检查：diff 为空 + 忙 -> 不进入重启分支）
+    check("代理参数含 --effort medium（与在线一致）",
+          "--effort" in L.proxy_args(cfg) and "medium" in L.proxy_args(cfg),
+          L.proxy_args(cfg))
+    check("代理参数不含 --warm（预热只由 launcher 做一次）",
+          "--warm" not in L.proxy_args(cfg), L.proxy_args(cfg))
+
+    # 11) 预热管线只读校验：能选到候选请求体，且档位与在线一致
+    spec = importlib.util.spec_from_file_location("px", cfg["proxy"]["script"])
+    px = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(px)
+    cand = px.pick_newest_capture((cfg.get("prewarm") or {}).get("min_chars") or 20000)
+    check("预热候选请求体可选取（存在且为大请求）",
+          bool(cand) and os.path.exists(cand) and os.path.getsize(cand) >= 20000,
+          cand)
+    eff_file = os.path.join(DEMO, "capture", "effort.txt")
+    live_eff = io.open(eff_file, encoding="utf-8").read().strip() if os.path.exists(eff_file) else None
+    check("预热档位与在线生效档位一致（%s）" % cfg["thinking"]["default_effort"],
+          live_eff == cfg["thinking"]["default_effort"],
+          "capture/effort.txt=%r" % live_eff)
+
+    print()
+    print("== 结果: %d 通过 / %d 失败 ==" % (len(PASS), len(FAIL)))
+    if FAIL:
+        print("失败项:")
+        for f in FAIL:
+            print("  - " + f)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,159 @@
+{
+  "harness": "local-script (NOT WorkBuddy/Pi; §14.3 A/B/C 对照不适用)",
+  "task": 4,
+  "task_text": "编写convert.py，将sales.csv转为results/sales.jsonl，保留全部原始行和字段，运行脚本。",
+  "run_dir": "D:\\Bonsai-demo\\bench\\runs\\B-r3",
+  "stop_reason": "model_finished",
+  "rounds": 6,
+  "detail_rounds": [
+    {
+      "round": 1,
+      "wall_s": 2.48,
+      "ttft_s": 1.53,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 61,
+      "tool_calls": [
+        "list_dir"
+      ]
+    },
+    {
+      "round": 2,
+      "wall_s": 1.24,
+      "ttft_s": 0.33,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 60,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 3,
+      "wall_s": 4.73,
+      "ttft_s": 0.35,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 139,
+      "tool_calls": [
+        "write_file"
+      ]
+    },
+    {
+      "round": 4,
+      "wall_s": 1.32,
+      "ttft_s": 0.48,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 22,
+      "tool_calls": [
+        "run_python"
+      ]
+    },
+    {
+      "round": 5,
+      "wall_s": 1.12,
+      "ttft_s": 0.3,
+      "finish": "tool_calls",
+      "content_chars": 0,
+      "reasoning_chars": 26,
+      "tool_calls": [
+        "read_file"
+      ]
+    },
+    {
+      "round": 6,
+      "wall_s": 3.85,
+      "ttft_s": 0.47,
+      "finish": "stop",
+      "content_chars": 249,
+      "reasoning_chars": 98,
+      "tool_calls": []
+    }
+  ],
+  "wall_s": 14.8,
+  "tool_retries": 0,
+  "proxy_records": 6,
+  "prompt_n": [
+    526,
+    73,
+    116,
+    195,
+    58,
+    197
+  ],
+  "cache_n": [
+    216,
+    738,
+    807,
+    919,
+    1110,
+    1164
+  ],
+  "prefill_ms": [
+    1062.9,
+    271.3,
+    296.5,
+    418.3,
+    236.4,
+    434.4
+  ],
+  "decode_tps": [
+    42.0,
+    45.3,
+    45.52,
+    41.86,
+    45.05,
+    45.35
+  ],
+  "finish_reasons": [
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "tool_calls",
+    "stop"
+  ],
+  "reasoning_tokens": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "answer_tokens": [
+    41,
+    42,
+    200,
+    36,
+    38,
+    154
+  ],
+  "est_reasoning_chars": [
+    61,
+    60,
+    139,
+    22,
+    26,
+    98
+  ],
+  "wall_ms": [
+    2484.0,
+    1219.0,
+    4703.0,
+    1297.0,
+    1094.0,
+    3844.0
+  ],
+  "cache_reuse": [
+    "部分复用",
+    "高比例复用",
+    "部分复用",
+    "部分复用",
+    "高比例复用",
+    "部分复用"
+  ],
+  "config_hash": "0b0d2806eb9a9d1ac125d5ec36a72fd30d3125bdbce52133ffb800634b759d07",
+  "at": "2026-09-27 22:03:54"
+}

@@ -1,0 +1,113 @@
+{
+  "phase": "G12",
+  "started_at": "2026-09-28 07:43:18",
+  "harness_sha256": "f06852086dca5f5e2cf3e1cc624eee74af29888b6d42cdf4cc7431907ca97f6e",
+  "proxy_v3_sha256": "6acfb9c5914595ec567f5b9d4db2da188e99c1bf635b36c017bc0532026340f5",
+  "config_sha256": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "config_extra_args": [
+    "--cache-ram",
+    "1024"
+  ],
+  "threshold_tokens": 56320,
+  "hard_limit_tokens": 65536,
+  "max_tokens": 4096,
+  "probe_max_tokens": 64,
+  "probe_target": 57000,
+  "g11_fingerprint": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g11_fingerprint.json",
+  "prod_reqlog_lines_before": 710,
+  "prod_timings_lines_before": 905,
+  "netstat_before": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_before": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "note": "G11 修正批：①C2 = 边界五轮 + §E2 压缩（触发改自测精确投影）；②闸门探针对照（同 token 数、仅字符/token 密度不同）；每项 n=1",
+  "slices": [
+    {
+      "name": "slice1.log",
+      "lines": [
+        1,
+        200
+      ],
+      "chars": 2506,
+      "sha256": "69c67f7b26b50d1fe156ceb4a787b5745b488a8876f932e5a6329080920e4001"
+    },
+    {
+      "name": "slice2.log",
+      "lines": [
+        201,
+        400
+      ],
+      "chars": 2600,
+      "sha256": "ae5898e9138fea108b3115bf4347cf9a64166c82c450a747e4cf15023a1aeccc"
+    },
+    {
+      "name": "slice3.log",
+      "lines": [
+        401,
+        600
+      ],
+      "chars": 2600,
+      "sha256": "e2490f6a058a0cc06c9ad12d23cc2a87154ddac3ef7dc4bc598a1e35f18cd553"
+    },
+    {
+      "name": "slice4.log",
+      "lines": [
+        601,
+        800
+      ],
+      "chars": 2600,
+      "sha256": "2100d53371cecce5d30cf9a3e404d27919b9deb958fe7b101f0aadcfaec3d988"
+    },
+    {
+      "name": "slice5.log",
+      "lines": [
+        801,
+        1000
+      ],
+      "chars": 2608,
+      "sha256": "0bc08defa2d332ff90eb53d49e1e7a25b68a600ac8f04c2c8ce3c6556925176c"
+    }
+  ],
+  "arm_config": {
+    "config_path": "D:\\Bonsai-demo\\optimization\\20260927_165311\\baseline\\g12\\config.json",
+    "config_sha256": "bce9d1324c1c3c299bc327a7ae0fc51ce298048e21231d9c8881e5fa48784f9e",
+    "changed_top_keys": [
+      "logging",
+      "prewarm",
+      "proxy"
+    ],
+    "tools_diff_keys": [],
+    "behavior_unchanged": true,
+    "backend_extra_args": [
+      "--cache-ram",
+      "1024"
+    ],
+    "prewarm_enabled": false
+  },
+  "ended_at": "2026-09-28 07:48:45",
+  "netstat_after": [
+    "TCP    127.0.0.1:8080         0.0.0.0:0              LISTENING       40480",
+    "TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       30160"
+  ],
+  "health_8080_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "health_8081_after": [
+    200,
+    "{\"status\":\"ok\"}"
+  ],
+  "config_sha256_after": "a68766381aaf1e32db0d5c3124911a6df04753559c91d315960fcad8d33b7e07",
+  "prod_reqlog_lines_after": 713,
+  "prod_timings_lines_after": 905,
+  "prod_reqlog_delta": 3,
+  "prod_timings_delta": 0
+}

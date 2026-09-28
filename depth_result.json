@@ -1,0 +1,50 @@
+{
+  "on": {
+    "tag": "on-dm0",
+    "depth_max": 0,
+    "rows": [
+      {
+        "target": 1024,
+        "depth": 1156,
+        "decode": 0.0,
+        "acc": NaN
+      },
+      {
+        "target": 12288,
+        "depth": 13542,
+        "decode": 0.0,
+        "acc": NaN
+      },
+      {
+        "target": 26624,
+        "depth": 29316,
+        "decode": 0.0,
+        "acc": NaN
+      }
+    ]
+  },
+  "off": {
+    "tag": "off",
+    "depth_max": 0,
+    "rows": [
+      {
+        "target": 1024,
+        "depth": 1153,
+        "decode": 0.0,
+        "acc": NaN
+      },
+      {
+        "target": 12288,
+        "depth": 13539,
+        "decode": 0.0,
+        "acc": NaN
+      },
+      {
+        "target": 26624,
+        "depth": 29313,
+        "decode": 0.0,
+        "acc": NaN
+      }
+    ]
+  }
+}

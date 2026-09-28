@@ -1,0 +1,126 @@
+# 阶段 G4 宿主管存压力 只读快照 v2（更深、更新）
+# 采集时间 2026-09-27 22:54 ~ 22:58  Asia/Shanghai
+# 执行方 TRAE Agent   |   纯只读：未改生产文件、未杀进程、未压测
+
+# ==== 服务身份 ====
+backend_pid            = 35040
+backend_build          = b181-9ef3205
+backend_start          = 2026-09-27 21:37:29
+backend_uptime         = 01:21:06
+proxy_pid              = 40480
+proxy_sha256           = 6ACFB9C5914595EC567F5B9D4DB2DA188E99C1BF635B36C017BC0532026340F5
+health_8081            = ok
+health_8080            = ok
+is_processing          = false
+gpu_used_total_MiB     = 7122 / 8151
+
+# ==== 后端命令行（无 --no-mmap / --cache-ram / --ctx-checkpoints / --context-shift / --load-mode）====
+D:\Bonsai-demo\dist\bonsai2-8gb-combo\bin\llama-server.exe -m D:\Bonsai-demo\models\bonsai2-gguf\27B\Ternary-Bonsai-2-27B-PTQ1_0-mtp-lean.gguf -ngl 99 -fa on -np 1 -c 65536 -b 2048 -ub 512 -ctk q4_0 -ctv q4_0 --backend-sampling --jinja --metrics --host 127.0.0.1 --port 8081 --alias bonsai-2-27b
+
+# ==== 二进制默认值（llama-server.exe --help 实测）====
+cache-ram          default = 8192 MiB   ( -1 no limit ; 0 = using unified KV )
+ctx-checkpoints    default = enabled     ( requires cache-ram )
+load-mode          default = auto
+swa-full           default = false
+slot-save-path     default = disabled
+context-shift      default = 未确认(help 截断)
+mmap/mlock         DEPRECATED in favor of --load-mode
+
+# ==== 日志证据 (logs\llama-server.log, 299537 B, 含 4 个进程生命周期) ====
+load_model: initializing, n_slots = 1, n_ctx_slot = 65536, kv_unified = 'false'
+common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+alloc: - making room for prompt cache entry, removing oldest entry (12 条, 尺寸 299.622 ~ 2030.278 MiB):
+  22.15.145.011 299.622 MiB
+  24.48.514.902 2030.278 MiB
+  29.27.471.916 735.939 MiB
+  43.19.475.200 701.484 MiB
+  43.37.602.382 826.562 MiB
+  43.52.686.869 743.453 MiB
+  44.28.586.749 723.181 MiB
+  46.47.151.692 903.127 MiB
+  49.05.688.026 1061.833 MiB
+  50.24.068.824 741.165 MiB
+  51.29.140.183 625.147 MiB
+  68.05.687.644 650.399 MiB
+
+# ==== /metrics (只读) ====
+prompt_tokens_total                        = 253266
+prompt_tokens_cached_total                 = 807001
+prompt_seconds_total                       = 454.522
+tokens_predicted_total                     = 51729
+tokens_predicted_seconds_total             = 1208.08
+n_tokens_max                               = 64358
+prompt_tokens_seconds                      = 557.214
+predicted_tokens_seconds                   = 42.6049
+spec_decode_num_draft_tokens_total         = 0
+spec_decode_num_accepted_tokens_total      = 0
+
+# ==== 进程内存 (PSAPI GetProcessMemoryInfo + perfmon) ====
+llama-server pid=35040
+  WS_22:21               = 380 MB        (Get-Process)
+  WS_22:54               = 5815.9 MB
+  WS_22:57               = 4210.2 MB
+  PEAK_WS                = 13358.3 MB
+  PRIVATE_22:21          = 16584 MB
+  PRIVATE_22:54/22:57    = 16972.5 MB
+  PRIVATE_BYTES_perfmon  = 17796993024 B  ( = PAGE_FILE_BYTES )
+  PAGE_FILE_BYTES_PEAK   = 18371887104 B
+  WORKING_SET_minus_PRIVATE = 5801 MB   ( 总 WS 5816 MB -> 私有占 99.7% )
+  PAGE_FAULT_COUNT       = 31750279      (uptime 81 min -> 均值约 6500 次/秒)
+  VIRTUAL_BYTES          = 123474223104 B
+  handles/threads        = 349 / 37
+python pid=40480 (proxy) WS=23.9MB Private=14.6MB
+
+# ==== 全机 WorkingSet Top (22:54) ====
+  llama-server     35040  WS=5815.9MB  Private=16972.5MB
+  Memory Compression 4320 WS=4112.1MB  Private=11.6MB
+  WorkBuddy        19308  WS=867.9MB   Private=869.3MB
+  TRAE SOLO CN     27524  WS=664.1MB   Private=685.1MB
+  MsMpEng           6636  WS=541.0MB   Private=533.2MB
+  pi Desktop       38592  WS=525.9MB   Private=482.5MB
+  WorkBuddy         2996  WS=409.0MB   Private=380.6MB
+  pi Desktop        8752  WS=350.7MB   Private=317.7MB
+  pi Desktop       41420  WS=280.2MB   Private=237.5MB
+  WorkBuddy        24448  WS=224.7MB   Private=349.1MB
+
+# ==== 系统内存计数器 (perfmon, 22:54) ====
+Available MBytes                       = 5780
+Committed Bytes                         = 46560010240   (46.56 GB)
+Commit Limit                            = 111062409216  (103.4 GB)
+Cache Bytes                             = 853364736
+Standby Cache Core Bytes                = 117927936
+Standby Cache Normal Priority Bytes     = 5691232256
+Standby Cache Reserve Bytes             = 196603904
+Modified Page List Bytes                = 79052800
+Free & Zero Page List Bytes             = 55476224
+Pool Paged Bytes                        = 1209524224
+Pool Nonpaged Bytes                     = 1235730432
+System Cache Resident Bytes             = 853364736
+Pages Input/sec                         = 10177.0
+Page Reads/sec                          = 76.75
+Page Writes/sec                         = 0
+Pages Output/sec                        = 0
+
+# 22:21 对照: Available=10623 MB, Memory Compression WS=9019 MB
+
+# ==== 操作系统内存 ====
+TotalVisibleMemorySize_MB = 32189
+FreePhysicalMemory_MB     = 5746
+TotalVirtualMemorySize_MB = 105917
+FreeVirtualMemory_MB      = 61496
+SizeStoredInPagingFiles_MB= 73728
+
+# ==== 页面文件 ====
+  C:\pagefile.sys  Initial=8192  Max=8192    Allocated=8192  CurrentUsage=398MB  Peak=592MB
+  D:\pagefile.sys  Initial=65536 Max=131072  Allocated=65536 CurrentUsage=348MB  Peak=564MB
+  合计实际用量 = 746 MB  ( 远低于已分配 73728 MB -> 页文件非瓶颈 )
+
+# ==== GPU ====
+NVIDIA GeForce RTX 5060 Laptop GPU, 8151 MiB total, 7122 MiB used, 778 MiB free, 0%, 375 MHz core, 405 MHz mem, 4.85 W
+
+# ==== 本轮失败/未完成（如实记录）====
+1) 自写 VirtualQueryEx 地址空间分类遍历器有缺陷（仅统计到 110 MB 提交、FREE 计数溢出），
+   其 COMMIT_PRIVATE / COMMIT_MAPPED 分解结果不可用，已弃用。
+2) --context-shift 默认值未取到（help 输出截断）。
+3) 模型加载期的 load_tensors / KV self size / compute buffer 明细行未取到（日志仅保留运行期）。
+4) 本轮未做压测或对照运行 -> 无性能结论。

@@ -1,0 +1,184 @@
+[
+ [
+  {
+   "name": "精准文字图片",
+   "overrideKey": "exact-text-image",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\exact-text-image\\SKILL.md",
+   "desc": "基于 精准文字图片 的 AI 图片生成与编辑器，通用图片能力和商业场景搜索入口，底层调用 AI Hive 裸接口。当用户需要 精准文字图片、图片文字、精准排版、海报文字、中文文字生成、文字准确、GPT Image 2、Image2、Nano Banana、AI图片、AIGC图片 时使用此 Skill。"
+  },
+  {
+   "name": "GPT Image 2 角色一致性图片",
+   "overrideKey": "gpt-image-2-character-consistency",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\gpt-image-2-character-consistency\\SKILL.md",
+   "desc": "基于 GPT Image 2 角色一致性图片 的 AI 图片生成与编辑器，固定调用 GPT Image 2 的角色一致性图片裸接口能力。当用户需要 GPT Image 2、GPT-Image-2、GPTImage2、OpenAI Image 2、ChatGPT Images、Image2、角色一致性图片、人物一致性、角色一致、IP形象、同一人物、多场景角色、AI图片、AIGC图片 时使用此 Skill。"
+  },
+  {
+   "name": "GPT Image 2 多参考图生成",
+   "overrideKey": "gpt-image-2-multi-reference-image",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\gpt-image-2-multi-reference-image\\SKILL.md",
+   "desc": "基于 GPT Image 2 多参考图生成 的 AI 图片生成与编辑器，固定调用 GPT Image 2 的多参考图生成裸接口能力。当用户需要 GPT Image 2、GPT-Image-2、GPTImage2、OpenAI Image 2、ChatGPT Images、Image2、多参考图生成、多图融合、多参考图、多图合成、角色风格参考、素材合成、AI图片、AIGC图片 时使用此 Skill。"
+  },
+  {
+   "name": "GPT Image 2 商品精修",
+   "overrideKey": "gpt-image-2-product-retouch",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\gpt-image-2-product-retouch\\SKILL.md",
+   "desc": "基于 GPT Image 2 商品精修 的 AI 图片生成与编辑器，固定调用 GPT Image 2 的商品精修裸接口能力。当用户需要 GPT Image 2、GPT-Image-2、GPTImage2、OpenAI Image 2、ChatGPT Images、Image2、商品精修、产品精修、商品修图、质感增强、瑕疵修复、电商精修、AI图片、AIGC图片 时使用此 Skill。"
+  },
+  {
+   "name": "Image2 图生图",
+   "overrideKey": "image-2-image-to-image",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\image-2-image-to-image\\SKILL.md",
+   "desc": "基于 Image2 图生图 的 AI 图片生成与编辑器，固定调用 Image2 的图生图裸接口能力。当用户需要 Image2、Image 2、GPT Image 2、GPTImage2、OpenAI 图片、ChatGPT 图片、图生图、图片生成图片、以图生图、image to image、I2I、参考图重绘、AI图片、AIGC图片 时使用此 Skill。"
+  },
+  {
+   "name": "Image2 海报生成",
+   "overrideKey": "image-2-poster",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\image-2-poster\\SKILL.md",
+   "desc": "基于 Image2 海报生成 的 AI 图片生成与编辑器，固定调用 Image2 的海报生成裸接口能力。当用户需要 Image2、Image 2、GPT Image 2、GPTImage2、OpenAI 图片、ChatGPT 图片、海报生成、营销海报、活动海报、中文海报、宣传海报、视觉海报、AI图片、AIGC图片 时使用此 Skill。"
+  },
+  {
+   "name": "Nano Banana 2 精准文字图片",
+   "overrideKey": "nano-banana-2-exact-text-image",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\nano-banana-2-exact-text-image\\SKILL.md",
+   "desc": "基于 Nano Banana 2 精准文字图片 的 AI 图片生成与编辑器，固定调用 Nano Banana 2 的精准文字图片裸接口能力。当用户需要 Nano Banana 2、NanoBanana2、Nano Banana、香蕉2、Gemini 图片、精准文字图片、图片文字、精准排版、海报文字、中文文字生成、文字准确、AI图片、AIGC图片 时使用此 Skill。"
+  },
+  {
+   "name": "Nano Banana 2 海报生成",
+   "overrideKey": "nano-banana-2-poster",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\nano-banana-2-poster\\SKILL.md",
+   "desc": "基于 Nano Banana 2 海报生成 的 AI 图片生成与编辑器，固定调用 Nano Banana 2 的海报生成裸接口能力。当用户需要 Nano Banana 2、NanoBanana2、Nano Banana、香蕉2、Gemini 图片、海报生成、营销海报、活动海报、中文海报、宣传海报、视觉海报、AI图片、AIGC图片 时使用此 Skill。"
+  },
+  {
+   "name": "商品详情页",
+   "overrideKey": "product-detail-page",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\product-detail-page\\SKILL.md",
+   "desc": "基于 商品详情页 的 AI 图片生成与编辑器，通用图片能力和商业场景搜索入口，底层调用 AI Hive 裸接口。当用户需要 商品详情页、电商详情页、详情页视觉、卖点图、产品长图、商品介绍图、GPT Image 2、Image2、Nano Banana、AI图片、AIGC图片 时使用此 Skill。"
+  }
+ ],
+ [
+  {
+   "name": "AgentEarth",
+   "overrideKey": "agent-earth",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\agent-earth\\SKILL.md",
+   "desc": "AgentEarth external tool marketplace skill — discover and execute 1400+ external API tools (weather, finance, search, maps, AI generation, and more) via the AgentEarth MCP connector."
+  },
+  {
+   "name": "agent-earth",
+   "overrideKey": "agent-earth",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\agent-earth\\skills\\SKILL.md",
+   "desc": "AgentEarth external tool marketplace skill — discover and execute 1400+ external API tools (weather, finance, search, maps, AI generation, and more) via the AgentEarth MCP connector."
+  }
+ ],
+ [
+  {
+   "name": "Computer Use Linux",
+   "overrideKey": "computer-use-linux",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\computer-use-linux__skillhub\\SKILL.md",
+   "desc": "Top-level Linux computer-use skill with a bundled standalone runtime that bootstraps itself without any local Claude installation, private native modules, or extracted app assets."
+  },
+  {
+   "name": "Computer Use Windows",
+   "overrideKey": "computer-use-windows",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\computer-use-windows__skillhub\\SKILL.md",
+   "desc": "Top-level Windows computer-use skill with a bundled standalone runtime that bootstraps itself without any local Claude installation, private native modules, or extracted app assets."
+  }
+ ],
+ [
+  {
+   "name": "豆包 WebSearch",
+   "overrideKey": "doubao-websearch",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\doubao-websearch\\SKILL.md",
+   "desc": "豆包 WebSearch 搜索工具。基于红狐 API 调用豆包联网搜索能力，提交查询后自动轮询等待结果返回。当用户需要使用豆包搜索、联网搜索、AI 搜索获取实时信息时使用。触发词：豆包搜索、豆包websearch、联网搜索、AI搜索、doubao搜索。"
+  },
+  {
+   "name": "Kimi WebSearch",
+   "overrideKey": "kimi-websearch",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\kimi-websearch\\SKILL.md",
+   "desc": "Kimi WebSearch 搜索工具。基于红狐 API 调用 Kimi 联网搜索能力，提交查询后自动轮询等待结果返回。当用户需要使用 Kimi 搜索、联网搜索、AI 搜索获取实时信息时使用。触发词：kimi搜索、kimi websearch、联网搜索、AI搜索、kimi搜索。"
+  }
+ ],
+ [
+  {
+   "name": "Midscene Automations Skills for Browser",
+   "overrideKey": "browser-automation",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\midscene-computer-browser__skillhub\\SKILL.md",
+   "desc": "Vision-driven browser automation using Midscene. Operates from screenshots — no DOM or accessibility labels needed.\n\nRuns in headless Puppeteer — does NOT take over the user's mouse or keyboard.\nAlso supports CDP mode an"
+  },
+  {
+   "name": "Midscene Automations Skills for Browser with Bridge",
+   "overrideKey": "chrome-bridge-automation",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\midscene-computer-chrome-bridge__skillhub\\SKILL.md",
+   "desc": "Vision-driven browser automation using Midscene Bridge mode. Operates entirely from screenshots — no DOM or accessibility labels required. Can interact with all visible elements on screen regardless of technology stack.\n"
+  }
+ ],
+ [
+  {
+   "name": "NeoData金融搜索服务",
+   "overrideKey": "neodata-financial-search",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\neodata-financial-search\\SKILL.md",
+   "desc": "NeoData Financial Search — 自然语言通用金融数据搜索服务。用自然语言查询股票、基金、指数、板块、 债券、期货、期权、宏观经济、外汇、大宗商品等全品类金融数据，涵盖行情报价、财务报表（财报）、 资金流向、研报评级、舆情观点、事件公告等，支持结构化API数据和财经文章两种召回模式，即问即答。 Use when the user asks about financial data, stock quotes, fin"
+  },
+  {
+   "name": "neodata-financial-search",
+   "overrideKey": "neodata-financial-search",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\plugins\\marketplaces\\cb_teams_marketplace\\plugins\\finance-data\\skills\\neodata-financial-search\\SKILL.md",
+   "desc": "NeoData Financial Search — 自然语言通用金融数据搜索服务。用自然语言查询股票、基金、指数、板块、 债券、期货、期权、宏观经济、外汇、大宗商品等全品类金融数据，涵盖行情报价、财务报表（财报）、 资金流向、研报评级、舆情观点、事件公告等，支持结构化API数据和财经文章两种召回模式，即问即答。 Use when the user asks about financial data, stock quotes, fin"
+  }
+ ],
+ [
+  {
+   "name": "PPT美化",
+   "overrideKey": "ppt-beautify",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\ppt-beautify\\SKILL.md",
+   "desc": "美化现有PPT中的页面，调整字体、配色、版式和视觉层级。适用于PPT美化、PPT排版。美图设计室提供。当用户需要“PPT美化”或描述中的等价能力时使用。当前对话已完成 PPT 时，用户要求导出、下载、获取 PPT 文件或可编辑版本也必须使用本 Skill。"
+  },
+  {
+   "name": "PPT设计",
+   "overrideKey": "ppt-design",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\ppt-design\\SKILL.md",
+   "desc": "根据文字、数据或参考图生成可编辑PPT，完成信息整理与页面设计。适用于PPT设计、汇报页制作。美图设计室提供。当用户需要“PPT设计”或描述中的等价能力时使用。当前对话已完成 PPT 时，用户要求导出、下载、获取 PPT 文件或可编辑版本也必须使用本 Skill。"
+  }
+ ],
+ [
+  {
+   "name": "Stagehand Browser CLI",
+   "overrideKey": "stagehand-browser-cli",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\stagehand-browser-cli\\SKILL.md",
+   "desc": "Automate web browser interactions using natural language via CLI commands. Use when the user asks to browse websites, navigate web pages, extract data from websites, take screenshots, fill forms, click buttons, or intera"
+  },
+  {
+   "name": "playwright-cli",
+   "overrideKey": "playwright-cli",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\plugins\\marketplaces\\codebuddy-plugins-official\\plugins\\playwright-cli\\skills\\playwright-cli\\SKILL.md",
+   "desc": "Automates browser interactions for web testing, form filling, screenshots, and data extraction. Use when the user needs to navigate websites, interact with web pages, fill forms, take screenshots, test web applications, "
+  }
+ ],
+ [
+  {
+   "name": "WorkBuddy 大神",
+   "overrideKey": "workbuddy-dashen",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\workbuddy-dashen\\SKILL.md",
+   "desc": "WorkBuddy全生态终极输出引擎与开放平台项目工厂。一键输出教程、办公文档、技术文档、需求分析、编程内容、项目开发文档、系统方案、提示词、图片视频提示词、设计内容十大类内容，并创建符合 open.WorkBuddy.cn 官方上传结构的技能/专家/连接器/Buddy应用/硬件五大生态能力项目包。深度挖掘需求+增强联网+挑战大模型极限，全网天花板级质量。"
+  },
+  {
+   "name": "AI开发大神",
+   "overrideKey": "workbuddy-dev-dashen",
+   "filePath": "C:\\Users\\intpj\\.workbuddy\\skills\\workbuddy-dev-dashen\\SKILL.md",
+   "desc": "WorkBuddy 全生态终极内容输出引擎与开放平台项目工厂（v2.0.5 名称合规版）。11 类内容全能输出（教程 / 工作内容 / 技术文档 / 需求分析 / 编程内容 / 项目开发文档 / 系统方案 / 提示词 / 图片视频提示词 / 设计内容 / 平台知识深解），5 类官方生态资产一键铸造（Skill 技能 / Expert 专家 / Connector 连接器 / Buddy 应用 / 硬件接入包），全部符合 open.wor"
+  }
+ ],
+ [
+  {
+   "name": "tencent-docs",
+   "overrideKey": "tencent-docs",
+   "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\builtin-plugins\\tencent-docs-plugin\\skills\\tencent-docs\\SKILL.md",
+   "desc": "腾讯文档个人版（docs.qq.com）-在线云文档平台，是创建、编辑、管理文档的首选 skill。涉及\"新建/创建/编辑/读取/查看/搜索文档\"、\"保存文件\"、\"云文档\"、\"腾讯文档\"、\"docs.qq.com\"等操作，请优先使用本 skill。支持能力：(1) 创建各类在线文档（文档/Word/Excel/幻灯片/思维导图/流程图/智能表格/收集表）(2) 管理知识库空间（创建空间、查询空间列表）(3) 管理空间节点、文件夹结构 ("
+  },
+  {
+   "name": "tencent-saas-docs",
+   "overrideKey": "tencent-saas-docs",
+   "filePath": "D:\\下载的\\WorkBuddy\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\builtin-plugins\\tencent-docs-plugin\\skills\\tencent-saas-docs\\SKILL.md",
+   "desc": "腾讯文档企业版（saas.docs.qq.com）-在线云文档平台，是创建、编辑、管理文档的首选 skill。涉及\"新建/创建/编辑/读取/查看/搜索文档\"、\"企业文档\"、\"团队文档\"、\"saas.docs.qq.com\"等操作，请优先使用本 skill。支持能力：(1) 创建各类在线文档（文档/Word/Excel/幻灯片/思维导图/流程图/智能表格/收集表）(2) 管理知识库空间（创建空间、查询空间列表）(3) 管理空间节点、文件夹"
+  }
+ ]
+]

@@ -1,0 +1,814 @@
+# -*- coding: utf-8 -*-
+r"""
+bonsai_launcher.py —— Bonsai 本地服务统一启动管理器（方案阶段 B）
+
+WHY（为什么要有这个文件）
+    原先 4 个启动脚本各自拼一份 llama-server 参数，实测至少 3 套互不一致：
+        start_all_agent.bat        -c 65536 / MTP off / 无采样参数 / 后端 8081 + 代理 8080
+        start_bonsai_8gb_agent.bat -c 65536 / MTP off / --temp 1.0 --top-p .95 --top-k 20
+                                    / --reasoning-budget 20480 / -n 24576 / 直听 8080
+        start-bonsai.ps1           -c 32768 / MTP ON  / --temp 1.0 --top-p .95 --top-k 20
+                                    / --reasoning-budget 20480 / -n 24576 / 直听 8080
+        serve.py                   -c 32768 / MTP ON  / -n 24576 / 直听 8080
+    => “在线生效参数”无人能确认。现在改为：唯一权威配置 config\bonsai-agent.json
+       -> 由本文件构造全部参数；入口脚本只负责调用本文件。
+
+B2 重写“僵死”判定（替换旧的“10 秒推理探活失败就按端口 taskkill”）
+    1. 先看 /health + 进程身份（可执行文件 + 命令行）+ /slots。
+    2. 忙（is_processing=true）→ 不发推理探活、不重启、不抢占用户任务。
+    3. 空闲 → 允许一次小型 smoke test（有限输出 + 有限超时）；超时只记录故障，
+       不按端口杀进程。
+    4. 需要停止时只操作本文件 state 里“记录并已核对身份”的 PID：
+       先请正常退出，确认无法正常退出后才强制。
+    5. 端口被别的程序占用 → 直接停手并说明，绝不杀未知进程。
+    6. 不做“自动无限重启”：一次恢复失败即保留日志并报告。
+
+B3 预热只做一次
+    合并 warm_kv.py 与代理 --warm 两条路径：代理不再 --warm；本文件在服务就绪
+    且空闲时，用与真实请求相同的转换管线预热一次。忙时跳过。
+
+USAGE
+    python launcher\bonsai_launcher.py up              # 确保后端+代理按配置运行
+    python launcher\bonsai_launcher.py up --smoke      # 另做一次有限推理冒烟
+    python launcher\bonsai_launcher.py up --no-prewarm # 本次不预热（抓包模式用）
+    python launcher\bonsai_launcher.py up --no-restart # 参数不一致也不自动重启
+    python launcher\bonsai_launcher.py status
+    python launcher\bonsai_launcher.py smoke
+    python launcher\bonsai_launcher.py prewarm
+    python launcher\bonsai_launcher.py stop
+    python launcher\bonsai_launcher.py show-config
+"""
+import argparse
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.request
+
+DEMO = r"D:\Bonsai-demo"
+DEFAULT_CONFIG = os.path.join(DEMO, "config", "bonsai-agent.json")
+
+# Windows 进程创建标志：脱离父进程 + 独立进程组（入口脚本退出后服务继续运行）
+DETACHED = 0x00000008 | 0x00000200
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
+_OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+
+
+# ================================================================ 配置
+def load_config(path):
+    with open(path, "r", encoding="utf-8-sig") as f:
+        return json.load(f)
+
+
+def config_fingerprint(cfg):
+    blob = json.dumps(cfg, ensure_ascii=False, sort_keys=True,
+                      separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(blob).hexdigest()
+
+
+def norm(tok):
+    return tok.replace("\\", "/").lower()
+
+
+def backend_args(cfg):
+    b = cfg["backend"]
+    a = [b["exe"],
+         "-m", b["model"],
+         "-ngl", str(b["n_gpu_layers"]),
+         "-fa", str(b["flash_attention"]),
+         "-np", str(b["n_parallel"]),
+         "-c", str(b["n_ctx"]),
+         "-b", str(b["n_batch"]),
+         "-ub", str(b["n_ubatch"]),
+         "-ctk", b["cache_type_k"],
+         "-ctv", b["cache_type_v"]]
+    if b.get("backend_sampling"):
+        a.append("--backend-sampling")
+    if b.get("jinja"):
+        a.append("--jinja")
+    if b.get("metrics"):
+        a.append("--metrics")
+    mtp = b.get("mtp") or {}
+    if mtp.get("enabled"):
+        a += ["--spec-type", "draft-mtp",
+              "--spec-draft-n-max", str(mtp.get("n_max", 1)),
+              "--spec-draft-depth-max", str(mtp.get("depth_max", 4096)),
+              "-ctkd", mtp.get("cache_type_k_draft", "q4_0"),
+              "-ctvd", mtp.get("cache_type_v_draft", "q4_0")]
+    smp = b.get("sampling") or {}
+    if smp.get("mode") == "explicit":
+        for k, v in (smp.get("params") or {}).items():
+            a += [k, str(v)]
+    a += ["--host", b["host"], "--port", str(b["port"]), "--alias", b["alias"]]
+    a += list(b.get("extra_args") or [])
+    return a
+
+
+def slimming_all_off(cfg):
+    s = cfg.get("slimming") or {}
+    return not any([s.get("locations"), s.get("deferred_tools"), s.get("subagents")])
+
+
+def slimming_partial(cfg):
+    s = cfg.get("slimming") or {}
+    vals = [bool(s.get("locations")), bool(s.get("deferred_tools")),
+            bool(s.get("subagents"))]
+    return any(vals) and not all(vals)
+
+
+def proxy_args(cfg):
+    p = cfg["proxy"]
+    py = cfg.get("python") or sys.executable
+    a = [py, "-u", p["script"],
+         "--port", str(p["port"]),
+         "--upstream", str(p["upstream_port"]),
+         "--config", DEFAULT_CONFIG]      # 阶段 C：代理也从同一权威配置读运行期参数
+    eff = (cfg.get("thinking") or {}).get("default_effort")
+    if eff:
+        a += ["--effort", eff]
+    if slimming_all_off(cfg):
+        a.append("--keep-location")
+    # 注意：不传 --warm。预热由本文件统一做一次（B3）。
+    return a
+
+
+def base_of(host_port, cfg):
+    return "http://%s" % host_port
+
+
+def backend_base(cfg):
+    b = cfg["backend"]
+    return "http://%s:%d" % (b["host"], b["port"])
+
+
+def proxy_base(cfg):
+    p = cfg["proxy"]
+    return "http://%s:%d" % (p["host"], p["port"])
+
+
+# ================================================================ 输出
+def hr(ch="="):
+    print(ch * 66)
+
+
+def show_effective_config(cfg, fp):
+    b = cfg["backend"]
+    p = cfg["proxy"]
+    t = cfg.get("thinking") or {}
+    bu = cfg.get("budget") or {}
+    po = bu.get("policy") or {}
+    hr()
+    print(" Bonsai 统一启动管理器（唯一配置源: %s）" % DEFAULT_CONFIG)
+    hr()
+    print(" 配置指纹 : %s" % fp[:16])
+    print(" 后端     : %s  pid 由 state 记录" % ("%s:%d" % (b["host"], b["port"])))
+    print("   模型    : %s" % os.path.basename(b["model"]))
+    print("   硬件参数: -c %d / -np %d / -b %d / -ub %d / -ctk %s -ctv %s / -fa %s / -ngl %d"
+          % (b["n_ctx"], b["n_parallel"], b["n_batch"], b["n_ubatch"],
+             b["cache_type_k"], b["cache_type_v"], b["flash_attention"],
+             b["n_gpu_layers"]))
+    print("   MTP     : %s" % ("开（实验）" if (b.get("mtp") or {}).get("enabled") else "关"))
+    print("   采样    : %s（未传采样参数 = 服务端默认）"
+          % (b.get("sampling") or {}).get("mode"))
+    print(" 代理     : %s:%d -> %s:%d   思考档位=%s"
+          % (p["host"], p["port"], p["upstream_host"], p["upstream_port"],
+             t.get("default_effort")))
+    s = cfg.get("slimming") or {}
+    print("   瘦身    : location=%s deferred=%s subagent=%s"
+          % (s.get("locations"), s.get("deferred_tools"), s.get("subagents")))
+    print(" 预算     : 总生成 %s / 思考 %s / 上下文余量 %s  [注入=%s/%s；阶段 D 已验证"
+          "请求级预算可用，policy=false = 只登记不注入]"
+          % (bu.get("request_max_tokens"), bu.get("thinking_budget_tokens"),
+             bu.get("context_reserve_tokens"),
+             po.get("apply_request_max_tokens"), po.get("apply_thinking_budget")))
+    tl = cfg.get("tools") or {}
+    print("   工具体  : 契约加固=%s（show_widget.loading_messages 精确化）/ "
+          "错误恢复策略块=%s"
+          % (bool(tl.get("schema_hardening")), bool(tl.get("error_policy"))))
+    print(" 预热     : %s（每次启动一次）" % ("开" if (cfg.get("prewarm") or {}).get("enabled") else "关"))
+    hr()
+    print()
+
+
+def die(msg, code=1):
+    print()
+    print("!! " + msg)
+    sys.exit(code)
+
+
+# ================================================================ 采集
+def run(cmd, timeout=30):
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True,
+                           encoding="utf-8", errors="ignore", timeout=timeout)
+        return (r.stdout or "") + (r.stderr or "")
+    except Exception as e:
+        return "[cmd failed] %r" % e
+
+
+def ps_json(cmd, timeout=30):
+    txt = run(["powershell", "-NoProfile", "-NonInteractive", "-Command",
+               "$OutputEncoding=[Console]::OutputEncoding=[Text.UTF8Encoding]::new();"
+               + cmd], timeout=timeout).strip()
+    if not txt:
+        return None
+    try:
+        return json.loads(txt)
+    except Exception:
+        return None
+
+
+def proc_info(pid):
+    d = ps_json("Get-CimInstance Win32_Process -Filter 'ProcessId=%d' | "
+                "Select-Object ProcessId,ExecutablePath,CommandLine | ConvertTo-Json -Compress"
+                % int(pid))
+    if isinstance(d, list):
+        d = d[0] if d else None
+    return d
+
+
+def find_processes(name):
+    d = ps_json("Get-CimInstance Win32_Process -Filter \"Name='%s'\" | "
+                "Select-Object ProcessId,ExecutablePath,CommandLine | ConvertTo-Json -Compress"
+                % name)
+    if d is None:
+        return []
+    if isinstance(d, dict):
+        return [d]
+    return d
+
+
+def port_owners(port):
+    out = run(["netstat", "-ano"])
+    pids = set()
+    for ln in out.splitlines():
+        parts = ln.split()
+        if len(parts) >= 5 and parts[0].upper().startswith("TCP") \
+                and parts[3].upper() == "LISTENING":
+            if parts[1].endswith(":" + str(port)):
+                try:
+                    pids.add(int(parts[4]))
+                except ValueError:
+                    pass
+    return sorted(pids)
+
+
+def api(base, path, timeout=5):
+    try:
+        with _OPENER.open(base + path, timeout=timeout) as r:
+            raw = r.read().decode("utf-8", "ignore")
+        return json.loads(raw) if raw.strip() else {}
+    except Exception:
+        return None
+
+
+def slots_busy(slots):
+    if not slots:
+        return False
+    if isinstance(slots, dict):
+        return bool(slots.get("is_processing"))
+    for s in slots:
+        if isinstance(s, dict) and s.get("is_processing"):
+            return True
+    return False
+
+
+def props_n_ctx(props):
+    """llama-server 把 n_ctx 放在 default_generation_settings 里。"""
+    dgs = (props or {}).get("default_generation_settings") or {}
+    return dgs.get("n_ctx") or (props or {}).get("n_ctx")
+
+
+def props_default_n_predict(props):
+    """服务级默认生成上限：-1 表示无显式上限（方案 P01 的证据）。
+
+    键路径：default_generation_settings.params.n_predict / max_tokens。
+    """
+    dgs = (props or {}).get("default_generation_settings") or {}
+    params = dgs.get("params") or {}
+    v = params.get("n_predict")
+    if v is None:
+        v = params.get("max_tokens")
+    return v
+
+
+def has_port(cl, port):
+    """命令行里端口可能写作 --port 8081 / :8081 / 127.0.0.1:8081。"""
+    return ("--port %d" % port) in cl or (":%d" % port) in cl
+
+
+def is_our_backend(info, cfg):
+    if not info:
+        return False
+    b = cfg["backend"]
+    exe = norm((info.get("ExecutablePath") or ""))
+    cl = norm((info.get("CommandLine") or ""))
+    return exe == norm(b["exe"]) and norm(os.path.basename(b["model"])) in cl \
+        and has_port(cl, b["port"])
+
+
+def is_our_proxy(info, cfg):
+    if not info:
+        return False
+    cl = norm((info.get("CommandLine") or ""))
+    return norm(os.path.basename(cfg["proxy"]["script"])) in cl \
+        and has_port(cl, cfg["proxy"]["port"])
+
+
+def canon(t):
+    """归一化一个 token：统一斜杠与小写；路径类 token 只留文件名。
+
+    只留文件名可消除“相对路径 vs 绝对路径”“正反斜杠”造成的假差异
+    （例如在线是 proxy/bonsai_proxy.py、配置是全路径）。
+    代价：同名的不同目录不可区分——对本项目的参数比对来说可接受。
+    """
+    t = norm(t)
+    return os.path.basename(t) if "/" in t else t
+
+
+def cmdline_diff(online_cmdline, want_args):
+    """比较“在线命令行”与“配置生成的参数”。顺序无关；路径分隔符与路径形态归一。"""
+    on = [canon(t) for t in (online_cmdline or "").split()]
+    wi = [canon(t) for t in want_args]
+    on_s, wi_s = set(on), set(wi)
+    only_online = [t for t in on if t not in wi_s]
+    only_config = [t for t in wi if t not in on_s]
+    # 去掉双方都有的可执行文件路径差异（shim 路径可能带引号）
+    def drop_exe(lst):
+        return [t for t in lst if not t.endswith("llama-server.exe")
+                and not t.endswith("python.exe") and not t.endswith("python3.exe")]
+    return {"only_online": drop_exe(only_online), "only_config": drop_exe(only_config)}
+
+
+def diff_empty(d):
+    return not d or (not d.get("only_online") and not d.get("only_config"))
+
+
+# ================================================================ state
+def state_path(cfg):
+    return (cfg.get("state") or {}).get("file") or os.path.join(DEMO, "state",
+                                                               "launcher_state.json")
+
+
+def load_state(cfg):
+    p = state_path(cfg)
+    if os.path.exists(p):
+        try:
+            with open(p, "r", encoding="utf-8-sig") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+
+def save_state(cfg, st):
+    p = state_path(cfg)
+    os.makedirs(os.path.dirname(p), exist_ok=True)
+    st["updated_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    with open(p, "w", encoding="utf-8") as f:
+        json.dump(st, f, ensure_ascii=False, indent=2)
+
+
+def ensure_dirs(cfg):
+    for k in ("logging",):
+        d = (cfg.get(k) or {}).get("dir")
+        if d:
+            os.makedirs(d, exist_ok=True)
+    for logkey in (("backend", "log"), ("proxy", "log")):
+        p = (cfg.get(logkey[0]) or {}).get(logkey[1])
+        if p:
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+    os.makedirs(os.path.dirname(state_path(cfg)), exist_ok=True)
+
+
+# ================================================================ 启停
+def start_backend(cfg):
+    b = cfg["backend"]
+    ensure_dirs(cfg)
+    env = dict(os.environ)
+    env.setdefault("PYTHONIOENCODING", "gbk")
+    if (b.get("mtp") or {}).get("enabled"):
+        env["GGML_CUDA_BATCH_INVARIANT"] = "1"
+    args = backend_args(cfg)
+    print("[后端] 启动: %s" % " ".join(args))
+    f = open(b["log"], "ab")
+    p = subprocess.Popen(args, cwd=b["cwd"], env=env, stdout=f,
+                         stderr=subprocess.STDOUT, creationflags=DETACHED,
+                         close_fds=True)
+    print("[后端] pid=%d  日志=%s" % (p.pid, b["log"]))
+    return p
+
+
+def start_proxy(cfg):
+    p = cfg["proxy"]
+    ensure_dirs(cfg)
+    env = dict(os.environ)
+    env.setdefault("PYTHONIOENCODING", "gbk")
+    args = proxy_args(cfg)
+    s = cfg.get("slimming") or {}
+    print("[代理] 瘦身（阶段 F 起代理按配置逐项生效）: ① location=%s ② deferred 清单=%s"
+          " ③ subagent 清单=%s（deferred/subagent=false 表示保留完整名册）"
+          % (s.get("locations"), s.get("deferred_tools"), s.get("subagents")))
+    print("[代理] 启动: %s" % " ".join(args))
+    f = open(p["log"], "ab")
+    pr = subprocess.Popen(args, cwd=DEMO, env=env, stdout=f,
+                          stderr=subprocess.STDOUT, creationflags=DETACHED,
+                          close_fds=True)
+    print("[代理] pid=%d  日志=%s" % (pr.pid, p["log"]))
+    return pr
+
+
+def wait_health(cfg, timeout_s, proc=None):
+    """等 /health ok。期间若进程已退出则立刻返回 None 并打印日志尾。"""
+    t0 = time.time()
+    base = backend_base(cfg)
+    while time.time() - t0 < timeout_s:
+        if api(base, "/health", 3):
+            return time.time() - t0
+        if proc is not None and proc.poll() is not None:
+            print("[后端] 进程已退出（退出码 %s），日志尾部：" % proc.returncode)
+            tail(cfg["backend"]["log"], 25)
+            return None
+        time.sleep(1)
+    return None
+
+
+def tail(path, n=25):
+    try:
+        with open(path, "r", encoding="utf-8", errors="ignore") as f:
+            lines = f.readlines()
+        for ln in lines[-n:]:
+            print("   | " + ln.rstrip())
+    except Exception as e:
+        print("   | (读日志失败 %r)" % e)
+
+
+def stop_pid_verified(pid, label):
+    """只对已核对身份的 PID 操作：先请正常退出，确认无效再强制。"""
+    print("[停止] %s pid=%d：先请求正常退出 ..." % (label, pid))
+    run(["taskkill", "/PID", str(pid)], timeout=15)
+    for _ in range(10):
+        time.sleep(0.5)
+        if not proc_info(pid):
+            print("[停止] %s pid=%d 已正常退出。" % (label, pid))
+            return True
+    print("[停止] %s pid=%d 未响应正常退出，改为强制停止（已确认身份）。" % (label, pid))
+    run(["taskkill", "/F", "/PID", str(pid)], timeout=15)
+    time.sleep(1.0)
+    ok = not proc_info(pid)
+    print("[停止] %s pid=%d %s" % (label, pid, "已停止。" if ok else "!! 仍未停止"))
+    return ok
+
+
+# ================================================================ 预热
+def do_prewarm(cfg, cfg_path=DEFAULT_CONFIG):
+    import importlib.util
+    from types import SimpleNamespace
+    spec = importlib.util.spec_from_file_location("bonsai_proxy_mod",
+                                                  cfg["proxy"]["script"])
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.ARGS = SimpleNamespace(
+        effort=(cfg.get("thinking") or {}).get("default_effort"),
+        keep_location=slimming_all_off(cfg))
+    # B3：预热必须与在线代理共用同一权威配置。否则本模块的 CFG 仍是代理内置
+    # 默认（slimming 三项全开），而在线代理按 config 只剥 location ->
+    # 预热前缀与真实请求不一致 = 白预热（本次实测 120.8 秒被浪费）。
+    mod.load_runtime(cfg_path)
+    print("[预热] 用最近一份真实请求体重放一次（与真实请求同一转换管线）...")
+    pn = mod.prewarm(None, cfg["backend"]["port"], "启动预热")
+    if pn is None:
+        print("[预热] 未完成：没有可用请求体，或上游未就绪。")
+    print("[预热] 本次启动到此为止只预热一次（代理不再自带 --warm）。")
+    return pn
+
+
+# ================================================================ 冒烟
+def cmd_smoke(cfg, via_proxy=True):
+    b = cfg["backend"]
+    base = proxy_base(cfg) if via_proxy else backend_base(cfg)
+    to = ((cfg.get("timeouts") or {}).get("smoke_s") or 240)
+    body = {
+        "model": b["alias"],
+        "messages": [{"role": "user", "content": "只回答一个词：正常吗？"}],
+        "max_tokens": 24,
+        "temperature": 0,
+        "stream": False,
+        "chat_template_kwargs": {"enable_thinking": False},
+    }
+    req = urllib.request.Request(base + "/v1/chat/completions",
+                                 data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
+                                 headers={"Content-Type": "application/json"})
+    print("[冒烟] POST %s/v1/chat/completions  max_tokens=24  超时=%ss" % (base, to))
+    t0 = time.time()
+    try:
+        with _OPENER.open(req, timeout=to) as r:
+            d = json.loads(r.read().decode("utf-8", "ignore"))
+    except Exception as e:
+        dt = time.time() - t0
+        print("[冒烟] !! 失败（%.1fs）：%r" % (dt, e))
+        print("[冒烟] 按方案 B2：超时/失败只记录故障，不按端口杀进程。")
+        return False
+    dt = time.time() - t0
+    ch = (d.get("choices") or [{}])[0]
+    msg = ch.get("message") or {}
+    usage = d.get("usage") or {}
+    tm = d.get("timings") or {}
+    print("[冒烟] 通过  %.2fs  finish_reason=%s" % (dt, ch.get("finish_reason")))
+    print("        content=%r" % ((msg.get("content") or "").strip()[:120]))
+    print("        prompt_tokens=%s completion_tokens=%s"
+          % (usage.get("prompt_tokens"), usage.get("completion_tokens")))
+    if tm:
+        print("        prefill=%.2f t/s  decode=%.2f t/s"
+              % (tm.get("prompt_per_second", 0.0), tm.get("predicted_per_second", 0.0)))
+    return True
+
+
+# ================================================================ up
+def cmd_up(cfg, args):
+    fp = config_fingerprint(cfg)
+    show_effective_config(cfg, fp)
+    b = cfg["backend"]
+    p = cfg["proxy"]
+    ensure_dirs(cfg)
+    st = load_state(cfg)
+    st["config_fingerprint"] = fp
+    fresh_backend = False
+    restarted_backend = False
+
+    # ---------------- 后端 ----------------
+    owners = port_owners(b["port"])
+    busy = False
+    if owners:
+        if len(owners) > 1:
+            print("[后端] 注意：:%d 有多个监听进程 %s" % (b["port"], owners))
+        pid = owners[0]
+        info = proc_info(pid)
+        if not is_our_backend(info, cfg):
+            die("端口 %d 被非本项目进程占用：pid=%s exe=%s\n"
+                "    本管理器不会杀未知进程。请先自行确认并处理，然后重跑。"
+                % (b["port"], pid, (info or {}).get("ExecutablePath")))
+        print("[后端] 已在运行 pid=%d（身份已核对：可执行文件+模型+端口一致）" % pid)
+        st["backend"] = {"pid": pid, "exe": b["exe"], "model": b["model"],
+                         "port": b["port"], "config_fingerprint": fp,
+                         "started_by": st.get("backend", {}).get("started_by", "unknown")}
+        save_state(cfg, st)
+
+        h = api(backend_base(cfg), "/health", 5)
+        if not h or h.get("status") != "ok":
+            print("[后端] !! /health 异常：%r" % h)
+            print("[后端] 按 B2：不按端口杀进程；保留现场，请人工确认。")
+            return 2
+
+        slots = api(backend_base(cfg), "/slots", 5)
+        busy = slots_busy(slots)
+        info_props = api(backend_base(cfg), "/props", 5) or {}
+        print("[后端] build_info=%s  n_ctx=%s  生成上限默认=%s  忙=%s"
+              % (info_props.get("build_info"), props_n_ctx(info_props),
+                 props_default_n_predict(info_props), busy))
+
+        diff = cmdline_diff(info.get("CommandLine"), backend_args(cfg))
+        if not diff_empty(diff):
+            print("[后端] !! 在线参数与配置不一致：")
+            print("        仅在线有: %s" % (diff.get("only_online") or "-"))
+            print("        仅配置有: %s" % (diff.get("only_config") or "-"))
+            if busy:
+                print("[后端] 忙 → 等待空闲后再受控重启；本次不重启，不中断用户任务。")
+            elif args.no_restart:
+                print("[后端] 空闲但 --no-restart → 不重启（新配置尚未生效）。")
+            else:
+                print("[后端] 空闲 → 受控重启（只按已核对身份的 pid=%d）" % pid)
+                stop_pid_verified(pid, "后端")
+                restarted_backend = True
+                owners = []
+        else:
+            print("[后端] 在线参数与配置一致，无需重启。")
+
+    if not owners:
+        if port_owners(b["port"]):
+            die("端口 %d 刚被别的进程抢占，停手（不杀未知进程）。" % b["port"])
+        proc = start_backend(cfg)
+        fresh_backend = True
+        t = wait_health(cfg, 300, proc)
+        if t is None:
+            print("[后端] !! 300 秒内未就绪。保留日志，不自动无限重启，请人工处理：%s"
+                  % b["log"])
+            return 1
+        print("[后端] 就绪，耗时 %.0f 秒。" % t)
+        st["backend"] = {"pid": proc.pid, "exe": b["exe"], "model": b["model"],
+                         "port": b["port"], "config_fingerprint": fp,
+                         "started_by": "bonsai_launcher"}
+        save_state(cfg, st)
+
+    # ---------------- 代理 ----------------
+    owners = port_owners(p["port"])
+    if owners:
+        pid = owners[0]
+        info = proc_info(pid)
+        if not is_our_proxy(info, cfg):
+            die("代理端口 %d 被非本项目进程占用：pid=%s exe=%s\n"
+                "    本管理器不会杀未知进程，请人工处理。"
+                % (p["port"], pid, (info or {}).get("ExecutablePath")))
+        print("[代理] 已在运行 pid=%d" % pid)
+        st["proxy"] = {"pid": pid, "script": p["script"], "port": p["port"],
+                       "config_fingerprint": fp}
+        save_state(cfg, st)
+        diff = cmdline_diff(info.get("CommandLine"), proxy_args(cfg))
+        if not diff_empty(diff):
+            print("[代理] !! 启动参数与配置不一致：")
+            print("        仅在线有: %s" % (diff.get("only_online") or "-"))
+            print("        仅配置有: %s" % (diff.get("only_config") or "-"))
+            if busy:
+                print("[代理] 后端忙 → 不重启代理，避免切断在途请求。")
+            elif args.no_restart:
+                print("[代理] 空闲但 --no-restart → 不重启。")
+            else:
+                print("[代理] 空闲 → 重启代理（不影响 GPU 模型）。")
+                stop_pid_verified(pid, "代理")
+                owners = []
+        else:
+            print("[代理] 参数与配置一致。")
+    if not owners:
+        if port_owners(p["port"]):
+            die("代理端口 %d 刚被抢占，停手。" % p["port"])
+        pr = start_proxy(cfg)
+        for _ in range(30):
+            time.sleep(0.5)
+            if api(proxy_base(cfg), "/health", 3):
+                break
+        st["proxy"] = {"pid": pr.pid, "script": p["script"], "port": p["port"],
+                       "config_fingerprint": fp}
+        save_state(cfg, st)
+
+    # ---------------- 预热（只一次） ----------------
+    if (cfg.get("prewarm") or {}).get("enabled") and not args.no_prewarm:
+        if not (fresh_backend or restarted_backend):
+            print("[预热] 后端本次未重启（缓存状态未知但非冷启动）→ 跳过重复预热；"
+                  "需要时单独跑 prewarm 动作。")
+        else:
+            slots = api(backend_base(cfg), "/slots", 5)
+            if slots_busy(slots):
+                print("[预热] 后端忙 → 跳过（不抢占正在执行的用户任务）。")
+            else:
+                do_prewarm(cfg, args.config)
+    else:
+        print("[预热] 已关闭（--no-prewarm 或配置 prewarm.enabled=false）。")
+
+    # ---------------- 冒烟 ----------------
+    if args.smoke or fresh_backend:
+        slots = api(backend_base(cfg), "/slots", 5)
+        if slots_busy(slots):
+            print("[冒烟] 后端忙 → 跳过（B2：忙时不发推理探活）。")
+        else:
+            cmd_smoke(cfg, via_proxy=True)
+
+    print()
+    hr()
+    print(" 就绪：WorkBuddy 指向 http://%s:%d/v1   模型别名 %s"
+          % (p["host"], p["port"], b["alias"]))
+    print(" 配置指纹 %s   状态文件 %s" % (fp[:16], state_path(cfg)))
+    print(" 查看状态: python launcher\\bonsai_launcher.py status")
+    print(" 看体检  : python launcher\\bonsai_launcher.py smoke")
+    hr()
+    return 0
+
+
+# ================================================================ status
+def cmd_status(cfg):
+    fp = config_fingerprint(cfg)
+    b = cfg["backend"]
+    p = cfg["proxy"]
+    st = load_state(cfg)
+    hr()
+    print(" Bonsai 运行状态")
+    hr()
+    print(" 配置指纹 : %s（当前文件）" % fp[:16])
+    if st.get("config_fingerprint"):
+        same = (st["config_fingerprint"] == fp)
+        print(" state 记录: %s   %s"
+              % (st["config_fingerprint"][:16], "一致" if same else "!! 不一致"))
+    print(" state 文件: %s" % state_path(cfg))
+    print()
+
+    for label, port, exe_check in (("后端", b["port"], is_our_backend),
+                                   ("代理", p["port"], is_our_proxy)):
+        owners = port_owners(port)
+        print(" [%s] :%d 监听 pid=%s" % (label, port, owners or "无"))
+        for pid in owners:
+            info = proc_info(pid) or {}
+            ok = exe_check(info, cfg)
+            print("   pid=%d 身份%s  exe=%s" % (pid, "匹配" if ok else "!! 不匹配",
+                                                info.get("ExecutablePath")))
+            d = cmdline_diff(info.get("CommandLine"),
+                             backend_args(cfg) if label == "后端" else proxy_args(cfg))
+            if not diff_empty(d):
+                print("     参数差异: 仅在线=%s 仅配置=%s"
+                      % (d.get("only_online") or "-", d.get("only_config") or "-"))
+    print()
+
+    h = api(backend_base(cfg), "/health", 5)
+    props = api(backend_base(cfg), "/props", 5) or {}
+    slots = api(backend_base(cfg), "/slots", 5)
+    print(" [健康] /health=%s" % (h or "不可达"))
+    print(" [模型] alias=%s  n_ctx=%s  服务默认生成上限=%s  build_info=%s"
+          % (props.get("model_alias"), props_n_ctx(props),
+             props_default_n_predict(props), props.get("build_info")))
+    if isinstance(slots, list) and slots:
+        s = slots[0]
+        print(" [忙碌] is_processing=%s  n_prompt_tokens=%s"
+              % (s.get("is_processing"), s.get("n_prompt_tokens")))
+    else:
+        print(" [忙碌] /slots 不可达或为空")
+    print()
+    out = run(["nvidia-smi", "--query-gpu=memory.used,memory.total,utilization.gpu,"
+               "temperature.gpu,power.draw,clocks.current.sm,clocks.current.graphics",
+               "--format=csv,noheader"], timeout=15).strip()
+    print(" [GPU ] %s" % out)
+    hr()
+    return 0
+
+
+# ================================================================ stop
+def cmd_stop(cfg, force=False):
+    st = load_state(cfg)
+    slots = api(backend_base(cfg), "/slots", 5)
+    if slots_busy(slots) and not force:
+        print("[停止] 后端正在处理任务 → 拒绝停止（方案铁律：不杀掉用户的任务）。")
+        print("       确需强制停止请加 --force（会中断当前任务）。")
+        return 4
+    hr()
+    print(" 停止本管理器记录并核对过身份的进程（禁止按端口盲杀）")
+    hr()
+    did = False
+    for role, checker, label in (("backend", is_our_backend, "后端"),
+                                 ("proxy", is_our_proxy, "代理")):
+        rec = st.get(role) or {}
+        pid = rec.get("pid")
+        if not pid:
+            print(" [%s] state 无记录，跳过。" % label)
+            continue
+        info = proc_info(pid)
+        if not info:
+            print(" [%s] pid=%d 已不存在（state 过期），清理记录。" % (label, pid))
+            st.pop(role, None)
+            continue
+        if not checker(info, cfg):
+            print(" [%s] pid=%d 身份不匹配（可能已被复用），跳过，不杀。" % (label, pid))
+            continue
+        stop_pid_verified(pid, label)
+        st.pop(role, None)
+        did = True
+    save_state(cfg, st)
+    if not did:
+        print(" 没有可安全停止的进程。")
+    hr()
+    return 0
+
+
+# ================================================================ main
+def main():
+    ap = argparse.ArgumentParser(description="Bonsai 统一启动管理器")
+    ap.add_argument("action", choices=["up", "status", "stop", "smoke",
+                                       "prewarm", "show-config"])
+    ap.add_argument("--config", default=DEFAULT_CONFIG)
+    ap.add_argument("--smoke", action="store_true", help="up 时另做一次有限推理冒烟")
+    ap.add_argument("--no-prewarm", action="store_true")
+    ap.add_argument("--no-restart", action="store_true",
+                    help="在线参数与配置不一致时也不自动重启")
+    ap.add_argument("--force", action="store_true",
+                    help="stop 时即使后端忙也强制停止（会中断任务，慎用）")
+    args = ap.parse_args()
+
+    cfg = load_config(args.config)
+
+    if args.action == "up":
+        return cmd_up(cfg, args)
+    if args.action == "status":
+        return cmd_status(cfg)
+    if args.action == "stop":
+        return cmd_stop(cfg, force=args.force)
+    if args.action == "smoke":
+        return 0 if cmd_smoke(cfg, via_proxy=True) else 3
+    if args.action == "prewarm":
+        slots = api(backend_base(cfg), "/slots", 5)
+        if slots_busy(slots):
+            print("[预热] 后端忙 → 跳过（不抢占用户任务）。")
+            return 0
+        return 0 if do_prewarm(cfg, args.config) is not None else 3
+    if args.action == "show-config":
+        show_effective_config(cfg, config_fingerprint(cfg))
+        print(json.dumps(cfg, ensure_ascii=False, indent=2))
+        return 0
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

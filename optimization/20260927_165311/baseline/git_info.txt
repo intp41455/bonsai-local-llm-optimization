@@ -1,0 +1,4 @@
+﻿HEAD=9ef32054fe44797376792c869891163083d64bd0
+date=2026-09-25T13:10:09-07:00
+subject=Refresh Bonsai 2 upstream progress and Q2_0 support scope (#244)
+dirty=175 entries
