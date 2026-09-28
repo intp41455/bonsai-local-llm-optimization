@@ -1,4 +1,8 @@
-# Bonsai: 本地大模型极限推理网关与长上下文工程优化
+# Bonsai: 本地大模型极限制推理网关与长上下文工程优化
+
+> 💡 **核心技术护城河与稀缺价值**：  
+> **用万元内消费级显卡（8GB），把 27B 思考大模型的 64k 原生超长上下文“榨干且稳住”：在仅剩 120MB 显存极限边缘，实现 100% 生产级防崩与 18~20 token/s 极速推理，彻底突破消费级硬件的长上下文落地天花板！**  
+> ⚡ **8GB 显存跑满 64k** ｜ 📐 **56k 空间硬预算严格推导** ｜ 🛡️ **0ms Reject+Floor 零开销双重动态闸门** ｜ 🔄 **无损增量 SSEParser 状态机** ｜ 🎯 **400 客户端异常全链路可观测**
 
 [![Cloudflare Pages Docs](https://img.shields.io/badge/Docs-Cloudflare%20Pages-orange?style=flat-square&logo=cloudflare)](https://bonsai-optimization.pages.dev/)
 [![Hardware](https://img.shields.io/badge/Hardware-RTX%205060%20Laptop%208GB-76B900?style=flat-square&logo=nvidia)](https://bonsai-optimization.pages.dev/)
@@ -14,7 +18,7 @@
 
 ## 🌐 线上技术架构与交互式全流程复盘手册
 
-已部署至 Cloudflare 边缘计算全球网络，技术评委与面试官可直接访问完整交互式全景手册：  
+已部署至 Cloudflare 边缘计算全球网络，技术评委与面试官可直接访问完整交互式全景手册（暖色淡色精修版）：  
 👉 **[https://bonsai-optimization.pages.dev/](https://bonsai-optimization.pages.dev/)**
 
 ![Bonsai 架构与工程全景](docs/images/docs_preview.png)
@@ -140,7 +144,7 @@ Bonsai-demo/
 │   ├── Bonsai-2-27B-最优操作手册.md # 生产级启动与维护 SOP
 │   ├── Bonsai2-27B-8GB部署交付报告.md# 8GB 显存极限压榨交付验收报告
 │   └── 蓝屏事故与防范复盘-2026-09.md # Windows 底层驱动稳定性排障复盘
-├── docs-web/                       # 在线知识库网页源码
+├── docs-web/                       # 在线知识库网页源码 (暖色淡色雅致版)
 │   └── index.html                  # 交互式技术全景文档站 (已上线 Pages)
 ├── bench/                          # 基准测试与压力评测工具集
 │   ├── bench_final2.py             # 64k 长上下文吞吐与时延评测
@@ -204,6 +208,8 @@ Bonsai-demo/
 
 ---
 
-## 8. 开源协议与知识产权
+## 8. 开源协议与个人作品集联动
 
-本项目核心代码遵循 [MIT License](LICENSE)。所涉第三方推理后端与模型权重遵循相应开源社区协议。
+* 本项目核心代码遵循 [MIT License](LICENSE)。
+* **个人作品集（国内镜像）**：[https://showcase-cn-5egoqlia.edgeone.cool/](https://showcase-cn-5egoqlia.edgeone.cool/)
+* **企业级多智能体协同排障平台**：[IncidentOps 线上中枢](https://incidentops.pages.dev/) ｜ [GitHub 仓库](https://github.com/intp41455/incidentops-enterprise-agent)
