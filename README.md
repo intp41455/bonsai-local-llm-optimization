@@ -41,6 +41,19 @@
 
 系统解耦了“底层算力推理加速”与“上游网关流量治理”，构建了双层反向代理拓扑：
 
+```mermaid
+flowchart TD
+    A["OpenAI API 客户端 / IDE"] --> B["Bonsai Proxy :8080"]
+    B --> C["输入预算与 Reject+Floor 预筛"]
+    C --> D["提示词处理与请求转发"]
+    D --> E["llama-server :8081"]
+    E --> F["Bonsai 27B GGUF 推理"]
+    F --> G["SSEParser 增量解析与断流观测"]
+    G --> H["HTTP / SSE 流式响应"]
+```
+
+图中展示请求主路径；下方文字框图列出预算阈值、接口端口和流式处理细节。
+
 ```
 [OpenAI API 客户端 / IDE / 多智能体框架]
          │
