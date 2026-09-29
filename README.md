@@ -1,8 +1,7 @@
 # Bonsai: 本地大模型推理网关与长上下文工程优化实验
 
-> 💡 **核心技术护城河与工程探索**：  
-> **围绕消费级显卡（RTX 5060 Laptop 8GB）部署 27B 思考型大模型并开启 64k（65,536 tokens）长上下文的工程优化探索：通过 56k 空间硬预算机制、字符与 Token 两级动态预筛闸门、增量 SSE 解析与异常感知，在实测测试集中实现超限请求 100% 拦截并稳定维持约 18~20 token/s 吞吐，为受限算力环境提供严密的单机长上下文服务化参考。**  
-> ⚡ **8GB 显存承载 64k** ｜ 📐 **56k 空间硬预算严格推导** ｜ 🛡️ **Reject+Floor 两级动态预筛（0.3ms / 1.2ms 拦截）** ｜ 🔄 **无损增量 SSEParser 状态机** ｜ 🎯 **400 客户端异常全链路可观测**
+> 💡 **工程概览**：在 RTX 5060 Laptop 8GB 上探索 27B 模型的 64k 上下文推理。网关以 56,320 tokens 为输入预算，结合请求预筛、增量 SSE 解析和异常观测；指定测试集中的超限请求均被拦截。文中速度数据对应各自的测试配置，并非所有任务的统一吞吐。
+> ⚡ **8GB 显存与 64k 上下文** ｜ 📐 **56k 输入预算** ｜ 🛡️ **Reject+Floor 预筛** ｜ 🔄 **SSE 增量解析** ｜ 🎯 **异常链路观测**
 
 [![Cloudflare Pages Docs](https://img.shields.io/badge/Docs-Cloudflare%20Pages-orange?style=flat-square&logo=cloudflare)](https://bonsai-optimization.pages.dev/)
 [![Hardware](https://img.shields.io/badge/Hardware-RTX%205060%20Laptop%208GB-76B900?style=flat-square&logo=nvidia)](https://bonsai-optimization.pages.dev/)
@@ -18,7 +17,7 @@
 
 ## 🌐 线上技术架构与交互式全流程复盘手册
 
-已部署至 Cloudflare 边缘计算全球网络，技术评委与面试官可直接访问完整交互式全景手册（暖色淡色精修版）：  
+交互式技术手册已上线，欢迎查看与参考：
 👉 **[https://bonsai-optimization.pages.dev/](https://bonsai-optimization.pages.dev/)**
 
 ![Bonsai 架构与工程全景](docs/images/docs_preview.png)
@@ -43,13 +42,11 @@
 
 ```mermaid
 flowchart TD
-    A["OpenAI API 客户端 / IDE"] --> B["Bonsai Proxy :8080"]
-    B --> C["输入预算与 Reject+Floor 预筛"]
-    C --> D["提示词处理与请求转发"]
-    D --> E["llama-server :8081"]
-    E --> F["Bonsai 27B GGUF 推理"]
-    F --> G["SSEParser 增量解析与断流观测"]
-    G --> H["HTTP / SSE 流式响应"]
+    A["API 客户端 / IDE"] --> B["Bonsai 网关 :8080"]
+    B --> C["输入预算预筛"]
+    C --> D["请求转发"]
+    D --> E["模型推理 :8081"]
+    E --> F["SSE 解析与响应"]
 ```
 
 图中展示请求主路径；下方文字框图列出预算阈值、接口端口和流式处理细节。
@@ -92,7 +89,7 @@ flowchart TD
 * **推理生成预留空间**：思考型大模型思考链与最终回答预留 **8,192 tokens**；
 * **安全冗余缓冲**：预留 **1,024 tokens** 应对分词器误差、系统特殊标记（Special Tokens）与会话包裹开销；
 * **网关准入红线推导**：
-  $$	ext{Max Input Budget} = 65,536 - 8,192 - 1,024 = 56,320	ext{ tokens}$$
+   **输入预算 = 65,536 − 8,192 − 1,024 = 56,320 tokens。**
   输入超过 56,320 tokens 的请求在网关层即行拦截，避免超额请求进入 GPU 阶段引发显存崩溃。
 
 ### 3.2 Reject + Floor 双重动态预筛闸门 (Two-Stage Gate)
@@ -166,7 +163,7 @@ Bonsai-demo/
 ├── config/                         # 推荐运行参数与模型配置
 ├── launcher/                       # 一键式守护进程与自启动控制脚本
 ├── .gitignore                      # 工业级代码与大文件隔离配置
-└── README.md                       # 本工程主说明文档 (修订副本: README-revised.md)
+└── README.md                       # 本工程主说明文档
 ```
 
 ---
@@ -213,28 +210,24 @@ Bonsai-demo/
 
 ## 7. 架构工程权衡与反思 (Engineering Trade-offs)
 
-1. **为什么不采用动态内存交换（Offload to RAM）？**  
-   在 PCIe 带宽受限的移动端设备上，频繁的 CPU-GPU 权重与 KV 交换会导致推理吞吐骤降至 0.8~1.5 token/s。本项目选择通过硬预算与三值化在纯 GPU 显存内达成闭环，锁定约 18~20 token/s 的可用速度。
+1. **为什么当前配置不采用动态内存交换（Offload to RAM）？**
+   在移动端设备上，频繁的 CPU–GPU 权重与 KV 交换会增加传输开销。本项目优先使用量化权重和输入预算控制，减少运行时显存压力；是否采用 offload 仍应按具体模型、上下文长度和硬件实测比较。
 2. **为什么在网关层执行 Reject 而非由后端自行排队截断？**  
    底层推理引擎一旦接收超额 prompt，其内部的 prefill 计算会瞬间拉高 Scratch 缓冲区显存，可能产生数秒的 GPU 阻塞。网关层通过约 0.3ms 字符地板粗筛与 1.2ms 分词闸门，将风险隔离在算力之外。
 
 ---
 
-## 8. 开源协议与项目链接
+## 8. 开源协议
 
-* 本项目核心代码遵循 [MIT License](LICENSE)。
-* **个人作品集（国内免翻墙镜像）**：[https://showcase-cn-5egoqlia.edgeone.cool/](https://showcase-cn-5egoqlia.edgeone.cool/)
-* **企业故障排查多智能体原型**：[IncidentOps 在线演示](https://incidentops.pages.dev/) ｜ [GitHub 仓库](https://github.com/intp41455/incidentops-enterprise-agent)
+仓库采用 [Apache License 2.0](LICENSE)；引用第三方模型、依赖或素材时，请分别遵循各自的许可。
 
 ---
 
-## 9. 2026-09 升级实测：NInfer 异构内核适配、Prefix Cache 前缀复用与双档交付架构
+## 9. 后续优化与验证状态
 
-针对社区反馈中多轮长会话重复预填耗时（如 50k 历史每轮重灌耗时 1 分钟）及极端场景长代码生成中断的问题，系统在原有 PrismML llama.cpp 基线之上，完成了针对 **RTX 5060 Laptop 8GB** 移动端 GPU 的异构加速演进：
+多轮会话的前缀复用、推理内核适配和任务级质量仍在持续验证。不同配置的速度样本不能直接当作同一生产配置的交付指标。
 
-1. **A3 补丁与内核边界修复**：严格审查并修复 `program_impl.h` 中的 KVMem frontier 边界条件与 262144 capacity 检查，彻底杜绝极端代码长生成中止引发的端口死锁；
-2. **前缀缓存对齐 (Prefix Cache Alignment)**：规范 System Prompt 与 Tool Schema 静态拓扑序列，多轮 Agent 会话前缀命中率从 0% 提升至 **75%+**，多轮重灌耗时由 60 秒级降至 **705ms**（亚秒级响应）；
-3. **双档分级架构 (Dual-Profile Routing)**：
-   - **日常稳态档 (Balanced Profile)**：PrismML / NInfer 基准内核，decode 速度稳定在 **24.9 ~ 28.5 token/s**（较初始基准提升约 35%），保障长上下文推理严谨性与 64k 事实召回；
-   - **代码极速档 (Fast Coding Profile)**：NInfer 异构内核适配 5060 Laptop 专属加速 + 受控 MTP 投机解码，在代码生成场景跑出 **45 ~ 55+ token/s** 的突破性吞吐；
-4. **12 任务基准质量门禁 100% 达标**：通过 4 短、4 中、4 长固定任务集 3 轮交叉盲评，无崩溃、无格式损坏、无 CUDA OOM，物理显存峰值严格受控在 **7.88GB** 安全水线以内，端到端任务完成耗时中位数缩短 38%。
+- **当前任务基线**：本地固定的 12 项任务各运行 3 次，30/36 次运行通过；失败集中在任务 8 和任务 12。任务 8 涉及 SVG 属性错误，任务 12 涉及日志错误码漏报。统计口径为完整任务通过次数。
+- **前缀复用与内核适配**：保留为独立研究方向；只有在固定模型、输入、配置和硬件下完成对照，才将结果写为可复现的性能结论。
+- **MTP 投机解码**：当前生产配置保持关闭。已有对照中，关闭 MTP 的任务完成速度更好；不将早期单次最高 token/s 宣称为现行生产吞吐。
+- **质量门禁**：任务 8/12 的候选修复仍需端到端完成及全量回归，尚未达到 12/12 任务通过。
