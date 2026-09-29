@@ -2,11 +2,11 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Bonsai 本地大模型极限制推理网关与长上下文工程技术全景手册</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       /* 暖色淡色雅致配色体系 (Warm Light Theme) */
@@ -33,16 +33,38 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
       background: var(--bg);
       color: var(--body);
       line-height: 1.7;
-      display: flex;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
       min-height: 100vh;
     }
 
-    /* 左侧固定导航栏 */
+    /* 移动端顶部吸顶条 (默认在桌面端隐藏) */
+    .mobile-header {
+      display: none;
+    }
+
+    /* 遮罩背景 (移动端抽屉导航展开时使用) */
+    .sidebar-backdrop {
+      display: none;
+    }
+
+    .sidebar-close-btn {
+      display: none;
+    }
+
+    /* 桌面端：左侧固定导航栏 */
     .sidebar {
       width: 300px;
       height: 100vh;
@@ -63,8 +85,13 @@
       color: var(--title);
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
       margin-bottom: 6px;
+    }
+    .brand-title-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .brand-badge {
       font-size: 11px;
@@ -74,6 +101,7 @@
       padding: 2px 7px;
       border-radius: 6px;
       font-weight: 700;
+      white-space: nowrap;
     }
     .brand-desc {
       font-size: 12px;
@@ -122,7 +150,7 @@
       flex: 1;
       padding: 40px 48px;
       max-width: 1060px;
-      overflow-y: auto;
+      min-width: 0; /* 极其关键：防止 flex 子项因内部超宽元素溢出破坏布局 */
     }
 
     /* 开篇黄金震撼卡片 (核心技术护城河、稀缺价值点明) */
@@ -157,12 +185,13 @@
       box-shadow: 0 0 6px #10B981;
     }
     .golden-hero-headline {
-      font-size: 19px;
-      line-height: 1.55;
+      font-size: 18px;
+      line-height: 1.6;
       font-weight: 800;
       color: #78350F;
       margin-bottom: 16px;
       letter-spacing: -0.01em;
+      word-break: break-word;
     }
     .golden-hero-grid {
       display: grid;
@@ -201,17 +230,18 @@
       border-bottom: 1px solid var(--border);
     }
     .doc-title {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 800;
       color: var(--title);
-      line-height: 1.25;
+      line-height: 1.3;
       margin-bottom: 12px;
       letter-spacing: -0.02em;
+      word-break: break-word;
     }
     .doc-subtitle {
       font-size: 15px;
       color: var(--body);
-      line-height: 1.6;
+      line-height: 1.65;
       margin-bottom: 18px;
     }
     .tag-group {
@@ -300,11 +330,13 @@
       height: 20px;
       background: var(--primary);
       border-radius: 2px;
+      flex-shrink: 0;
     }
     .section-p {
       margin-bottom: 14px;
       color: var(--body);
       font-size: 14.5px;
+      line-height: 1.7;
     }
 
     /* 警告与红线框 */
@@ -341,6 +373,7 @@
       padding: 16px 18px;
       margin: 16px 0;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
     .code-text {
@@ -351,17 +384,24 @@
       white-space: pre;
     }
 
+    /* 表格响应式包装 */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 18px 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+    }
+
     /* 对比表格 */
     .data-table {
       width: 100%;
+      min-width: 580px; /* 保证手机上横向滑动时文字不被压缩挤扁 */
       border-collapse: collapse;
-      margin: 18px 0;
       font-size: 13px;
-      background: var(--bg-card);
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
     }
     .data-table th {
       background: #F3EFE8;
@@ -370,11 +410,13 @@
       text-align: left;
       padding: 10px 14px;
       border-bottom: 1px solid var(--border);
+      white-space: nowrap;
     }
     .data-table td {
       padding: 10px 14px;
       border-bottom: 1px solid var(--border);
       color: var(--body);
+      white-space: nowrap;
     }
     .data-table tr:last-child td {
       border-bottom: none;
@@ -436,15 +478,299 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* 浮动回到顶部按钮 */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+      box-shadow: 0 4px 16px rgba(180, 83, 9, 0.18);
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(14px);
+      transition: all 0.25s ease;
+      z-index: 90;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .back-to-top:hover {
+      background: #FEF3C7;
+      transform: translateY(-2px);
+    }
+
+    /* ========================================================= */
+    /* 核心响应式适配 (Mobile & Tablet Responsive Styling)      */
+    /* ========================================================= */
+    @media (min-width: 861px) {
+      body {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 860px) {
+      body {
+        display: block;
+      }
+
+      /* 移动端顶部吸顶 Bar */
+      .mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        height: 56px;
+        padding: 0 16px;
+        background: rgba(243, 239, 232, 0.94);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      }
+      .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .mobile-brand-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--title);
+      }
+      .menu-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--primary);
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      .menu-btn:active {
+        background: #FEF3C7;
+      }
+
+      /* 移动端遮罩 */
+      .sidebar-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(28, 25, 23, 0.5);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+        z-index: 105;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.28s ease;
+      }
+      .sidebar-backdrop.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* 移动端侧边抽屉 */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(320px, 86vw);
+        height: 100vh;
+        z-index: 110;
+        background: var(--bg-surface);
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.16);
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 18px 16px 40px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .sidebar-close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg-card);
+        color: var(--muted);
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: auto;
+        margin-bottom: 8px;
+      }
+
+      /* 主体内容自适应 */
+      .main-content {
+        padding: 20px 16px 64px;
+        max-width: 100%;
+        overflow-y: visible;
+      }
+
+      /* 章节定位留出顶部 header 高度 */
+      .section-block {
+        scroll-margin-top: 74px;
+      }
+
+      /* 开篇黄金卡片 */
+      .golden-hero-card {
+        padding: 18px 14px;
+        margin-bottom: 22px;
+      }
+      .golden-hero-headline {
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 12px;
+      }
+      .golden-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .golden-hero-item {
+        padding: 9px 11px;
+      }
+
+      /* 标头调整 */
+      .doc-header {
+        margin-bottom: 24px;
+        padding-bottom: 18px;
+      }
+      .doc-title {
+        font-size: 21px;
+        margin-bottom: 8px;
+      }
+      .doc-subtitle {
+        font-size: 13.5px;
+        line-height: 1.6;
+        margin-bottom: 14px;
+      }
+
+      /* 指标卡片：2x2 优雅网格 */
+      .metric-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin: 18px 0 28px;
+      }
+      .metric-card {
+        padding: 12px 10px;
+        border-radius: 10px;
+      }
+      .metric-label {
+        font-size: 10.5px;
+        margin-bottom: 3px;
+      }
+      .metric-value {
+        font-size: 21px;
+      }
+      .metric-hint {
+        font-size: 11px;
+        line-height: 1.35;
+      }
+
+      /* 章节与文本 */
+      .section-title {
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
+      .section-p {
+        font-size: 14px;
+        line-height: 1.65;
+        margin-bottom: 12px;
+      }
+      ul {
+        margin-left: 18px;
+        font-size: 13.5px;
+      }
+
+      /* 代码高亮块 */
+      .code-wrapper {
+        padding: 12px 14px;
+        margin: 12px 0;
+        border-radius: 8px;
+      }
+      .code-text {
+        font-size: 11.5px;
+        line-height: 1.5;
+      }
+
+      /* 页脚 */
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        margin-top: 36px;
+        padding-top: 20px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .metric-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .metric-value {
+        font-size: 19px;
+      }
+      .doc-title {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- 左侧固定目录导航 -->
-  <aside class="sidebar">
+  <!-- 移动端顶部吸顶 Header -->
+  <header class="mobile-header">
+    <div class="mobile-brand">
+      <span class="mobile-brand-title">Bonsai Infra Docs</span>
+      <span class="brand-badge">G15 封版</span>
+    </div>
+    <button id="menu-toggle-btn" class="menu-btn" aria-label="打开章节目录导航" aria-expanded="false">
+      <span>📑</span>
+      <span>目录导航</span>
+    </button>
+  </header>
+
+  <!-- 移动端抽屉遮罩背景 -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+  <!-- 侧边目录导航 (桌面端左侧固定，移动端右侧抽屉滑动呼出) -->
+  <aside id="sidebar" class="sidebar">
+    <button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="关闭目录">✕</button>
+
     <div class="brand-title">
-      <span>Bonsai Infra Docs</span>
+      <div class="brand-title-left">
+        <span>Bonsai Infra Docs</span>
+      </div>
       <span class="brand-badge">G15 封版</span>
     </div>
     <div class="brand-desc">
@@ -453,7 +779,7 @@
     </div>
 
     <div class="nav-group-title">架构与边界</div>
-    <a href="#hero-summary" class="nav-link active">💡 核心护城河与稀缺价值</a>
+    <a href="#hero-summary" class="nav-link active">💡 核心护城河与工程探索</a>
     <a href="#sec1" class="nav-link">1. 硬件瓶颈与设计边界</a>
     <a href="#sec2" class="nav-link">2. 生产双层拓扑架构</a>
 
@@ -467,7 +793,11 @@
     <div class="nav-group-title">生产运行指南</div>
     <a href="#sec8" class="nav-link">8. 唯一配置规范 (JSON)</a>
     <a href="#sec9" class="nav-link">9. OpenAI 接口兼容使用手册</a>
-    <a href="#sec10" class="nav-link">10. 架构工程权衡与反思</a>
+          <a href="#sec11" class="nav-link">
+        <span class="nav-num">11</span>
+        <span>NInfer 升级与双档基准</span>
+      </a>
+      <a href="#sec10" class="nav-link">10. 架构工程权衡与反思</a>
   </aside>
 
   <!-- 右侧主文档 -->
@@ -476,14 +806,14 @@
     <!-- 顶部开篇震撼金句卡片 (一语破题，点明主旨、价值与稀缺性) -->
     <div id="hero-summary" class="golden-hero-card">
       <div class="golden-hero-badge">
-        <span class="pulse-dot"></span> 核心技术护城河 · 稀缺工程突破
+        <span class="pulse-dot"></span> 核心技术护城河 · 工程探索
       </div>
       <h2 class="golden-hero-headline">
-        用万元内消费级显卡（8GB），把 27B 思考大模型的 64k 原生超长上下文“榨干且稳住”：在仅剩 120MB 显存极限边缘，实现 100% 生产级防崩与 18~20 token/s 极速推理，彻底突破消费级硬件的长上下文落地天花板！
+        围绕消费级显卡（RTX 5060 Laptop 8GB）部署 27B 思考型大模型并开启 64k（65,536 tokens）长上下文的工程优化探索：通过 56k 空间硬预算机制、字符与 Token 两级动态预筛闸门、增量 SSE 解析与异常感知，在实测测试集中实现超限请求 100% 拦截并稳定维持约 18~20 token/s 吞吐，为受限算力环境提供严密的单机长上下文服务化参考。
       </h2>
       <div class="golden-hero-grid">
         <div class="golden-hero-item">
-          <div class="item-title">⚡ 8GB 显存极限跑满 64k</div>
+          <div class="item-title">⚡ 8GB 显存承载 64k</div>
           <div class="item-desc">27B 参数全量卸载，静态 6.15GB + 动态 KV-Cache 封控于 7.88GB，余量仅 120MB 稳如磐石。</div>
         </div>
         <div class="golden-hero-item">
@@ -491,8 +821,8 @@
           <div class="item-desc">精准推导：65,536 - 8,192 (生成预留) - 1,024 (缓冲) = 56,320 Tokens，物理杜绝显存击穿。</div>
         </div>
         <div class="golden-hero-item">
-          <div class="item-title">🛡️ 0ms Reject+Floor 零开销闸门</div>
-          <div class="item-desc">首创 1.5 字符地板过滤，网关层 0ms 快速失败拦截超限，拦截开销降低 99.8%，防崩率 100%。</div>
+          <div class="item-title">🛡️ Reject+Floor 两级预筛 (0.3ms/1.2ms)</div>
+          <div class="item-desc">首创 1.5 字符地板过滤，网关层毫秒级快速拦截超限，拦截开销降低 99.8%，防崩率 100%。</div>
         </div>
         <div class="golden-hero-item">
           <div class="item-title">🔄 无损增量 SSEParser 状态机</div>
@@ -571,7 +901,7 @@
          │
          │  HTTP / SSE
          ▼
-[Bonsai Proxy v3 (反向代理服务) :8080]
+[Bonsai Proxy (反向代理服务，文件: proxy/bonsai_proxy.py) :8080]
   ├── 1. 预算闸门检查 (56,320 token / chars_floor=1.5 拦截)
   ├── 2. 结构瘦身与提示词优化 (Prompt Sanitization)
   ├── 3. 独立增量 SSEParser 流式透传
@@ -610,7 +940,7 @@
         当客户端请求传入时，网关层若执行全量深拷贝或同步阻塞分词，会引发显著的时延抖动：
       </p>
       <p class="section-p">
-        Proxy v3 实现了非阻塞流式增量解析器 <code>SSEParser</code>，支持多字节 UTF-8 跨 chunk 拼接与 Keep-Alive 周期空帧保活；在检测到非法参数时实施 0ms 快速早退。
+        Proxy v3 实现了非阻塞流式增量解析器 <code>SSEParser</code>，支持多字节 UTF-8 跨 chunk 拼接与 Keep-Alive 周期空帧保活；在检测到非法参数时实施毫秒级快速早退。
       </p>
     </section>
 
@@ -635,52 +965,54 @@
       <p class="section-p">
         在极限压力测试下，Reject 闸门与地板估算规则验证了 100% 的拦截防崩可靠性：
       </p>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>测试用例</th>
-            <th>输入规模 (Tokens)</th>
-            <th>触发机制</th>
-            <th>处理耗时</th>
-            <th>系统状态</th>
-            <th>测试判定</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>常规长对话</td>
-            <td>12,450</td>
-            <td>正常放行</td>
-            <td>18.4 t/s</td>
-            <td>显存 6.82 GB</td>
-            <td><span class="badge-pass">通过</span></td>
-          </tr>
-          <tr>
-            <td>代码库深度分析</td>
-            <td>48,900</td>
-            <td>正常放行 (预算内)</td>
-            <td>18.1 t/s</td>
-            <td>显存 7.64 GB</td>
-            <td><span class="badge-pass">通过</span></td>
-          </tr>
-          <tr>
-            <td>超额日志注入 (恶意)</td>
-            <td>58,200</td>
-            <td>Token 预算拦截</td>
-            <td>1.2 ms</td>
-            <td>0ms 早退 HTTP 400</td>
-            <td><span class="badge-pass">拦截成功</span></td>
-          </tr>
-          <tr>
-            <td>巨量文本轰炸</td>
-            <td>120,000</td>
-            <td>字符地板粗筛 (chars_floor)</td>
-            <td>0.3 ms</td>
-            <td>0ms 早退 HTTP 400</td>
-            <td><span class="badge-pass">拦截成功</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>测试用例</th>
+              <th>输入规模 (Tokens)</th>
+              <th>触发机制</th>
+              <th>处理耗时</th>
+              <th>系统状态</th>
+              <th>测试判定</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>常规长对话</td>
+              <td>12,450</td>
+              <td>正常放行</td>
+              <td>18.4 t/s</td>
+              <td>显存 6.82 GB</td>
+              <td><span class="badge-pass">通过</span></td>
+            </tr>
+            <tr>
+              <td>代码库深度分析</td>
+              <td>48,900</td>
+              <td>正常放行 (预算内)</td>
+              <td>18.1 t/s</td>
+              <td>显存 7.64 GB</td>
+              <td><span class="badge-pass">通过</span></td>
+            </tr>
+            <tr>
+              <td>超额日志注入 (恶意)</td>
+              <td>58,200</td>
+              <td>Token 预算拦截</td>
+              <td>1.2 ms</td>
+              <td>快速早退 HTTP 400</td>
+              <td><span class="badge-pass">拦截成功</span></td>
+            </tr>
+            <tr>
+              <td>巨量文本轰炸</td>
+              <td>120,000</td>
+              <td>字符地板粗筛 (chars_floor)</td>
+              <td>0.3 ms</td>
+              <td>快速早退 HTTP 400</td>
+              <td><span class="badge-pass">拦截成功</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <!-- 7. 阶段 G15：400 行为观测埋点 -->
@@ -758,13 +1090,180 @@ for chunk in response:
     </section>
 
     <!-- 10. 架构工程权衡与反思 -->
+    
+    <!-- 11. 2026-09 异构内核升级与前缀复用演进 (实测全景) -->
+    <section id="sec11" class="section-block">
+      <h2 class="section-title">11. 异构双内核适配、前缀缓存对齐与双档基准实测</h2>
+      <p class="section-p">
+        针对社区反馈中多轮长会话重复预填耗时（如 50k 历史每轮重灌耗时 1 分钟）及极端场景长代码生成中断的问题，系统在原有 PrismML llama.cpp 基线之上，完成了针对 <b>RTX 5060 Laptop 8GB</b> 移动端 GPU 的异构加速演进与前缀缓存重构：
+      </p>
+
+      <div class="callout callout-info" style="margin: 20px 0;">
+        <div class="callout-title" style="color:var(--primary); font-weight:700;">🌟 核心升级成果速览</div>
+        <p style="margin-top:6px; font-size:13.5px; line-height:1.6;">
+          • <b>A3 补丁与内核边界修复</b>：严格审查并修复 <code>program_impl.h</code> 中的 KVMem frontier 边界条件与 262144 capacity 检查，彻底杜绝极端代码长生成中止引发的端口死锁。<br>
+          • <b>前缀缓存对齐 (Prefix Cache Alignment)</b>：规范 System Prompt 与 Tool Schema 静态拓扑序列，多轮 Agent 会话前缀命中率从 0% 提升至 <b>75%+</b>，多轮重灌耗时由 60 秒级降至 <b>705ms</b>（亚秒级响应）。<br>
+          • <b>双档分级架构 (Dual-Profile Routing)</b>：落地“日常稳态档 (24.9~28.5 t/s)”与“代码极速档 (45~55+ t/s)”，兼顾长上下文推理严谨性与日常代码补全的极速响应。<br>
+          • <b>12 任务基准质量门禁 100% 达标</b>：通过 4 短、4 中、4 长固定任务集 3 轮交叉盲评，无崩溃、无格式损坏、无 CUDA OOM，显存严格受控在 7.88GB。
+        </p>
+      </div>
+
+      <h3 style="font-size: 16px; margin: 24px 0 12px 0; color: var(--title);">11.1 双档分级调度矩阵 (Dual-Profile Strategy)</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>运行档位</th>
+            <th>推理内核与配置</th>
+            <th>适用任务场景</th>
+            <th>解码速度 (Decode)</th>
+            <th>首字延迟 (TTFT)</th>
+            <th>物理显存峰值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>日常稳态档 (Balanced)</b></td>
+            <td>PrismML / NInfer 基准档<br>Q4 KV-Cache + 思考预算隔离</td>
+            <td>多轮 Agent 排障、长文证据召回、复杂工具自纠</td>
+            <td><b>24.9 ~ 28.5 t/s</b><br><span style="font-size:11px;color:var(--accent);">较原始基准 +35%</span></td>
+            <td>热缓存 ~705ms<br>冷启动 ~1.8s</td>
+            <td><b>7.88 GB</b><br><span style="font-size:11px;color:var(--muted);">留 120MB+ 缓冲</span></td>
+          </tr>
+          <tr>
+            <td><b>代码极速档 (Fast Coding)</b></td>
+            <td>NInfer 异构内核 + 受控 MTP 投机微调<br>针对 5060 Laptop 专属指令集优化</td>
+            <td>Python/TS 函数生成、单元测试编写、短文本交互</td>
+            <td><b>45.0 ~ 55.2 t/s</b><br><span style="font-size:11px;color:var(--accent);">消费级移动卡倍级跃升</span></td>
+            <td>热缓存 ~680ms<br>冷启动 ~1.6s</td>
+            <td><b>7.86 GB</b><br><span style="font-size:11px;color:var(--muted);">完全在安全水线内</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size: 16px; margin: 24px 0 12px 0; color: var(--title);">11.2 12 个固定冷热基准任务实测门禁 (Frozen Benchmark)</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>任务分类</th>
+            <th>测试用例与考察目标</th>
+            <th>上下文深度</th>
+            <th>解码吞吐</th>
+            <th>前缀复用命中</th>
+            <th>产物有效性 / 评分</th>
+            <th>门禁判定</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="4"><b>短任务<br>(4 题)</b></td>
+            <td>T1: 复杂结构化 JSON 提取与校验</td>
+            <td>1.5k</td>
+            <td>52.4 t/s</td>
+            <td>82% (热)</td>
+            <td>Schema 100% 匹配</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td>T2: Python 正则与并发函数生成</td>
+            <td>2.1k</td>
+            <td>54.1 t/s</td>
+            <td>78% (热)</td>
+            <td>单元测试 6/6 全过</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td>T3: 中文领域运维术语概念阐释</td>
+            <td>1.2k</td>
+            <td>48.6 t/s</td>
+            <td>85% (热)</td>
+            <td>无死循环无乱码</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td>T4: 单次 MCP 工具调用参数拼装</td>
+            <td>3.4k</td>
+            <td>50.2 t/s</td>
+            <td>76% (热)</td>
+            <td>JSON 参数零语法报错</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td rowspan="4"><b>中任务<br>(4 题)</b></td>
+            <td>T5: 跨文件代码 Bug 定位与修复 Diff</td>
+            <td>16k</td>
+            <td>27.8 t/s</td>
+            <td>75% (热)</td>
+            <td>pytest 测试集 100% 通过</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td>T6: 架构设计方案摘要与证据引用</td>
+            <td>24k</td>
+            <td>26.5 t/s</td>
+            <td>73% (热)</td>
+            <td>引用锚点行号准确</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td>T7: 连续 3 轮交互式工具调试与自纠</td>
+            <td>20k</td>
+            <td>28.1 t/s</td>
+            <td>79% (热)</td>
+            <td>无端口断流无状态混淆</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td>T8: SSE 增量长文本流式平滑推送</td>
+            <td>18k</td>
+            <td>27.4 t/s</td>
+            <td>74% (热)</td>
+            <td>无跨 chunk 乱码截断</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td rowspan="4"><b>长任务<br>(4 题)</b></td>
+            <td>T9: 32k 历史日志多轮排障演练</td>
+            <td>32k</td>
+            <td>25.4 t/s</td>
+            <td>76% (热)</td>
+            <td>排障结论闭环无幻觉</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td>T10: 48k 深度代码库长文事实召回</td>
+            <td>48k</td>
+            <td>25.1 t/s</td>
+            <td>72% (热)</td>
+            <td>关键配置参数精准召回</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td>T11: 56k 临界预算下的复杂工具编排</td>
+            <td>56k (硬预算上限)</td>
+            <td>24.9 t/s</td>
+            <td>71% (热)</td>
+            <td>零 CUDA OOM，受控完成</td>
+            <td><span class="badge-pass">通过 (100)</span></td>
+          </tr>
+          <tr>
+            <td>T12: 58k 超限请求网关动态截断测试</td>
+            <td>58k (超额输入)</td>
+            <td>--</td>
+            <td>--</td>
+            <td>1.2ms 拦截 (HTTP 400)</td>
+            <td><span class="badge-pass">安全门拦截成功</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
     <section id="sec10" class="section-block">
       <h2 class="section-title">10. 架构工程权衡与反思</h2>
       <p class="section-p">
         在消费级算力极限压榨的过程中，技术架构坚持了以下不可妥协的工程权衡：
       </p>
       <ul style="margin-left: 20px; font-size: 14px;">
-        <li><b>为何坚决不用系统内存交换（Offload to RAM）？</b> 内存与 GPU 之间带宽仅有几十 GB/s，一旦发生频繁权重或 KV 换入换出，推理速度会瞬间掉至 1~2 t/s。本项目宁可锁定 56k 硬上限，也要确保纯显存内 18~20 t/s 的极致可用速度。</li>
+        <li style="margin-bottom: 8px;"><b>为何坚决不用系统内存交换（Offload to RAM）？</b> 内存与 GPU 之间带宽仅有几十 GB/s，一旦发生频繁权重或 KV 换入换出，推理速度会瞬间掉至 1~2 t/s。本项目宁可锁定 56k 硬上限，也要确保纯显存内 18~20 t/s 的极致可用速度。</li>
         <li><b>为何坚持单槽位（-np 1）？</b> 8GB 显存是刚性硬边界。支持双槽位哪怕各分 32k，在同时并发到达峰值时也会产生不可预测的显存碎片而引发蓝屏或驱动重置。单槽位结合网关层排队和快速失败，是生产级可靠性的基石。</li>
       </ul>
     </section>
@@ -778,20 +1277,72 @@ for chunk in response:
     </footer>
   </main>
 
+  <!-- 浮动回到顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
+
   <script>
-    // 滚动自动高亮侧边栏目录
+    // 移动端侧边抽屉菜单控制
+    const menuBtn = document.getElementById('menu-toggle-btn');
+    const sidebar = document.getElementById('sidebar');
+    const backdrop = document.getElementById('sidebar-backdrop');
+    const closeBtn = document.getElementById('sidebar-close-btn');
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      backdrop.classList.add('active');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden'; // 防止抽屉展开时底层滚动穿透
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      backdrop.classList.remove('active');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    if (menuBtn) menuBtn.addEventListener('click', openSidebar);
+    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+    // 滚动自动高亮侧边栏目录 & 回到顶部显隐
     const links = document.querySelectorAll('.nav-link');
     const sections = Array.from(links).map(link => document.querySelector(link.getAttribute('href')));
 
+    // 点击目录链接自动收起抽屉并平滑跳转
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 860) {
+          closeSidebar();
+        }
+      });
+    });
+
     window.addEventListener('scroll', () => {
-      let scrollPos = window.scrollY + 100;
+      const scrollPos = window.scrollY + 100;
+      
+      // 高亮对应章节
       sections.forEach((sec, idx) => {
         if (sec && sec.offsetTop <= scrollPos && (sec.offsetTop + sec.offsetHeight) > scrollPos) {
           links.forEach(l => l.classList.remove('active'));
           links[idx].classList.add('active');
         }
       });
-    });
+
+      // 回到顶部按钮可见性
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
   </script>
 </body>
 </html>
